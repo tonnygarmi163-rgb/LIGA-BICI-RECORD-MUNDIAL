@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liga Bici</title>
+    <meta name="theme-color" content="#0b0b0c">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="season-switcher" aria-label="Temporadas">
+        <button class="season-card active" type="button" data-season="2026">
+          <span class="season-kicker">Actual</span>
+          <strong>Temporada 3</strong>
+          <span>2026</span>
+        </button>
+        <button class="season-card" type="button" data-season="2025">
+          <span class="season-kicker">Archivo</span>
+          <strong>Temporada 2</strong>
+          <span>2025</span>
+        </button>
+      </header>
+
+      <main class="content" id="app-content">
+        <section class="view active" id="view-inicio" aria-labelledby="inicio-title">
+          <div class="home-grid">
+            <div class="brand-panel">
+              <img class="brand-logo" src="./assets/liga-bici-logo.png" alt="Liga Bici">
+              <div>
+                <p class="eyebrow" id="season-label">Temporada 3</p>
+                <h1 id="inicio-title">Liga Bici 2026</h1>
+                <p class="season-summary" id="season-summary"></p>
+              </div>
+            </div>
+            <div class="quick-stats" id="quick-stats"></div>
+          </div>
+
+          <section class="section-block" aria-labelledby="next-title">
+            <div class="section-heading">
+              <h2 id="next-title">Próximos eventos</h2>
+              <button class="text-link" type="button" data-go="horarios">Ver horarios</button>
+            </div>
+            <div class="event-strip" id="home-events"></div>
+          </section>
+
+          <section class="section-block" aria-labelledby="leaders-title">
+            <div class="section-heading">
+              <h2 id="leaders-title">Clasificación rápida</h2>
+              <button class="text-link" type="button" data-go="puntos">Ver puntos</button>
+            </div>
+            <div class="leader-list" id="home-leaders"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-participantes" aria-labelledby="participants-title">
+          <div class="view-header">
+            <p class="eyebrow">Fichas</p>
+            <h1 id="participants-title">Participantes</h1>
+          </div>
+          <div class="participant-grid" id="participant-list"></div>
+        </section>
+
+        <section class="view" id="view-puntos" aria-labelledby="points-title">
+          <div class="view-header">
+            <p class="eyebrow">General</p>
+            <h1 id="points-title">Clasificación</h1>
+          </div>
+          <div class="standings-table" id="standings-table"></div>
+          <section class="section-block compact" aria-labelledby="score-title">
+            <div class="section-heading">
+              <h2 id="score-title">Recuento por piloto</h2>
+            </div>
+            <div class="score-grid" id="score-grid"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-circuitos" aria-labelledby="circuits-title">
+          <div class="view-header">
+            <p class="eyebrow">Trazados</p>
+            <h1 id="circuits-title">Circuitos</h1>
+          </div>
+          <div class="filter-row" role="tablist" aria-label="Filtros de circuito">
+            <button class="filter-pill active" type="button" data-filter="todos">Todos</button>
+            <button class="filter-pill" type="button" data-filter="asfalto">Asfalto</button>
+            <button class="filter-pill" type="button" data-filter="mixto">Mixto</button>
+            <button class="filter-pill" type="button" data-filter="tierra">Tierra</button>
+          </div>
+          <div class="circuit-grid" id="circuit-list"></div>
+        </section>
+
+        <section class="view" id="view-horarios" aria-labelledby="schedule-title">
+          <div class="view-header">
+            <p class="eyebrow">Calendario</p>
+            <h1 id="schedule-title">Horarios</h1>
+          </div>
+          <div class="timeline" id="schedule-list"></div>
+        </section>
+
+        <section class="view" id="view-info" aria-labelledby="info-title">
+          <div class="view-header">
+            <p class="eyebrow">Información</p>
+            <h1 id="info-title">Liga Bici</h1>
+          </div>
+          <div class="info-tabs" role="tablist" aria-label="Información">
+            <button class="info-tab active" type="button" data-info="normas">Normas</button>
+            <button class="info-tab" type="button" data-info="noticias">Noticias</button>
+            <button class="info-tab" type="button" data-info="entrevistas">Entrevistas</button>
+          </div>
+          <div id="info-panel"></div>
+        </section>
+
+        <section class="view" id="view-edits" aria-labelledby="edits-title">
+          <div class="view-header">
+            <p class="eyebrow">Vídeo</p>
+            <h1 id="edits-title">Edits</h1>
+          </div>
+          <div class="edits-grid" id="edits-list"></div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <button class="nav-button active" type="button" data-view="inicio" aria-label="Inicio">
+          <span class="nav-icon home-icon" aria-hidden="true"></span>
+          <span>Inicio</span>
+        </button>
+        <button class="nav-button" type="button" data-view="participantes" aria-label="Participantes">
+          <span class="nav-icon rider-icon" aria-hidden="true"></span>
+          <span>Pilotos</span>
+        </button>
+        <button class="nav-button" type="button" data-view="puntos" aria-label="Puntos">
+          <span class="nav-icon points-icon" aria-hidden="true"></span>
+          <span>Puntos</span>
+        </button>
+        <button class="nav-button" type="button" data-view="circuitos" aria-label="Circuitos">
+          <span class="nav-icon circuit-icon" aria-hidden="true"></span>
+          <span>Circuitos</span>
+        </button>
+        <button class="nav-button" type="button" data-view="horarios" aria-label="Horarios">
+          <span class="nav-icon clock-icon" aria-hidden="true"></span>
+          <span>Horarios</span>
+        </button>
+        <button class="nav-button" type="button" data-view="info" aria-label="Información">
+          <span class="nav-icon info-icon" aria-hidden="true"></span>
+          <span>Info</span>
+        </button>
+        <button class="nav-button" type="button" data-view="edits" aria-label="Edits">
+          <span class="nav-icon play-icon" aria-hidden="true"></span>
+          <span>Edits</span>
+        </button>
+      </nav>
+    </div>
+
+    <dialog class="detail-dialog" id="detail-dialog">
+      <div class="dialog-content">
+        <button class="close-button" type="button" id="dialog-close" aria-label="Cerrar"></button>
+        <div id="dialog-body"></div>
+      </div>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
