@@ -204,7 +204,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dev-velocidad{background:#dbeafe;color:#1e40af}
 .dev-bajada{background:#fef3c7;color:#92400e}
 .dev-freno{background:#fce7f3;color:#be185d}
-.export-btn{background:var(--black);color:var(--white);border:none;border-radius:10px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;margin:0 14px 14px;display:inline-flex;align-items:center;gap:6px}
 .gama-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
 .gama-baja{background:#dcfce7;color:#15803d}
 .gama-media{background:#fef9c3;color:#854d0e}
@@ -266,7 +265,7 @@ const BIKE_IMAGES = {
   bh_spike25: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1ae087076-c437-4d50-8e52-ffdb04c9c4fc.png',
   btwin_rockrider: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/11f30d75a-00a9-4f88-8d86-d1daed59a1e7.png',
   giant_talon: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1e670b86d-a77b-4e4c-a9e6-2f8efa669b0d.png',
-  scott_spark: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1c1eb3943-ff64-4c8c-8d99-26fa238610d2.png'
+  scott_spark: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/15.png'
 };
 
 const CIRC_SVGS = {
@@ -317,7 +316,7 @@ const RIDERS = {
     },
     wins:[{c:'San José',s:'T1 · 2024',t:'t1'},{c:'Rascanya',s:'T1 · 2024',t:'t1'},{c:'Cementerio',s:'T1 · 2024',t:'t1'},{c:'Barranquet',s:'T1 · 2024',t:'t1'},{c:'Andrómeda',s:'T2 · 2025',t:'t2'},{c:'Pobla Nova',s:'T2 · 2025',t:'t2'},{c:'Benaguacil',s:'T2 · 2025',t:'t2'},{c:'Barranquet',s:'T2 · 2025',t:'t2'},{c:'Vista Calderona',s:'T2 · 2025',t:'t2'}]
   },
-  hugo:{id:'hugo',first:'Hugo',last:'CASTRO',dorsal:69,color:'#f5c800',textColor:'#000',peso:'Por añadir',altura:'Por añadir',ligasGanadas:0,
+  hugo:{id:'hugo',first:'Hugo',last:'CASTRO',dorsal:69,color:'#f5c800',textColor:'#000',peso:'61 kg',altura:'174 cm',ligasGanadas:0,
     bici:{
       t1:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'baja',
         shopUrl:'https://support.decathlon.es/rockrider-st-540-2016',
@@ -336,20 +335,20 @@ const RIDERS = {
   },
   ruben:{id:'ruben',first:'Rubén',last:'ASENSI',dorsal:23,color:'#e02020',textColor:'#fff',peso:'67 kg',altura:'186 cm',ligasGanadas:0,
     bici:{
-      t1:{model:'Scott Spark RC 900 Team GX',tipo:'Mountain Bike 29" Doble Suspensión',svgKey:'scott_spark',price:'~1,947€ (2ª mano)',gama:'pro',
-        shopUrl:'https://www.decathlon.es/es/p/mp/segunda-vida-mtb-spark-rc-900-team-gx-muy-buen-estado/57b15001-de67-4c1a-91b0-443a5a1fcf67/c1',
-        specs:[{l:'Cuadro',v:'Carbono 29"'},{l:'Suspensión',v:'Doble: Fox 32 SC (100mm) + Fox Nude DPS'},{l:'Transmisión',v:'SRAM GX Eagle 1×12'},{l:'Plato',v:'32T (monoplato)'},{l:'Cassette',v:'10-50T (12 piñones)'},{l:'Velocidades',v:'12 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Ruedas',v:'Syncros XR 2.5 (Aluminio)'},{l:'Peso estimado',v:'~11-12 kg'}],
-        desarrollo:{plato:32,pinonMin:10,pinonMax:50}},
-      t2:{model:'Scott Spark RC 900 Team GX',tipo:'Mountain Bike 29" Doble Suspensión',svgKey:'scott_spark',price:'~1,947€ (2ª mano)',gama:'pro',
-        shopUrl:'https://www.decathlon.es/es/p/mp/segunda-vida-mtb-spark-rc-900-team-gx-muy-buen-estado/57b15001-de67-4c1a-91b0-443a5a1fcf67/c1',
-        specs:[{l:'Cuadro',v:'Carbono 29"'},{l:'Suspensión',v:'Doble: Fox 32 SC (100mm) + Fox Nude DPS'},{l:'Transmisión',v:'SRAM GX Eagle 1×12'},{l:'Plato',v:'32T (monoplato)'},{l:'Cassette',v:'10-50T (12 piñones)'},{l:'Velocidades',v:'12 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Ruedas',v:'Syncros XR 2.5 (Aluminio)'},{l:'Peso estimado',v:'~11-12 kg'}],
-        desarrollo:{plato:32,pinonMin:10,pinonMax:50}},
-      t3:{model:'Scott Spark RC 900 Team GX',tipo:'Mountain Bike 29" Doble Suspensión',svgKey:'scott_spark',price:'~1,947€ (2ª mano)',gama:'pro',
-        shopUrl:'https://www.decathlon.es/es/p/mp/segunda-vida-mtb-spark-rc-900-team-gx-muy-buen-estado/57b15001-de67-4c1a-91b0-443a5a1fcf67/c1',
-        specs:[{l:'Cuadro',v:'Carbono 29"'},{l:'Suspensión',v:'Doble: Fox 32 SC (100mm) + Fox Nude DPS'},{l:'Transmisión',v:'SRAM GX Eagle 1×12'},{l:'Plato',v:'32T (monoplato)'},{l:'Cassette',v:'10-50T (12 piñones)'},{l:'Velocidades',v:'12 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Ruedas',v:'Syncros XR 2.5 (Aluminio)'},{l:'Peso estimado',v:'~11-12 kg'}],
-        desarrollo:{plato:32,pinonMin:10,pinonMax:50}}
+      t1:{model:'Scott Spark 950 (2017)',tipo:'Mountain Bike 29"',svgKey:'scott_spark',price:'~799€',gama:'media',
+        shopUrl:'https://www.bikingpoint.es/bicicleta-scott-spark-950-2017.html',
+        specs:[{l:'Cuadro',v:'Aluminio 6011 Hydroformed'},{l:'Suspensión',v:'Fox 32 Float Perf. Air (120mm) + Fox Float Perf. Trunnion'},{l:'Control',v:'TwinLoc Remoto'},{l:'Transmisión',v:'Shimano Deore/XT 2x10'},{l:'Frenos',v:'Shimano M506'},{l:'Ruedas',v:'Syncros con cubiertas Maxxis Forecaster'},{l:'Ejes',v:'Delantero 15x100, Trasero Boost 148x12'},{l:'Peso',v:'13.70 kg'}],
+        desarrollo:{plato:36,pinonMin:11,pinonMax:36}},
+      t2:{model:'Scott Spark 950 (2017)',tipo:'Mountain Bike 29"',svgKey:'scott_spark',price:'~799€',gama:'media',
+        shopUrl:'https://www.bikingpoint.es/bicicleta-scott-spark-950-2017.html',
+        specs:[{l:'Cuadro',v:'Aluminio 6011 Hydroformed'},{l:'Suspensión',v:'Fox 32 Float Perf. Air (120mm) + Fox Float Perf. Trunnion'},{l:'Control',v:'TwinLoc Remoto'},{l:'Transmisión',v:'Shimano Deore/XT 2x10'},{l:'Frenos',v:'Shimano M506'},{l:'Ruedas',v:'Syncros con cubiertas Maxxis Forecaster'},{l:'Ejes',v:'Delantero 15x100, Trasero Boost 148x12'},{l:'Peso',v:'13.70 kg'}],
+        desarrollo:{plato:36,pinonMin:11,pinonMax:36}},
+      t3:{model:'Scott Spark 950 (2017)',tipo:'Mountain Bike 29"',svgKey:'scott_spark',price:'~799€',gama:'media',
+        shopUrl:'https://www.bikingpoint.es/bicicleta-scott-spark-950-2017.html',
+        specs:[{l:'Cuadro',v:'Aluminio 6011 Hydroformed'},{l:'Suspensión',v:'Fox 32 Float Perf. Air (120mm) + Fox Float Perf. Trunnion'},{l:'Control',v:'TwinLoc Remoto'},{l:'Transmisión',v:'Shimano Deore/XT 2x10'},{l:'Frenos',v:'Shimano M506'},{l:'Ruedas',v:'Syncros con cubiertas Maxxis Forecaster'},{l:'Ejes',v:'Delantero 15x100, Trasero Boost 148x12'},{l:'Peso',v:'13.70 kg'}],
+        desarrollo:{plato:36,pinonMin:11,pinonMax:36}}
     },
-    wins:[{c:'Benissanó',s:'T1 · 2024',t:'t1'},{c:'Maracaná',s:'T1 · 2024',t:'t1'},{c:'Benissanó',s:'T2 · 2025',t:'t2'},{c:'Lliria',s:'T2 · 2025',t:'t2'}]
+    wins:[{c:'Benissanó',s:'T1 · 2024',t:'t1'},{c:'Maracaná',s:'T1 · 2024',t:'t1'},{c:'Benaguacil',s:'T1 · 2024',t:'t1'},{c:'Sierra Espada',s:'T1 · 2024',t:'t1'},{c:'Lliria',s:'T2 · 2025',t:'t2'},{c:'Benissanó',s:'T2 · 2025',t:'t2'}]
   },
   toni:{id:'toni',first:'Toni',last:'GARCÍA',dorsal:7,color:'#16a34a',textColor:'#fff',peso:'70,5 kg',altura:'180 cm',ligasGanadas:0,
     bici:{
@@ -377,10 +376,10 @@ const CIRCUITS = [
   {id:'benissano',name:'Benissanó',record:"1'35.30\"",desc:'Entrada a Benissanó con trazada de velocidad. Tiene una cuesta abajo que al finalizar hay una curva cerrada seguida con muchas piedras. Muy fácil caerse.',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\" · 2025"]},
   {id:'poblanova',name:'Pobla Nova',record:"1'44.26\"",desc:'Circuito condicionado por lluvia y aplazamientos. La primera curva decide gran parte de la carrera.',zona:'peatones',dif:'media',riesgo:'medio',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\" · 2025"]},
   {id:'cementerio',name:'Cementerio',record:"1'22.96\"",desc:'Circuito rápido con buenas oportunidades de adelantamiento. Cuesta descendiente al final con curva muy cerrada. Buen sitio para prácticas de temporada 3.',zona:'peatones',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\" · 2025"]},
-  {id:'benaguacil',name:'Benaguacil',record:"1'33.00\"",desc:'Entrada a Benaguacil con trazada de velocidad y pocas zonas de descanso. Circuito tranquilo.',zona:'tranquilo',dif:'baja',riesgo:'bajo',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\" · 2025"]},
+  {id:'benaguacil',name:'Benaguacil',record:"1'33.00\"",desc:'Entrada a Benaguacil con trazada de velocidad y pocas zonas de descanso. Circuito tranquilo.',zona:'tranquilo',dif:'baja',riesgo:'bajo',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\" · 2025"]},
   {id:'lliria',name:'Lliria',record:"1'27.63\"",desc:'Carrera de capital de comarca, exigente por ritmo y resistencia. Circuito tranquilo con parte baja descendiente con dos caminos.',zona:'tranquilo',dif:'baja',riesgo:'bajo',winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\" · 2025"]},
   {id:'barranquet',name:'Barranquet',record:"1'25.61\"",desc:'Uno de los trazados más completos. Curvas cerradas donde tienes visión reducida y pasan personas. Después cuesta descendiente al final con curva muy cerrada.',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\" · 2025"]},
-  {id:'sierraespada',name:'Sierra Espada',record:"1'49.00\"",desc:'Maravisa norte. Circuito duro con desgaste y opciones de remontada.',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\" · 2025"]},
+  {id:'sierraespada',name:'Sierra Espada',record:"1'49.00\"",desc:'Maravisa norte. Circuito duro con desgaste y opciones de remontada.',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\" · 2025"]},
   {id:'vistacalderona',name:'Vista Calderona',record:"1'22.43\"",desc:'Última carrera de la temporada 2. Cierre ideal para decidir posiciones y premiar regularidad.',zona:'coches',dif:'media',riesgo:'medio',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'22.43\" · 2025"]},
   {id:'rascanya',name:'Rascanya',record:'Por añadir',desc:'Circuito histórico de temporada 1. Se mantiene como referencia en victorias totales.',zona:'coches',dif:'media',riesgo:'medio',winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   {id:'llomallarga',name:'Lloma Llarga',record:"2'06.95\"",desc:'El circuito más lejano. Conocido como "La ruta de la muerte". Cuenta con la cuesta abajo más empinada seguida. Ruta de más de 20km de ida y vuelta.',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\" · 2026","Julian Matei 2'07.45\" · 2026"]}
@@ -409,16 +408,63 @@ const SEASONS = {
     ],
     circs:['sanjose','cementerio','andromeda','llomallarga']
   },
-  t2:{key:'t2',label:'Temporada 2',year:'2025',kicker:'Archivo',summary:'11 circuitos. Campeón: Julian Matei con 119 puntos.',participantes:4,practicas:1,carreras:11,finalizadas:11,
+  t2:{key:'t2',label:'Temporada 2',year:'2025',kicker:'Archivo',summary:'11 circuitos. Campeón: Julian Matei con 119 puntos.',participantes:4,practicas:0,carreras:11,finalizadas:11,
     standings:[{id:'matei',pts:119,pos:'Campeón',diff:''},{id:'hugo',pts:105,pos:'2º',diff:'-14'},{id:'ruben',pts:105,pos:'3º',diff:'-14'},{id:'toni',pts:75,pos:'4º',diff:'-44'}],
     scores:{
-      matei:[{c:'San José',tipo:'carrera',pts:7},{c:'Andrómeda',tipo:'carrera',pts:12},{c:'Maracaná',tipo:'tiempos',pts:3},{c:'Maracaná',tipo:'carrera',pts:9},{c:'Benissanó',tipo:'carrera',pts:9},{c:'Pobla Nova',tipo:'tiempos',pts:3},{c:'Barranquet',tipo:'carrera',pts:15},{c:'Vista Calderona',tipo:'carrera',pts:25},{c:'Benaguacil',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'tiempos',pts:3},{c:'Andrómeda',tipo:'tiempos',pts:3}],
-      hugo:[{c:'Maracaná',tipo:'carrera',pts:25},{c:'Cementerio',tipo:'carrera',pts:18},{c:'Sierra Espada',tipo:'carrera',pts:25},{c:'Andrómeda',tipo:'carrera',pts:15},{c:'Barranquet',tipo:'tiempos',pts:3},{c:'Lliria',tipo:'tiempos',pts:3},{c:'San José',tipo:'tiempos',pts:3},{c:'Pobla Nova',tipo:'carrera',pts:7},{c:'Benissanó',tipo:'tiempos',pts:3},{c:'Vista Calderona',tipo:'tiempos',pts:3}],
-      ruben:[{c:'Benissanó',tipo:'carrera',pts:25},{c:'Lliria',tipo:'carrera',pts:18},{c:'Maracaná',tipo:'tiempos',pts:3},{c:'San José',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'carrera',pts:12},{c:'Andrómeda',tipo:'tiempos',pts:3},{c:'Sierra Espada',tipo:'tiempos',pts:3},{c:'Vista Calderona',tipo:'carrera',pts:12},{c:'Barranquet',tipo:'carrera',pts:7},{c:'Benaguacil',tipo:'tiempos',pts:3},{c:'Pobla Nova',tipo:'carrera',pts:7}],
-      toni:[{c:'San José',tipo:'carrera',pts:25},{c:'Barranquet',tipo:'tiempos',pts:3},{c:'Maracaná',tipo:'carrera',pts:7},{c:'Lliria',tipo:'carrera',pts:7},{c:'Cementerio',tipo:'tiempos',pts:3},{c:'Benaguacil',tipo:'carrera',pts:18},{c:'Pobla Nova',tipo:'tiempos',pts:3},{c:'Vista Calderona',tipo:'carrera',pts:9}]
+      matei:[
+        {c:'San José',tipo:'carrera',pts:7},
+        {c:'Andrómeda',tipo:'carrera',pts:12},
+        {c:'Maracaná',tipo:'tiempos',pts:3},{c:'Maracaná',tipo:'carrera',pts:10},
+        {c:'Benissanó',tipo:'carrera',pts:9},
+        {c:'Pobla Nova',tipo:'tiempos',pts:2},{c:'Pobla Nova',tipo:'carrera',pts:12},
+        {c:'Cementerio',tipo:'carrera',pts:9},
+        {c:'Benaguacil',tipo:'tiempos',pts:2},{c:'Benaguacil',tipo:'carrera',pts:12},
+        {c:'Lliria',tipo:'tiempos',pts:1},{c:'Lliria',tipo:'carrera',pts:9},
+        {c:'Barranquet',tipo:'carrera',pts:12},
+        {c:'Sierra Espada',tipo:'carrera',pts:7},
+        {c:'Vista Calderona',tipo:'carrera',pts:12}
+      ],
+      hugo:[
+        {c:'San José',tipo:'carrera',pts:6},
+        {c:'Andrómeda',tipo:'carrera',pts:13},
+        {c:'Maracaná',tipo:'tiempos',pts:1},{c:'Maracaná',tipo:'carrera',pts:12},
+        {c:'Benissanó',tipo:'carrera',pts:7},
+        {c:'Pobla Nova',tipo:'tiempos',pts:1},{c:'Pobla Nova',tipo:'carrera',pts:9},
+        {c:'Cementerio',tipo:'carrera',pts:12},
+        {c:'Benaguacil',tipo:'tiempos',pts:1},{c:'Benaguacil',tipo:'carrera',pts:7},
+        {c:'Lliria',tipo:'tiempos',pts:2},{c:'Lliria',tipo:'carrera',pts:7},
+        {c:'Barranquet',tipo:'carrera',pts:9},
+        {c:'Sierra Espada',tipo:'carrera',pts:12},
+        {c:'Vista Calderona',tipo:'carrera',pts:6}
+      ],
+      ruben:[
+        {c:'San José',tipo:'carrera',pts:9},
+        {c:'Andrómeda',tipo:'carrera',pts:7},
+        {c:'Maracaná',tipo:'tiempos',pts:1},{c:'Maracaná',tipo:'carrera',pts:9},
+        {c:'Benissanó',tipo:'carrera',pts:12},
+        {c:'Pobla Nova',tipo:'tiempos',pts:0},{c:'Pobla Nova',tipo:'carrera',pts:5},
+        {c:'Cementerio',tipo:'carrera',pts:10},
+        {c:'Benaguacil',tipo:'tiempos',pts:3},{c:'Benaguacil',tipo:'carrera',pts:9},
+        {c:'Lliria',tipo:'tiempos',pts:3},{c:'Lliria',tipo:'carrera',pts:12},
+        {c:'Barranquet',tipo:'carrera',pts:7},
+        {c:'Sierra Espada',tipo:'carrera',pts:9},
+        {c:'Vista Calderona',tipo:'carrera',pts:9}
+      ],
+      toni:[
+        {c:'San José',tipo:'carrera',pts:18},
+        {c:'Andrómeda',tipo:'carrera',pts:6},
+        {c:'Maracaná',tipo:'tiempos',pts:0},{c:'Maracaná',tipo:'carrera',pts:3},
+        {c:'Benissanó',tipo:'carrera',pts:5},
+        {c:'Pobla Nova',tipo:'tiempos',pts:3},{c:'Pobla Nova',tipo:'carrera',pts:7},
+        {c:'Cementerio',tipo:'carrera',pts:5},
+        {c:'Benaguacil',tipo:'tiempos',pts:0},{c:'Benaguacil',tipo:'carrera',pts:5},
+        {c:'Lliria',tipo:'tiempos',pts:0},{c:'Lliria',tipo:'carrera',pts:6},
+        {c:'Barranquet',tipo:'carrera',pts:5},
+        {c:'Sierra Espada',tipo:'carrera',pts:5},
+        {c:'Vista Calderona',tipo:'carrera',pts:7}
+      ]
     },
     horarios:[
-      {name:'Práctica Cementerio',date:'10 oct',mes:'oct',dia:'10',circ:'Cementerio',tipo:'practica',status:'done',circId:'cementerio'},
       {name:'San José',date:'21 sep',mes:'sep',dia:'21',circ:'San José',tipo:'carrera',status:'done',circId:'sanjose'},
       {name:'Andrómeda',date:'28 sep',mes:'sep',dia:'28',circ:'Andrómeda',tipo:'carrera',status:'done',circId:'andromeda'},
       {name:'Maracaná',date:'2 oct',mes:'oct',dia:'2',circ:'Maracaná',tipo:'carrera',status:'done',circId:'maracana'},
@@ -437,10 +483,36 @@ const SEASONS = {
   t1:{key:'t1',label:'Temporada 1',year:'2024',kicker:'Archivo',summary:'Primera edición. 7 circuitos. Campeón: Julian Matei con 87 puntos.',participantes:4,practicas:0,carreras:7,finalizadas:7,
     standings:[{id:'matei',pts:87,pos:'Campeón',diff:''},{id:'ruben',pts:83,pos:'2º',diff:'-4'},{id:'toni',pts:54,pos:'3º',diff:'-33'},{id:'hugo',pts:19,pos:'4º',diff:'-68'}],
     scores:{
-      matei:[{c:'San José',tipo:'carrera',pts:12},{c:'Rascanya',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'carrera',pts:12},{c:'Barranquet',tipo:'carrera',pts:12},{c:'Andrómeda',tipo:'tiempos',pts:3},{c:'Benissanó',tipo:'carrera',pts:12},{c:'Maracaná',tipo:'tiempos',pts:3},{c:'San José',tipo:'tiempos',pts:3},{c:'Rascanya',tipo:'tiempos',pts:3},{c:'Cementerio',tipo:'tiempos',pts:3},{c:'Barranquet',tipo:'tiempos',pts:3},{c:'Andrómeda',tipo:'carrera',pts:12}],
-      hugo:[{c:'Andrómeda',tipo:'carrera',pts:12},{c:'Maracaná',tipo:'tiempos',pts:2},{c:'San José',tipo:'tiempos',pts:3},{c:'Rascanya',tipo:'tiempos',pts:2}],
-      ruben:[{c:'Benissanó',tipo:'carrera',pts:12},{c:'Maracaná',tipo:'carrera',pts:12},{c:'San José',tipo:'tiempos',pts:3},{c:'Rascanya',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'carrera',pts:12},{c:'Barranquet',tipo:'tiempos',pts:3},{c:'Andrómeda',tipo:'tiempos',pts:3},{c:'Benissanó',tipo:'tiempos',pts:3},{c:'Maracaná',tipo:'tiempos',pts:3},{c:'San José',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'tiempos',pts:3}],
-      toni:[{c:'San José',tipo:'carrera',pts:12},{c:'Rascanya',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'carrera',pts:12},{c:'Barranquet',tipo:'carrera',pts:12},{c:'Andrómeda',tipo:'tiempos',pts:3},{c:'Benissanó',tipo:'tiempos',pts:3}]
+      matei:[
+        {c:'San José',tipo:'carrera',pts:12},
+        {c:'Rascanya',tipo:'carrera',pts:12},
+        {c:'Cementerio',tipo:'carrera',pts:12},
+        {c:'Barranquet',tipo:'carrera',pts:12},
+        {c:'Andrómeda',tipo:'carrera',pts:12},
+        {c:'Benissanó',tipo:'carrera',pts:12},
+        {c:'Maracaná',tipo:'carrera',pts:3}
+      ],
+      hugo:[
+        {c:'Andrómeda',tipo:'carrera',pts:12},
+        {c:'Maracaná',tipo:'carrera',pts:7}
+      ],
+      ruben:[
+        {c:'Benissanó',tipo:'carrera',pts:12},
+        {c:'Maracaná',tipo:'carrera',pts:12},
+        {c:'San José',tipo:'carrera',pts:12},
+        {c:'Rascanya',tipo:'carrera',pts:12},
+        {c:'Cementerio',tipo:'carrera',pts:12},
+        {c:'Barranquet',tipo:'carrera',pts:3},
+        {c:'Andrómeda',tipo:'carrera',pts:3}
+      ],
+      toni:[
+        {c:'San José',tipo:'carrera',pts:12},
+        {c:'Rascanya',tipo:'carrera',pts:12},
+        {c:'Cementerio',tipo:'carrera',pts:12},
+        {c:'Barranquet',tipo:'carrera',pts:5},
+        {c:'Andrómeda',tipo:'carrera',pts:3},
+        {c:'Benissanó',tipo:'carrera',pts:3}
+      ]
     },
     horarios:[
       {name:'San José',date:'Sin registro',mes:'',dia:'',circ:'San José',tipo:'carrera',status:'done',circId:'sanjose'},
@@ -472,19 +544,6 @@ function openExternalLink(url){
       navigator.clipboard.writeText(url).then(function(){showToast('🔗 URL copiada. Pégala en tu navegador');}).catch(function(){showToast('🔗 URL: '+url.substring(0,60)+'...');});
     }else{showToast('🔗 Copia esta URL manualmente: '+url.substring(0,60)+'...');}
   }
-}
-
-function exportCSV(){
-  var s=SEASONS[curSeason];
-  var csv='Posición,Piloto,Puntos,Diferencia\n';
-  s.standings.forEach(function(r,i){
-    var rd=RIDERS[r.id];
-    csv+=(i+1)+','+rd.first+' '+rd.last+','+r.pts+','+(r.diff||r.pos)+'\n';
-  });
-  var blob=new Blob([csv],{type:'text/csv'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');a.href=url;a.download='clasificacion_'+s.label.replace(' ','_')+'.csv';a.click();
-  showToast('📥 Clasificación descargada');
 }
 
 function renderSwitcher(){
@@ -551,7 +610,6 @@ function renderView(){
 
   else if(curView==='puntos'){
     html+='<div class="view-header"><p class="eyebrow">General</p><h1>Clasificación</h1></div>';
-    html+='<button class="export-btn" onclick="exportCSV()" role="button" tabindex="0">📥 Exportar CSV</button>';
     s.standings.forEach(function(r,i){var rd=RIDERS[r.id];html+='<div class="standing-row" style="border-left-color:'+rd.color+'" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="sr-num">'+(i+1)+'</div><div class="sr-info"><div class="sr-name">'+rd.first+' '+rd.last+'</div><div class="sr-diff">'+(r.diff||r.pos)+'</div></div><div class="sr-pts" style="color:'+rd.color+'">'+r.pts+'</div></div>';});
     html+='<div class="score-section"><div class="section-heading"><h2>Recuento por piloto</h2></div>';
     s.standings.forEach(function(r){var rd=RIDERS[r.id];var rows=s.scores[r.id]||[];if(!rows.length){html+='<div class="score-player"><div class="sp-header"><span class="sp-name">'+rd.first+' '+rd.last+'</span><span class="sp-total">0</span></div></div>';return;}html+='<div class="score-player"><div class="sp-header"><span class="sp-name">'+rd.first+' '+rd.last+'</span><span class="sp-total">'+r.pts+'</span></div>';rows.forEach(function(sc){html+='<div class="sp-row"><span class="spr-circ">'+sc.c+'</span><div class="spr-right"><span class="tag-'+sc.tipo+'">'+sc.tipo.toUpperCase()+'</span><span class="spr-pts">+'+sc.pts+'</span></div></div>';});html+='</div>';});
@@ -591,11 +649,11 @@ function renderView(){
     html+='<div class="comp-section"><div class="comp-subtitle">📊 1. Información Básica de Transmisión</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Bicicleta</th><th>Transmisión</th><th>Plato</th><th>Cassette</th><th>Veloc.</th><th>Material</th><th>Gama</th></tr></thead><tbody>';
     html+='<tr><td class="bike-label">Giant Talon 27.5 5<span class="pilot-name">Julian Matei</span></td><td>Shimano Altus 2×8</td><td>24T / 36T</td><td>11-32T (8v)</td><td>16</td><td>Aluminio 27.5"</td><td>'+gamaBadge('baja')+'</td></tr>';
     html+='<tr><td class="bike-label">Rockrider ST 540<span class="pilot-name">Hugo Castro</span></td><td>Shimano Altus 2×9</td><td>22T / 36T</td><td>11-34T (9v)</td><td>18</td><td>Aluminio 27.5"</td><td>'+gamaBadge('baja')+'</td></tr>';
-    html+='<tr><td class="bike-label">Scott Spark RC 900<span class="pilot-name">Rubén Asensi</span></td><td>SRAM GX Eagle 1×12</td><td>32T</td><td>10-50T (12v)</td><td>12</td><td>Carbono 29"</td><td>'+gamaBadge('pro')+'</td></tr>';
+    html+='<tr><td class="bike-label">Scott Spark 950<span class="pilot-name">Rubén Asensi</span></td><td>Shimano Deore/XT 2x10</td><td>2x10</td><td>11-36T (10v)</td><td>20</td><td>Aluminio 6011 Hydroformed</td><td>'+gamaBadge('media')+'</td></tr>';
     html+='<tr><td class="bike-label">BH Spike 2.5<span class="pilot-name">Toni García</span></td><td>Shimano Deore 1×10</td><td>30T</td><td>11-46T (10v)</td><td>10</td><td>Aluminio 29"</td><td>'+gamaBadge('media')+'</td></tr>';
     html+='</tbody></table></div></div>';
     html+='<div class="comp-section"><div class="comp-subtitle">⚖️ 2. Comparativa de Desarrollo (m/pedalada)</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Bicicleta</th><th>🧗 Subida más fácil</th><th>🏎️ Velocidad máx.</th><th>Rango</th><th>Suspensión</th></tr></thead><tbody>';
-    ['matei','hugo','ruben','toni'].forEach(function(id){var r=RIDERS[id];var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;var d=b.desarrollo;var dev=calcDevRange(d.plato,d.pinonMin,d.pinonMax);var susp=id==='ruben'?'Doble (Fox)':'Delantera 100mm';html+='<tr><td class="bike-label">'+b.model.split(' ')[0]+' '+b.model.split(' ')[1]+'<span class="pilot-name">'+r.first+' '+r.last+'</span></td><td><strong style="color:#15803d">'+dev.subida+' m</strong></td><td><strong style="color:#1e40af">'+dev.velocidad+' m</strong></td><td>'+dev.rango+' m</td><td>'+susp+'</td></tr>';});
+    ['matei','hugo','ruben','toni'].forEach(function(id){var r=RIDERS[id];var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;var d=b.desarrollo;var dev=calcDevRange(d.plato,d.pinonMin,d.pinonMax);var susp=id==='ruben'?'Fox 32 Float Perf. Air (120mm)':'Delantera 100mm';html+='<tr><td class="bike-label">'+b.model.split(' ')[0]+' '+b.model.split(' ')[1]+'<span class="pilot-name">'+r.first+' '+r.last+'</span></td><td><strong style="color:#15803d">'+dev.subida+' m</strong></td><td><strong style="color:#1e40af">'+dev.velocidad+' m</strong></td><td>'+dev.rango+' m</td><td>'+susp+'</td></tr>';});
     html+='</tbody></table></div></div>';
     html+='<div class="comp-formula"><code>D = 2.167 × (Plato / Piñón)</code><div class="formula-lbl">Ruedas 27.5-29" (Ø≈690-730mm) · D en metros por pedalada completa</div></div>';
   }
@@ -685,3 +743,4 @@ render();
 </script>
 </body>
 </html>
+
