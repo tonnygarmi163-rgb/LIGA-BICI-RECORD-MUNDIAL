@@ -1,0 +1,6 @@
+const BIKE_IMAGES = {
+  bh_spike25: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1ae087076-c437-4d50-8e52-ffdb04c9c4fc.png',
+  btwin_rockrider: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/11f30d75a-00a9-4f88-8d86-d1daed59a1e7.png',
+  giant_talon: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1e670b86d-a77b-4e4c-a9e6-2f8efa669b0d.png',
+  scott_spark: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/15.png'
+};
