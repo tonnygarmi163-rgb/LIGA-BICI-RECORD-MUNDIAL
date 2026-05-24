@@ -290,28 +290,22 @@ const CIRC_SVGS = {
   llomallarga: {color:'#b91c1c', path:'M 30 90 L 15 50 L 20 20 L 60 10 L 120 15 L 180 40 L 195 70 L 160 90 Z', dot:'M 30 90'}
 };
 
+// URLs de Google Earth para cada circuito
+const CIRCUIT_GOOGLE_EARTH = {
+  sanjose: 'https://earth.google.com/earth/d/13mVl3ODEJVU3lyRMRa3me1ygt0YkXWRK',
+  andromeda: 'https://earth.google.com/web/@39.58036308,-0.52606725,117.19741839a,977.3431825d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  maracana: 'https://earth.google.com/web/@39.58463117,-0.53899806,98.65270464a,1269.59138704d,30.00000006y,-0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  benissano: 'https://earth.google.com/web/@39.61558767,-0.57642141,132.11610347a,1352.38344074d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  poblanova: 'https://earth.google.com/web/@39.57686237,-0.54218807,90.65437835a,1587.04235685d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  cementerio: 'https://earth.google.com/web/@39.59860613,-0.54982855,119.14362498a,1228.005582d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  benaguacil: 'https://earth.google.com/web/@39.5941395,-0.58215252,101.26960375a,1342.61751289d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  lliria: 'https://earth.google.com/web/@39.61714052,-0.58428717,124.61490748a,953.86890987d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  barranquet: 'https://earth.google.com/web/@39.59390034,-0.53415944,112.62884808a,606.49709629d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
+  sierraespada: 'https://earth.google.com/web/@39.58556196,-0.52996516,116.41329149a,966.78485889d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE'
+};
+
 // URL corregida sin ?usp=sharing
 const GOOGLE_EARTH_URL = 'https://earth.google.com/earth/d/13mVl3ODEJVU3lyRMRa3me1ygt0YkXWRK';
-
-// Función unificada para abrir enlaces externos
-function openExternalLink(url){
-  // Intentar abrir en nueva pestaña
-  var newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-  
-  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-    // Si no se puede abrir, mostrar la URL claramente
-    alert('No se pudo abrir automáticamente. Copia esta URL y pégala en tu navegador:\n\n' + url);
-    
-    // Intentar copiar al portapapeles
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(url).then(function() {
-        showToast('🔗 URL copiada al portapapeles');
-      }).catch(function(err) {
-        console.error('Error al copiar:', err);
-      });
-    }
-  }
-}
 
 function circSVG(id) {
   var c = CIRC_SVGS[id] || {color:'#888', path:'M 50 85 L 20 55 L 80 15 L 160 20 L 190 60 L 150 90 Z', dot:'M 50 85'};
@@ -766,7 +760,8 @@ function openCircuit(id){
   if(!id)return;var c=CIRCUITS.find(function(x){return x.id===id;});if(!c)return;
   var winners=c.winners.map(function(w){return '<span class="dg-chip">'+w.n+' <span style="color:#888;font-weight:400">'+w.s+'</span></span>';}).join('');
   var tiempos=c.tiempos.map(function(t){return '<div class="dt-item"><span>'+t+'</span></div>';}).join('');
-  openDialog('<div class="dlg-circ-drawing">'+circSVG(c.id)+'</div><div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+c.desc+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+(c.zona==='tranquilo'?'Tranquilo':c.zona==='coches'?'Zona coches':'Zona peatones')+'</div><div class="dig-lbl">Entorno</div></div><div class="dig-box"><div class="dig-val">'+c.dif+'</div><div class="dig-lbl">Dificultad</div></div><div class="dig-box"><div class="dig-val">'+c.riesgo+'</div><div class="dig-lbl">Riesgo</div></div><div class="dig-box"><div class="dig-val">'+c.record+'</div><div class="dig-lbl">Récord</div></div></div><div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+(winners||'<span style="color:#aaa">Sin historial</span>')+'</div>'+(tiempos?'<div class="dlg-tiempos"><div class="dg-title">Mejores tiempos</div>'+tiempos+'</div>':'')+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()" role="button" tabindex="0">Volver</button><button class="btn-mymaps" onclick="window.open(\'https://www.komoot.com/search/'+encodeURIComponent(c.name+' Valencia')+'/tours\',\'_blank\',\'noopener,noreferrer\')" role="button" tabindex="0">Abrir Komoot ↗</button></div>');
+  var earthUrl = CIRCUIT_GOOGLE_EARTH[id] || '';
+  openDialog('<div class="dlg-circ-drawing">'+circSVG(c.id)+'</div><div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+c.desc+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+(c.zona==='tranquilo'?'Tranquilo':c.zona==='coches'?'Zona coches':'Zona peatones')+'</div><div class="dig-lbl">Entorno</div></div><div class="dig-box"><div class="dig-val">'+c.dif+'</div><div class="dig-lbl">Dificultad</div></div><div class="dig-box"><div class="dig-val">'+c.riesgo+'</div><div class="dig-lbl">Riesgo</div></div><div class="dig-box"><div class="dig-val">'+c.record+'</div><div class="dig-lbl">Récord</div></div></div><div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+(winners||'<span style="color:#aaa">Sin historial</span>')+'</div>'+(tiempos?'<div class="dlg-tiempos"><div class="dg-title">Mejores tiempos</div>'+tiempos+'</div>':'')+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()" role="button" tabindex="0">Volver</button>'+ (earthUrl ? '<button class="btn-mymaps" onclick="window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')" role="button" tabindex="0">🌍 Google Earth ↗</button>' : '')+'</div>');
 }
 
 document.getElementById('dialog-close').onclick=closeDialog;
@@ -777,3 +772,4 @@ render();
 </script>
 </body>
 </html>
+
