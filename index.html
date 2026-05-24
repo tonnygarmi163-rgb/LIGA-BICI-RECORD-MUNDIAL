@@ -231,52 +231,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .news-modal-date{font-size:12px;color:var(--gray4);margin-bottom:15px;text-transform:uppercase}
 .news-modal-body{font-size:14px;line-height:1.6;color:var(--gray5)}
 .news-modal-img{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:15px}
-.img-sanjose{width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .2s}
-.img-sanjose:hover{transform:scale(1.02)}
+.img-circuito{width:100%;height:100%;object-fit:cover;display:block}
 .google-earth-btn{position:absolute;bottom:10px;right:10px;background:#4285f4;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;display:flex;align-items:center;gap:6px;z-index:20;cursor:pointer;border:none;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .google-earth-btn:hover{background:#1e40ff}
-
-/* Estilos para la nueva pestaña de comparación de circuitos */
-.circ-compare-header{padding:20px 14px 10px}
-.circ-compare-header .eyebrow{font-size:11px;color:var(--gray4);letter-spacing:2px;text-transform:uppercase;font-weight:600}
-.circ-compare-header h1{font-size:26px;font-weight:900;margin-top:2px}
-.circ-compare-filters{display:flex;gap:8px;overflow-x:auto;padding:0 14px 14px;scrollbar-width:none}
-.circ-compare-filters::-webkit-scrollbar{display:none}
-.circ-compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 14px 14px}
-.circ-compare-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.circ-compare-table th{background:var(--black);color:var(--white);padding:12px 8px;text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;position:sticky;top:0;z-index:10}
-.circ-compare-table td{padding:10px 8px;border-bottom:1px solid var(--gray2);vertical-align:top}
-.circ-compare-table tr:last-child td{border-bottom:none}
-.circ-compare-table .circ-name{font-weight:700;font-size:13px;white-space:nowrap}
-.circ-compare-table .circ-desc{font-size:11px;color:var(--gray4);display:block;margin-top:2px}
-.circ-compare-table .val-good{color:var(--green);font-weight:700}
-.circ-compare-table .val-warn{color:#ca8a04;font-weight:700}
-.circ-compare-table .val-bad{color:var(--red);font-weight:700}
-.circ-ai-card{background:var(--white);border-radius:12px;margin:0 14px 12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.circ-ai-header{padding:14px 16px;background:var(--gray1);display:flex;justify-content:space-between;align-items:center}
-.circ-ai-title{font-size:16px;font-weight:800}.circ-ai-score{font-size:18px;font-weight:900}
-.circ-ai-body{padding:14px 16px}
-.circ-ai-desc{font-size:13px;color:var(--gray5);line-height:1.6;margin-bottom:12px}
-.circ-ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.circ-ai-stat{text-align:center;padding:8px;background:var(--gray1);border-radius:8px}
-.circ-ai-stat .val{font-size:16px;font-weight:700}.circ-ai-stat .lbl{font-size:10px;color:var(--gray4);text-transform:uppercase;margin-top:2px}
-.circ-ai-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.circ-ai-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;text-transform:uppercase}
-.tag-stop{background:#fee2e2;color:#b91c1c}.tag-peatones{background:#dbeafe;color:#1e40af}.tag-sentido{background:#fef9c3;color:#854d0e}.tag-obras{background:#f3f4f6;color:#374151}
-.circ-ai-warning{background:#fff7ed;border-left:3px solid #c2410c;padding:10px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#92400e}
-.circ-ai-tip{background:#f0fdf4;border-left:3px solid var(--green);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#15803d}
-
-/* LEYENDA DE MARCADORES - NUEVO ESTILO */
-.leyenda-container{margin:16px 14px 20px;background:var(--white);border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.leyenda-container h3{font-size:16px;font-weight:800;margin-bottom:12px;color:var(--black);display:flex;align-items:center;gap:8px}
-.leyenda-container .leyenda-intro{font-size:13px;color:var(--gray5);margin-bottom:16px}
-.leyenda-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.leyenda-item{display:flex;align-items:flex-start;gap:10px;background:var(--gray1);padding:10px;border-radius:8px;transition:background .2s}
-.leyenda-item:hover{background:var(--gray2)}
-.leyenda-item .icon{font-size:1.5rem;min-width:28px;text-align:center;line-height:1}
-.leyenda-item .texto strong{display:block;font-size:12px;color:var(--black);margin-bottom:2px}
-.leyenda-item .texto p{font-size:11px;color:var(--gray5);margin:0;line-height:1.3}
-@media(max-width:600px){.leyenda-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
 </style>
 </head>
 <body>
@@ -715,7 +672,7 @@ function renderView(){
     html+='<div class="leyenda-item"><span class="icon">↔️</span><div class="texto"><strong>Sentido Contrario</strong><p>Tramo con circulación de coches en ambos sentidos.</p></div></div>';
     html+='<div class="leyenda-item"><span class="icon">🚶</span><div class="texto"><strong>Zona Peatones</strong><p>Zona con tránsito peatonal frecuente (ej. parques, zonas residenciales).</p></div></div>';
     html+='<div class="leyenda-item"><span class="icon">🚧</span><div class="texto"><strong>Obras</strong><p>Zona en construcción o reparación de la vía.</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">🚲</span><div class="texto"><strong>Zona de Bicis</strong><p>Zona habilitada o segura para ciclistas.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🚲</span><div class="texto"><strong>Zona Bicis</strong><p>Zonas donde suelen pasar otras bicis o personas.</p></div></div>';
     html+='<div class="leyenda-item"><span class="icon">🏁</span><div class="texto"><strong>Salida / Inicio</strong><p>Punto de inicio de tramo o salida del circuito.</p></div></div>';
     html+='<div class="leyenda-item"><span class="icon">👁️</span><div class="texto"><strong>Visión Reducida</strong><p>Zona con poca visibilidad debido a curvas cerradas, vegetación u obstáculos.</p></div></div>';
     html+='</div></div>';
@@ -725,14 +682,15 @@ function renderView(){
       html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')" role="button" tabindex="0">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')" role="button" tabindex="0">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')" role="button" tabindex="0">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')" role="button" tabindex="0">Alta</button><button class="filter-pill'+(circFilter==='tranquilo'?' active':'')+'" onclick="setCircFilter(\'tranquilo\')" role="button" tabindex="0">Tranquilo</button><button class="filter-pill'+(circFilter==='coches'?' active':'')+'" onclick="setCircFilter(\'coches\')" role="button" tabindex="0">Coches</button><button class="filter-pill'+(circFilter==='peatones'?' active':'')+'" onclick="setCircFilter(\'peatones\')" role="button" tabindex="0">Peatones</button></div>';
       s.circs.map(function(id){return CIRCUITS.find(function(c){return c.id===id;});}).filter(Boolean).filter(function(c){if(circFilter==='todos')return true;if(circFilter==='baja'||circFilter==='media'||circFilter==='alta')return c.dif===circFilter;return c.zona===circFilter;}).forEach(function(c){
         var drawingHtml = '';
-        if(c.id === 'sanjose' && curSeason === 't2') {
-          drawingHtml = `<div class="circ-drawing" style="padding:0; position:relative; overflow:hidden;">
-            <img src="sanjose_t2.png" alt="Mapa Circuito San José T2" class="img-sanjose" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display:none; align-items:center; justify-content:center; height:100%; background:#f8f8f8;">${circSVG(c.id)}</div>
-            <button class="google-earth-btn" onclick="event.stopPropagation(); window.open('${GOOGLE_EARTH_URL}', '_blank', 'noopener,noreferrer');">🌍 Google Earth</button>
-          </div>`;
+        var earthUrl = CIRCUIT_GOOGLE_EARTH[c.id] || '';
+        if(earthUrl){
+          drawingHtml = '<div class="circ-drawing" style="padding:0;position:relative;">'+
+            '<img src="circuits/'+c.id+'.png" alt="Circuito '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
+            '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>'+
+            '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')">🌍 Google Earth</button>'+
+          '</div>';
         } else {
-          drawingHtml = `<div class="circ-drawing">${circSVG(c.id)}</div>`;
+          drawingHtml = '<div class="circ-drawing">'+circSVG(c.id)+'</div>';
         }
         html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')" role="button" tabindex="0"><div class="circ-header-bar"><span class="ch-label">Circuito</span><span class="ch-badge badge-circuit">CIRCUITO</span></div>'+drawingHtml+'<div class="circ-info"><span class="ci-record">'+c.record+'</span><div class="ci-name">'+c.name+'</div><div class="ci-desc">'+c.desc.split('.')[0]+'.</div><div class="ci-tags">'+zonaBadge(c.zona)+difBadge(c.dif)+riesgoBadge(c.riesgo)+'</div></div></div>';
       });
@@ -883,6 +841,7 @@ render();
 </script>
 </body>
 </html>
+
 
 
 
