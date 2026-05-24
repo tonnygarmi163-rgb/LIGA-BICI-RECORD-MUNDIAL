@@ -235,6 +235,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .img-sanjose:hover{transform:scale(1.02)}
 .google-earth-btn{position:absolute;bottom:10px;right:10px;background:#4285f4;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;display:flex;align-items:center;gap:6px;z-index:20;cursor:pointer;border:none;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .google-earth-btn:hover{background:#1e40ff}
+
+/* Estilos para la nueva pestaña de comparación de circuitos */
+.circ-compare-header{padding:20px 14px 10px}
+.circ-compare-header .eyebrow{font-size:11px;color:var(--gray4);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.circ-compare-header h1{font-size:26px;font-weight:900;margin-top:2px}
+.circ-compare-filters{display:flex;gap:8px;overflow-x:auto;padding:0 14px 14px;scrollbar-width:none}
+.circ-compare-filters::-webkit-scrollbar{display:none}
+.circ-compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 14px 14px}
+.circ-compare-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.circ-compare-table th{background:var(--black);color:var(--white);padding:12px 8px;text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;position:sticky;top:0;z-index:10}
+.circ-compare-table td{padding:10px 8px;border-bottom:1px solid var(--gray2);vertical-align:top}
+.circ-compare-table tr:last-child td{border-bottom:none}
+.circ-compare-table .circ-name{font-weight:700;font-size:13px;white-space:nowrap}
+.circ-compare-table .circ-desc{font-size:11px;color:var(--gray4);display:block;margin-top:2px}
+.circ-compare-table .val-good{color:var(--green);font-weight:700}
+.circ-compare-table .val-warn{color:#ca8a04;font-weight:700}
+.circ-compare-table .val-bad{color:var(--red);font-weight:700}
+.circ-ai-card{background:var(--white);border-radius:12px;margin:0 14px 12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.circ-ai-header{padding:14px 16px;background:var(--gray1);display:flex;justify-content:space-between;align-items:center}
+.circ-ai-title{font-size:16px;font-weight:800}.circ-ai-score{font-size:18px;font-weight:900}
+.circ-ai-body{padding:14px 16px}
+.circ-ai-desc{font-size:13px;color:var(--gray5);line-height:1.6;margin-bottom:12px}
+.circ-ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.circ-ai-stat{text-align:center;padding:8px;background:var(--gray1);border-radius:8px}
+.circ-ai-stat .val{font-size:16px;font-weight:700}.circ-ai-stat .lbl{font-size:10px;color:var(--gray4);text-transform:uppercase;margin-top:2px}
+.circ-ai-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.circ-ai-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;text-transform:uppercase}
+.tag-stop{background:#fee2e2;color:#b91c1c}.tag-peatones{background:#dbeafe;color:#1e40af}.tag-sentido{background:#fef9c3;color:#854d0e}.tag-obras{background:#f3f4f6;color:#374151}
+.circ-ai-warning{background:#fff7ed;border-left:3px solid #c2410c;padding:10px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#92400e}
+.circ-ai-tip{background:#f0fdf4;border-left:3px solid var(--green);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#15803d}
 </style>
 </head>
 <body>
@@ -245,10 +275,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="nav-button active" data-view="inicio" title="Inicio" role="tab" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Inicio</button>
     <button class="nav-button" data-view="pilotos" title="Pilotos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Pilotos</button>
     <button class="nav-button" data-view="puntos" title="Puntos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Puntos</button>
-    <!-- CAMBIADO: Icono de circuito en lugar de reloj -->
     <button class="nav-button" data-view="circuitos" title="Circuitos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="3"/><path d="M12 6v2M12 16v2M6 12h2M16 12h2"/></svg>Circuitos</button>
     <button class="nav-button" data-view="horarios" title="Horarios" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>Horarios</button>
     <button class="nav-button" data-view="comparativa" title="Comparativa Bicis" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5.5 8.5l3-2.5 3 2.5M15.5 8.5l3-2.5 3 2.5"/><rect x="3" y="14" width="5" height="6" rx="1"/><rect x="10" y="12" width="5" height="8" rx="1"/><rect x="17" y="10" width="5" height="10" rx="1"/></svg>Bicis</button>
+    <button class="nav-button" data-view="circuitos-comparativa" title="Comparar Circuitos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Comparar</button>
     <button class="nav-button" data-view="info" title="Info" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Info</button>
     <button class="nav-button" data-view="edits" title="Edits" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Edits</button>
   </nav>
@@ -290,7 +320,6 @@ const CIRC_SVGS = {
   llomallarga: {color:'#b91c1c', path:'M 30 90 L 15 50 L 20 20 L 60 10 L 120 15 L 180 40 L 195 70 L 160 90 Z', dot:'M 30 90'}
 };
 
-// URLs de Google Earth para cada circuito
 const CIRCUIT_GOOGLE_EARTH = {
   sanjose: 'https://earth.google.com/earth/d/13mVl3ODEJVU3lyRMRa3me1ygt0YkXWRK',
   andromeda: 'https://earth.google.com/web/@39.58036308,-0.52606725,117.19741839a,977.3431825d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
@@ -304,7 +333,20 @@ const CIRCUIT_GOOGLE_EARTH = {
   sierraespada: 'https://earth.google.com/web/@39.58556196,-0.52996516,116.41329149a,966.78485889d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE'
 };
 
-// URL corregida sin ?usp=sharing
+// Datos de análisis de circuitos Temporada 2 (extraídos del CSV y MD)
+const CIRCUIT_ANALYSIS = [
+  {id:'sanjose',name:'San José',distancia:813,alt_min:91.7,alt_max:93.4,rango_alt:1.7,subida:3.1,bajada:3.0,pend_max:3.6,pend_tramo:'Curva 4 San José -> Sentido contrario 1 San José',curvas_norm:8,curvas_pelig:1,curvas_total:9,stops:1,peatones:1,sentido:3,obras:3,score:20.3,desc_ai:'Circuito con peatones, obras impidiendo una trazada sin ir por calles en sentido contrario, pero al estar en obras no pasa coches',warning:'1 STOP, 1 zona peatones, 3 sentido contrario, 3 obras',tip:'Ideal para práctica técnica en entorno urbano controlado'},
+  {id:'andromeda',name:'Andrómeda',distancia:732,alt_min:117.9,alt_max:123.1,rango_alt:5.2,subida:6.7,bajada:7.0,pend_max:-5.2,pend_tramo:'Pendiente descediente 1 Andromena -> Curva peligrosa 1 Andromena',curvas_norm:5,curvas_pelig:1,curvas_total:6,stops:0,peatones:0,sentido:0,obras:0,score:8.7,desc_ai:'Circuito de ritmo técnico, con 1 curvas peligrosas',warning:'-',tip:'Atención a la curva peligrosa tras pendiente descendente'},
+  {id:'maracana',name:'Maracaná',distancia:483,alt_min:97.8,alt_max:98.9,rango_alt:1.1,subida:1.1,bajada:0.0,pend_max:0.6,pend_tramo:'Salida Maracana -> Curva 1 Maracana',curvas_norm:2,curvas_pelig:0,curvas_total:2,stops:0,peatones:0,sentido:0,obras:0,score:1.6,desc_ai:'Circuito de ritmo rápido, bastante limpio según los puntos marcados',warning:'-',tip:'Perfecto para pruebas de velocidad y reacción'},
+  {id:'benissano',name:'Benissanó',distancia:587,alt_min:132.3,alt_max:139.6,rango_alt:7.3,subida:2.1,bajada:9.1,pend_max:-6.9,pend_tramo:'Pendiente descedente 2 Benissanó -> Curva peligrosa 1 Benissanó',curvas_norm:5,curvas_pelig:2,curvas_total:7,stops:0,peatones:0,sentido:0,obras:0,score:12.0,desc_ai:'Circuito de ritmo técnico, con 2 curvas peligrosas',warning:'Curva peligrosa con suelo de piedrecitas haciendo que las ruedas patinen',tip:'Máxima precaución en curvas con pendiente deslizante'},
+  {id:'poblanova',name:'Pobla Nova',distancia:677,alt_min:90.9,alt_max:92.9,rango_alt:2.0,subida:2.0,bajada:1.9,pend_max:-3.9,pend_tramo:'Salida Pobla Nova -> Pendiente descedente Pobla Nova',curvas_norm:3,curvas_pelig:2,curvas_total:5,stops:0,peatones:1,sentido:0,obras:0,score:10.8,desc_ai:'Circuito de ritmo técnico, con 2 curvas peligrosas, zona de peatones',warning:'1 zona peatones',tip:'Vigilar peatones en zona de parque, especialmente en pruebas de tiempos'},
+  {id:'cementerio',name:'Cementerio',distancia:585,alt_min:118.6,alt_max:128.9,rango_alt:10.3,subida:2.8,bajada:14.1,pend_max:-14.8,pend_tramo:'Zona de bicis 1 Cementerio -> Curva 3 Cementerio',curvas_norm:9,curvas_pelig:1,curvas_total:10,stops:0,peatones:0,sentido:0,obras:0,score:14.1,desc_ai:'Circuito de ritmo técnico, con 1 curvas peligrosas, cambios de altura marcados',warning:'Curva cerrada después de pendiente descendiente',tip:'Excelente para practicar frenada en bajadas pronunciadas'},
+  {id:'benaguacil',name:'Benaguacil',distancia:661,alt_min:96.2,alt_max:101.1,rango_alt:4.9,subida:6.0,bajada:5.7,pend_max:5.4,pend_tramo:'Salida Benaguacil -> Curva 1 Benaguacil',curvas_norm:7,curvas_pelig:0,curvas_total:7,stops:0,peatones:0,sentido:0,obras:0,score:7.0,desc_ai:'Entrada a Benaguacil con trazada de velocidad y pocas zonas de descanso. Circuito tranquilo',warning:'-',tip:'Ideal para entrenar resistencia y ritmo constante'},
+  {id:'lliria',name:'Llíria',distancia:684,alt_min:125.1,alt_max:132.1,rango_alt:7.1,subida:5.2,bajada:7.3,pend_max:6.0,pend_tramo:'Salida Llíria -> Pendiente ascendiente 1 Llíria',curvas_norm:6,curvas_pelig:0,curvas_total:6,stops:0,peatones:0,sentido:0,obras:0,score:6.5,desc_ai:'Circuito de ritmo rápido, bastante limpio según los puntos marcados',warning:'-',tip:'Bueno para trabajar potencia en subidas moderadas'},
+  {id:'barranquet',name:'Barranquet',distancia:561,alt_min:108.2,alt_max:125.3,rango_alt:17.1,subida:26.9,bajada:38.1,pend_max:23.6,pend_tramo:'Curva 4 Barranquet -> Curva de Barranquet 5',curvas_norm:5,curvas_pelig:4,curvas_total:9,stops:0,peatones:1,sentido:0,obras:0,score:27.2,desc_ai:'Circuito de ritmo técnico, con 4 curvas peligrosas, zona de peatones, cambios de altura marcados',warning:'1 zona peatones, 4 curvas peligrosas con visión reducida',tip:'Máxima concentración: curvas ciegas y peatones. No apto para principiantes'},
+  {id:'sierraespada',name:'Sierra Espada',distancia:891,alt_min:113.6,alt_max:118.3,rango_alt:4.7,subida:5.9,bajada:7.8,pend_max:9.1,pend_tramo:'Salida Sierra Espada -> Pendiente descediente Sierra Espada',curvas_norm:4,curvas_pelig:4,curvas_total:8,stops:3,peatones:0,sentido:1,obras:0,score:23.7,desc_ai:'Circuito de ritmo técnico, con 4 curvas peligrosas, STOP, sentido contrario',warning:'3 STOP, 1 sentido contrario',tip:'Respetar señales de tráfico y circulación compartida con vehículos'}
+];
+
 const GOOGLE_EARTH_URL = 'https://earth.google.com/earth/d/13mVl3ODEJVU3lyRMRa3me1ygt0YkXWRK';
 
 function circSVG(id) {
@@ -553,6 +595,7 @@ const SEASONS = {
 
 let curSeason='t3', curView='inicio', circFilter='todos', infoTab='normas', searchQuery='', pilotaFilter='todos';
 let sortBy='nombre', sortDir='asc';
+let compareSortBy='score', compareSortDir='desc';
 
 function zonaBadge(z){var m={tranquilo:'tag-tranquilo',coches:'tag-coches',peatones:'tag-peatones'};var l={tranquilo:'Tranquilo',coches:'Zona coches',peatones:'Zona peatones'};return '<span class="ci-tag '+m[z]+'">'+(l[z]||z)+'</span>';}
 function difBadge(d){var m={baja:'tag-dif-baja',media:'tag-dif-media',alta:'tag-dif-alta'};return '<span class="ci-tag '+m[d]+'">Dif. '+d+'</span>';}
@@ -586,6 +629,20 @@ function getSortedRiders(){
     return 0;
   });
   return riders;
+}
+
+function getSortedCircuits(){
+  var circuits = CIRCUIT_ANALYSIS.slice();
+  circuits.sort(function(a,b){
+    var va,vb;
+    if(compareSortBy==='score'){va=a.score;vb=b.score;}
+    else if(compareSortBy==='distancia'){va=a.distancia;vb=b.distancia;}
+    else if(compareSortBy==='pendiente'){va=Math.abs(a.pend_max);vb=Math.abs(b.pend_max);}
+    else if(compareSortBy==='curvas'){va=a.curvas_total;vb=b.curvas_total;}
+    else return 0;
+    return compareSortDir==='asc'?(va-vb):(vb-va);
+  });
+  return circuits;
 }
 
 function renderView(){
@@ -638,7 +695,6 @@ function renderView(){
       html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')" role="button" tabindex="0">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')" role="button" tabindex="0">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')" role="button" tabindex="0">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')" role="button" tabindex="0">Alta</button><button class="filter-pill'+(circFilter==='tranquilo'?' active':'')+'" onclick="setCircFilter(\'tranquilo\')" role="button" tabindex="0">Tranquilo</button><button class="filter-pill'+(circFilter==='coches'?' active':'')+'" onclick="setCircFilter(\'coches\')" role="button" tabindex="0">Coches</button><button class="filter-pill'+(circFilter==='peatones'?' active':'')+'" onclick="setCircFilter(\'peatones\')" role="button" tabindex="0">Peatones</button></div>';
       s.circs.map(function(id){return CIRCUITS.find(function(c){return c.id===id;});}).filter(Boolean).filter(function(c){if(circFilter==='todos')return true;if(circFilter==='baja'||circFilter==='media'||circFilter==='alta')return c.dif===circFilter;return c.zona===circFilter;}).forEach(function(c){
         var drawingHtml = '';
-        // Lógica para mostrar imagen solo en San José T2
         if(c.id === 'sanjose' && curSeason === 't2') {
           drawingHtml = `<div class="circ-drawing" style="padding:0; position:relative; overflow:hidden;">
             <img src="sanjose_t2.png" alt="Mapa Circuito San José T2" class="img-sanjose" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -684,6 +740,31 @@ function renderView(){
     ['matei','hugo','ruben','toni'].forEach(function(id){var r=RIDERS[id];var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;var d=b.desarrollo;var dev=calcDevRange(d.plato,d.pinonMin,d.pinonMax);var susp=id==='ruben'?'Fox 32 Float Perf. Air (120mm)':'Delantera 100mm';html+='<tr><td class="bike-label">'+b.model.split(' ')[0]+' '+b.model.split(' ')[1]+'<span class="pilot-name">'+r.first+' '+r.last+'</span></td><td><strong style="color:#15803d">'+dev.subida+' m</strong></td><td><strong style="color:#1e40af">'+dev.velocidad+' m</strong></td><td>'+dev.rango+' m</td><td>'+susp+'</td></tr>';});
     html+='</tbody></table></div></div>';
     html+='<div class="comp-formula"><code>D = 2.167 × (Plato / Piñón)</code><div class="formula-lbl">Ruedas 27.5-29" (Ø≈690-730mm) · D en metros por pedalada completa</div></div>';
+  }
+
+  else if(curView==='circuitos-comparativa'){
+    html+='<div class="circ-compare-header"><p class="eyebrow">Análisis IA</p><h1>Comparativa de Circuitos</h1></div>';
+    html+='<div class="circ-compare-filters"><button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Score Riesgo</button><button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button><button class="filter-pill'+(compareSortBy==='pendiente'?' active':'')+'" onclick="compareSortBy=\'pendiente\';renderView()">⛰️ Pendiente</button><button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🌀 Curvas</button><button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️ Asc':'⬇️ Desc')+'</button></div>';
+    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Distancia</th><th>Altitud</th><th>Pendiente Máx</th><th>Curvas</th><th>Riesgos</th><th>Score</th></tr></thead><tbody>';
+    getSortedCircuits().forEach(function(c){
+      var pendClass = c.pend_max > 10 ? 'val-bad' : c.pend_max > 5 ? 'val-warn' : 'val-good';
+      var riesgoTags = '';
+      if(c.stops>0) riesgoTags+='<span class="circ-ai-tag tag-stop">🛑 '+c.stops+' STOP</span> ';
+      if(c.peatones>0) riesgoTags+='<span class="circ-ai-tag tag-peatones">🚶 '+c.peatones+' zona peatones</span> ';
+      if(c.sentido>0) riesgoTags+='<span class="circ-ai-tag tag-sentido">🚗 '+c.sentido+' sentido contrario</span> ';
+      if(c.obras>0) riesgoTags+='<span class="circ-ai-tag tag-obras">🚧 '+c.obras+' obras</span> ';
+      html+='<tr><td><div class="circ-name">'+c.name+'</div><div class="circ-desc">'+CIRCUITS.find(function(x){return x.id===c.id;})?.desc.split('.')[0]+'.</div></td><td>'+c.distancia+' m</td><td>'+c.alt_min+' - '+c.alt_max+' m</td><td class="'+pendClass+'">'+(c.pend_max>0?'+':'')+c.pend_max+'%</td><td>'+c.curvas_total+' ('+c.curvas_pelig+' peligrosas)</td><td>'+(riesgoTags||'-')+'</td><td><strong style="color:'+(c.score>20?'#b91c1c':c.score>10?'#ca8a04':'#15803d')+'">'+c.score+'</strong></td></tr>';
+    });
+    html+='</tbody></table></div>';
+    html+='<div style="padding:0 14px"><h3 style="font-size:18px;font-weight:800;margin:20px 0 10px">🤖 Observaciones por Circuito (IA)</h3></div>';
+    getSortedCircuits().forEach(function(c){
+      var circInfo = CIRCUITS.find(function(x){return x.id===c.id;});
+      var earthBtn = CIRCUIT_GOOGLE_EARTH[c.id] ? '<button class="google-earth-btn" onclick="event.stopPropagation(); window.open(\''+CIRCUIT_GOOGLE_EARTH[c.id]+'\', \'_blank\', \'noopener,noreferrer\')">🌍 Google Earth</button>' : '';
+      html+='<div class="circ-ai-card"><div class="circ-ai-header"><div class="circ-ai-title">'+c.name+'</div><div class="circ-ai-score" style="color:'+(c.score>20?'#b91c1c':c.score>10?'#ca8a04':'#15803d')+'">'+c.score+' pts</div></div><div class="circ-ai-body"><div class="circ-ai-desc">'+c.desc_ai+'</div><div class="circ-ai-stats"><div class="circ-ai-stat"><div class="val">'+c.distancia+'m</div><div class="lbl">Distancia</div></div><div class="circ-ai-stat"><div class="val">'+(c.pend_max>0?'+':'')+c.pend_max+'%</div><div class="lbl">Pendiente Máx</div></div><div class="circ-ai-stat"><div class="val">'+c.curvas_pelig+'/'+c.curvas_total}</div><div class="lbl">Curvas Peligrosas</div></div></div>';
+      if(c.warning && c.warning!=='-') html+='<div class="circ-ai-warning">⚠️ '+c.warning+'</div>';
+      if(c.tip) html+='<div class="circ-ai-tip">💡 '+c.tip+'</div>';
+      html+='</div></div>';
+    });
   }
 
   else if(curView==='info'){
