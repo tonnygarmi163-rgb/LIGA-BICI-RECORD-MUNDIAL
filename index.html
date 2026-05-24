@@ -265,6 +265,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tag-stop{background:#fee2e2;color:#b91c1c}.tag-peatones{background:#dbeafe;color:#1e40af}.tag-sentido{background:#fef9c3;color:#854d0e}.tag-obras{background:#f3f4f6;color:#374151}
 .circ-ai-warning{background:#fff7ed;border-left:3px solid #c2410c;padding:10px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#92400e}
 .circ-ai-tip{background:#f0fdf4;border-left:3px solid var(--green);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#15803d}
+
+/* LEYENDA DE MARCADORES - NUEVO ESTILO */
+.leyenda-container{margin:16px 14px 20px;background:var(--white);border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.leyenda-container h3{font-size:16px;font-weight:800;margin-bottom:12px;color:var(--black);display:flex;align-items:center;gap:8px}
+.leyenda-container .leyenda-intro{font-size:13px;color:var(--gray5);margin-bottom:16px}
+.leyenda-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.leyenda-item{display:flex;align-items:flex-start;gap:10px;background:var(--gray1);padding:10px;border-radius:8px;transition:background .2s}
+.leyenda-item:hover{background:var(--gray2)}
+.leyenda-item .icon{font-size:1.5rem;min-width:28px;text-align:center;line-height:1}
+.leyenda-item .texto strong{display:block;font-size:12px;color:var(--black);margin-bottom:2px}
+.leyenda-item .texto p{font-size:11px;color:var(--gray5);margin:0;line-height:1.3}
+@media(max-width:600px){.leyenda-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
 </style>
 </head>
 <body>
@@ -333,7 +345,6 @@ const CIRCUIT_GOOGLE_EARTH = {
   sierraespada: 'https://earth.google.com/web/@39.58556196,-0.52996516,116.41329149a,966.78485889d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE'
 };
 
-// Datos de análisis de circuitos Temporada 2 (extraídos del CSV y MD)
 const CIRCUIT_ANALYSIS = [
   {id:'sanjose',name:'San José',distancia:813,alt_min:91.7,alt_max:93.4,rango_alt:1.7,subida:3.1,bajada:3.0,pend_max:3.6,pend_tramo:'Curva 4 San José -> Sentido contrario 1 San José',curvas_norm:8,curvas_pelig:1,curvas_total:9,stops:1,peatones:1,sentido:3,obras:3,score:20.3,desc_ai:'Circuito con peatones, obras impidiendo una trazada sin ir por calles en sentido contrario, pero al estar en obras no pasa coches',warning:'1 STOP, 1 zona peatones, 3 sentido contrario, 3 obras',tip:'Ideal para práctica técnica en entorno urbano controlado'},
   {id:'andromeda',name:'Andrómeda',distancia:732,alt_min:117.9,alt_max:123.1,rango_alt:5.2,subida:6.7,bajada:7.0,pend_max:-5.2,pend_tramo:'Pendiente descediente 1 Andromena -> Curva peligrosa 1 Andromena',curvas_norm:5,curvas_pelig:1,curvas_total:6,stops:0,peatones:0,sentido:0,obras:0,score:8.7,desc_ai:'Circuito de ritmo técnico, con 1 curvas peligrosas',warning:'-',tip:'Atención a la curva peligrosa tras pendiente descendente'},
@@ -690,6 +701,25 @@ function renderView(){
 
   else if(curView==='circuitos'){
     html+='<div class="view-header"><p class="eyebrow">Trazados</p><h1>Circuitos</h1></div>';
+
+    // LEYENDA DE MARCADORES - NUEVA SECCIÓN
+    html+='<div class="leyenda-container">';
+    html+='<h3>🗺️ Leyenda de Marcadores</h3>';
+    html+='<p class="leyenda-intro">Guía de referencia para interpretar los puntos críticos del trazado.</p>';
+    html+='<div class="leyenda-grid">';
+    html+='<div class="leyenda-item"><span class="icon">🔄</span><div class="texto"><strong>Curva</strong><p>Curva estándar del circuito.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">⚠️</span><div class="texto"><strong>Curva Peligrosa</strong><p>Curva de alta dificultad, frecuentemente tras bajada fuerte o con suelo deslizante.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">📈</span><div class="texto"><strong>Pendiente Ascendente</strong><p>Tramo de subida. Requiere mayor esfuerzo y cambio de marcha.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">📉</span><div class="texto"><strong>Pendiente Descendente</strong><p>Tramo de bajada. Aumenta la velocidad y exige precaución en frenado.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🛑</span><div class="texto"><strong>STOP</strong><p>Señal de Stop obligatoria o intersección peligrosa.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">↔️</span><div class="texto"><strong>Sentido Contrario</strong><p>Tramo con circulación de coches en ambos sentidos.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🚶</span><div class="texto"><strong>Zona Peatones</strong><p>Zona con tránsito peatonal frecuente (ej. parques, zonas residenciales).</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🚧</span><div class="texto"><strong>Obras</strong><p>Zona en construcción o reparación de la vía.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🚲</span><div class="texto"><strong>Zona de Bicis</strong><p>Zona habilitada o segura para ciclistas.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🏁</span><div class="texto"><strong>Salida / Inicio</strong><p>Punto de inicio de tramo o salida del circuito.</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">👁️</span><div class="texto"><strong>Visión Reducida</strong><p>Zona con poca visibilidad debido a curvas cerradas, vegetación u obstáculos.</p></div></div>';
+    html+='</div></div>';
+
     if(s.circs.length===0){html+='<div class="empty-state"><span class="emoji">🏗️</span><p>No hay circuitos confirmados aún para esta temporada</p><p style="margin-top:8px;font-size:13px">Se anunciarán próximamente</p></div>';}
     else{
       html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')" role="button" tabindex="0">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')" role="button" tabindex="0">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')" role="button" tabindex="0">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')" role="button" tabindex="0">Alta</button><button class="filter-pill'+(circFilter==='tranquilo'?' active':'')+'" onclick="setCircFilter(\'tranquilo\')" role="button" tabindex="0">Tranquilo</button><button class="filter-pill'+(circFilter==='coches'?' active':'')+'" onclick="setCircFilter(\'coches\')" role="button" tabindex="0">Coches</button><button class="filter-pill'+(circFilter==='peatones'?' active':'')+'" onclick="setCircFilter(\'peatones\')" role="button" tabindex="0">Peatones</button></div>';
@@ -760,7 +790,7 @@ function renderView(){
     getSortedCircuits().forEach(function(c){
       var circInfo = CIRCUITS.find(function(x){return x.id===c.id;});
       var earthBtn = CIRCUIT_GOOGLE_EARTH[c.id] ? '<button class="google-earth-btn" onclick="event.stopPropagation(); window.open(\''+CIRCUIT_GOOGLE_EARTH[c.id]+'\', \'_blank\', \'noopener,noreferrer\')">🌍 Google Earth</button>' : '';
-      html+='<div class="circ-ai-card"><div class="circ-ai-header"><div class="circ-ai-title">'+c.name+'</div><div class="circ-ai-score" style="color:'+(c.score>20?'#b91c1c':c.score>10?'#ca8a04':'#15803d')+'">'+c.score+' pts</div></div><div class="circ-ai-body"><div class="circ-ai-desc">'+c.desc_ai+'</div><div class="circ-ai-stats"><div class="circ-ai-stat"><div class="val">'+c.distancia+'m</div><div class="lbl">Distancia</div></div><div class="circ-ai-stat"><div class="val">'+(c.pend_max>0?'+':'')+c.pend_max+'%</div><div class="lbl">Pendiente Máx</div></div><div class="circ-ai-stat"><div class="val">'+c.curvas_pelig+'/'+c.curvas_total}</div><div class="lbl">Curvas Peligrosas</div></div></div>';
+      html+='<div class="circ-ai-card"><div class="circ-ai-header"><div class="circ-ai-title">'+c.name+'</div><div class="circ-ai-score" style="color:'+(c.score>20?'#b91c1c':c.score>10?'#ca8a04':'#15803d')+'">'+c.score+' pts</div></div><div class="circ-ai-body"><div class="circ-ai-desc">'+c.desc_ai+'</div><div class="circ-ai-stats"><div class="circ-ai-stat"><div class="val">'+c.distancia+'m</div><div class="lbl">Distancia</div></div><div class="circ-ai-stat"><div class="val">'+(c.pend_max>0?'+':'')+c.pend_max+'%</div><div class="lbl">Pendiente Máx</div></div><div class="circ-ai-stat"><div class="val">'+c.curvas_pelig+'/'+c.curvas_total+'</div><div class="lbl">Curvas Peligrosas</div></div></div>';
       if(c.warning && c.warning!=='-') html+='<div class="circ-ai-warning">⚠️ '+c.warning+'</div>';
       if(c.tip) html+='<div class="circ-ai-tip">💡 '+c.tip+'</div>';
       html+='</div></div>';
@@ -853,4 +883,6 @@ render();
 </script>
 </body>
 </html>
+
+
 
