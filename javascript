@@ -1,38 +1,28 @@
-function openExternalLink(url){
-  // Intentar abrir en nueva pestaña
-  var newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-  
-  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-    // Si no se puede abrir, mostrar la URL claramente
-    alert('No se pudo abrir automáticamente. Copia esta URL y pégala en tu navegador:\n\n' + url);
+s.circs.map(function(id){return CIRCUITS.find(function(c){return c.id===id;});})
+  .filter(Boolean)
+  .filter(function(c){
+    if(circFilter==='todos')return true;
+    if(circFilter==='baja'||circFilter==='media'||circFilter==='alta')return c.dif===circFilter;
+    return c.zona===circFilter;
+  })
+  .forEach(function(c){
+    var earthUrl = CIRCUIT_GOOGLE_EARTH[c.id] || '';
     
-    // Intentar copiar al portapapeles
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(url).then(function() {
-        showToast('🔗 URL copiada al portapapeles');
-      }).catch(function(err) {
-        console.error('Error al copiar:', err);
-        showToast('🔗 URL: ' + url.substring(0, 50) + '...');
-      });
-    } else {
-      // Método alternativo para copiar
-      var textArea = document.createElement("textarea");
-      textArea.value = url;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-9999px";
-      document.body.appendChild(textArea);
-      textArea.select();
-      
-      try {
-        document.execCommand('copy');
-        showToast('🔗 URL copiada al portapapeles');
-      } catch (err) {
-        showToast('🔗 URL: ' + url.substring(0, 50) + '...');
-      }
-      
-      document.body.removeChild(textArea);
+    // IMÁGENES EN LA RAÍZ (sin carpeta circuits/)
+    var imgSrc = c.id + '_' + curSeason + '.png';
+    
+    var drawingHtml = '<div class="circ-drawing" style="padding:0;position:relative;">'+
+      '<img src="'+imgSrc+'" alt="Mapa Circuito '+c.name+' '+curSeason.toUpperCase()+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
+      '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>';
+    
+    if(earthUrl){
+      drawingHtml += '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')">🌍 Google Earth</button>';
     }
-  } else {
-    showToast('🔗 Abriendo enlace...');
-  }
-}
+    
+    drawingHtml += '</div>';
+    
+    html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')" role="button" tabindex="0">'+
+      '<div class="circ-header-bar"><span class="ch-label">Circuito</span><span class="ch-badge badge-circuit">CIRCUITO</span></div>'+
+      drawingHtml+
+      '<div class="circ-info"><span class="ci-record">'+c.record+'</span><div class="ci-name">'+c.name+'</div><div class="ci-desc">'+c.desc.split('.')[0]+'.</div><div class="ci-tags">'+zonaBadge(c.zona)+difBadge(c.dif)+riesgoBadge(c.riesgo)+'</div></div></div>';
+  });
