@@ -82,10 +82,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ch-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .ch-badge{font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;text-transform:uppercase}
 .badge-circuit{background:var(--red);color:var(--white)}
-.circ-drawing{height:150px;display:flex;align-items:center;justify-content:center;padding:0;background:var(--gray1);position:relative;overflow:hidden}
+.circ-drawing{height:200px;display:flex;align-items:center;justify-content:center;padding:0;background:var(--gray1);position:relative;overflow:hidden}
 .circ-drawing svg{max-width:100%;max-height:100%}
-.circ-drawing img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;transition:transform .2s}
-.circ-drawing img:hover{transform:scale(1.02)}
+.circ-drawing img{width:100%;height:100%;object-fit:contain;display:block;background:#fff;padding:10px;box-sizing:border-box}
 .circ-info{padding:10px 14px}
 .ci-name{font-size:18px;font-weight:900}.ci-record{font-size:13px;color:var(--gray4);float:right;margin-top:2px}
 .ci-desc{font-size:12px;color:var(--gray5);margin-top:4px;line-height:1.5}
@@ -232,7 +231,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .news-modal-date{font-size:12px;color:var(--gray4);margin-bottom:15px;text-transform:uppercase}
 .news-modal-body{font-size:14px;line-height:1.6;color:var(--gray5)}
 .news-modal-img{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:15px}
-.img-circuito{width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .2s}
+.img-circuito{width:100%;height:100%;object-fit:contain;cursor:pointer;transition:transform .2s}
 .img-circuito:hover{transform:scale(1.02)}
 .google-earth-btn{position:absolute;bottom:10px;right:10px;background:#4285f4;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;display:flex;align-items:center;gap:6px;z-index:20;cursor:pointer;border:none;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .google-earth-btn:hover{background:#1e40ff}
@@ -335,22 +334,28 @@ const CIRCUIT_GOOGLE_EARTH = {
 };
 
 // ============================================
-// CIRCUITS - CORREGIDO POR TEMPORADAS
+// CIRCUITS - COMPLETO Y ORDENADO
 // ============================================
 const CIRCUITS = [
   // TEMPORADA 1 (7 circuitos)
-  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Toni García'}],tiempos:["Rubén Asensi 1'54.25\" · 2025","Toni García 2'09.96\" · 2025"]},
-  {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\" · 2025"]},
-  {id:'maracana',name:'Maracaná',season:'t1',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\" · 2025","Hugo Castro 1'03.40\" · 2025"]},
-  {id:'cementerio',name:'Cementerio',season:'t1',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\" · 2025"]},
-  {id:'barranquet',name:'Barranquet',season:'t1',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\" · 2025"]},
-  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches curva peligrosa',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente con tráfico.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Hugo Castro'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\" · 2025"]},
+  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
+  {id:'maracana',name:'Maracaná',season:'t1',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
+  {id:'cementerio',name:'Cementerio',season:'t1',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'barranquet',name:'Barranquet',season:'t1',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches curva peligrosa',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente con tráfico.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
   {id:'rascanya',name:'Rascanya',season:'t1',distancia:750,curvasNorm:5,curvasPelig:2,riesgos:'-',homePilot:'',desc:'Circuito histórico, trazado mixto.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'media',riesgo:'medio',altMin:95,altMax:102,valoracion:3.8,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   
-  // TEMPORADA 2 (5 circuitos nuevos)
-  {id:'sanjose',name:'San José',season:'t2',distancia:813,curvasNorm:8,curvasPelig:1,riesgos:'1 STOP, 3 sentido contrario',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas, zonas de visión reducida y obras.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,valoracion:4.5,winners:[{s:'T2·2025',n:'Toni García'}],tiempos:["Toni García 2'09.96\""]},
+  // TEMPORADA 2 (11 circuitos - ORDEN CORRECTO)
+  {id:'sanjose',name:'San José',season:'t2',distancia:813,curvasNorm:8,curvasPelig:1,riesgos:'1 STOP, 3 sentido contrario, 3 obras',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas, zonas de visión reducida y obras.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,valoracion:4.5,winners:[{s:'T2·2025',n:'Toni García'}],tiempos:["Toni García 2'09.96\""]},
+  {id:'andromeda',name:'Andrómeda',season:'t2',distancia:732,curvasNorm:5,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente descendente.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\""]},
+  {id:'maracana',name:'Maracaná',season:'t2',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\"","Hugo Castro 1'03.40\""]},
   {id:'benissano',name:'Benissanó',season:'t2',distancia:587,curvasNorm:5,curvasPelig:2,riesgos:'Zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en bajada inicial y curvas peligrosas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:132.3,altMax:139.6,valoracion:4.0,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\""]},
   {id:'poblanova',name:'Pobla Nova',season:'t2',distancia:677,curvasNorm:3,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico, curvas peligrosas tras pendiente y zona de parque.',bikeRec:'BH Spike 2.5 (maniobrable)',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,valoracion:3.9,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\""]},
+  {id:'cementerio',name:'Cementerio',season:'t2',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\""]},
+  {id:'benaguacil',name:'Benaguacil',season:'t2',distancia:661,curvasNorm:7,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\""]},
+  {id:'lliria',name:'Llíria',season:'t2',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\""]},
+  {id:'barranquet',name:'Barranquet',season:'t2',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\""]},
   {id:'sierraespada',name:'Sierra Espada',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]},
   {id:'vistacalderona',name:'Vista Calderona',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'STOP, sentido contrario',homePilot:'',desc:'Largo y técnico, tráfico y paradas obligatorias.',bikeRec:'Scott Spark 950',zona:'coches',dif:'media',riesgo:'medio',altMin:110,altMax:118,valoracion:4.1,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'22.43\""]},
   
@@ -708,7 +713,8 @@ function renderView(){
     circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).forEach(function(c){
       var earthUrl = CIRCUIT_GOOGLE_EARTH[c.id] || '';
       var imgSrc = c.id + '_' + curSeason + '.png';
-      var drawingHtml = '<div class="circ-drawing" style="height:150px;padding:0;position:relative;">'+
+      // IMÁGENES MÁS GRANDES (200px de altura) con object-fit:contain para ver circuito completo
+      var drawingHtml = '<div class="circ-drawing" style="height:200px;padding:0;position:relative;">'+
         '<img src="'+imgSrc+'" alt="Mapa '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
         '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>';
       if(earthUrl){drawingHtml += '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\')">🌍 Google Earth</button>';}
