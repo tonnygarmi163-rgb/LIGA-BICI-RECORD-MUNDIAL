@@ -1,0 +1,143 @@
+// ============================================
+// CIRCUITS - CORREGIDO POR TEMPORADAS
+// ============================================
+
+const CIRCUITS = [
+  // TEMPORADA 1 (7 circuitos)
+  {id:'sanjose',name:'San José',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'benissano',name:'Benissanó',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
+  {id:'maracana',name:'Maracaná',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
+  {id:'cementerio',name:'Cementerio',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'barranquet',name:'Barranquet',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'andromeda',name:'Andrómeda',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches curva peligrosa',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente con tráfico.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
+  {id:'rascanya',name:'Rascanya',distancia:750,curvasNorm:5,curvasPelig:2,riesgos:'-',homePilot:'',desc:'Circuito histórico, trazado mixto.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'media',riesgo:'medio',altMin:95,altMax:102,valoracion:3.8,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  
+  // TEMPORADA 2 (11 circuitos - SOLO los que NO están en T1)
+  {id:'poblanova',name:'Pobla Nova',distancia:677,curvasNorm:2,curvasPelig:2,riesgos:'1 zona peatones, rotonda',homePilot:'',desc:'Técnico, curvas peligrosas tras pendiente y parque.',bikeRec:'BH Spike 2.5',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,valoracion:3.9,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\""]},
+  {id:'benaguacil',name:'Benaguacil',distancia:661,curvasNorm:7,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Trazada velocidad, pocas zonas descanso.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\""]},
+  {id:'lliria',name:'Llíria',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Ritmo rápido, limpio, pendientes moderadas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\""]},
+  {id:'sierraespada',name:'Sierra Espada',distancia:891,curvasNorm:3,curvasPelig:3,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]},
+  {id:'vistacalderona',name:'Vista Calderona',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'STOP, sentido contrario',homePilot:'',desc:'Largo y técnico, tráfico y paradas.',bikeRec:'Scott Spark 950',zona:'coches',dif:'media',riesgo:'medio',altMin:110,altMax:118,valoracion:4.1,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'22.43\""]},
+  
+  // TEMPORADA 3
+  {id:'llomallarga',name:'Lloma Llarga',distancia:950,curvasNorm:6,curvasPelig:3,riesgos:'-',homePilot:'',desc:'Más lejano, ruta larga con tramos técnicos.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:115,altMax:130,valoracion:4.6,winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\""]}
+];
+
+// ============================================
+// FUNCIONES ACTUALIZADAS
+// ============================================
+
+// Función getSortedCircuits actualizada para comparativa
+function getSortedCircuits(){
+  var baseCircuits = curSeason === 't1' 
+    ? CIRCUITS.filter(function(c){return SEASONS.t1.circs.indexOf(c.id)!==-1;})
+    : curSeason === 't2'
+      ? CIRCUITS.filter(function(c){return SEASONS.t2.circs.indexOf(c.id)!==-1;})
+      : CIRCUITS.filter(function(c){return SEASONS.t3.circs.indexOf(c.id)!==-1;});
+  
+  var circuits = baseCircuits.slice();
+  circuits.sort(function(a,b){
+    var va,vb;
+    if(compareSortBy==='score'){
+      va = (a.curvasPelig||0)*3 + (a.curvasNorm||0);
+      vb = (b.curvasPelig||0)*3 + (b.curvasNorm||0);
+    }
+    else if(compareSortBy==='distancia'){va=a.distancia||0;vb=b.distancia||0;}
+    else if(compareSortBy==='desnivel'){
+      va = (a.altMax||0) - (a.altMin||0);
+      vb = (b.altMax||0) - (b.altMin||0);
+    }
+    else if(compareSortBy==='valoracion'){va=a.valoracion||0;vb=b.valoracion||0;}
+    else return 0;
+    return compareSortDir==='asc'?(va-vb):(vb-va);
+  });
+  return circuits;
+}
+
+// Función para emoji de riesgo
+function riesgoEmoji(riesgo){
+  if(!riesgo || riesgo==='-') return '🟢';
+  if(riesgo.includes('STOP') || riesgo.includes('peligro')) return '🔴';
+  if(riesgo.includes('peatones') || riesgo.includes('coches')) return '🟡';
+  return '🟢';
+}
+
+// Vista Circuitos actualizada con LEYENDA
+else if(curView==='circuitos'){
+  html+='<div class="view-header"><p class="eyebrow">Trazados</p><h1>Circuitos</h1></div>';
+  
+  // LEYENDA DE MARCADORES
+  html+='<div class="leyenda-container">';
+  html+='<h3>🗺️ Leyenda de Marcadores</h3>';
+  html+='<div class="leyenda-grid">';
+  html+='<div class="leyenda-item"><span class="icon">🔄</span><div class="texto"><strong>Curva</strong><p>Curva estándar</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">⚠️</span><div class="texto"><strong>Curva Peligrosa</strong><p>Alta dificultad</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">📈</span><div class="texto"><strong>Pendiente ↑</strong><p>Subida</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">📉</span><div class="texto"><strong>Pendiente ↓</strong><p>Bajada</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">🛑</span><div class="texto"><strong>STOP</strong><p>Parada obligatoria</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">🚶</span><div class="texto"><strong>Peatones</strong><p>Zona peatonal</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">🚲</span><div class="texto"><strong>Zona Bicis</strong><p>Zonas donde suelen pasar otras bicis o personas</p></div></div>';
+  html+='<div class="leyenda-item"><span class="icon">👁️</span><div class="texto"><strong>Visión Reducida</strong><p>Poca visibilidad</p></div></div>';
+  html+='</div></div>';
+  
+  html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')">Alta</button></div>';
+  
+  var circuitList = curSeason==='t1' 
+    ? CIRCUITS.filter(function(c){return SEASONS.t1.circs.indexOf(c.id)!==-1;})
+    : curSeason==='t2'
+      ? CIRCUITS.filter(function(c){return SEASONS.t2.circs.indexOf(c.id)!==-1;})
+      : CIRCUITS.filter(function(c){return SEASONS.t3.circs.indexOf(c.id)!==-1;});
+  
+  circuitList.filter(function(c){
+    if(circFilter==='todos')return true;
+    return c.dif===circFilter;
+  }).forEach(function(c){
+    var earthUrl = CIRCUIT_GOOGLE_EARTH[c.id] || '';
+    var imgSrc = c.id + '_' + curSeason + '.png';
+    
+    // IMÁGENES MÁS PEQUEÑAS (height reducido)
+    var drawingHtml = '<div class="circ-drawing" style="height:100px;padding:0;position:relative;">'+
+      '<img src="'+imgSrc+'" alt="Mapa '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';" style="opacity:0.85;">'+
+      '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>';
+    if(earthUrl){
+      drawingHtml += '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\')">🌍 Google Earth</button>';
+    }
+    drawingHtml += '</div>';
+    
+    html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')">'+
+      '<div class="circ-header-bar"><span class="ch-label">Circuito</span><span class="ch-badge badge-circuit">CIRCUITO</span></div>'+
+      drawingHtml+
+      '<div class="circ-info"><span class="ci-record">'+(c.distancia||'?')+' m</span><div class="ci-name">'+c.name+'</div><div class="ci-desc">'+((c.desc||'').substring(0,50)+'...')+'</div><div class="ci-tags">'+zonaBadge(c.zona||'')+difBadge(c.dif||'')+riesgoBadge(c.riesgo||'')+'</div></div></div>';
+  });
+}
+
+// Vista Comparativa actualizada
+else if(curView==='circuitos-comparativa'){
+  html+='<div class="circ-compare-header"><p class="eyebrow">Análisis IA</p><h1>Comparativa Circuitos</h1></div>';
+  html+='<div class="circ-compare-filters">';
+  html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button>';
+  html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
+  html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
+  html+='<button class="filter-pill'+(compareSortBy==='valoracion'?' active':'')+'" onclick="compareSortBy=\'valoracion\';renderView()">⭐ Valoración</button>';
+  html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
+  html+='</div>';
+  
+  var circuitList = getSortedCircuits();
+  
+  html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>⭐</th></tr></thead><tbody>';
+  circuitList.forEach(function(c){
+    var totalCurvas = (c.curvasNorm||0) + (c.curvasPelig||0);
+    var desnivel = ((c.altMax||0) - (c.altMin||0)).toFixed(1);
+    var riesgoIcon = riesgoEmoji(c.riesgos||'');
+    html+='<tr>'+
+      '<td><strong>'+c.name+'</strong></td>'+
+      '<td>'+(c.distancia||'?')+'m</td>'+
+      '<td>'+desnivel+'m</td>'+
+      '<td>'+totalCurvas+'</td>'+
+      '<td>'+(c.curvasPelig||0)+'</td>'+
+      '<td>'+riesgoIcon+' '+(c.riesgos||'-')+'</td>'+
+      '<td>'+(c.valoracion||'?')+'/5</td>'+
+      '</tr>';
+  });
+  html+='</tbody></table></div>';
+}
