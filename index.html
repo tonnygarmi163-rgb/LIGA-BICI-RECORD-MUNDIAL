@@ -82,9 +82,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ch-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .ch-badge{font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;text-transform:uppercase}
 .badge-circuit{background:var(--red);color:var(--white)}
-.circ-drawing{height:130px;display:flex;align-items:center;justify-content:center;padding:8px;background:var(--gray1);position:relative;overflow:hidden}
+.circ-drawing{height:150px;display:flex;align-items:center;justify-content:center;padding:0;background:var(--gray1);position:relative;overflow:hidden}
 .circ-drawing svg{max-width:100%;max-height:100%}
-.circ-drawing img{width:100%;height:100%;object-fit:cover;display:block}
+.circ-drawing img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;transition:transform .2s}
+.circ-drawing img:hover{transform:scale(1.02)}
 .circ-info{padding:10px 14px}
 .ci-name{font-size:18px;font-weight:900}.ci-record{font-size:13px;color:var(--gray4);float:right;margin-top:2px}
 .ci-desc{font-size:12px;color:var(--gray5);margin-top:4px;line-height:1.5}
@@ -235,6 +236,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .img-circuito:hover{transform:scale(1.02)}
 .google-earth-btn{position:absolute;bottom:10px;right:10px;background:#4285f4;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;display:flex;align-items:center;gap:6px;z-index:20;cursor:pointer;border:none;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .google-earth-btn:hover{background:#1e40ff}
+/* Leyenda de marcadores */
+.leyenda-container{margin:16px 14px 20px;background:var(--white);border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.leyenda-container h3{font-size:16px;font-weight:800;margin-bottom:12px;color:var(--black);display:flex;align-items:center;gap:8px}
+.leyenda-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.leyenda-item{display:flex;align-items:flex-start;gap:10px;background:var(--gray1);padding:10px;border-radius:8px;transition:background .2s}
+.leyenda-item:hover{background:var(--gray2)}
+.leyenda-item .icon{font-size:1.5rem;min-width:28px;text-align:center;line-height:1}
+.leyenda-item .texto strong{display:block;font-size:12px;color:var(--black);margin-bottom:2px}
+.leyenda-item .texto p{font-size:11px;color:var(--gray5);margin:0;line-height:1.3}
+/* Comparativa */
+.circ-compare-header{padding:20px 14px 10px}
+.circ-compare-header .eyebrow{font-size:11px;color:var(--gray4);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.circ-compare-header h1{font-size:26px;font-weight:900;margin-top:2px}
+.circ-compare-filters{display:flex;gap:8px;overflow-x:auto;padding:0 14px 14px;scrollbar-width:none}
+.circ-compare-filters::-webkit-scrollbar{display:none}
+.circ-compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 14px 14px}
+.circ-compare-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.circ-compare-table th{background:var(--black);color:var(--white);padding:10px 8px;text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.circ-compare-table td{padding:10px 8px;border-bottom:1px solid var(--gray2);vertical-align:top}
+.circ-compare-table tr:last-child td{border-bottom:none}
+.circ-compare-table .bike-label{font-weight:700;font-size:13px;white-space:nowrap}
+.circ-compare-table .pilot-name{font-size:11px;color:var(--gray4);display:block;margin-top:2px}
+.circ-compare-table .status-ok{color:var(--green);font-weight:700}
+.circ-compare-table .status-warn{color:#ca8a04;font-weight:700}
+.circ-compare-table .status-bad{color:var(--red);font-weight:700}
 </style>
 </head>
 <body>
@@ -294,9 +320,8 @@ const CIRC_SVGS = {
   llomallarga: {color:'#b91c1c', path:'M 30 90 L 15 50 L 20 20 L 60 10 L 120 15 L 180 40 L 195 70 L 160 90 Z', dot:'M 30 90'}
 };
 
-// URLs de Google Earth para TODAS las temporadas
+// URLs de Google Earth
 const CIRCUIT_GOOGLE_EARTH = {
-  // Temporada 1 URLs (actualizadas)
   sanjose: 'https://earth.google.com/web/@39.58679526,-0.55706109,106.07084095a,902.51226334d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
   andromeda: 'https://earth.google.com/web/@39.58047755,-0.524995,120.90603233a,720.32715404d,30y,19.5276911h,22.17507047t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
   maracana: 'https://earth.google.com/web/@39.5850657,-0.5387055,99.2711129a,954.14212741d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
@@ -309,23 +334,28 @@ const CIRCUIT_GOOGLE_EARTH = {
   sierraespada: 'https://earth.google.com/web/@39.58555365,-0.5282567,116.47546966a,795.11913484d,30y,19.52289265h,22.17532431t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0'
 };
 
-// Datos de análisis de circuitos (Temporada 1 y 2 combinados)
+// ============================================
+// CIRCUITS - CORREGIDO POR TEMPORADAS
+// ============================================
 const CIRCUITS = [
-  // Temporada 1 - Circuitos actualizados
-  {id:'sanjose',name:'San José',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas. Es poco exigente por desnivel, pero exige atención por trazada y visibilidad.',bikeRec:'BH Spike 2.5 (versátil, buena suspensión para curvas técnicas y visibilidad)',zona:'peatones',dif:'media',riesgo:'bajo',winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Toni García'}],tiempos:["Rubén Asensi 1'54.25\" · 2025","Toni García 2'09.96\" · 2025"]},
-  {id:'benissano',name:'Benissanó',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas. Aunque tiene menos curvas que San José, el riesgo está concentrado.',bikeRec:'Scott Spark 950 (ligereza y control en bajadas técnicas)',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\" · 2025"]},
-  {id:'maracana',name:'Maracaná',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado. Ideal para trabajar velocidad.',bikeRec:'Giant Talon 27.5 (robusta para ritmos rápidos)',zona:'tranquilo',dif:'baja',riesgo:'bajo',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\" · 2025","Hugo Castro 1'03.40\" · 2025"]},
-  {id:'sierraespada',name:'Sierra Espada',distancia:891,curvasNorm:3,curvasPelig:3,riesgos:'STOP, sentido contrario, visión reducida',homePilot:'',desc:'Circuito técnico con circulación compartida, varios STOP y curvas peligrosas tras pendientes.',bikeRec:'Scott Spark 950 (doble suspensión recomendada para terreno irregular y curvas)',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\" · 2025"]},
-  {id:'poblanova',name:'Pobla Nova',distancia:677,curvasNorm:2,curvasPelig:2,riesgos:'Zona peatones, rotonda',homePilot:'',desc:'Técnico, con curvas peligrosas tras pendiente y entrada a zona de parque.',bikeRec:'BH Spike 2.5 (maniobrabilidad en zonas compartidas)',zona:'peatones',dif:'media',riesgo:'medio',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\" · 2025"]},
-  {id:'cementerio',name:'Cementerio',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, peatones/patines, cambios de altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados y tránsito de bicis/peatones.',bikeRec:'BH Spike 2.5 (ligera y ágil para circuitos técnicos)',zona:'peatones',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\" · 2025"]},
-  {id:'barranquet',name:'Barranquet',distancia:561,curvasNorm:5,curvasPelig:5,riesgos:'Zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado y zonas de visión reducida. No apto para principiantes.',bikeRec:'Scott Spark 950 (precisión en curvas cerradas y desnivel)',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\" · 2025"]},
-  {id:'andromeda',name:'Andrómeda',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches en curva peligrosa, rotonda',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente descendente con circulación de coches y rotonda.',bikeRec:'Giant Talon 27.5 (estabilidad en tráfico y curvas)',zona:'coches',dif:'alta',riesgo:'medio',winners:[{s:'T1·2024',n:'Hugo Castro'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\" · 2025"]},
-  // Temporada 2 - Circuitos adicionales
-  {id:'benaguacil',name:'Benaguacil',distancia:661,curvasNorm:7,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso. Circuito tranquilo.',bikeRec:'Giant Talon 27.5 (estabilidad en velocidad)',zona:'tranquilo',dif:'baja',riesgo:'bajo',winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\" · 2025"]},
-  {id:'lliria',name:'Llíria',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',bikeRec:'Giant Talon 27.5 (buen rendimiento en pendientes)',zona:'tranquilo',dif:'baja',riesgo:'bajo',winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\" · 2025"]},
-  {id:'vistacalderona',name:'Vista Calderona',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'STOP, sentido contrario',homePilot:'',desc:'Circuito largo y técnico, con tráfico y paradas obligatorias.',bikeRec:'Scott Spark 950 (control en tráfico y paradas)',zona:'coches',dif:'media',riesgo:'medio',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'22.43\" · 2025"]},
-  {id:'rascanya',name:'Rascanya',distancia:750,curvasNorm:5,curvasPelig:2,riesgos:'-',homePilot:'',desc:'Circuito histórico, trazado mixto con curvas técnicas.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'media',riesgo:'medio',winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
-  {id:'llomallarga',name:'Lloma Llarga',distancia:950,curvasNorm:6,curvasPelig:3,riesgos:'-',homePilot:'',desc:'El circuito más lejano, ruta larga con tramos técnicos.',bikeRec:'Scott Spark 950 (confort para largas distancias)',zona:'coches',dif:'alta',riesgo:'alto',winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\" · 2026","Julian Matei 2'07.45\" · 2026"]}
+  // TEMPORADA 1 (7 circuitos)
+  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Toni García'}],tiempos:["Rubén Asensi 1'54.25\" · 2025","Toni García 2'09.96\" · 2025"]},
+  {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\" · 2025"]},
+  {id:'maracana',name:'Maracaná',season:'t1',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\" · 2025","Hugo Castro 1'03.40\" · 2025"]},
+  {id:'cementerio',name:'Cementerio',season:'t1',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\" · 2025"]},
+  {id:'barranquet',name:'Barranquet',season:'t1',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\" · 2025"]},
+  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches curva peligrosa',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente con tráfico.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,winners:[{s:'T1·2024',n:'Hugo Castro'},{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\" · 2025"]},
+  {id:'rascanya',name:'Rascanya',season:'t1',distancia:750,curvasNorm:5,curvasPelig:2,riesgos:'-',homePilot:'',desc:'Circuito histórico, trazado mixto.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'media',riesgo:'medio',altMin:95,altMax:102,valoracion:3.8,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  
+  // TEMPORADA 2 (5 circuitos nuevos)
+  {id:'sanjose',name:'San José',season:'t2',distancia:813,curvasNorm:8,curvasPelig:1,riesgos:'1 STOP, 3 sentido contrario',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas, zonas de visión reducida y obras.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,valoracion:4.5,winners:[{s:'T2·2025',n:'Toni García'}],tiempos:["Toni García 2'09.96\""]},
+  {id:'benissano',name:'Benissanó',season:'t2',distancia:587,curvasNorm:5,curvasPelig:2,riesgos:'Zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en bajada inicial y curvas peligrosas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:132.3,altMax:139.6,valoracion:4.0,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\""]},
+  {id:'poblanova',name:'Pobla Nova',season:'t2',distancia:677,curvasNorm:3,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico, curvas peligrosas tras pendiente y zona de parque.',bikeRec:'BH Spike 2.5 (maniobrable)',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,valoracion:3.9,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\""]},
+  {id:'sierraespada',name:'Sierra Espada',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]},
+  {id:'vistacalderona',name:'Vista Calderona',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'STOP, sentido contrario',homePilot:'',desc:'Largo y técnico, tráfico y paradas obligatorias.',bikeRec:'Scott Spark 950',zona:'coches',dif:'media',riesgo:'medio',altMin:110,altMax:118,valoracion:4.1,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'22.43\""]},
+  
+  // TEMPORADA 3
+  {id:'llomallarga',name:'Lloma Llarga',season:'t3',distancia:950,curvasNorm:6,curvasPelig:3,riesgos:'-',homePilot:'',desc:'El circuito más lejano, ruta larga con tramos técnicos.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:115,altMax:130,valoracion:4.6,winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\" · 2026","Julian Matei 2'07.45\" · 2026"]}
 ];
 
 // Datos de pilotos
@@ -544,6 +574,7 @@ function zonaBadge(z){var m={tranquilo:'tag-tranquilo',coches:'tag-coches',peato
 function difBadge(d){var m={baja:'tag-dif-baja',media:'tag-dif-media',alta:'tag-dif-alta'};return '<span class="ci-tag '+m[d]+'">Dif. '+d+'</span>';}
 function riesgoBadge(r){var m={bajo:'tag-riesgo-bajo',medio:'tag-riesgo-medio',alto:'tag-riesgo-alto'};return '<span class="ci-tag '+m[r]+'">Riesgo '+r+'</span>';}
 function gamaBadge(g){var m={baja:'gama-baja',media:'gama-media',alta:'gama-alta',pro:'gama-pro'};var l={baja:'🟢 Baja',media:'🟡 Media',alta:'🟠 Alta',pro:'🔴 Pro'};return '<span class="gama-badge '+m[g]+'">'+(l[g]||g)+'</span>';}
+function riesgoEmoji(riesgos){if(!riesgos||riesgos==='-')return'🟢';if(riesgos.includes('STOP')||riesgos.includes('peligro'))return'🔴';if(riesgos.includes('peatones')||riesgos.includes('coches'))return'🟡';return'🟢';}
 
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
@@ -561,21 +592,16 @@ function calcDevRange(plato, pinonMin, pinonMax) {
   };
 }
 
-// Función para abrir enlaces externos (CORREGIDA - sin duplicados)
 function openExternalLink(url){
   var newWindow = window.open(url, '_blank', 'noopener,noreferrer');
   if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
     alert('No se pudo abrir automáticamente. Copia esta URL y pégala en tu navegador:\n\n' + url);
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(url).then(function() {
-        showToast('🔗 URL copiada al portapapeles');
-      }).catch(function(err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); });
+      navigator.clipboard.writeText(url).then(function() { showToast('🔗 URL copiada al portapapeles'); }).catch(function(err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); });
     } else {
-      var textArea = document.createElement("textarea");
-      textArea.value = url; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
+      var textArea = document.createElement("textarea"); textArea.value = url; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
       document.body.appendChild(textArea); textArea.select();
-      try { document.execCommand('copy'); showToast('🔗 URL copiada al portapapeles'); } 
-      catch (err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); }
+      try { document.execCommand('copy'); showToast('🔗 URL copiada al portapapeles'); } catch (err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); }
       document.body.removeChild(textArea);
     }
   } else { showToast('🔗 Abriendo enlace...'); }
@@ -612,31 +638,25 @@ function getSortedRiders(){
   return riders;
 }
 
-// Función CORREGIDA para obtener circuitos ordenados
 function getSortedCircuits(){
-  // Filtrar circuitos según temporada actual
   var baseCircuits = curSeason === 't1' 
-    ? CIRCUITS.filter(function(c){return SEASONS.t1.circs.indexOf(c.id)!==-1;})
+    ? CIRCUITS.filter(function(c){return c.season==='t1';})
     : curSeason === 't2'
-      ? CIRCUITS.filter(function(c){return SEASONS.t2.circs.indexOf(c.id)!==-1;})
-      : CIRCUITS.filter(function(c){return SEASONS.t3.circs.indexOf(c.id)!==-1;});
-  
+      ? CIRCUITS.filter(function(c){return c.season==='t2';})
+      : CIRCUITS.filter(function(c){return c.season==='t3';});
   var circuits = baseCircuits.slice();
   circuits.sort(function(a,b){
     var va,vb;
-    if(compareSortBy==='score'){
-      va = (a.curvasPelig||0)*3 + (a.curvasNorm||0);
-      vb = (b.curvasPelig||0)*3 + (b.curvasNorm||0);
-    }
+    if(compareSortBy==='score'){va=(a.curvasPelig||0)*3+(a.curvasNorm||0);vb=(b.curvasPelig||0)*3+(b.curvasNorm||0);}
     else if(compareSortBy==='distancia'){va=a.distancia||0;vb=b.distancia||0;}
-    else if(compareSortBy==='curvas'){va=(a.curvasPelig||0)+(a.curvasNorm||0);vb=(b.curvasPelig||0)+(b.curvasNorm||0);}
+    else if(compareSortBy==='desnivel'){va=(a.altMax||0)-(a.altMin||0);vb=(b.altMax||0)-(b.altMin||0);}
+    else if(compareSortBy==='valoracion'){va=a.valoracion||0;vb=b.valoracion||0;}
     else return 0;
     return compareSortDir==='asc'?(va-vb):(vb-va);
   });
   return circuits;
 }
 
-// Función principal de renderizado
 function renderView(){
   var s=SEASONS[curSeason];
   var html='';
@@ -656,20 +676,9 @@ function renderView(){
     html+='<div class="search-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="pilot-search" placeholder="Buscar por nombre o dorsal..." value="'+searchQuery+'" oninput="searchQuery=this.value;renderView();"></div>';
     html+='<div class="sort-controls"><span class="sort-label">Ordenar por:</span><select class="sort-select" onchange="sortBy=this.value;renderView();"><option value="nombre"'+(sortBy==='nombre'?' selected':'')+'>Nombre</option><option value="apellido"'+(sortBy==='apellido'?' selected':'')+'>Apellido</option><option value="dorsal"'+(sortBy==='dorsal'?' selected':'')+'>Dorsal</option><option value="ptsTemporada"'+(sortBy==='ptsTemporada'?' selected':'')+'>Puntos temporada</option><option value="ptsTotales"'+(sortBy==='ptsTotales'?' selected':'')+'>Puntos totales</option></select><button class="sort-dir" onclick="sortDir=sortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(sortDir==='asc'?'⬆️ A-Z':'⬇️ Z-A')+'</button></div>';
     html+='<div class="filter-row"><button class="filter-pill'+(pilotaFilter==='todos'?' active':'')+'" onclick="pilotaFilter=\'todos\';renderView();">Todos</button><button class="filter-pill'+(pilotaFilter==='wins'?' active':'')+'" onclick="pilotaFilter=\'wins\';renderView();">Con victorias</button><button class="filter-pill'+(pilotaFilter==='nowins'?' active':'')+'" onclick="pilotaFilter=\'nowins\';renderView();">Sin victorias</button></div>';
-    var filtered=getSortedRiders().filter(function(r){
-      if(searchQuery){var q=searchQuery.toLowerCase();return r.first.toLowerCase().includes(q)||r.last.toLowerCase().includes(q)||String(r.dorsal).includes(q);}
-      if(pilotaFilter==='wins')return r.wins.length>0;
-      if(pilotaFilter==='nowins')return r.wins.length===0;
-      return true;
-    });
+    var filtered=getSortedRiders().filter(function(r){if(searchQuery){var q=searchQuery.toLowerCase();return r.first.toLowerCase().includes(q)||r.last.toLowerCase().includes(q)||String(r.dorsal).includes(q);}if(pilotaFilter==='wins')return r.wins.length>0;if(pilotaFilter==='nowins')return r.wins.length===0;return true;});
     if(!filtered.length){html+='<div class="empty-state"><span class="emoji">🔍</span><p>No se encontraron pilotos con esa búsqueda</p></div>';}
-    filtered.forEach(function(r){
-      var st=s.standings.find(function(x){return x.id===r.id;})||{pts:0,pos:'-'};
-      var seasonWins=r.wins.filter(function(w){return w.s.toLowerCase().includes(s.year);}).length;
-      var totalWins=r.wins.length;
-      var totalPts=getTotalPts(r.id);
-      html+='<div class="participant-card" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="pc-header" style="background:'+r.color+'"><div><span class="pc-kicker" style="color:'+r.textColor+';opacity:.8">'+r.first+'</span><div class="pc-name" style="color:'+r.textColor+'">'+r.last+'</div></div><div class="pc-dorsal" style="color:'+r.textColor+'">'+r.dorsal+'</div></div><div class="pc-stats"><div class="pc-stat"><div class="pc-sv">'+st.pos+'</div><div class="pc-sl">Posición</div></div><div class="pc-stat"><div class="pc-sv">'+st.pts+'</div><div class="pc-sl">Puntos Temp.</div></div><div class="pc-stat"><div class="pc-sv">'+totalPts+'</div><div class="pc-sl">Puntos Total</div></div><div class="pc-stat"><div class="pc-sv">'+seasonWins+'</div><div class="pc-sl">Vict. Temp.</div></div><div class="pc-stat"><div class="pc-sv">'+totalWins+'</div><div class="pc-sl">Vict. Total</div></div></div></div>';
-    });
+    filtered.forEach(function(r){var st=s.standings.find(function(x){return x.id===r.id;})||{pts:0,pos:'-'};var seasonWins=r.wins.filter(function(w){return w.s.toLowerCase().includes(s.year);}).length;var totalWins=r.wins.length;var totalPts=getTotalPts(r.id);html+='<div class="participant-card" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="pc-header" style="background:'+r.color+'"><div><span class="pc-kicker" style="color:'+r.textColor+';opacity:.8">'+r.first+'</span><div class="pc-name" style="color:'+r.textColor+'">'+r.last+'</div></div><div class="pc-dorsal" style="color:'+r.textColor+'">'+r.dorsal+'</div></div><div class="pc-stats"><div class="pc-stat"><div class="pc-sv">'+st.pos+'</div><div class="pc-sl">Posición</div></div><div class="pc-stat"><div class="pc-sv">'+st.pts+'</div><div class="pc-sl">Puntos Temp.</div></div><div class="pc-stat"><div class="pc-sv">'+totalPts+'</div><div class="pc-sl">Puntos Total</div></div><div class="pc-stat"><div class="pc-sv">'+seasonWins+'</div><div class="pc-sl">Vict. Temp.</div></div><div class="pc-stat"><div class="pc-sv">'+totalWins+'</div><div class="pc-sl">Vict. Total</div></div></div></div>';});
   }
 
   else if(curView==='puntos'){
@@ -682,32 +691,29 @@ function renderView(){
 
   else if(curView==='circuitos'){
     html+='<div class="view-header"><p class="eyebrow">Trazados</p><h1>Circuitos</h1></div>';
-    html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')" role="button" tabindex="0">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')" role="button" tabindex="0">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')" role="button" tabindex="0">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')" role="button" tabindex="0">Alta</button><button class="filter-pill'+(circFilter==='tranquilo'?' active':'')+'" onclick="setCircFilter(\'tranquilo\')" role="button" tabindex="0">Tranquilo</button><button class="filter-pill'+(circFilter==='coches'?' active':'')+'" onclick="setCircFilter(\'coches\')" role="button" tabindex="0">Coches</button><button class="filter-pill'+(circFilter==='peatones'?' active':'')+'" onclick="setCircFilter(\'peatones\')" role="button" tabindex="0">Peatones</button></div>';
-    
-    // Obtener circuitos de la temporada actual
-    var circuitList = curSeason==='t1' 
-      ? CIRCUITS.filter(function(c){return SEASONS.t1.circs.indexOf(c.id)!==-1;})
-      : curSeason==='t2'
-        ? CIRCUITS.filter(function(c){return SEASONS.t2.circs.indexOf(c.id)!==-1;})
-        : CIRCUITS.filter(function(c){return SEASONS.t3.circs.indexOf(c.id)!==-1;});
-    
-    circuitList.filter(function(c){
-      if(circFilter==='todos')return true;
-      if(circFilter==='baja'||circFilter==='media'||circFilter==='alta')return c.dif===circFilter;
-      return c.zona===circFilter;
-    }).forEach(function(c){
+    html+='<div class="leyenda-container"><h3>🗺️ Leyenda de Marcadores</h3><div class="leyenda-grid">';
+    html+='<div class="leyenda-item"><span class="icon">🔄</span><div class="texto"><strong>Curva</strong><p>Curva estándar del circuito</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">⚠️</span><div class="texto"><strong>Curva Peligrosa</strong><p>Alta dificultad, bajada fuerte o suelo deslizante</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">📈</span><div class="texto"><strong>Pendiente ↑</strong><p>Tramo de subida</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">📉</span><div class="texto"><strong>Pendiente ↓</strong><p>Tramo de bajada</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🛑</span><div class="texto"><strong>STOP</strong><p>Parada obligatoria</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">↔️</span><div class="texto"><strong>Sentido Contrario</strong><p>Coches en ambos sentidos</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🚶</span><div class="texto"><strong>Peatones</strong><p>Zona con tránsito peatonal</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">🚲</span><div class="texto"><strong>Zona Bicis</strong><p>Zonas donde suelen pasar otras bicis o personas</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">👁️</span><div class="texto"><strong>Visión Reducida</strong><p>Poca visibilidad en curva</p></div></div>';
+    html+='<div class="leyenda-item"><span class="icon">⚠️</span><div class="texto"><strong>Zona Deslizante</strong><p>Suelo con piedrecitas</p></div></div>';
+    html+='</div></div>';
+    html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')">Alta</button></div>';
+    var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
+    circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).forEach(function(c){
       var earthUrl = CIRCUIT_GOOGLE_EARTH[c.id] || '';
       var imgSrc = c.id + '_' + curSeason + '.png';
-      
-      var drawingHtml = '<div class="circ-drawing" style="padding:0;position:relative;">'+
-        '<img src="'+imgSrc+'" alt="Mapa Circuito '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
+      var drawingHtml = '<div class="circ-drawing" style="height:150px;padding:0;position:relative;">'+
+        '<img src="'+imgSrc+'" alt="Mapa '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
         '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>';
-      if(earthUrl){
-        drawingHtml += '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')">🌍 Google Earth</button>';
-      }
+      if(earthUrl){drawingHtml += '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\')">🌍 Google Earth</button>';}
       drawingHtml += '</div>';
-      
-      html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')" role="button" tabindex="0">'+
+      html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')">'+
         '<div class="circ-header-bar"><span class="ch-label">Circuito</span><span class="ch-badge badge-circuit">CIRCUITO</span></div>'+
         drawingHtml+
         '<div class="circ-info"><span class="ci-record">'+(c.distancia||'?')+' m</span><div class="ci-name">'+c.name+'</div><div class="ci-desc">'+((c.desc||'').substring(0,60)+'...')+'</div><div class="ci-tags">'+zonaBadge(c.zona||'')+difBadge(c.dif||'')+riesgoBadge(c.riesgo||'')+'</div></div></div>';
@@ -726,54 +732,33 @@ function renderView(){
       else btnType='<button class="btn-carrera">CARRERA</button>';
       html+='<div class="hor-item"><div class="hi-date"><div class="hi-day">'+(h.dia||'-')+'</div><div class="hi-month">'+(h.mes||'-')+'</div></div><div class="hi-body"><div class="hi-name">'+h.name+'</div><div class="hi-sub">'+h.circ+'</div><div class="hi-actions">'+btnType+'<button class="btn-ver-circ" onclick="event.stopPropagation();openCircuit(\''+(circ?circ.id:'')+'\')" role="button" tabindex="0">Ver circuito</button></div></div><span class="hi-status '+sc+'">'+sl+'</span></div>';
     });
-    if(curSeason==='t2'){
-      html+='<div class="gala-item"><div class="gala-icon">🏆</div><div class="gala-text"><div class="gala-title">✨ Gala de Premios ✨</div><div class="gala-date">13 de Diciembre · Celebración de temporada</div></div></div>';
-    }
+    if(curSeason==='t2'){html+='<div class="gala-item"><div class="gala-icon">🏆</div><div class="gala-text"><div class="gala-title">✨ Gala de Premios ✨</div><div class="gala-date">13 de Diciembre · Celebración de temporada</div></div></div>';}
   }
 
-  // Vista comparativa de bicis - CORREGIDA
   else if(curView==='comparativa'){
     html+='<div class="view-header"><p class="eyebrow">Análisis técnico</p><h1>Comparativa Bicis</h1></div>';
     html+='<div class="bici-info-box"><h3>📋 Sobre esta sección</h3><p>Aquí puedes comparar las características técnicas de cada bicicleta de la liga.</p></div>';
-    
-    // Tabla de transmisión
     html+='<div class="comp-section"><div class="comp-subtitle">📊 Transmisión</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Bicicleta</th><th>Piloto</th><th>Transmisión</th><th>Gama</th></tr></thead><tbody>';
-    ['matei','hugo','ruben','toni'].forEach(function(id){
-      var r=RIDERS[id];
-      var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;
-      html+='<tr><td class="bike-label">'+b.model+'</td><td>'+r.first+' '+r.last+'</td><td>'+(b.specs[2]?b.specs[2].v:'-')+'</td><td>'+gamaBadge(b.gama)+'</td></tr>';
-    });
+    ['matei','hugo','ruben','toni'].forEach(function(id){var r=RIDERS[id];var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;html+='<tr><td class="bike-label">'+b.model+'</td><td>'+r.first+' '+r.last+'</td><td>'+(b.specs[2]?b.specs[2].v:'-')+'</td><td>'+gamaBadge(b.gama)+'</td></tr>';});
     html+='</tbody></table></div></div>';
-    
-    // Recomendación por circuito
-    var circuitList = curSeason==='t1' 
-      ? CIRCUITS.filter(function(c){return SEASONS.t1.circs.indexOf(c.id)!==-1;})
-      : curSeason==='t2'
-        ? CIRCUITS.filter(function(c){return SEASONS.t2.circs.indexOf(c.id)!==-1;})
-        : CIRCUITS.filter(function(c){return SEASONS.t3.circs.indexOf(c.id)!==-1;});
-    
+    var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
     html+='<div class="comp-section"><div class="comp-subtitle">🚴 Recomendación por Circuito</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Circuito</th><th>Mejor Bici</th><th>Motivo</th></tr></thead><tbody>';
-    circuitList.forEach(function(c){
-      var rec = c.bikeRec || 'Giant Talon 27.5 (versátil)';
-      var bike = rec.split('(')[0].trim();
-      var reason = rec.includes('(') ? rec.split('(')[1].replace(')','') : 'Buena para todo terreno';
-      html+='<tr><td>'+c.name+'</td><td>'+bike+'</td><td>'+reason+'</td></tr>';
-    });
+    circuitList.forEach(function(c){var rec = c.bikeRec || 'Giant Talon 27.5 (versátil)';var bike = rec.split('(')[0].trim();var reason = rec.includes('(') ? rec.split('(')[1].replace(')','') : 'Buena para todo terreno';html+='<tr><td>'+c.name+'</td><td>'+bike+'</td><td>'+reason+'</td></tr>';});
     html+='</tbody></table></div></div>';
   }
 
-  // Vista comparativa de circuitos - CORREGIDA
   else if(curView==='circuitos-comparativa'){
-    html+='<div class="circ-compare-header"><p class="eyebrow">Análisis</p><h1>Comparativa de Circuitos</h1></div>';
-    html+='<div class="circ-compare-filters"><button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button><button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button><button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button></div>';
-    
+    html+='<div class="circ-compare-header"><p class="eyebrow">Análisis IA</p><h1>Comparativa Circuitos</h1></div>';
+    html+='<div class="circ-compare-filters">';
+    html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button>';
+    html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
+    html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
+    html+='<button class="filter-pill'+(compareSortBy==='valoracion'?' active':'')+'" onclick="compareSortBy=\'valoracion\';renderView()">⭐ Valoración</button>';
+    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
+    html+='</div>';
     var circuitList = getSortedCircuits();
-    
-    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Distancia</th><th>Curvas</th><th>Riesgos</th><th>Casa</th></tr></thead><tbody>';
-    circuitList.forEach(function(c){
-      var totalCurvas = (c.curvasNorm||0) + (c.curvasPelig||0);
-      html+='<tr><td><strong>'+c.name+'</strong><br><small>'+((c.desc||'').substring(0,40)+'...')+'</small></td><td>'+(c.distancia||'?')+' m</td><td>'+(c.curvasNorm||0)+'N + '+(c.curvasPelig||0)+'P</td><td>'+(c.riesgos||'-')+'</td><td>'+(c.homePilot||'-')+'</td></tr>';
-    });
+    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>⭐</th></tr></thead><tbody>';
+    circuitList.forEach(function(c){var totalCurvas = (c.curvasNorm||0) + (c.curvasPelig||0);var desnivel = ((c.altMax||0) - (c.altMin||0)).toFixed(1);var riesgoIcon = riesgoEmoji(c.riesgos||'-');html+='<tr><td><strong>'+c.name+'</strong></td><td>'+(c.distancia||'?')+'m</td><td>'+desnivel+'m</td><td>'+totalCurvas+'</td><td>'+(c.curvasPelig||0)+'</td><td>'+riesgoIcon+' '+(c.riesgos||'-')+'</td><td>'+(c.valoracion||'?')+'/5</td></tr>';});
     html+='</tbody></table></div>';
   }
 
@@ -788,13 +773,8 @@ function renderView(){
       html+='<div class="norma-section"><div class="ns-title">📋 Posición de Salida</div><div class="ns-body">Las posiciones de salida de la carrera equivalen a los tiempos obtenidos en la prueba de tiempos (crono). El más rápido sale primero (Pole).</div></div>';
       html+='<div class="norma-section"><div class="ns-title">📋 Participación</div><div class="ns-body">Es obligatorio avisar con antelación si no se puede asistir. La ausencia sin aviso puede conllevar penalización de puntos.</div></div>';
     }else if(infoTab==='noticias'){
-      NOTICIAS.forEach(function(n){
-        var imgHtml = n.img ? '<img src="'+n.img+'" alt="'+n.titulo+'">' : '<div style="font-size:40px">'+n.emoji+'</div>';
-        html+='<div class="noticia-card" onclick="openNews(\''+n.titulo.replace(/'/g,"\\'")+'\',\''+n.fecha+'\',\''+n.cuerpo.replace(/'/g,"\\'")+'\',\''+(n.img||'')+'\')"><div class="noticia-img">'+imgHtml+'</div><div class="noticia-fecha">'+n.fecha+'</div><div class="noticia-title">'+n.titulo+'</div></div>';
-      });
-    }else{
-      html+='<div class="norma-section"><div class="ns-body" style="text-align:center;padding:20px;color:#aaa">🎙️ Sin entrevistas publicadas aún</div></div>';
-    }
+      NOTICIAS.forEach(function(n){var imgHtml = n.img ? '<img src="'+n.img+'" alt="'+n.titulo+'">' : '<div style="font-size:40px">'+n.emoji+'</div>';html+='<div class="noticia-card" onclick="openNews(\''+n.titulo.replace(/'/g,"\\'")+'\',\''+n.fecha+'\',\''+n.cuerpo.replace(/'/g,"\\'")+'\',\''+(n.img||'')+'\')"><div class="noticia-img">'+imgHtml+'</div><div class="noticia-fecha">'+n.fecha+'</div><div class="noticia-title">'+n.titulo+'</div></div>';});
+    }else{html+='<div class="norma-section"><div class="ns-body" style="text-align:center;padding:20px;color:#aaa">🎙️ Sin entrevistas publicadas aún</div></div>';}
     html+='</div>';
   }
 
@@ -820,9 +800,7 @@ function openNews(title, date, body, img){
   modal.classList.add('open');
 }
 
-function closeNewsModal(){
-  document.getElementById('news-modal').classList.remove('open');
-}
+function closeNewsModal(){document.getElementById('news-modal').classList.remove('open');}
 
 function render(){renderSwitcher();renderView();document.querySelectorAll('.nav-button').forEach(function(b){b.classList.toggle('active',b.dataset.view===curView);});}
 function goView(v){curView=v;render();}
@@ -851,37 +829,17 @@ function openBici(riderId){
   openDialog('<div class="bici-hero"><img src="'+BIKE_IMAGES[bici.svgKey]+'" alt="'+bici.model+'" loading="lazy" onerror="this.style.display=\'none\'"/></div><div class="bici-model-title">'+bici.model+'</div><div class="bici-type-sub">'+bici.tipo+' '+gamaBadge(bici.gama)+'</div><div style="margin:0 16px 14px;display:flex;gap:8px;flex-wrap:wrap"><span class="dev-badge dev-subida">🧗 Subida: '+dev.subida+' m/ped</span><span class="dev-badge dev-velocidad">🏎️ Vel: '+dev.velocidad+' m/ped</span><span class="dev-badge" style="background:#f3f4f6;color:#374151">📐 Rango: '+dev.rango+' m</span></div><div class="bici-specs">'+(specs||'<p style="color:#aaa;text-align:center;padding:20px">Datos por añadir</p>')+'</div><div class="bici-price"><span class="bp-label">Precio</span><span class="bp-price">'+bici.price+'</span></div>'+shopBtn+'<div style="padding:0 16px 20px"><button class="btn-back" onclick="openPlayer(\''+riderId+'\')" role="button" tabindex="0">← Volver al piloto</button></div>');
 }
 
-// Función openCircuit CORREGIDA con manejo seguro de propiedades
 function openCircuit(id){
   if(!id) return;
   var c = CIRCUITS.find(function(x){return x.id===id;});
   if(!c) return;
-  
   var earthUrl = CIRCUIT_GOOGLE_EARTH[id] || '';
   var earthBtn = earthUrl ? '<button class="btn-mymaps" onclick="window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')">🌍 Google Earth ↗</button>' : '';
-  
-  // Manejo seguro de propiedades opcionales
   var winners = c.winners || [];
   var tiempos = c.tiempos || [];
-  
   var winnersHtml = winners.map(function(w){return '<span class="dg-chip">'+(w.n||'')+' <small>'+(w.s||'')+'</small></span>';}).join('') || '<span style="color:#aaa">Sin historial</span>';
   var tiemposHtml = tiempos.length ? '<div class="dlg-tiempos"><div class="dg-title">Mejores tiempos</div>' + tiempos.map(function(t){return '<div class="dt-item"><span>'+t+'</span></div>';}).join('') + '</div>' : '';
-  
-  openDialog(
-    '<div class="dlg-circ-drawing">'+circSVG(c.id)+'</div>'+
-    '<div class="dlg-circ-label">CIRCUITO</div>'+
-    '<div class="dlg-circ-name">'+c.name+'</div>'+
-    '<div class="dlg-circ-desc">'+(c.desc||'')+'</div>'+
-    '<div class="dlg-info-grid">'+
-      '<div class="dig-box"><div class="dig-val">'+(c.distancia||'?')+' m</div><div class="dig-lbl">Distancia</div></div>'+
-      '<div class="dig-box"><div class="dig-val">'+((c.curvasNorm||0)+(c.curvasPelig||0))+'</div><div class="dig-lbl">Curvas totales</div></div>'+
-      '<div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div>'+
-      '<div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div>'+
-    '</div>'+
-    '<div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+winnersHtml+'</div>'+
-    tiemposHtml+
-    '<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earthBtn+'</div>'
-  );
+  openDialog('<div class="dlg-circ-drawing">'+circSVG(c.id)+'</div><div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+(c.desc||'')+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+(c.distancia||'?')+' m</div><div class="dig-lbl">Distancia</div></div><div class="dig-box"><div class="dig-val">'+((c.curvasNorm||0)+(c.curvasPelig||0))+'</div><div class="dig-lbl">Curvas totales</div></div><div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div><div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div></div><div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+winnersHtml+'</div>'+tiemposHtml+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earthBtn+'</div>');
 }
 
 // ============================================
@@ -897,4 +855,3 @@ render();
 </script>
 </body>
 </html>
-
