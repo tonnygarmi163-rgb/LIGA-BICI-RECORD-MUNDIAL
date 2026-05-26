@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Liga Bici</title>
 <style>
+/* --- ESTILOS GENERALES --- */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#f0f0f0;--white:#fff;--black:#0b0b0c;
@@ -82,9 +83,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ch-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .ch-badge{font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;text-transform:uppercase}
 .badge-circuit{background:var(--red);color:var(--white)}
-.circ-drawing{height:200px;display:flex;align-items:center;justify-content:center;padding:0;background:var(--gray1);position:relative;overflow:hidden}
+.circ-drawing{height:130px;display:flex;align-items:center;justify-content:center;padding:8px;background:var(--gray1);position:relative;overflow:hidden}
 .circ-drawing svg{max-width:100%;max-height:100%}
-.circ-drawing img{width:100%;height:100%;object-fit:contain;display:block;background:#fff;padding:8px;box-sizing:border-box}
+.circ-drawing img{width:100%;height:100%;object-fit:cover}
 .circ-info{padding:10px 14px}
 .ci-name{font-size:18px;font-weight:900}.ci-record{font-size:13px;color:var(--gray4);float:right;margin-top:2px}
 .ci-desc{font-size:12px;color:var(--gray5);margin-top:4px;line-height:1.5}
@@ -231,37 +232,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .news-modal-date{font-size:12px;color:var(--gray4);margin-bottom:15px;text-transform:uppercase}
 .news-modal-body{font-size:14px;line-height:1.6;color:var(--gray5)}
 .news-modal-img{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:15px}
-.img-circuito{width:100%;height:100%;object-fit:contain;cursor:pointer;transition:transform .2s}
-.img-circuito:hover{transform:scale(1.02)}
+.img-sanjose{width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .2s}
+.img-sanjose:hover{transform:scale(1.02)}
 .google-earth-btn{position:absolute;bottom:10px;right:10px;background:#4285f4;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;display:flex;align-items:center;gap:6px;z-index:20;cursor:pointer;border:none;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .google-earth-btn:hover{background:#1e40ff}
-/* Leyenda de marcadores */
-.leyenda-container{margin:16px 14px 20px;background:var(--white);border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.leyenda-container h3{font-size:16px;font-weight:800;margin-bottom:12px;color:var(--black);display:flex;align-items:center;gap:8px}
-.leyenda-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.leyenda-item{display:flex;align-items:flex-start;gap:10px;background:var(--gray1);padding:10px;border-radius:8px;transition:background .2s}
-.leyenda-item:hover{background:var(--gray2)}
-.leyenda-item .icon{font-size:1.5rem;min-width:28px;text-align:center;line-height:1}
-.leyenda-item .texto strong{display:block;font-size:12px;color:var(--black);margin-bottom:2px}
-.leyenda-item .texto p{font-size:11px;color:var(--gray5);margin:0;line-height:1.3}
-/* Comparativa */
-.circ-compare-header{padding:20px 14px 10px}
-.circ-compare-header .eyebrow{font-size:11px;color:var(--gray4);letter-spacing:2px;text-transform:uppercase;font-weight:600}
-.circ-compare-header h1{font-size:26px;font-weight:900;margin-top:2px}
-.circ-compare-filters{display:flex;gap:8px;overflow-x:auto;padding:0 14px 14px;scrollbar-width:none}
-.circ-compare-filters::-webkit-scrollbar{display:none}
-.circ-compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 14px 14px}
-.circ-compare-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.circ-compare-table th{background:var(--black);color:var(--white);padding:10px 8px;text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
-.circ-compare-table td{padding:10px 8px;border-bottom:1px solid var(--gray2);vertical-align:top}
-.circ-compare-table tr:last-child td{border-bottom:none}
-.circ-compare-table .bike-label{font-weight:700;font-size:13px;white-space:nowrap}
-.circ-compare-table .pilot-name{font-size:11px;color:var(--gray4);display:block;margin-top:2px}
-.circ-compare-table .status-ok{color:var(--green);font-weight:700}
-.circ-compare-table .status-warn{color:#ca8a04;font-weight:700}
-.circ-compare-table .status-bad{color:var(--red);font-weight:700}
-.opinion-cell{font-size:11px;color:var(--gray5);max-width:150px;line-height:1.3}
-.dificultad-cell{font-weight:700;font-size:14px;text-align:center}
 </style>
 </head>
 <body>
@@ -315,13 +289,10 @@ const CIRC_SVGS = {
   benaguacil: {color:'#16a34a', path:'M 60 88 L 22 65 L 18 38 L 45 15 L 110 10 L 170 22 L 192 52 L 180 82 L 130 93 Z', dot:'M 60 88'},
   lliria: {color:'#ca8a04', path:'M 50 90 L 18 62 L 15 35 L 40 14 L 95 8 L 158 18 L 192 48 L 188 78 L 155 92 L 90 96 Z', dot:'M 50 90'},
   barranquet: {color:'#b45309', path:'M 35 88 L 15 60 L 18 30 L 50 12 L 115 8 L 175 22 L 195 55 L 185 82 L 140 94 L 75 96 Z', dot:'M 35 88'},
-  sierraespada: {color:'#6b7280', path:'M 45 90 L 18 65 L 15 38 L 40 16 L 100 10 L 165 22 L 192 52 L 185 80 L 145 93 Z', dot:'M 45 90'},
-  vistacalderona: {color:'#0284c7', path:'M 55 88 L 20 65 L 18 38 L 44 16 L 105 10 L 168 24 L 190 54 L 178 82 L 130 93 Z', dot:'M 55 88'},
-  rascanya: {color:'#7c3aed', path:'M 65 88 L 22 65 L 18 38 L 42 16 L 100 10 L 162 22 L 188 52 L 178 82 L 125 93 Z', dot:'M 65 88'},
-  llomallarga: {color:'#b91c1c', path:'M 30 90 L 15 50 L 20 20 L 60 10 L 120 15 L 180 40 L 195 70 L 160 90 Z', dot:'M 30 90'}
+  sierraespada: {color:'#6b7280', path:'M 45 90 L 18 65 L 15 38 L 40 16 L 100 10 L 165 22 L 192 52 L 185 80 L 145 93 Z', dot:'M 45 90'}
 };
 
-// URLs de Google Earth - TEMPORADA 2
+// URLs de Google Earth
 const CIRCUIT_GOOGLE_EARTH = {
   sanjose: 'https://earth.google.com/web/@39.58679526,-0.55706109,106.07084095a,902.51226334d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
   andromeda: 'https://earth.google.com/web/@39.58047755,-0.524995,120.90603233a,720.32715404d,30y,19.5276911h,22.17507047t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
@@ -335,30 +306,21 @@ const CIRCUIT_GOOGLE_EARTH = {
   sierraespada: 'https://earth.google.com/web/@39.58555365,-0.5282567,116.47546966a,795.11913484d,30y,19.52289265h,22.17532431t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0'
 };
 
-// Función para obtener emoji de riesgo basado en riesgos marcados
-function riesgoEmoji(riesgos,curvasPelig){
-  if(curvasPelig>=4)return'🔴';
-  if(curvasPelig>=2 || (riesgos&&riesgos.includes('STOP')))return'🟠';
-  if(curvasPelig>=1)return'🟡';
-  return'🟢';
-}
-
 // ============================================
-// CIRCUITS - COMPLETO Y ORDENADO
+// CIRCUITS - ACTUALIZADO
 // ============================================
 const CIRCUITS = [
-  // TEMPORADA 1 (7 circuitos)
+  // TEMPORADA 1 (Sin Rascanya, Lloma Llarga, Vista Calderona)
   {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:18.5,opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por la trazada y la visibilidad limitada en varias zonas.',winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,dificultad:10.8,opinion:'Circuito corto pero intenso. La bajada inicial seguida de zona deslizante y curvas peligrosas enlazadas lo hace traicionero a pesar de su corta distancia.',winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
   {id:'maracana',name:'Maracaná',season:'t1',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,dificultad:1.6,opinion:'El circuito más sencillo y limpio. Ideal para trabajar velocidad y ritmo sin complicaciones técnicas.',winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
   {id:'cementerio',name:'Cementerio',season:'t1',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,dificultad:14.1,opinion:'Circuito con muchos cambios de altura y una bajada pronunciada. La curva peligrosa después de la bajada con zona de bicis lo hace técnico y exigente.',winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   {id:'barranquet',name:'Barranquet',season:'t1',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,opinion:'El circuito más peligroso y técnico. Curvas cerradas con visión reducida, zonas de peatones y desniveles marcados. Requiere máxima concentración.',winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
-  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches curva peligrosa',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente con tráfico.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,opinion:'Circuito de ritmo técnico con una curva peligrosa después de pendiente descendente. La circulación de coches en ambos sentidos añade dificultad.',winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
-  {id:'rascanya',name:'Rascanya',season:'t1',distancia:750,curvasNorm:5,curvasPelig:2,riesgos:'-',homePilot:'',desc:'Circuito histórico, trazado mixto.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'media',riesgo:'medio',altMin:95,altMax:102,valoracion:3.8,dificultad:5.5,opinion:'Circuito histórico con trazado mixto. Tiene algunas curvas peligrosas pero es manejable con buena técnica.',winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'Coches curva peligrosa',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso. Carretera de ambos sentidos con nula visibilidad de coches.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso. Carretera de ambos sentidos donde no se pueden ver los coches, requiriendo precaución extrema.',winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
   
-  // TEMPORADA 2 (11 circuitos - ORDEN CORRECTO)
+  // TEMPORADA 2 (Sin Lloma Llarga, Vista Calderona)
   {id:'sanjose',name:'San José',season:'t2',distancia:813,curvasNorm:8,curvasPelig:1,riesgos:'1 STOP, 3 sentido contrario, 3 obras',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas, zonas de visión reducida y obras.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,valoracion:4.5,dificultad:20.3,opinion:'Circuito con muchas curvas y obras que obligan a ir por calles en sentido contrario. Afortunadamente al estar en obras no hay tráfico de coches.',winners:[{s:'T2·2025',n:'Toni García'}],tiempos:["Toni García 2'09.96\""]},
-  {id:'andromeda',name:'Andrómeda',season:'t2',distancia:732,curvasNorm:5,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, curva peligrosa tras pendiente descendente.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,opinion:'Circuito de ritmo técnico con 1 curva peligrosa. Pendiente descendente seguida de ascendente con circulación de coches.',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\""]},
+  {id:'andromeda',name:'Andrómeda',season:'t2',distancia:732,curvasNorm:5,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso. Carretera de ambos sentidos con nula visibilidad de coches.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso. Carretera de ambos sentidos donde no se pueden ver los coches, requiriendo precaución extrema.',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\""]},
   {id:'maracana',name:'Maracaná',season:'t2',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,dificultad:1.6,opinion:'El circuito más limpio y sencillo. Ideal para trabajar velocidad sin complicaciones técnicas.',winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\"","Hugo Castro 1'03.40\""]},
   {id:'benissano',name:'Benissanó',season:'t2',distancia:587,curvasNorm:5,curvasPelig:2,riesgos:'Zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en bajada inicial y curvas peligrosas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:132.3,altMax:139.6,valoracion:4.0,dificultad:12.0,opinion:'Circuito corto pero técnico. Bajada inicial con zona deslizante y curvas peligrosas. Requiere buen control de frenado.',winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\""]},
   {id:'poblanova',name:'Pobla Nova',season:'t2',distancia:677,curvasNorm:3,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico, curvas peligrosas tras pendiente y zona de parque.',bikeRec:'BH Spike 2.5 (maniobrable)',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,valoracion:3.9,dificultad:10.8,opinion:'Circuito técnico con curvas peligrosas después de pendientes. La zona de peatones en el parque añade complejidad.',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\""]},
@@ -366,11 +328,7 @@ const CIRCUITS = [
   {id:'benaguacil',name:'Benaguacil',season:'t2',distancia:661,curvasNorm:7,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\""]},
   {id:'lliria',name:'Llíria',season:'t2',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,dificultad:6.5,opinion:'Circuito de ritmo rápido y bastante limpio. Pendientes moderadas sin curvas peligrosas.',winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\""]},
   {id:'barranquet',name:'Barranquet',season:'t2',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, 10 curvas (5 peligrosas), desnivel marcado.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,opinion:'El circuito más peligroso. 4 curvas peligrosas, zonas de peatones con visión reducida y desniveles marcados. Requiere máxima concentración.',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\""]},
-  {id:'sierraespada',name:'Sierra Espada',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,dificultad:23.7,opinion:'Circuito técnico con 3 paradas obligatorias y curvas peligrosas. La circulación de coches en ambos sentidos añade complejidad.',winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]},
-  {id:'vistacalderona',name:'Vista Calderona',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'STOP, sentido contrario',homePilot:'',desc:'Largo y técnico, tráfico y paradas obligatorias.',bikeRec:'Scott Spark 950',zona:'coches',dif:'media',riesgo:'medio',altMin:110,altMax:118,valoracion:4.1,dificultad:18.0,opinion:'Circuito largo y técnico con tráfico y paradas obligatorias. Requiere buena gestión del ritmo y atención al tráfico.',winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'22.43\""]},
-  
-  // TEMPORADA 3
-  {id:'llomallarga',name:'Lloma Llarga',season:'t3',distancia:950,curvasNorm:6,curvasPelig:3,riesgos:'-',homePilot:'',desc:'El circuito más lejano, ruta larga con tramos técnicos.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:115,altMax:130,valoracion:4.6,dificultad:15.0,opinion:'El circuito más lejano con ruta larga. Tramos técnicos que requieren buena forma física y técnica.',winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\" · 2026","Julian Matei 2'07.45\" · 2026"]}
+  {id:'sierraespada',name:'Sierra Espada',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,dificultad:23.7,opinion:'Circuito técnico con 3 paradas obligatorias y curvas peligrosas. La circulación de coches en ambos sentidos añade complejidad.',winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]}
 ];
 
 // Datos de pilotos
@@ -442,6 +400,16 @@ const RIDERS = {
         desarrollo:{plato:30,pinonMin:11,pinonMax:46}}
     },
     wins:[{c:'San José',s:'T2 · 2025',t:'t2'}]
+  },
+  adrian:{
+    id:'adrian',first:'Adrián',last:'VERA',dorsal:14,color:'#ffffff',textColor:'#000000',peso:'-- kg',altura:'-- cm',ligasGanadas:0,
+    bici:{
+      t3:{model:'Bicicleta Genérica',tipo:'Mountain Bike',svgKey:'giant_talon',price:'--',gama:'media',
+        shopUrl:'',
+        specs:[{l:'Cuadro',v:'--'},{l:'Suspensión',v:'--'},{l:'Transmisión',v:'--'},{l:'Platos',v:'--'},{l:'Cassette',v:'--'},{l:'Velocidades',v:'--'},{l:'Frenos',v:'--'},{l:'Cubiertas',v:'--'},{l:'Peso estimado',v:'--'}],
+        desarrollo:{plato:32,pinonMin:11,pinonMax:36}}
+    },
+    wins:[]
   }
 };
 
@@ -458,9 +426,15 @@ const NOTICIAS = [
 
 // Temporadas
 const SEASONS = {
-  t3:{key:'t3',label:'Temporada 3',year:'2026',kicker:'Actual',summary:'La nueva temporada abre con San José. Prácticas de Pascua ya completadas. Nuevo circuito: Lloma Llarga.',participantes:4,practicas:4,carreras:0,finalizadas:0,
-    standings:[{id:'matei',pts:0,pos:'-',diff:'-'},{id:'hugo',pts:0,pos:'-',diff:'-'},{id:'ruben',pts:0,pos:'-',diff:'-'},{id:'toni',pts:0,pos:'-',diff:'-'}],
-    scores:{matei:[],hugo:[],ruben:[],toni:[]},
+  t3:{key:'t3',label:'Temporada 3',year:'2026',kicker:'Actual',summary:'La nueva temporada abre con San José. Prácticas de Pascua ya completadas. Nuevo circuito: Lloma Llarga.',participantes:5,practicas:4,carreras:0,finalizadas:0,
+    standings:[
+      {id:'matei',pts:0,pos:'-',diff:'-'},
+      {id:'hugo',pts:0,pos:'-',diff:'-'},
+      {id:'ruben',pts:0,pos:'-',diff:'-'},
+      {id:'toni',pts:0,pos:'-',diff:'-'},
+      {id:'adrian',pts:0,pos:'-',diff:'-'}
+    ],
+    scores:{matei:[],hugo:[],ruben:[],toni:[],adrian:[]},
     horarios:[
       {name:'Práctica pascua 1',date:'7 abril',mes:'abr',dia:'7',circ:'San José',tipo:'practica',status:'done',circId:'sanjose'},
       {name:'Práctica pascua 2',date:'7 abril',mes:'abr',dia:'7',circ:'Cementerio',tipo:'practica',status:'done',circId:'cementerio'},
@@ -468,9 +442,9 @@ const SEASONS = {
       {name:'Práctica pascua 4',date:'13 abril',mes:'abr',dia:'13',circ:'Lloma Llarga',tipo:'practica',status:'done',circId:'llomallarga'},
       {name:'Etapa 1',date:'Por confirmar',mes:'???',dia:'?',circ:'Por confirmar',tipo:'carrera',status:'pend'}
     ],
-    circs:['sanjose','cementerio','andromeda','llomallarga']
+    circs:['sanjose','cementerio','andromeda'] // Eliminado Lloma Llarga de aquí también porque no existe
   },
-  t2:{key:'t2',label:'Temporada 2',year:'2025',kicker:'Archivo',summary:'11 circuitos. Campeón: Julian Matei con 119 puntos.',participantes:4,practicas:1,carreras:11,finalizadas:11,
+  t2:{key:'t2',label:'Temporada 2',year:'2025',kicker:'Archivo',summary:'11 circuitos. Campeón: Julian Matei con 119 puntos.',participantes:4,practicas:1,carreras:10,finalizadas:10,
     standings:[{id:'matei',pts:119,pos:'Campeón',diff:''},{id:'hugo',pts:105,pos:'2º',diff:'-14'},{id:'ruben',pts:105,pos:'3º',diff:'-14'},{id:'toni',pts:75,pos:'4º',diff:'-44'}],
     scores:{
       matei:[
@@ -482,8 +456,7 @@ const SEASONS = {
         {c:'Benaguacil',tipo:'tiempos',pts:2},{c:'Benaguacil',tipo:'carrera',pts:12},
         {c:'Lliria',tipo:'tiempos',pts:1},{c:'Lliria',tipo:'carrera',pts:9},
         {c:'Barranquet',tipo:'carrera',pts:12},
-        {c:'Sierra Espada',tipo:'carrera',pts:7},
-        {c:'Vista Calderona',tipo:'carrera',pts:12}
+        {c:'Sierra Espada',tipo:'carrera',pts:7}
       ],
       hugo:[
         {c:'San José',tipo:'carrera',pts:6},{c:'Andrómeda',tipo:'carrera',pts:13},
@@ -494,8 +467,7 @@ const SEASONS = {
         {c:'Benaguacil',tipo:'tiempos',pts:1},{c:'Benaguacil',tipo:'carrera',pts:7},
         {c:'Lliria',tipo:'tiempos',pts:2},{c:'Lliria',tipo:'carrera',pts:7},
         {c:'Barranquet',tipo:'carrera',pts:9},
-        {c:'Sierra Espada',tipo:'carrera',pts:12},
-        {c:'Vista Calderona',tipo:'carrera',pts:6}
+        {c:'Sierra Espada',tipo:'carrera',pts:12}
       ],
       ruben:[
         {c:'San José',tipo:'carrera',pts:9},{c:'Andrómeda',tipo:'carrera',pts:7},
@@ -506,8 +478,7 @@ const SEASONS = {
         {c:'Benaguacil',tipo:'tiempos',pts:3},{c:'Benaguacil',tipo:'carrera',pts:9},
         {c:'Lliria',tipo:'tiempos',pts:3},{c:'Lliria',tipo:'carrera',pts:12},
         {c:'Barranquet',tipo:'carrera',pts:7},
-        {c:'Sierra Espada',tipo:'carrera',pts:9},
-        {c:'Vista Calderona',tipo:'carrera',pts:9}
+        {c:'Sierra Espada',tipo:'carrera',pts:9}
       ],
       toni:[
         {c:'San José',tipo:'carrera',pts:18},{c:'Andrómeda',tipo:'carrera',pts:6},
@@ -518,8 +489,7 @@ const SEASONS = {
         {c:'Benaguacil',tipo:'tiempos',pts:0},{c:'Benaguacil',tipo:'carrera',pts:5},
         {c:'Lliria',tipo:'tiempos',pts:0},{c:'Lliria',tipo:'carrera',pts:6},
         {c:'Barranquet',tipo:'carrera',pts:5},
-        {c:'Sierra Espada',tipo:'carrera',pts:5},
-        {c:'Vista Calderona',tipo:'carrera',pts:7}
+        {c:'Sierra Espada',tipo:'carrera',pts:5}
       ]
     },
     horarios:[
@@ -534,10 +504,9 @@ const SEASONS = {
       {name:'Benaguacil',date:'2 nov',mes:'nov',dia:'2',circ:'Benaguacil',tipo:'carrera',status:'done',circId:'benaguacil'},
       {name:'Llíria',date:'30 nov',mes:'nov',dia:'30',circ:'Llíria',tipo:'carrera',status:'done',circId:'lliria'},
       {name:'Barranquet',date:'6 dic',mes:'dic',dia:'6',circ:'Barranquet',tipo:'carrera',status:'done',circId:'barranquet'},
-      {name:'Sierra Espada',date:'8 dic',mes:'dic',dia:'8',circ:'Sierra Espada',tipo:'carrera',status:'done',circId:'sierraespada'},
-      {name:'Vista Calderona',date:'13 dic',mes:'dic',dia:'13',circ:'Vista Calderona',tipo:'carrera',status:'done',circId:'vistacalderona'}
+      {name:'Sierra Espada',date:'8 dic',mes:'dic',dia:'8',circ:'Sierra Espada',tipo:'carrera',status:'done',circId:'sierraespada'}
     ],
-    circs:['sanjose','andromeda','maracana','benissano','poblanova','cementerio','benaguacil','lliria','barranquet','sierraespada','vistacalderona']
+    circs:['sanjose','andromeda','maracana','benissano','poblanova','cementerio','benaguacil','lliria','barranquet','sierraespada']
   },
   t1:{key:'t1',label:'Temporada 1',year:'2024',kicker:'Archivo',summary:'Primera edición. 7 circuitos. Campeón: Julian Matei con 87 puntos.',participantes:4,practicas:0,carreras:7,finalizadas:7,
     standings:[{id:'matei',pts:87,pos:'Campeón',diff:''},{id:'ruben',pts:83,pos:'2º',diff:'-4'},{id:'toni',pts:54,pos:'3º',diff:'-33'},{id:'hugo',pts:19,pos:'4º',diff:'-68'}],
@@ -665,19 +634,11 @@ function getSortedCircuits(){
     else if(compareSortBy==='distancia'){va=a.distancia||0;vb=b.distancia||0;}
     else if(compareSortBy==='desnivel'){va=(a.altMax||0)-(a.altMin||0);vb=(b.altMax||0)-(b.altMin||0);}
     else if(compareSortBy==='valoracion'){va=a.valoracion||0;vb=b.valoracion||0;}
+    else if(compareSortBy==='curvas'){va=(a.curvasPelig||0)+(a.curvasNorm||0);vb=(b.curvasPelig||0)+(b.curvasNorm||0);}
     else return 0;
     return compareSortDir==='asc'?(va-vb):(vb-va);
   });
   return circuits;
-}
-
-// Función para obtener nombre de imagen según temporada
-function getImageName(circId, season) {
-  // Para T1: San José y Benissanó usan fotos propias, el resto usan fotos de T2
-  if (season === 't1' && circId !== 'sanjose' && circId !== 'benissano') {
-    return circId + '_t2.png';
-  }
-  return circId + '_' + season + '.png';
 }
 
 function renderView(){
@@ -714,18 +675,6 @@ function renderView(){
 
   else if(curView==='circuitos'){
     html+='<div class="view-header"><p class="eyebrow">Trazados</p><h1>Circuitos</h1></div>';
-    html+='<div class="leyenda-container"><h3>🗺️ Leyenda de Marcadores</h3><div class="leyenda-grid">';
-    html+='<div class="leyenda-item"><span class="icon">🔄</span><div class="texto"><strong>Curva</strong><p>Curva estándar del circuito</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">⚠️</span><div class="texto"><strong>Curva Peligrosa</strong><p>Alta dificultad, bajada fuerte o suelo deslizante</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">📈</span><div class="texto"><strong>Pendiente ↑</strong><p>Tramo de subida</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">📉</span><div class="texto"><strong>Pendiente ↓</strong><p>Tramo de bajada</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">🛑</span><div class="texto"><strong>STOP</strong><p>Parada obligatoria</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">↔️</span><div class="texto"><strong>Sentido Contrario</strong><p>Coches en ambos sentidos</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">🚶</span><div class="texto"><strong>Peatones</strong><p>Zona con tránsito peatonal</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">🚲</span><div class="texto"><strong>Zona Bicis</strong><p>Zonas donde suelen pasar otras bicis o personas</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">👁️</span><div class="texto"><strong>Visión Reducida</strong><p>Poca visibilidad en curva</p></div></div>';
-    html+='<div class="leyenda-item"><span class="icon">⚠️</span><div class="texto"><strong>Zona Deslizante</strong><p>Suelo con piedrecitas</p></div></div>';
-    html+='</div></div>';
     html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')">Alta</button></div>';
     var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
     circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).forEach(function(c){
@@ -777,6 +726,7 @@ function renderView(){
     html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button>';
     html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
     html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
+    html+='<button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button>';
     html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
     html+='</div>';
     var circuitList = getSortedCircuits();
@@ -892,4 +842,3 @@ render();
 </script>
 </body>
 </html>
-
