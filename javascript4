@@ -3,3 +3,4 @@ circuits.sort(function(a,b){
   var scoreB = (b.curvasPelig * 3) + b.curvasNorm;
   return scoreB - scoreA; // Descendente
 });
+if(pilotaFilter==='wins')return r.wins.filter(function(w){return w.s.toLowerCase().includes(SEASONS[curSeason].year);}).length>0;
