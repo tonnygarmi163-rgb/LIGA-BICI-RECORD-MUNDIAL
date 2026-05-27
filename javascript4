@@ -1,0 +1,5 @@
+circuits.sort(function(a,b){
+  var scoreA = (a.curvasPelig * 3) + a.curvasNorm;
+  var scoreB = (b.curvasPelig * 3) + b.curvasNorm;
+  return scoreB - scoreA; // Descendente
+});
