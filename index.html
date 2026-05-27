@@ -261,6 +261,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .circ-compare-table .status-bad{color:var(--red);font-weight:700}
 .opinion-cell{font-size:11px;color:var(--gray5);max-width:150px;line-height:1.3}
 .dificultad-cell{font-weight:700;font-size:14px;text-align:center}
+.riesgo-emojis{font-size:16px;margin-right:4px}
 </style>
 </head>
 <body>
@@ -317,8 +318,8 @@ const CIRC_SVGS = {
   sierraespada: {color:'#6b7280', path:'M 45 90 L 18 65 L 15 38 L 40 16 L 100 10 L 165 22 L 192 52 L 185 80 L 145 93 Z', dot:'M 45 90'}
 };
 
-// URLs de Google Earth
-const CIRCUIT_GOOGLE_EARTH = {
+// URLs de Google Earth - TEMPORADA 2 (CORREGIDAS)
+const CIRCUIT_GOOGLE_EARTH_T2 = {
   sanjose: 'https://earth.google.com/web/@39.58679526,-0.55706109,106.07084095a,902.51226334d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
   andromeda: 'https://earth.google.com/web/@39.58047755,-0.524995,120.90603233a,720.32715404d,30y,19.5276911h,22.17507047t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
   maracana: 'https://earth.google.com/web/@39.5850657,-0.5387055,99.2711129a,954.14212741d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
@@ -331,7 +332,7 @@ const CIRCUIT_GOOGLE_EARTH = {
   sierraespada: 'https://earth.google.com/web/@39.58555365,-0.5282567,116.47546966a,795.11913484d,30y,19.52289265h,22.17532431t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0'
 };
 
-// Función para obtener emoji de riesgo basado en SCORE de dificultad (no en curvas peligrosas)
+// Función para obtener emoji de riesgo basado en SCORE de dificultad
 function riesgoEmojiPorDificultad(dificultad){
   if(dificultad>=20)return'🔴';
   if(dificultad>=10)return'🟠';
@@ -339,11 +340,26 @@ function riesgoEmojiPorDificultad(dificultad){
   return'🟢';
 }
 
+// Función para obtener emojis de riesgos específicos
+function riesgoEmojis(riesgos){
+  if(!riesgos || riesgos==='-')return'';
+  var emojis=[];
+  if(riesgos.includes('STOP'))emojis.push('🛑');
+  if(riesgos.includes('sentido contrario'))emojis.push('↔️');
+  if(riesgos.includes('obras'))emojis.push('🚧');
+  if(riesgos.includes('peatones'))emojis.push('🚶');
+  if(riesgos.includes('visión reducida'))emojis.push('👁️');
+  if(riesgos.includes('deslizante'))emojis.push('⚠️');
+  if(riesgos.includes('bicis'))emojis.push('🚲');
+  if(riesgos.includes('altura'))emojis.push('📈');
+  return emojis.join(' ');
+}
+
 // ============================================
 // CIRCUITS - CORREGIDO CON DATOS DEL USUARIO
 // ============================================
 const CIRCUITS = [
-  // TEMPORADA 1 (con circuitos añadidos según petición del usuario)
+  // TEMPORADA 1
   {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por la trazada y la visibilidad limitada en varias zonas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:18.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',opinion:'Circuito corto pero intenso. La bajada inicial seguida de zona deslizante y curvas peligrosas enlazadas lo hace traicionero a pesar de su corta distancia.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,dificultad:10.8,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
   {id:'benaguacil',name:'Benaguacil',season:'t1',distancia:661,curvasNorm:8,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[],tiempos:[]},
@@ -685,7 +701,6 @@ function getSortedCircuits(){
 
 // Función para obtener nombre de imagen según temporada
 function getImageName(circId, season) {
-  // Para T1: San José y Benissanó usan fotos propias, el resto usan fotos de T2
   if (season === 't1' && circId !== 'sanjose' && circId !== 'benissano') {
     return circId + '_t2.png';
   }
@@ -702,7 +717,12 @@ function renderView(){
     html+='<div class="section-block"><div class="section-heading"><h2>Próximos eventos</h2><button class="text-link" onclick="goView(\'horarios\')">Ver horarios</button></div>';
     s.horarios.slice(0,3).forEach(function(h){var sc=h.status==='done'?'status-done':h.status==='next'?'status-next':'status-pend';var sl=h.status==='done'?'FINALIZADA':h.status==='next'?'PRÓXIMA':'PENDIENTE';var onclick=h.circId?' onclick="openCircuit(\''+h.circId+'\')"':'';html+='<div class="event-item"'+onclick+' role="button" tabindex="0"><div><div class="ei-name">'+h.name+'</div><div class="ei-date">'+h.date+' · '+h.circ+'</div></div><span class="ei-status '+sc+'">'+sl+'</span></div>';});
     html+='</div><div class="section-block"><div class="section-heading"><h2>Clasificación rápida</h2><button class="text-link" onclick="goView(\'puntos\')">Ver puntos</button></div>';
-    s.standings.forEach(function(r,i){var rd=RIDERS[r.id];html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+rd.color+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+rd.color+'">'+r.pts+'</div></div>';});
+    s.standings.forEach(function(r,i){
+      var rd=RIDERS[r.id];
+      // Si el color del piloto es blanco, usar fondo negro para que el texto se vea
+      var bgColor = rd.color === '#ffffff' ? '#000000' : rd.color;
+      html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+rd.color+';background:'+bgColor+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+rd.color+'">'+r.pts+'</div></div>';
+    });
     html+='</div><div style="height:8px"></div>';
   }
 
@@ -729,9 +749,9 @@ function renderView(){
     html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')">Alta</button></div>';
     var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
     circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).forEach(function(c){
-      var earthUrl = CIRCUIT_GOOGLE_EARTH[c.id] || '';
+      // Usar enlaces correctos según temporada
+      var earthUrl = curSeason==='t2' ? (CIRCUIT_GOOGLE_EARTH_T2[c.id] || '') : '';
       var imgSrc = getImageName(c.id, curSeason);
-      // Imágenes más grandes horizontalmente (height: 220px)
       var drawingHtml = '<div class="circ-drawing" style="height:220px;padding:0;position:relative;">'+
         '<img src="'+imgSrc+'" alt="Mapa '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
         '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>';
@@ -744,7 +764,6 @@ function renderView(){
         '<div class="ci-summary">💡 '+(c.opinion||'')+'</div>'+
         '<div class="ci-tags">'+zonaBadge(c.zona||'')+difBadge(c.dif||'')+riesgoBadge(c.riesgo||'')+'</div></div></div>';
     });
-    // Si no hay circuitos, mostrar mensaje
     if(circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).length===0){
       html+='<div class="empty-state"><span class="emoji">🔍</span><p>No hay circuitos en esta temporada con ese filtro</p></div>';
     }
@@ -791,15 +810,15 @@ function renderView(){
     circuitList.forEach(function(c){
       var totalCurvas = (c.curvasNorm||0) + (c.curvasPelig||0);
       var desnivel = ((c.altMax||0) - (c.altMin||0)).toFixed(1);
-      // Usar emoji basado en SCORE de dificultad, no en curvas peligrosas
       var riesgoIcon = riesgoEmojiPorDificultad(c.dificultad||0);
+      var riesgoIcons = riesgoEmojis(c.riesgos||'');
       html+='<tr>'+
         '<td><strong>'+c.name+'</strong></td>'+
         '<td>'+(c.distancia||'?')+'m</td>'+
         '<td>'+desnivel+'m</td>'+
         '<td>'+totalCurvas+'</td>'+
         '<td>'+(c.curvasPelig||0)+'</td>'+
-        '<td>'+(c.riesgos||'-')+'</td>'+
+        '<td><span class="riesgo-emojis">'+(riesgoIcons||'-')+'</span></td>'+
         '<td class="opinion-cell">'+(c.opinion||'-')+'</td>'+
         '<td class="dificultad-cell">'+riesgoIcon+' '+(c.dificultad||'?')+'</td>'+
         '</tr>';
@@ -878,7 +897,8 @@ function openCircuit(id){
   if(!id) return;
   var c = CIRCUITS.find(function(x){return x.id===id;});
   if(!c) return;
-  var earthUrl = CIRCUIT_GOOGLE_EARTH[id] || '';
+  // Usar enlaces correctos según temporada
+  var earthUrl = curSeason==='t2' ? (CIRCUIT_GOOGLE_EARTH_T2[id] || '') : '';
   var earthBtn = earthUrl ? '<button class="btn-mymaps" onclick="window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')">🌍 Google Earth ↗</button>' : '';
   var winners = c.winners || [];
   var tiempos = c.tiempos || [];
