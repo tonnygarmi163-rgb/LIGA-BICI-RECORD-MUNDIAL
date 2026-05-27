@@ -369,7 +369,7 @@ function riesgoEmojis(riesgos){
 }
 
 // ============================================
-// CIRCUITS - CORREGIDO CON DATOS EXACTOS DEL USUARIO
+// CIRCUITS - CORREGIDO CON DATOS EXACTOS
 // ============================================
 const CIRCUITS = [
   // TEMPORADA 1 - DATOS CORREGIDOS (San José dificultad: 25)
@@ -392,7 +392,7 @@ const CIRCUITS = [
   {id:'cementerio',name:'Cementerio',season:'t2',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',opinion:'Circuito con muchos cambios de altura y una bajada pronunciada de 14.8%. La curva peligrosa con zona de bicis lo hace técnico.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,dificultad:14.1,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\""]},
   {id:'benaguacil',name:'Benaguacil',season:'t2',distancia:661,curvasNorm:7,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\""]},
   {id:'lliria',name:'Llíria',season:'t2',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',opinion:'Circuito de ritmo rápido y bastante limpio. Pendientes moderadas sin curvas peligrosas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,dificultad:6.5,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\""]},
-  {id:'barranquet',name:'Barranquet',season:'t2',distancia:561,curvasNorm:5,curvasPelig:5,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, con curvas normales y zonas de peatones.',opinion:'Circuito de ritmo técnico, con 5 curvas normales y 5 peligrosas. Zonas de peatones con visión reducida.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\""]},
+  {id:'barranquet',name:'Barranquet',season:'t2',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, con curvas normales y zonas de peatones.',opinion:'Circuito de ritmo técnico, con 5 curvas normales y 4 peligrosas. Zonas de peatones con visión reducida.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\""]},
   {id:'sierraespada',name:'Sierra Espada',season:'t2',distancia:891,curvasNorm:4,curvasPelig:4,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',opinion:'Circuito técnico con 3 paradas obligatorias y curvas peligrosas. La circulación de coches en ambos sentidos añade complejidad.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,dificultad:23.7,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]},
   
   // TEMPORADA 3
@@ -673,7 +673,7 @@ function openExternalLink(url){
 }
 
 // ============================================
-// FUNCIONES DE RENDERIZADO - SIMPLIFICADAS Y CORREGIDAS
+// FUNCIONES DE RENDERIZADO
 // ============================================
 
 function renderSwitcher(){
@@ -744,12 +744,12 @@ function renderView(){
     html+='</div><div class="section-block"><div class="section-heading"><h2>Clasificación rápida</h2><button class="text-link" onclick="goView(\'puntos\')">Ver puntos</button></div>';
     s.standings.forEach(function(r,i){
       var rd=RIDERS[r.id];
-      // CORRECCIÓN: Solo Adrián Vera (blanco) necesita fondo negro
-      // Los demás usan su color original con texto blanco para contraste
+      // CORRECCIÓN: Solo Adrián Vera (blanco) necesita fondo negro y texto negro para sus puntos
       var isAdrian = (rd.id === 'adrian');
-      var bgColor = isAdrian ? '#000000' : rd.color;
-      var textColor = isAdrian ? '#ffffff' : '#ffffff'; // Texto blanco para todos
-      html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+textColor+';background:'+bgColor+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+rd.color+'">'+r.pts+'</div></div>';
+      var posBgColor = isAdrian ? '#000000' : rd.color;
+      var posTextColor = isAdrian ? '#000000' : '#ffffff';
+      var ptsColor = isAdrian ? '#000000' : rd.color;
+      html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+posTextColor+';background:'+posBgColor+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+ptsColor+'">'+r.pts+'</div></div>';
     });
     html+='</div><div style="height:8px"></div>';
   }
@@ -759,16 +759,29 @@ function renderView(){
     html+='<div class="search-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="pilot-search" placeholder="Buscar por nombre o dorsal..." value="'+searchQuery+'" oninput="searchQuery=this.value;renderView();"></div>';
     html+='<div class="sort-controls"><span class="sort-label">Ordenar por:</span><select class="sort-select" onchange="sortBy=this.value;renderView();"><option value="nombre"'+(sortBy==='nombre'?' selected':'')+'>Nombre</option><option value="apellido"'+(sortBy==='apellido'?' selected':'')+'>Apellido</option><option value="dorsal"'+(sortBy==='dorsal'?' selected':'')+'>Dorsal</option><option value="ptsTemporada"'+(sortBy==='ptsTemporada'?' selected':'')+'>Puntos temporada</option><option value="ptsTotales"'+(sortBy==='ptsTotales'?' selected':'')+'>Puntos totales</option></select><button class="sort-dir" onclick="sortDir=sortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(sortDir==='asc'?'⬆️ A-Z':'⬇️ Z-A')+'</button></div>';
     html+='<div class="filter-row"><button class="filter-pill'+(pilotaFilter==='todos'?' active':'')+'" onclick="pilotaFilter=\'todos\';renderView();">Todos</button><button class="filter-pill'+(pilotaFilter==='wins'?' active':'')+'" onclick="pilotaFilter=\'wins\';renderView();">Con victorias</button><button class="filter-pill'+(pilotaFilter==='nowins'?' active':'')+'" onclick="pilotaFilter=\'nowins\';renderView();">Sin victorias</button></div>';
-    var filtered=getSortedRiders().filter(function(r){if(searchQuery){var q=searchQuery.toLowerCase();return r.first.toLowerCase().includes(q)||r.last.toLowerCase().includes(q)||String(r.dorsal).includes(q);}if(pilotaFilter==='wins')return r.wins.length>0;if(pilotaFilter==='nowins')return r.wins.length===0;return true;});
+    var filtered=getSortedRiders().filter(function(r){if(searchQuery){var q=searchQuery.toLowerCase();return r.first.toLowerCase().includes(q)||r.last.toLowerCase().includes(q)||String(r.dorsal).includes(q);}if(pilotaFilter==='wins')return r.wins.filter(function(w){return w.s.toLowerCase().includes(SEASONS[curSeason].year);}).length>0;if(pilotaFilter==='nowins')return r.wins.filter(function(w){return w.s.toLowerCase().includes(SEASONS[curSeason].year);}).length===0;return true;});
     if(!filtered.length){html+='<div class="empty-state"><span class="emoji">🔍</span><p>No se encontraron pilotos con esa búsqueda</p></div>';}
     filtered.forEach(function(r){var st=s.standings.find(function(x){return x.id===r.id;})||{pts:0,pos:'-'};var seasonWins=r.wins.filter(function(w){return w.s.toLowerCase().includes(s.year);}).length;var totalWins=r.wins.length;var totalPts=getTotalPts(r.id);html+='<div class="participant-card" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="pc-header" style="background:'+r.color+'"><div><span class="pc-kicker" style="color:'+r.textColor+';opacity:.8">'+r.first+'</span><div class="pc-name" style="color:'+r.textColor+'">'+r.last+'</div></div><div class="pc-dorsal" style="color:'+r.textColor+'">'+r.dorsal+'</div></div><div class="pc-stats"><div class="pc-stat"><div class="pc-sv">'+st.pos+'</div><div class="pc-sl">Posición</div></div><div class="pc-stat"><div class="pc-sv">'+st.pts+'</div><div class="pc-sl">Puntos Temp.</div></div><div class="pc-stat"><div class="pc-sv">'+totalPts+'</div><div class="pc-sl">Puntos Total</div></div><div class="pc-stat"><div class="pc-sv">'+seasonWins+'</div><div class="pc-sl">Vict. Temp.</div></div><div class="pc-stat"><div class="pc-sv">'+totalWins+'</div><div class="pc-sl">Vict. Total</div></div></div></div>';});
   }
 
   else if(curView==='puntos'){
     html+='<div class="view-header"><p class="eyebrow">General</p><h1>Clasificación</h1></div>';
-    s.standings.forEach(function(r,i){var rd=RIDERS[r.id];html+='<div class="standing-row" style="border-left-color:'+rd.color+'" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="sr-num">'+(i+1)+'</div><div class="sr-info"><div class="sr-name">'+rd.first+' '+rd.last+'</div><div class="sr-diff">'+(r.diff||r.pos)+'</div></div><div class="sr-pts" style="color:'+rd.color+'">'+r.pts+'</div></div>';});
+    s.standings.forEach(function(r,i){
+      var rd=RIDERS[r.id];
+      // CORRECCIÓN: Puntos de Adrián en negro
+      var ptsColor = (rd.id === 'adrian') ? '#000000' : rd.color;
+      html+='<div class="standing-row" style="border-left-color:'+rd.color+'" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="sr-num">'+(i+1)+'</div><div class="sr-info"><div class="sr-name">'+rd.first+' '+rd.last+'</div><div class="sr-diff">'+(r.diff||r.pos)+'</div></div><div class="sr-pts" style="color:'+ptsColor+'">'+r.pts+'</div></div>';
+    });
     html+='<div class="score-section"><div class="section-heading"><h2>Recuento por piloto</h2></div>';
-    s.standings.forEach(function(r){var rd=RIDERS[r.id];var rows=s.scores[r.id]||[];if(!rows.length){html+='<div class="score-player"><div class="sp-header"><span class="sp-name">'+rd.first+' '+rd.last+'</span><span class="sp-total">0</span></div></div>';return;}html+='<div class="score-player"><div class="sp-header"><span class="sp-name">'+rd.first+' '+rd.last+'</span><span class="sp-total">'+r.pts+'</span></div>';rows.forEach(function(sc){html+='<div class="sp-row"><span class="spr-circ">'+sc.c+'</span><div class="spr-right"><span class="tag-'+sc.tipo+'">'+sc.tipo.toUpperCase()+'</span><span class="spr-pts">+'+sc.pts+'</span></div></div>';});html+='</div>';});
+    s.standings.forEach(function(r){
+      var rd=RIDERS[r.id];
+      var rows=s.scores[r.id]||[];
+      if(!rows.length){html+='<div class="score-player"><div class="sp-header"><span class="sp-name">'+rd.first+' '+rd.last+'</span><span class="sp-total">0</span></div></div>';return;}
+      var ptsColor = (rd.id === 'adrian') ? '#000000' : rd.color;
+      html+='<div class="score-player"><div class="sp-header"><span class="sp-name">'+rd.first+' '+rd.last+'</span><span class="sp-total" style="color:'+ptsColor+'">'+r.pts+'</span></div>';
+      rows.forEach(function(sc){html+='<div class="sp-row"><span class="spr-circ">'+sc.c+'</span><div class="spr-right"><span class="tag-'+sc.tipo+'">'+sc.tipo.toUpperCase()+'</span><span class="spr-pts">+'+sc.pts+'</span></div></div>';});
+      html+='</div>';
+    });
     html+='</div>';
   }
 
@@ -836,7 +849,7 @@ function renderView(){
     html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
     html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
     html+='<button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button>';
-    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'️')+'</button>';
+    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
     html+='</div>';
     var circuitList = getSortedCircuits();
     html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
