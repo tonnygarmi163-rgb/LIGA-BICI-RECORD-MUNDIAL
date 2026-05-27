@@ -262,6 +262,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .opinion-cell{font-size:11px;color:var(--gray5);max-width:150px;line-height:1.3}
 .dificultad-cell{font-weight:700;font-size:14px;text-align:center}
 .riesgo-emojis{font-size:16px;margin-right:4px}
+.pilot-photo{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:12px;background:var(--gray2)}
 </style>
 </head>
 <body>
@@ -318,7 +319,7 @@ const CIRC_SVGS = {
   sierraespada: {color:'#6b7280', path:'M 45 90 L 18 65 L 15 38 L 40 16 L 100 10 L 165 22 L 192 52 L 185 80 L 145 93 Z', dot:'M 45 90'}
 };
 
-// URLs de Google Earth - TEMPORADA 1 (ENLACES PROPORCIONADOS POR USUARIO)
+// URLs de Google Earth - TEMPORADA 1
 const CIRCUIT_GOOGLE_EARTH_T1 = {
   sanjose: 'https://earth.google.com/web/@39.58688902,-0.55705197,99.65846376a,1008.11923332d,35y,0.00022795h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoHCK3k3TkQAQ?authuser=0',
   andromeda: 'https://earth.google.com/web/@39.58107223,-0.52554362,119.29480263a,1277.62446484d,35y,0.00022769h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoHCK3k3TkQAQ?authuser=0',
@@ -330,7 +331,7 @@ const CIRCUIT_GOOGLE_EARTH_T1 = {
   benissano: 'https://earth.google.com/web/@39.60875275,-0.57552421,114.11862401a,525.91595379d,35y,19.90786731h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoHCK3k3TkQAQ?authuser=0'
 };
 
-// URLs de Google Earth - TEMPORADA 2 (ENLACES PROPORCIONADOS POR USUARIO)
+// URLs de Google Earth - TEMPORADA 2
 const CIRCUIT_GOOGLE_EARTH_T2 = {
   sanjose: 'https://earth.google.com/web/@39.58672752,-0.55687671,91.90053382a,701.22167347d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
   andromeda: 'https://earth.google.com/web/@39.58018851,-0.52510263,124.09678953a,752.9055877d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
@@ -371,8 +372,8 @@ function riesgoEmojis(riesgos){
 // CIRCUITS - CORREGIDO CON DATOS EXACTOS DEL USUARIO
 // ============================================
 const CIRCUITS = [
-  // TEMPORADA 1 - DATOS CORREGIDOS
-  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por la trazada y la visibilidad limitada en varias zonas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:18.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  // TEMPORADA 1 - DATOS CORREGIDOS (San José dificultad: 25)
+  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por la trazada y la visibilidad limitada en varias zonas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:25,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:1,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',opinion:'Circuito corto pero intenso. La bajada inicial seguida de zona deslizante y curvas peligrosas enlazadas lo hace traicionero a pesar de su corta distancia.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,dificultad:10.8,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
   {id:'benaguacil',name:'Benaguacil',season:'t1',distancia:661,curvasNorm:8,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[],tiempos:[]},
   {id:'sierraespada',name:'Sierra Espada',season:'t1',distancia:891,curvasNorm:3,curvasPelig:3,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',opinion:'Circuito técnico con 3 paradas obligatorias y curvas peligrosas. La circulación de coches en ambos sentidos añade complejidad.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,dificultad:23.7,winners:[],tiempos:[]},
@@ -400,7 +401,7 @@ const CIRCUITS = [
 
 // Datos de pilotos
 const RIDERS = {
-  matei:{id:'matei',first:'Julian',last:'MATEI',dorsal:1,color:'#1e40ff',textColor:'#fff',peso:'70 kg',altura:'175 cm',ligasGanadas:2,seasons:['t1','t2','t3'],
+  matei:{id:'matei',first:'Julian',last:'MATEI',dorsal:1,color:'#1e40ff',textColor:'#fff',peso:'70 kg',altura:'175 cm',ligasGanadas:2,seasons:['t1','t2','t3'],foto:'julian_1.png',
     bici:{
       t1:{model:'Giant Talon 27.5 5',tipo:'Mountain Bike 27.5"',svgKey:'giant_talon',price:'~599€',gama:'baja',
         shopUrl:'https://www.bikezona.com/bicicletas/todobici-vs1.asp?ficha=16271',
@@ -417,7 +418,7 @@ const RIDERS = {
     },
     wins:[{c:'San José',s:'T1 · 2024',t:'t1'},{c:'Rascanya',s:'T1 · 2024',t:'t1'},{c:'Cementerio',s:'T1 · 2024',t:'t1'},{c:'Barranquet',s:'T1 · 2024',t:'t1'},{c:'Andrómeda',s:'T2 · 2025',t:'t2'},{c:'Pobla Nova',s:'T2 · 2025',t:'t2'},{c:'Benaguacil',s:'T2 · 2025',t:'t2'},{c:'Barranquet',s:'T2 · 2025',t:'t2'},{c:'Vista Calderona',s:'T2 · 2025',t:'t2'}]
   },
-  hugo:{id:'hugo',first:'Hugo',last:'CASTRO',dorsal:69,color:'#f5c800',textColor:'#000',peso:'61 kg',altura:'174 cm',ligasGanadas:0,seasons:['t1','t2','t3'],
+  hugo:{id:'hugo',first:'Hugo',last:'CASTRO',dorsal:69,color:'#f5c800',textColor:'#000',peso:'61 kg',altura:'174 cm',ligasGanadas:0,seasons:['t1','t2','t3'],foto:'hugo_69.png',
     bici:{
       t1:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'baja',
         shopUrl:'https://support.decathlon.es/rockrider-st-540-2016',
@@ -434,7 +435,7 @@ const RIDERS = {
     },
     wins:[{c:'Andrómeda',s:'T1 · 2024',t:'t1'},{c:'Maracaná',s:'T2 · 2025',t:'t2'},{c:'Cementerio',s:'T2 · 2025',t:'t2'},{c:'Sierra Espada',s:'T2 · 2025',t:'t2'}]
   },
-  ruben:{id:'ruben',first:'Rubén',last:'ASENSI',dorsal:23,color:'#e02020',textColor:'#fff',peso:'67 kg',altura:'186 cm',ligasGanadas:0,seasons:['t1','t2','t3'],
+  ruben:{id:'ruben',first:'Rubén',last:'ASENSI',dorsal:23,color:'#e02020',textColor:'#fff',peso:'67 kg',altura:'186 cm',ligasGanadas:0,seasons:['t1','t2','t3'],foto:'ruben_23.png',
     bici:{
       t1:{model:'Scott Spark 950 (2017)',tipo:'Mountain Bike 29"',svgKey:'scott_spark',price:'~799€',gama:'media',
         shopUrl:'https://www.bikingpoint.es/bicicleta-scott-spark-950-2017.html',
@@ -451,7 +452,7 @@ const RIDERS = {
     },
     wins:[{c:'Benissanó',s:'T1 · 2024',t:'t1'},{c:'Maracaná',s:'T1 · 2024',t:'t1'},{c:'Benaguacil',s:'T1 · 2024',t:'t1'},{c:'Sierra Espada',s:'T1 · 2024',t:'t1'},{c:'Lliria',s:'T2 · 2025',t:'t2'},{c:'Benissanó',s:'T2 · 2025',t:'t2'}]
   },
-  toni:{id:'toni',first:'Toni',last:'GARCÍA',dorsal:7,color:'#16a34a',textColor:'#fff',peso:'70,5 kg',altura:'180 cm',ligasGanadas:0,seasons:['t1','t2','t3'],
+  toni:{id:'toni',first:'Toni',last:'GARCÍA',dorsal:7,color:'#16a34a',textColor:'#fff',peso:'70,5 kg',altura:'180 cm',ligasGanadas:0,seasons:['t1','t2','t3'],foto:'toni_7.png',
     bici:{
       t1:{model:'BH Spike 2.5',tipo:'Mountain Bike 29"',svgKey:'bh_spike25',price:'~599€',gama:'media',
         shopUrl:'https://www.elcorteingles.es/deportes/A56775425-bicicleta-de-montana-unisex-spike-25-bh/',
@@ -469,7 +470,7 @@ const RIDERS = {
     wins:[{c:'San José',s:'T2 · 2025',t:'t2'}]
   },
   adrian:{
-    id:'adrian',first:'Adrián',last:'VERA',dorsal:14,color:'#ffffff',textColor:'#000',peso:'75 kg',altura:'180 cm',ligasGanadas:0,seasons:['t3'],
+    id:'adrian',first:'Adrián',last:'VERA',dorsal:14,color:'#ffffff',textColor:'#000',peso:'75 kg',altura:'180 cm',ligasGanadas:0,seasons:['t3'],foto:'adrian_14.png',
     bici:{
       t3:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'media',
         shopUrl:'',
@@ -479,7 +480,7 @@ const RIDERS = {
     wins:[]
   },
   sergio:{
-    id:'sergio',first:'Sergio',last:'BOCHONS',dorsal:21,color:'#f97316',textColor:'#fff',peso:'72 kg',altura:'178 cm',ligasGanadas:0,seasons:['t3'],
+    id:'sergio',first:'Sergio',last:'BOCHONS',dorsal:21,color:'#f97316',textColor:'#fff',peso:'72 kg',altura:'178 cm',ligasGanadas:0,seasons:['t3'],foto:'sergio_21.png',
     bici:{
       t3:{model:'Por definir',tipo:'Mountain Bike',svgKey:'',price:'TBD',gama:'media',
         shopUrl:'',
@@ -835,7 +836,7 @@ function renderView(){
     html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
     html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
     html+='<button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button>';
-    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
+    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'️')+'</button>';
     html+='</div>';
     var circuitList = getSortedCircuits();
     html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
@@ -913,7 +914,8 @@ function openPlayer(id){
   var seasonWins=r.wins.filter(function(w){return w.s.toLowerCase().includes(s.year);}).length;
   var wins=r.wins.map(function(w){return '<button class="win-chip" onclick="closeDialog();openCircuit(\''+(CIRCUITS.find(function(c){return c.name===w.c;})?.id||'')+'\')" role="button" tabindex="0">🏆 '+w.c+'<span class="wc-season">'+w.s+'</span></button>';}).join('');
   var dev=calcDevRange(bici.desarrollo.plato,bici.desarrollo.pinonMin,bici.desarrollo.pinonMax);
-  openDialog('<div class="dlg-player-header" style="background:'+r.color+'"><div class="dph-eyebrow" style="color:'+r.textColor+';opacity:.7">DORSAL '+r.dorsal+'</div><div class="dph-name" style="color:'+r.textColor+'">'+r.first+' '+r.last+'</div></div><div style="height:14px"></div><div class="dlg-bici-row" onclick="openBici(\''+id+'\')" role="button" tabindex="0"><div class="dbr-img"><img src="'+BIKE_IMAGES[bici.svgKey]+'" alt="'+bici.model+'" loading="lazy" onerror="this.style.display=\'none\'"/></div><div><div class="dbr-model">'+bici.model+'</div><div class="dbr-link">Ver información web ↗</div></div></div><div class="dlg-stats-grid"><div class="dsg-box"><div class="dsg-val">'+st.pts+'</div><div class="dsg-lbl">Puntos temporada</div></div><div class="dsg-box"><div class="dsg-val">'+st.pos+'</div><div class="dsg-lbl">Posición</div></div><div class="dsg-box"><div class="dsg-val">'+r.peso+'</div><div class="dsg-lbl">Peso</div></div><div class="dsg-box"><div class="dsg-val">'+r.altura+'</div><div class="dsg-lbl">Altura</div></div><div class="dsg-box"><div class="dsg-val">'+seasonWins+'</div><div class="dsg-lbl">Victoria '+s.year.split(' ')[1]+'</div></div><div class="dsg-box"><div class="dsg-val">'+r.wins.length+'</div><div class="dsg-lbl">Victorias totales</div></div><div class="dsg-box"><div class="dsg-val">'+totalPts+'</div><div class="dsg-lbl">Puntos históricos</div></div><div class="dsg-box"><div class="dsg-val">3</div><div class="dsg-lbl">Temporadas participadas</div></div></div><div style="margin:0 16px 14px;display:flex;gap:8px"><span class="dev-badge dev-subida">🧗 Subida: '+dev.subida+' m/ped</span><span class="dev-badge dev-velocidad">🏎️ Vel: '+dev.velocidad+' m/ped</span></div><div class="dlg-wins-title">Circuitos ganados</div><div class="win-chips">'+(wins||'<span style="color:#aaa;padding:0 16px;font-size:13px">Sin victorias aún</span>')+'</div>');
+  var photoHtml = r.foto ? '<img src="'+r.foto+'" alt="'+r.first+' '+r.last+'" class="pilot-photo" onerror="this.style.display=\'none\'"/>' : '';
+  openDialog('<div class="dlg-player-header" style="background:'+r.color+'"><div class="dph-eyebrow" style="color:'+r.textColor+';opacity:.7">DORSAL '+r.dorsal+'</div><div class="dph-name" style="color:'+r.textColor+'">'+r.first+' '+r.last+'</div></div><div style="height:14px"></div>'+photoHtml+'<div class="dlg-bici-row" onclick="openBici(\''+id+'\')" role="button" tabindex="0"><div class="dbr-img"><img src="'+BIKE_IMAGES[bici.svgKey]+'" alt="'+bici.model+'" loading="lazy" onerror="this.style.display=\'none\'"/></div><div><div class="dbr-model">'+bici.model+'</div><div class="dbr-link">Ver información web ↗</div></div></div><div class="dlg-stats-grid"><div class="dsg-box"><div class="dsg-val">'+st.pts+'</div><div class="dsg-lbl">Puntos temporada</div></div><div class="dsg-box"><div class="dsg-val">'+st.pos+'</div><div class="dsg-lbl">Posición</div></div><div class="dsg-box"><div class="dsg-val">'+r.peso+'</div><div class="dsg-lbl">Peso</div></div><div class="dsg-box"><div class="dsg-val">'+r.altura+'</div><div class="dsg-lbl">Altura</div></div><div class="dsg-box"><div class="dsg-val">'+seasonWins+'</div><div class="dsg-lbl">Victoria '+s.year.split(' ')[1]+'</div></div><div class="dsg-box"><div class="dsg-val">'+r.wins.length+'</div><div class="dsg-lbl">Victorias totales</div></div><div class="dsg-box"><div class="dsg-val">'+totalPts+'</div><div class="dsg-lbl">Puntos históricos</div></div><div class="dsg-box"><div class="dsg-val">3</div><div class="dsg-lbl">Temporadas participadas</div></div></div><div style="margin:0 16px 14px;display:flex;gap:8px"><span class="dev-badge dev-subida">🧗 Subida: '+dev.subida+' m/ped</span><span class="dev-badge dev-velocidad">🏎️ Vel: '+dev.velocidad+' m/ped</span></div><div class="dlg-wins-title">Circuitos ganados</div><div class="win-chips">'+(wins||'<span style="color:#aaa;padding:0 16px;font-size:13px">Sin victorias aún</span>')+'</div>');
 }
 
 function openBici(riderId){
