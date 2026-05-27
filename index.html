@@ -8,7 +8,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#f0f0f0;--white:#fff;--black:#0b0b0c;
-  --red:#e02020;--blue:#1e40ff;--yellow:#f5c800;--green:#16a34a;
+  --red:#e02020;--blue:#1e40ff;--yellow:#f5c800;--green:#16a34a;--orange:#f97316;
   --gray1:#f8f8f8;--gray2:#e8e8e8;--gray3:#d0d0d0;--gray4:#a0a0a0;--gray5:#555;
   --nav-h:64px;
 }
@@ -318,18 +318,18 @@ const CIRC_SVGS = {
   sierraespada: {color:'#6b7280', path:'M 45 90 L 18 65 L 15 38 L 40 16 L 100 10 L 165 22 L 192 52 L 185 80 L 145 93 Z', dot:'M 45 90'}
 };
 
-// URLs de Google Earth - TEMPORADA 2 (CORREGIDAS)
+// URLs de Google Earth - TEMPORADA 2 (CORREGIDAS CON ENLACES DEL USUARIO)
 const CIRCUIT_GOOGLE_EARTH_T2 = {
-  sanjose: 'https://earth.google.com/web/@39.58679526,-0.55706109,106.07084095a,902.51226334d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
-  andromeda: 'https://earth.google.com/web/@39.58047755,-0.524995,120.90603233a,720.32715404d,30y,19.5276911h,22.17507047t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
-  maracana: 'https://earth.google.com/web/@39.5850657,-0.5387055,99.2711129a,954.14212741d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
-  benissano: 'https://earth.google.com/web/@39.60864142,-0.57518898,114.00551444a,646.92601463d,30y,19.50679823h,22.17482135t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
+  sanjose: 'https://earth.google.com/web/@39.58672752,-0.55687671,91.90053382a,701.22167347d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
+  andromeda: 'https://earth.google.com/web/@39.58018851,-0.52510263,124.09678953a,752.9055877d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
+  maracana: 'https://earth.google.com/web/@39.58473501,-0.53863857,98.15293146a,903.12396654d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
+  benissano: 'https://earth.google.com/web/@39.61489088,-0.57384026,138.20541912a,1222.56626298d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
   poblanova: 'https://earth.google.com/web/@39.57686237,-0.54218807,90.65437835a,1587.04235685d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
-  cementerio: 'https://earth.google.com/web/@39.59797282,-0.54806403,123.09969941a,616.66019548d,30y,19.51129139h,22.17471863t,-0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
-  benaguacil: 'https://earth.google.com/web/@39.59410862,-0.58092208,99.32020081a,769.10853751d,30y,19.5113005h,22.17523604t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
+  cementerio: 'https://earth.google.com/web/@39.59974002,-0.55399512,117.93524165a,2842.26975117d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
+  benaguacil: 'https://earth.google.com/web/@39.59440077,-0.58251938,103.10171917a,1372.69638153d,30y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
   lliria: 'https://earth.google.com/web/@39.61714052,-0.58428717,124.61490748a,953.86890987d,30.00000006y,0h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICMjFit4EEAE',
-  barranquet: 'https://earth.google.com/web/@39.59404321,-0.53383451,114.7734871a,603.29654795d,30y,19.5245785h,22.17467328t,0r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0',
-  sierraespada: 'https://earth.google.com/web/@39.58555365,-0.5282567,116.47546966a,795.11913484d,30y,19.52289265h,22.17532431t,360r/data=CgRCAggBMikKJwolCiExb1RLSDVHOUpyZG5sTk5mSHkwdWU5cXdOLWVPMzFHTDAgAToDCgEwQgIIAEoICJSC_fgDEAE?authuser=0'
+  barranquet: 'https://earth.google.com/web/@39.59447322,-0.53217721,106.68870906a,1120.22529488d,30y,91.00000003h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0',
+  sierraespada: 'https://earth.google.com/web/@39.58552013,-0.52679595,124.61501362a,1202.15096992d,30y,91.00111689h,0t,0r/data=CgRCAggBMikKJwolCiExM21WbDNPREVKVlUzbHlSTVJhM21lMXlndDBZa1hXUksgAToDCgEwQgIIAEoICPTInt8DEAE?authuser=0'
 };
 
 // Función para obtener emoji de riesgo basado en SCORE de dificultad
@@ -386,7 +386,7 @@ const CIRCUITS = [
   {id:'llomallarga',name:'Lloma Llarga',season:'t3',distancia:950,curvasNorm:6,curvasPelig:3,riesgos:'-',homePilot:'',desc:'El circuito más lejano, ruta larga con tramos técnicos.',opinion:'El circuito más lejano con ruta larga. Tramos técnicos que requieren buena forma física y técnica.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:115,altMax:130,valoracion:4.6,dificultad:15.0,winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\" · 2026","Julian Matei 2'07.45\" · 2026"]}
 ];
 
-// Datos de pilotos
+// Datos de pilotos (CON SERGIO BOCHONS AÑADIDO)
 const RIDERS = {
   matei:{id:'matei',first:'Julian',last:'MATEI',dorsal:1,color:'#1e40ff',textColor:'#fff',peso:'70 kg',altura:'175 cm',ligasGanadas:2,seasons:['t1','t2','t3'],
     bici:{
@@ -465,6 +465,16 @@ const RIDERS = {
         desarrollo:{plato:36,pinonMin:11,pinonMax:34}}
     },
     wins:[]
+  },
+  sergio:{
+    id:'sergio',first:'Sergio',last:'BOCHONS',dorsal:21,color:'#f97316',textColor:'#fff',peso:'72 kg',altura:'178 cm',ligasGanadas:0,seasons:['t3'],
+    bici:{
+      t3:{model:'Por definir',tipo:'Mountain Bike',svgKey:'',price:'TBD',gama:'media',
+        shopUrl:'',
+        specs:[{l:'Cuadro',v:'Por definir'},{l:'Suspensión',v:'Por definir'},{l:'Transmisión',v:'Por definir'},{l:'Platos',v:'Por definir'},{l:'Cassette',v:'Por definir'},{l:'Velocidades',v:'Por definir'},{l:'Frenos',v:'Por definir'},{l:'Cubiertas',v:'Por definir'},{l:'Peso estimado',v:'Por definir'}],
+        desarrollo:{plato:0,pinonMin:0,pinonMax:0}}
+    },
+    wins:[]
   }
 };
 
@@ -481,15 +491,16 @@ const NOTICIAS = [
 
 // Temporadas
 const SEASONS = {
-  t3:{key:'t3',label:'Temporada 3',year:'2026',kicker:'Actual',summary:'La nueva temporada abre con San José. Prácticas de Pascua ya completadas.',participantes:5,practicas:4,carreras:0,finalizadas:0,
+  t3:{key:'t3',label:'Temporada 3',year:'2026',kicker:'Actual',summary:'La nueva temporada abre con San José. Prácticas de Pascua ya completadas.',participantes:6,practicas:4,carreras:0,finalizadas:0,
     standings:[
       {id:'matei',pts:0,pos:'-',diff:'-'},
       {id:'hugo',pts:0,pos:'-',diff:'-'},
       {id:'ruben',pts:0,pos:'-',diff:'-'},
       {id:'toni',pts:0,pos:'-',diff:'-'},
-      {id:'adrian',pts:0,pos:'-',diff:'-'}
+      {id:'adrian',pts:0,pos:'-',diff:'-'},
+      {id:'sergio',pts:0,pos:'-',diff:'-'}
     ],
-    scores:{matei:[],hugo:[],ruben:[],toni:[],adrian:[]},
+    scores:{matei:[],hugo:[],ruben:[],toni:[],adrian:[],sergio:[]},
     horarios:[
       {name:'Práctica pascua 1',date:'7 abril',mes:'abr',dia:'7',circ:'San José',tipo:'practica',status:'done',circId:'sanjose'},
       {name:'Práctica pascua 2',date:'7 abril',mes:'abr',dia:'7',circ:'Cementerio',tipo:'practica',status:'done',circId:'cementerio'},
@@ -686,6 +697,7 @@ function getSortedCircuits(){
       ? CIRCUITS.filter(function(c){return c.season==='t2';})
       : CIRCUITS.filter(function(c){return c.season==='t3';});
   var circuits = baseCircuits.slice();
+  // ORDENAR POR SCORE DE DIFICULTAD DESCENDENTE (mayor a menor)
   circuits.sort(function(a,b){
     var va,vb;
     if(compareSortBy==='score'){va=(a.curvasPelig||0)*3+(a.curvasNorm||0);vb=(b.curvasPelig||0)*3+(b.curvasNorm||0);}
@@ -694,6 +706,8 @@ function getSortedCircuits(){
     else if(compareSortBy==='valoracion'){va=a.valoracion||0;vb=b.valoracion||0;}
     else if(compareSortBy==='curvas'){va=(a.curvasPelig||0)+(a.curvasNorm||0);vb=(b.curvasPelig||0)+(b.curvasNorm||0);}
     else return 0;
+    // Orden descendente para score (mayor dificultad primero)
+    if(compareSortBy==='score') return compareSortDir==='asc'?(vb-va):(va-vb);
     return compareSortDir==='asc'?(va-vb):(vb-va);
   });
   return circuits;
@@ -719,8 +733,8 @@ function renderView(){
     html+='</div><div class="section-block"><div class="section-heading"><h2>Clasificación rápida</h2><button class="text-link" onclick="goView(\'puntos\')">Ver puntos</button></div>';
     s.standings.forEach(function(r,i){
       var rd=RIDERS[r.id];
-      // Si el color del piloto es blanco, usar fondo negro para que el texto se vea
-      var bgColor = rd.color === '#ffffff' ? '#000000' : rd.color;
+      // SOLO para Adrián Vera (color blanco) aplicar fondo negro para que el texto se vea
+      var bgColor = (rd.id === 'adrian' && rd.color === '#ffffff') ? '#000000' : rd.color;
       html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+rd.color+';background:'+bgColor+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+rd.color+'">'+r.pts+'</div></div>';
     });
     html+='</div><div style="height:8px"></div>';
@@ -749,7 +763,7 @@ function renderView(){
     html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')">Alta</button></div>';
     var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
     circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).forEach(function(c){
-      // Usar enlaces correctos según temporada
+      // Usar enlaces correctos según temporada (SOLO T2 usa los nuevos enlaces)
       var earthUrl = curSeason==='t2' ? (CIRCUIT_GOOGLE_EARTH_T2[c.id] || '') : '';
       var imgSrc = getImageName(c.id, curSeason);
       var drawingHtml = '<div class="circ-drawing" style="height:220px;padding:0;position:relative;">'+
@@ -897,7 +911,7 @@ function openCircuit(id){
   if(!id) return;
   var c = CIRCUITS.find(function(x){return x.id===id;});
   if(!c) return;
-  // Usar enlaces correctos según temporada
+  // Usar enlaces correctos según temporada (SOLO T2 usa los nuevos enlaces)
   var earthUrl = curSeason==='t2' ? (CIRCUIT_GOOGLE_EARTH_T2[id] || '') : '';
   var earthBtn = earthUrl ? '<button class="btn-mymaps" onclick="window.open(\''+earthUrl+'\',\'_blank\',\'noopener,noreferrer\')">🌍 Google Earth ↗</button>' : '';
   var winners = c.winners || [];
