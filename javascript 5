@@ -1,0 +1,12 @@
+// En la sección curView==='inicio', busca esta parte y cámbiala:
+
+s.standings.forEach(function(r,i){
+  var rd=RIDERS[r.id];
+  // CORRECCIÓN: Adrián Vera - fondo negro con texto BLANCO
+  var isAdrian = (rd.id === 'adrian');
+  var posBgColor = isAdrian ? '#000000' : rd.color;
+  var posTextColor = '#ffffff'; // Blanco para TODOS los números
+  var ptsColor = isAdrian ? '#000000' : rd.color; // Puntos negros solo para Adrián
+  
+  html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+posTextColor+';background:'+posBgColor+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+ptsColor+'">'+r.pts+'</div></div>';
+});
