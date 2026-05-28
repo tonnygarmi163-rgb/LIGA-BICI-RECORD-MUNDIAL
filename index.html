@@ -145,7 +145,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .noticia-body{font-size:13px;color:var(--gray5);margin-top:6px;line-height:1.6}
 .video-note{background:#dbeafe;border-radius:10px;padding:12px 14px;font-size:13px;color:#1e40af;font-weight:500;margin:0 14px 14px;display:flex;gap:8px}
 .vcard{background:var(--white);border-radius:12px;margin:0 14px 10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.vcard-thumb{height:100px;display:flex;align-items:center;justify-content:center;position:relative}
+.vcard-thumb{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .vcard-play{width:42px;height:42px;background:var(--red);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:16px}
 .vcard-info{padding:10px 14px}.vcard-title{font-size:14px;font-weight:700}.vcard-meta{font-size:12px;color:var(--gray4);margin-top:2px}
 .detail-dialog{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;align-items:flex-end;justify-content:center}
@@ -262,7 +262,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .opinion-cell{font-size:11px;color:var(--gray5);max-width:150px;line-height:1.3}
 .dificultad-cell{font-weight:700;font-size:14px;text-align:center}
 .riesgo-emojis{font-size:16px;margin-right:4px}
-.pilot-photo{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:12px;background:var(--gray2)}
+.pilot-photo{width:100%;height:200px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:var(--gray2)}
 </style>
 </head>
 <body>
@@ -369,30 +369,30 @@ function riesgoEmojis(riesgos){
 }
 
 // ============================================
-// CIRCUITS - CORREGIDO SEGÚN SOLICITUD DEL USUARIO
+// CIRCUITS - CORREGIDO SEGÚN SOLICITUD
 // ============================================
 const CIRCUITS = [
-  // TEMPORADA 1 - DATOS CORREGIDOS
-  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por la trazada y la visibilidad limitada en varias zonas.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:18.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
-  {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',opinion:'Circuito corto pero intenso. La bajada inicial seguida de zona deslizante y curvas peligrosas enlazadas lo hace traicionero a pesar de su corta distancia.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,dificultad:10.8,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
+  // TEMPORADA 1 - DATOS SEGÚN CSV
+  {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por trazada y visibilidad.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:18.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
+  {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',opinion:'Circuito corto pero intenso. La bajada inicial seguida de zona deslizante y curvas peligrosas enlazadas lo hace traicionero.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,dificultad:10.8,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
   {id:'benaguacil',name:'Benaguacil',season:'t1',distancia:661,curvasNorm:8,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[],tiempos:[]},
   {id:'sierraespada',name:'Sierra Espada',season:'t1',distancia:891,curvasNorm:3,curvasPelig:3,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',opinion:'Circuito técnico con 3 paradas obligatorias y curvas peligrosas. La circulación de coches en ambos sentidos añade complejidad.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,dificultad:23.7,winners:[],tiempos:[]},
   {id:'barranquet',name:'Barranquet',season:'t1',distancia:561,curvasNorm:5,curvasPelig:5,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, con curvas normales y zonas de peatones.',opinion:'Circuito de ritmo técnico, con 5 curvas normales y 5 peligrosas. Zonas de peatones con visión reducida.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,winners:[],tiempos:[]},
-  {id:'cementerio',name:'Cementerio',season:'t1',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con cambios de altura marcados.',opinion:'Circuito con muchos cambios de altura y una bajada pronunciada. La curva peligrosa después de la bajada con zona de bicis lo hace técnico y exigente.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,dificultad:14.1,winners:[],tiempos:[]},
+  {id:'cementerio',name:'Cementerio',season:'t1',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con cambios de altura marcados.',opinion:'Circuito con muchos cambios de altura y una bajada pronunciada. La curva peligrosa con zona de bicis lo hace técnico.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,dificultad:25.0,winners:[],tiempos:[]},
   {id:'maracana',name:'Maracaná',season:'t1',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',opinion:'El circuito más sencillo y limpio. Ideal para trabajar velocidad y ritmo sin complicaciones técnicas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,dificultad:1.6,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
-  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso. Carretera de ambos sentidos con nula visibilidad de coches.',opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso. Carretera de ambos sentidos donde no se pueden ver los coches, requiriendo precaución extrema.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
+  {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso. Carretera de ambos sentidos con nula visibilidad de coches.',opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso. Carretera de ambos sentidos donde no se pueden ver los coches.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
   {id:'lliria',name:'Llíria',season:'t1',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',opinion:'Circuito de ritmo rápido y bastante limpio. Pendientes moderadas sin curvas peligrosas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,dificultad:6.5,winners:[],tiempos:[]},
   
-  // TEMPORADA 2 - DATOS CORREGIDOS SEGÚN SOLICITUD
+  // TEMPORADA 2 - DATOS CORREGIDOS
   {id:'sanjose',name:'San José',season:'t2',distancia:813,curvasNorm:8,curvasPelig:1,riesgos:'1 STOP, 3 sentido contrario, 3 obras',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas, zonas de visión reducida y obras.',opinion:'Circuito con muchas curvas y obras que obligan a ir por calles en sentido contrario. Afortunadamente al estar en obras no hay tráfico de coches.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,valoracion:4.5,dificultad:14.1,winners:[{s:'T2·2025',n:'Toni García'}],tiempos:["Toni García 2'09.96\""]},
-  {id:'andromeda',name:'Andrómeda',season:'t2',distancia:732,curvasNorm:5,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso. Carretera de ambos sentidos con nula visibilidad de coches.',opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso. Carretera de ambos sentidos donde no se pueden ver los coches, requiriendo precaución extrema.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\""]},
-  {id:'maracana',name:'Maracaná',season:'t2',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio, sin desnivel marcado.',opinion:'El circuito más limpio y sencillo. Ideal para trabajar velocidad sin complicaciones técnicas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,dificultad:1.6,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\"","Hugo Castro 1'03.40\""]},
-  {id:'benissano',name:'Benissanó',season:'t2',distancia:587,curvasNorm:5,curvasPelig:2,riesgos:'Zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en bajada inicial y curvas peligrosas.',opinion:'Circuito corto pero técnico. Bajada inicial con zona deslizante y curvas peligrosas. Requiere buen control de frenado.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:132.3,altMax:139.6,valoracion:4.0,dificultad:12.0,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\""]},
-  {id:'poblanova',name:'Pobla Nova',season:'t2',distancia:677,curvasNorm:3,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico, curvas peligrosas tras pendiente y zona de parque.',opinion:'Circuito técnico con curvas peligrosas después de pendientes. La zona de peatones en el parque añade complejidad.',bikeRec:'BH Spike 2.5 (maniobrable)',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,valoracion:3.9,dificultad:10.8,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\""]},
+  {id:'andromeda',name:'Andrómeda',season:'t2',distancia:732,curvasNorm:5,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso.',opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\""]},
+  {id:'maracana',name:'Maracaná',season:'t2',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio.',opinion:'El circuito más limpio y sencillo. Ideal para trabajar velocidad.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,dificultad:1.6,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\"","Hugo Castro 1'03.40\""]},
+  {id:'benissano',name:'Benissanó',season:'t2',distancia:587,curvasNorm:5,curvasPelig:2,riesgos:'Zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en bajada inicial y curvas peligrosas.',opinion:'Circuito corto pero técnico. Bajada inicial con zona deslizante y curvas peligrosas.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:132.3,altMax:139.6,valoracion:4.0,dificultad:12.0,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'35.30\""]},
+  {id:'poblanova',name:'Pobla Nova',season:'t2',distancia:677,curvasNorm:2,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico, curvas peligrosas tras pendiente y zona de parque.',opinion:'Circuito técnico con curvas peligrosas después de pendientes. La zona de peatones en el parque añade complejidad.',bikeRec:'BH Spike 2.5 (maniobrable)',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,valoracion:3.9,dificultad:10.8,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'44.26\""]},
   {id:'cementerio',name:'Cementerio',season:'t2',distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis, cambios altura',homePilot:'Rubén Asensi',desc:'Circuito técnico con 10 curvas totales, cambios de altura marcados.',opinion:'Circuito con muchos cambios de altura y una bajada pronunciada de 14.8%. La curva peligrosa con zona de bicis lo hace técnico.',bikeRec:'BH Spike 2.5 (ágil)',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,valoracion:4.2,dificultad:20.3,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'22.96\""]},
-  {id:'benaguacil',name:'Benaguacil',season:'t2',distancia:661,curvasNorm:8,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\""]},
-  {id:'lliria',name:'Llíria',season:'t2',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',opinion:'Circuito de ritmo rápido y bastante limpio. Pendientes moderadas sin curvas peligrosas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,dificultad:6.5,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\""]},
-  {id:'barranquet',name:'Barranquet',season:'t2',distancia:561,curvasNorm:5,curvasPelig:4,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, con curvas normales y zonas de peatones.',opinion:'Circuito de ritmo técnico, con 5 curvas normales y 4 peligrosas. Zonas de peatones con visión reducida.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\""]},
+  {id:'benaguacil',name:'Benaguacil',season:'t2',distancia:661,curvasNorm:8,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'33.00\""]},
+  {id:'lliria',name:'Llíria',season:'t2',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio.',opinion:'Circuito de ritmo rápido y bastante limpio.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,dificultad:6.5,winners:[{s:'T2·2025',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 1'27.63\""]},
+  {id:'barranquet',name:'Barranquet',season:'t2',distancia:561,curvasNorm:5,curvasPelig:5,riesgos:'1 zona peatones, visión reducida',homePilot:'',desc:'Muy técnico, con curvas normales y zonas de peatones.',opinion:'Circuito de ritmo técnico, con 5 curvas normales y 5 peligrosas. Zonas de peatones con visión reducida.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:108.2,altMax:125.3,valoracion:4.8,dificultad:27.2,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'25.61\""]},
   {id:'sierraespada',name:'Sierra Espada',season:'t2',distancia:891,curvasNorm:3,curvasPelig:3,riesgos:'3 STOP, 1 sentido contrario',homePilot:'',desc:'Técnico con tráfico, varios STOP y curvas peligrosas.',opinion:'Circuito técnico con 3 paradas obligatorias y curvas peligrosas. La circulación de coches en ambos sentidos añade complejidad.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:113.6,altMax:118.3,valoracion:4.3,dificultad:23.7,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Hugo Castro 1'49.00\""]},
   
   // TEMPORADA 3
@@ -493,13 +493,13 @@ const RIDERS = {
 
 // Noticias
 const NOTICIAS = [
-  {fecha:'13 Abril 2026',titulo:'La ruta de la muerte: LLOMA LLARGA',cuerpo:'Una de las peores experiencias para llegar a un circuito. El camino de Andrómeda a Lloma Llarga se ha convertido en un infierno, siendo una ruta de más de 20 km de ida y de vuelta. Los 4 participantes han tenido gran dificultad para llegar a la urbanización, la cual es la más alejada de de la Pobla de Vallbona sin contar la Manguilla. La ruta ha tenido cosas malas y otras buenas, pero en general llegar para hacer tiempos, ha podido con el cansancio de todos. El principal circuito que iba a ser añadido para esta tercera edición esta practicamente eliminado del calendario.',emoji:'💀',img:''},
-  {fecha:'13 Abril 2026',titulo:'Andromeda vuelve de practicas.',cuerpo:'La casa del 69 ha sido protagonista de la penúltima práctica antes de la llegada de la temporada. Finalmente el tiempo del 23 en 2024 se ha batido de una vez por todas con un gran Hugo Castro que ha marcado un 1\'46,57", 4 segundos menos de lo que se logró en la temporada 1. Rubén Asensi se ha acercado con 1\'47,23", el mismo 23 aceptaba la falta de precisión en puntos claves del circuito, donde el cambio de marchas era una falta clave. Toni García ha superado a Hugo por tan solo 51 centésimas, con su 1\'46,08".',emoji:'🚴',img:''},
-  {fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas, en el que los récords se han roto hasta 4 veces. El tiempo más rápido de el circuito de Casa Blanca era de Rubén la temporada 2025, con 1 minuto 30.56 segundos. Pues, tras la primera vuelta de Hugo Castro bajo el récord 1.7 segundos en su primera vuelta. Toni García bajaría su tiempo personal más de 10 segundos que con la B Pro, poniendo el récord a 1\'27.56". Rubén Asensi aún con su rueda delantera semipinchada a podido marcar un peligroso 1\'25.52", bajando el récord 2 segundos más y dejando casi definitivo el tiempo más rápido, si no fuera por el número 1, Julian Matei tras un día duro con indisposiciones por el tráfico ha logrado arruinarle el mejor tiempo a Rubén, poniendo el récord mundial a 1\'22.96".',emoji:'🏆',img:''},
-  {fecha:'7 Abril 2026',titulo:'Prácticas en San José',cuerpo:'Después de la victoria de Toni García hace 198 días, Liga bici vuelve a San José para practicar. Los tiempos han sido en su mayoría impresionantes acercandose peligrosamente al record. Toni ha sido el primero en impresionar a los participantes con su nueva bici HB, que ha logrado marcar el segundo mejor tiempo de la historia del circuito en su primera vuelta con 1\'57,34". Rubén Asensi no se queda atras y consolida un tiempo casi idéntico al del número 7. Solamente superandolo por 9 centésimas de segundo.',emoji:'🚲',img:''},
-  {fecha:'Abril 2026',titulo:'Prácticas de Pascua completadas',cuerpo:'La Temporada 3 arrancó con cuatro prácticas intensas en los circuitos de San José, Cementerio, Andrómeda y el nuevo Lloma Llarga.',emoji:'🚴'},
-  {fecha:'Enero 2026',titulo:'Temporada 3 confirmada',cuerpo:'Se confirma el inicio de la Temporada 3 para 2026 con los mismos cuatro participantes. Julian Matei defenderá el título de campeón de las últimas dos temporadas.',emoji:'🏆'},
-  {fecha:'Octubre 2025',titulo:'Julian Matei bicampeón',cuerpo:'Con la victoria en Vista Calderona, Julian Matei se proclamó campeón de la Temporada 2 con 119 puntos, por delante de Hugo Castro y Rubén Asensi, ambos con 105 puntos.',emoji:'🥇'}
+  {fecha:'13 Abril 2026',titulo:'La ruta de la muerte: LLOMA LLARGA',cuerpo:'Una de las peores experiencias para llegar a un circuito.',emoji:'💀',img:''},
+  {fecha:'13 Abril 2026',titulo:'Andromeda vuelve de practicas.',cuerpo:'La casa del 69 ha sido protagonista de la penúltima práctica.',emoji:'🚴',img:''},
+  {fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas.',emoji:'🏆',img:''},
+  {fecha:'7 Abril 2026',titulo:'Prácticas en San José',cuerpo:'Después de la victoria de Toni García.',emoji:'🚲',img:''},
+  {fecha:'Abril 2026',titulo:'Prácticas de Pascua completadas',cuerpo:'La Temporada 3 arrancó con cuatro prácticas.',emoji:'🚴'},
+  {fecha:'Enero 2026',titulo:'Temporada 3 confirmada',cuerpo:'Se confirma el inicio de la Temporada 3.',emoji:'🏆'},
+  {fecha:'Octubre 2025',titulo:'Julian Matei bicampeón',cuerpo:'Con la victoria en Vista Calderona.',emoji:'🥇'}
 ];
 
 // Temporadas
@@ -703,7 +703,7 @@ function getSortedRiders(){
   return riders;
 }
 
-// FUNCIÓN DE ORDENACIÓN SIMPLIFICADA Y CORREGIDA
+// FUNCIÓN DE ORDENACIÓN - Ordena por DIFICULTAD
 function getSortedCircuits(){
   var baseCircuits = curSeason === 't1' 
     ? CIRCUITS.filter(function(c){return c.season==='t1';})
@@ -712,24 +712,10 @@ function getSortedCircuits(){
       : CIRCUITS.filter(function(c){return c.season==='t3';});
   
   var circuits = baseCircuits.slice();
-  
-  // Ordenar por SCORE de dificultad: (curvasPelig * 3) + curvasNorm
-  // Orden DESCENDENTE (mayor score primero)
   circuits.sort(function(a,b){
-    var scoreA = (a.curvasPelig * 3) + a.curvasNorm;
-    var scoreB = (b.curvasPelig * 3) + b.curvasNorm;
-    return scoreB - scoreA; // Descendente
+    return b.dificultad - a.dificultad;
   });
-  
   return circuits;
-}
-
-// Función para obtener nombre de imagen según temporada
-function getImageName(circId, season) {
-  if (season === 't1' && circId !== 'sanjose' && circId !== 'benissano') {
-    return circId + '_t2.png';
-  }
-  return circId + '_' + season + '.png';
 }
 
 function renderView(){
@@ -744,12 +730,15 @@ function renderView(){
     html+='</div><div class="section-block"><div class="section-heading"><h2>Clasificación rápida</h2><button class="text-link" onclick="goView(\'puntos\')">Ver puntos</button></div>';
     s.standings.forEach(function(r,i){
       var rd=RIDERS[r.id];
-      // CORRECCIÓN: Adrián Vera - fondo negro con texto BLANCO para que se vea el número
-      var isAdrian = (rd.id === 'adrian');
-      var posBgColor = isAdrian ? '#000000' : rd.color;
-      var posTextColor = '#ffffff'; // Texto BLANCO para que se vea el número de Adrián
-      var ptsColor = rd.color; // Los puntos mantienen su color original (no tocar)
-      html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+posTextColor+';background:'+posBgColor+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+ptsColor+'">'+r.pts+'</div></div>';
+      // CORRECCIÓN: Adrián Vera - fondo negro, texto blanco para visibilidad
+      var rankingBg = rd.color;
+      var rankingText = '#ffffff';
+      if (r.id === 'adrian') {
+        rankingBg = '#000000';
+        rankingText = '#ffffff';
+      }
+      var ptsColor = (r.id === 'adrian') ? '#000000' : rd.color;
+      html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+rankingText+';background:'+rankingBg+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+ptsColor+'">'+r.pts+'</div></div>';
     });
     html+='</div><div style="height:8px"></div>';
   }
@@ -787,15 +776,14 @@ function renderView(){
     html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="setCircFilter(\'todos\')">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="setCircFilter(\'baja\')">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="setCircFilter(\'media\')">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="setCircFilter(\'alta\')">Alta</button></div>';
     var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
     circuitList.filter(function(c){if(circFilter==='todos')return true;return c.dif===circFilter;}).forEach(function(c){
-      // CORRECCIÓN: Usar enlaces correctos según temporada
       var earthUrl = '';
       if(curSeason==='t1' && CIRCUIT_GOOGLE_EARTH_T1[c.id]){
         earthUrl = CIRCUIT_GOOGLE_EARTH_T1[c.id];
       }else if(curSeason==='t2' && CIRCUIT_GOOGLE_EARTH_T2[c.id]){
         earthUrl = CIRCUIT_GOOGLE_EARTH_T2[c.id];
       }
-      var imgSrc = getImageName(c.id, curSeason);
-      var drawingHtml = '<div class="circ-drawing" style="height:220px;padding:0;position:relative;">'+
+      var imgSrc = c.id + '_' + curSeason + '.png';
+      var drawingHtml = '<div class="circ-drawing" style="height:200px;padding:0;position:relative;">'+
         '<img src="'+imgSrc+'" alt="Mapa '+c.name+'" class="img-circuito" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
         '<div style="display:none;align-items:center;justify-content:center;height:100%;background:#f8f8f8;">'+circSVG(c.id)+'</div>';
       if(earthUrl){drawingHtml += '<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+earthUrl+'\',\'_blank\')">🌍 Google Earth</button>';}
@@ -846,10 +834,11 @@ function renderView(){
     html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
     html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
     html+='<button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button>';
-    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'️')+'</button>';
+    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
     html+='</div>';
     var circuitList = getSortedCircuits();
-    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
+    // CORRECCIÓN: Headers actualizados a CURVAS TOTALES y CURVAS PELIGROSAS
+    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>CURVAS TOTALES</th><th>CURVAS PELIGROSAS</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
     circuitList.forEach(function(c){
       var totalCurvas = c.curvasNorm + c.curvasPelig;
       var desnivel = (c.altMax - c.altMin).toFixed(1);
@@ -941,7 +930,6 @@ function openCircuit(id){
   if(!id) return;
   var c = CIRCUITS.find(function(x){return x.id===id;});
   if(!c) return;
-  // CORRECCIÓN: Usar enlaces correctos según temporada
   var earthUrl = '';
   if(curSeason==='t1' && CIRCUIT_GOOGLE_EARTH_T1[id]){
     earthUrl = CIRCUIT_GOOGLE_EARTH_T1[id];
@@ -969,3 +957,4 @@ render();
 </script>
 </body>
 </html>
+
