@@ -263,6 +263,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dificultad-cell{font-weight:700;font-size:14px;text-align:center}
 .riesgo-emojis{font-size:16px;margin-right:4px}
 .pilot-photo{width:100%;height:200px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:var(--gray2)}
+.buy-bike-item{background:#f8f9fa;border-radius:8px;padding:15px;margin-bottom:15px;border-left:4px solid #1a1a2e;display:flex;align-items:center;gap:15px}
+.buy-bike-item img{width:80px;height:80px;object-fit:contain;border-radius:8px}
+.buy-bike-info{flex:1}
+.buy-bike-info h4{margin-bottom:5px;color:#1a1a2e}
+.buy-bike-info p{font-size:0.9em;margin-bottom:5px}
+.buy-bike-info a{color:#0066cc;text-decoration:none;font-weight:bold}
+.buy-bike-info a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -303,7 +310,10 @@ const BIKE_IMAGES = {
   bh_spike25: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1ae087076-c437-4d50-8e52-ffdb04c9c4fc.png',
   btwin_rockrider: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/11f30d75a-00a9-4f88-8d86-d1daed59a1e7.png',
   giant_talon: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/1e670b86d-a77b-4e4c-a9e6-2f8efa669b0d.png',
-  scott_spark: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/15.png'
+  scott_spark: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/15.png',
+  bpro_m100: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/11f30d75a-00a9-4f88-8d86-d1daed59a1e7.png',
+  rockrider_5xc: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/11f30d75a-00a9-4f88-8d86-d1daed59a1e7.png',
+  merida_matts: 'https://image.qwenlm.ai/public_source/ccb5385f-3b9f-4739-a912-f975751bb5c0/11f30d75a-00a9-4f88-8d86-d1daed59a1e7.png'
 };
 
 const CIRC_SVGS = {
@@ -350,7 +360,7 @@ function riesgoEmojiPorDificultad(dificultad){
   if(dificultad>=20)return'🔴';
   if(dificultad>=10)return'🟠';
   if(dificultad>=5)return'🟡';
-  return'🟢';
+  return'';
 }
 
 // Función para obtener emojis de riesgos específicos
@@ -363,16 +373,16 @@ function riesgoEmojis(riesgos){
   if(riesgos.includes('peatones'))emojis.push('🚶');
   if(riesgos.includes('visión reducida'))emojis.push('👁️');
   if(riesgos.includes('deslizante'))emojis.push('⚠️');
-  if(riesgos.includes('bicis'))emojis.push('🚲');
+  if(riesgos.includes('bicis'))emojis.push('');
   if(riesgos.includes('altura'))emojis.push('📈');
   return emojis.join(' ');
 }
 
 // ============================================
-// CIRCUITS - CORREGIDO SEGÚN SOLICITUD
+// CIRCUITS
 // ============================================
 const CIRCUITS = [
-  // TEMPORADA 1 - DATOS SEGÚN CSV
+  // TEMPORADA 1
   {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó, con muchas curvas, varias zonas de visión reducida y tres curvas peligrosas.',opinion:'Circuito técnico con muchas curvas y zonas de visión reducida. Aunque el desnivel es bajo, exige atención constante por trazada y visibilidad.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,valoracion:4.5,dificultad:18.5,winners:[{s:'T1·2024',n:'Julian Matei'}],tiempos:[]},
   {id:'benissano',name:'Benissanó',season:'t1',distancia:385,curvasNorm:2,curvasPelig:2,riesgos:'1 zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico, centrado en una bajada inicial, zona deslizante y dos curvas peligrosas enlazadas.',opinion:'Circuito corto pero intenso. La bajada inicial seguida de zona deslizante y curvas peligrosas enlazadas lo hace traicionero.',bikeRec:'Scott Spark 950 (control bajadas)',zona:'coches',dif:'alta',riesgo:'alto',altMin:110.4,altMax:117.1,valoracion:4.0,dificultad:10.8,winners:[{s:'T1·2024',n:'Rubén Asensi'}],tiempos:[]},
   {id:'benaguacil',name:'Benaguacil',season:'t1',distancia:661,curvasNorm:8,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Entrada con trazada de velocidad y pocas zonas de descanso.',opinion:'Circuito tranquilo con trazada de velocidad. Pocas zonas de descanso pero sin peligros significativos.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:96.2,altMax:101.1,valoracion:3.6,dificultad:7.0,winners:[],tiempos:[]},
@@ -383,7 +393,7 @@ const CIRCUITS = [
   {id:'andromeda',name:'Andrómeda',season:'t1',distancia:732,curvasNorm:4,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso. Carretera de ambos sentidos con nula visibilidad de coches.',opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso. Carretera de ambos sentidos donde no se pueden ver los coches.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,winners:[{s:'T1·2024',n:'Hugo Castro'}],tiempos:[]},
   {id:'lliria',name:'Llíria',season:'t1',distancia:684,curvasNorm:6,curvasPelig:0,riesgos:'-',homePilot:'',desc:'Circuito de ritmo rápido y bastante limpio, con pendientes moderadas.',opinion:'Circuito de ritmo rápido y bastante limpio. Pendientes moderadas sin curvas peligrosas.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:125.1,altMax:132.1,valoracion:3.7,dificultad:6.5,winners:[],tiempos:[]},
   
-  // TEMPORADA 2 - DATOS CORREGIDOS
+  // TEMPORADA 2
   {id:'sanjose',name:'San José',season:'t2',distancia:813,curvasNorm:8,curvasPelig:1,riesgos:'1 STOP, 3 sentido contrario, 3 obras',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas, zonas de visión reducida y obras.',opinion:'Circuito con muchas curvas y obras que obligan a ir por calles en sentido contrario. Afortunadamente al estar en obras no hay tráfico de coches.',bikeRec:'BH Spike 2.5 (versátil)',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,valoracion:4.5,dificultad:14.1,winners:[{s:'T2·2025',n:'Toni García'}],tiempos:["Toni García 2'09.96\""]},
   {id:'andromeda',name:'Andrómeda',season:'t2',distancia:732,curvasNorm:5,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso.',opinion:'Circuito de ritmo técnico con una cuesta seguida de un ceda el paso.',bikeRec:'Giant Talon 27.5',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,valoracion:4.0,dificultad:8.7,winners:[{s:'T2·2025',n:'Julian Matei'}],tiempos:["Julian Matei 1'55.56\""]},
   {id:'maracana',name:'Maracaná',season:'t2',distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido, bastante limpio.',opinion:'El circuito más limpio y sencillo. Ideal para trabajar velocidad.',bikeRec:'Giant Talon 27.5',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,valoracion:3.5,dificultad:1.6,winners:[{s:'T2·2025',n:'Hugo Castro'}],tiempos:["Julian Matei 1'02.17\"","Hugo Castro 1'03.40\""]},
@@ -399,21 +409,21 @@ const CIRCUITS = [
   {id:'llomallarga',name:'Lloma Llarga',season:'t3',distancia:950,curvasNorm:6,curvasPelig:3,riesgos:'-',homePilot:'',desc:'El circuito más lejano, ruta larga con tramos técnicos.',opinion:'El circuito más lejano con ruta larga. Tramos técnicos que requieren buena forma física y técnica.',bikeRec:'Scott Spark 950',zona:'coches',dif:'alta',riesgo:'alto',altMin:115,altMax:130,valoracion:4.6,dificultad:15.0,winners:[{s:'T3·2026',n:'Rubén Asensi'}],tiempos:["Rubén Asensi 2'06.95\" · 2026","Julian Matei 2'07.45\" · 2026"]}
 ];
 
-// Datos de pilotos - CORREGIDO: Adrián Vera y Sergio Bochons solo en temporada 3
+// Datos de pilotos - ACTUALIZADOS
 const RIDERS = {
   matei:{id:'matei',first:'Julian',last:'MATEI',dorsal:1,color:'#1e40ff',textColor:'#fff',peso:'70 kg',altura:'175 cm',ligasGanadas:2,seasons:['t1','t2','t3'],foto:'julian_1.png',
     bici:{
       t1:{model:'Giant Talon 27.5 5',tipo:'Mountain Bike 27.5"',svgKey:'giant_talon',price:'~599€',gama:'baja',
         shopUrl:'https://www.bikezona.com/bicicletas/todobici-vs1.asp?ficha=16271',
-        specs:[{l:'Cuadro',v:'Aluminio ALUXX 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×8'},{l:'Platos',v:'24T / 36T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'16 marchas'},{l:'Frenos',v:'Disco mecánico Tektro'},{l:'Cubiertas',v:'Kenda 2.1"'},{l:'Peso estimado',v:'~14 kg'}],
+        specs:[{l:'Cuadro',v:'Aluminio ALUXX 27.5"'},{l:'Suspensión',v:'SR Suntour XCE 28'},{l:'Transmisión',v:'Shimano Altus 2x8'},{l:'Platos',v:'24T / 36T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'16 marchas'},{l:'Frenos',v:'Disco Mecánico Tektro'},{l:'Cubiertas',v:'Kenda 26x2.1'},{l:'Peso estimado',v:'~14 kg'}],
         desarrollo:{plato:36,pinonMin:11,pinonMax:32}},
       t2:{model:'Giant Talon 27.5 5',tipo:'Mountain Bike 27.5"',svgKey:'giant_talon',price:'~599€',gama:'baja',
         shopUrl:'https://www.bikezona.com/bicicletas/todobici-vs1.asp?ficha=16271',
-        specs:[{l:'Cuadro',v:'Aluminio ALUXX 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×8'},{l:'Platos',v:'24T / 36T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'16 marchas'},{l:'Frenos',v:'Disco mecánico Tektro'},{l:'Cubiertas',v:'Kenda 2.1"'},{l:'Peso estimado',v:'~14 kg'}],
+        specs:[{l:'Cuadro',v:'Aluminio ALUXX 27.5"'},{l:'Suspensión',v:'SR Suntour XCE 28'},{l:'Transmisión',v:'Shimano Altus 2x8'},{l:'Platos',v:'24T / 36T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'16 marchas'},{l:'Frenos',v:'Disco Mecánico Tektro'},{l:'Cubiertas',v:'Kenda 26x2.1'},{l:'Peso estimado',v:'~14 kg'}],
         desarrollo:{plato:36,pinonMin:11,pinonMax:32}},
       t3:{model:'Giant Talon 27.5 5',tipo:'Mountain Bike 27.5"',svgKey:'giant_talon',price:'~599€',gama:'baja',
         shopUrl:'https://www.bikezona.com/bicicletas/todobici-vs1.asp?ficha=16271',
-        specs:[{l:'Cuadro',v:'Aluminio ALUXX 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×8'},{l:'Platos',v:'24T / 36T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'16 marchas'},{l:'Frenos',v:'Disco mecánico Tektro'},{l:'Cubiertas',v:'Kenda 2.1"'},{l:'Peso estimado',v:'~14 kg'}],
+        specs:[{l:'Cuadro',v:'Aluminio ALUXX 27.5"'},{l:'Suspensión',v:'SR Suntour XCE 28'},{l:'Transmisión',v:'Shimano Altus 2x8'},{l:'Platos',v:'24T / 36T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'16 marchas'},{l:'Frenos',v:'Disco Mecánico Tektro'},{l:'Cubiertas',v:'Kenda 26x2.1'},{l:'Peso estimado',v:'~14 kg'}],
         desarrollo:{plato:36,pinonMin:11,pinonMax:32}}
     },
     wins:[{c:'San José',s:'T1 · 2024',t:'t1'},{c:'Rascanya',s:'T1 · 2024',t:'t1'},{c:'Cementerio',s:'T1 · 2024',t:'t1'},{c:'Barranquet',s:'T1 · 2024',t:'t1'},{c:'Andrómeda',s:'T2 · 2025',t:'t2'},{c:'Pobla Nova',s:'T2 · 2025',t:'t2'},{c:'Benaguacil',s:'T2 · 2025',t:'t2'},{c:'Barranquet',s:'T2 · 2025',t:'t2'},{c:'Vista Calderona',s:'T2 · 2025',t:'t2'}]
@@ -422,15 +432,15 @@ const RIDERS = {
     bici:{
       t1:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'baja',
         shopUrl:'https://support.decathlon.es/rockrider-st-540-2016',
-        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Peso estimado',v:'~13 kg'}],
+        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2x9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco Hidráulico'},{l:'Cubiertas',v:'Kenda 27.5x2.1'},{l:'Peso estimado',v:'~13 kg'}],
         desarrollo:{plato:36,pinonMin:11,pinonMax:34}},
       t2:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'baja',
         shopUrl:'https://support.decathlon.es/rockrider-st-540-2016',
-        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Peso estimado',v:'~13 kg'}],
+        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2x9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco Hidráulico'},{l:'Cubiertas',v:'Kenda 27.5x2.1'},{l:'Peso estimado',v:'~13 kg'}],
         desarrollo:{plato:36,pinonMin:11,pinonMax:34}},
       t3:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'baja',
         shopUrl:'https://support.decathlon.es/rockrider-st-540-2016',
-        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Peso estimado',v:'~13 kg'}],
+        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2x9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco Hidráulico'},{l:'Cubiertas',v:'Kenda 27.5x2.1'},{l:'Peso estimado',v:'~13 kg'}],
         desarrollo:{plato:36,pinonMin:11,pinonMax:34}}
     },
     wins:[{c:'Andrómeda',s:'T1 · 2024',t:'t1'},{c:'Maracaná',s:'T2 · 2025',t:'t2'},{c:'Cementerio',s:'T2 · 2025',t:'t2'},{c:'Sierra Espada',s:'T2 · 2025',t:'t2'}]
@@ -454,14 +464,14 @@ const RIDERS = {
   },
   toni:{id:'toni',first:'Toni',last:'GARCÍA',dorsal:7,color:'#16a34a',textColor:'#fff',peso:'70,5 kg',altura:'180 cm',ligasGanadas:0,seasons:['t1','t2','t3'],foto:'toni_7.png',
     bici:{
-      t1:{model:'BH Spike 2.5',tipo:'Mountain Bike 29"',svgKey:'bh_spike25',price:'~599€',gama:'media',
-        shopUrl:'https://www.elcorteingles.es/deportes/A56775425-bicicleta-de-montana-unisex-spike-25-bh/',
-        specs:[{l:'Cuadro',v:'Aluminio 29"'},{l:'Color',v:'Gris/Plata'},{l:'Suspensión',v:'Delantera SR Suntour XCM 100mm'},{l:'Transmisión',v:'Shimano Deore 1×10'},{l:'Plato',v:'30T (bielas M5100)'},{l:'Cassette',v:'11-46T (10 piñones)'},{l:'Velocidades',v:'10 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Peso estimado',v:'~12.5 kg'}],
-        desarrollo:{plato:30,pinonMin:11,pinonMax:46}},
-      t2:{model:'BH Spike 2.5',tipo:'Mountain Bike 29"',svgKey:'bh_spike25',price:'~599€',gama:'media',
-        shopUrl:'https://www.elcorteingles.es/deportes/A56775425-bicicleta-de-montana-unisex-spike-25-bh/',
-        specs:[{l:'Cuadro',v:'Aluminio 29"'},{l:'Color',v:'Gris/Plata'},{l:'Suspensión',v:'Delantera SR Suntour XCM 100mm'},{l:'Transmisión',v:'Shimano Deore 1×10'},{l:'Plato',v:'30T (bielas M5100)'},{l:'Cassette',v:'11-46T (10 piñones)'},{l:'Velocidades',v:'10 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Peso estimado',v:'~12.5 kg'}],
-        desarrollo:{plato:30,pinonMin:11,pinonMax:46}},
+      t1:{model:'B-PRO M100',tipo:'Mountain Bike',svgKey:'bpro_m100',price:'Consultar',gama:'media',
+        shopUrl:'https://tallerciclosur.blogspot.com/2015/04/bicicleta-de-montana-para-hombre-m100-b.html',
+        specs:[{l:'Cuadro',v:'Aluminio Hidroformed'},{l:'Suspensión',v:'Suntour XCM'},{l:'Transmisión',v:'Shimano Acera'},{l:'Platos',v:'42T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'8 marchas'},{l:'Frenos',v:'Disco Mecánico'},{l:'Cubiertas',v:'Maxxis 27.5"'},{l:'Peso estimado',v:'~13.5 kg'}],
+        desarrollo:{plato:42,pinonMin:11,pinonMax:32}},
+      t2:{model:'B-PRO M100',tipo:'Mountain Bike',svgKey:'bpro_m100',price:'Consultar',gama:'media',
+        shopUrl:'https://tallerciclosur.blogspot.com/2015/04/bicicleta-de-montana-para-hombre-m100-b.html',
+        specs:[{l:'Cuadro',v:'Aluminio Hidroformed'},{l:'Suspensión',v:'Suntour XCM'},{l:'Transmisión',v:'Shimano Acera'},{l:'Platos',v:'42T'},{l:'Cassette',v:'11-32T (8 piñones)'},{l:'Velocidades',v:'8 marchas'},{l:'Frenos',v:'Disco Mecánico'},{l:'Cubiertas',v:'Maxxis 27.5"'},{l:'Peso estimado',v:'~13.5 kg'}],
+        desarrollo:{plato:42,pinonMin:11,pinonMax:32}},
       t3:{model:'BH Spike 2.5',tipo:'Mountain Bike 29"',svgKey:'bh_spike25',price:'~599€',gama:'media',
         shopUrl:'https://www.elcorteingles.es/deportes/A56775425-bicicleta-de-montana-unisex-spike-25-bh/',
         specs:[{l:'Cuadro',v:'Aluminio 29"'},{l:'Color',v:'Gris/Plata'},{l:'Suspensión',v:'Delantera SR Suntour XCM 100mm'},{l:'Transmisión',v:'Shimano Deore 1×10'},{l:'Plato',v:'30T (bielas M5100)'},{l:'Cassette',v:'11-46T (10 piñones)'},{l:'Velocidades',v:'10 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Peso estimado',v:'~12.5 kg'}],
@@ -469,25 +479,23 @@ const RIDERS = {
     },
     wins:[{c:'San José',s:'T2 · 2025',t:'t2'}]
   },
-  // CORRECCIÓN: Adrián Vera solo en temporada 3
   adrian:{
     id:'adrian',first:'Adrián',last:'VERA',dorsal:14,color:'#ffffff',textColor:'#000',peso:'75 kg',altura:'180 cm',ligasGanadas:0,seasons:['t3'],foto:'adrian_14.png',
     bici:{
-      t3:{model:'Rockrider ST 540',tipo:'Mountain Bike 27.5"',svgKey:'btwin_rockrider',price:'~599€',gama:'media',
-        shopUrl:'',
-        specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'Delantera SR Suntour XCE 100mm'},{l:'Transmisión',v:'Shimano Altus 2×9'},{l:'Platos',v:'22T / 36T'},{l:'Cassette',v:'11-34T (9 piñones)'},{l:'Velocidades',v:'18 marchas'},{l:'Frenos',v:'Disco hidráulico'},{l:'Cubiertas',v:'--'},{l:'Peso estimado',v:'~13 kg'}],
-        desarrollo:{plato:36,pinonMin:11,pinonMax:34}}
+      t3:{model:'Merida Matts',tipo:'Mountain Bike',svgKey:'merida_matts',price:'Consultar',gama:'media',
+        shopUrl:'https://es.wallapop.com/item/bicicleta-merida-matts-blanca-1249370614',
+        specs:[{l:'Cuadro',v:'Aluminio TFS'},{l:'Suspensión',v:'Suntour M3030 PLO'},{l:'Transmisión',v:'Shimano Altus'},{l:'Frenos',v:'Disco Mecánico'},{l:'Cubiertas',v:'Kenda 26x2.1'},{l:'Velocidades',v:'21 marchas'},{l:'Peso estimado',v:'~13.8 kg'}],
+        desarrollo:{plato:42,pinonMin:11,pinonMax:32}}
     },
     wins:[]
   },
-  // CORRECCIÓN: Sergio Bochons solo en temporada 3
   sergio:{
     id:'sergio',first:'Sergio',last:'BOCHONS',dorsal:21,color:'#f97316',textColor:'#fff',peso:'72 kg',altura:'178 cm',ligasGanadas:0,seasons:['t3'],foto:'sergio_21.png',
     bici:{
-      t3:{model:'Por definir',tipo:'Mountain Bike',svgKey:'',price:'TBD',gama:'media',
-        shopUrl:'',
-        specs:[{l:'Cuadro',v:'Por definir'},{l:'Suspensión',v:'Por definir'},{l:'Transmisión',v:'Por definir'},{l:'Platos',v:'Por definir'},{l:'Cassette',v:'Por definir'},{l:'Velocidades',v:'Por definir'},{l:'Frenos',v:'Por definir'},{l:'Cubiertas',v:'Por definir'},{l:'Peso estimado',v:'Por definir'}],
-        desarrollo:{plato:0,pinonMin:0,pinonMax:0}}
+      t3:{model:'Rockrider 5XC',tipo:'Mountain Bike',svgKey:'rockrider_5xc',price:'~499€',gama:'media',
+        shopUrl:'https://bilbotruke.net/productos-vendidos/14353-bicicleta-montana-rockrider-5xc.html',
+        specs:[{l:'Cuadro',v:'Aluminio Rockrider'},{l:'Suspensión',v:'Rockrider XC 100 Air'},{l:'Transmisión',v:'Shimano Deore'},{l:'Platos',v:'30T'},{l:'Cassette',v:'11-36T (10 piñones)'},{l:'Velocidades',v:'10 marchas'},{l:'Frenos',v:'Disco Hidráulico'},{l:'Cubiertas',v:'Rockrider All Terrain'},{l:'Peso estimado',v:'~13.2 kg'}],
+        desarrollo:{plato:30,pinonMin:11,pinonMax:36}}
     },
     wins:[]
   }
@@ -495,13 +503,13 @@ const RIDERS = {
 
 // Noticias
 const NOTICIAS = [
-  {fecha:'13 Abril 2026',titulo:'La ruta de la muerte: LLOMA LLARGA',cuerpo:'Una de las peores experiencias para llegar a un circuito.',emoji:'💀',img:''},
-  {fecha:'13 Abril 2026',titulo:'Andromeda vuelve de practicas.',cuerpo:'La casa del 69 ha sido protagonista de la penúltima práctica.',emoji:'🚴',img:''},
-  {fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas.',emoji:'🏆',img:''},
-  {fecha:'7 Abril 2026',titulo:'Prácticas en San José',cuerpo:'Después de la victoria de Toni García.',emoji:'🚲',img:''},
-  {fecha:'Abril 2026',titulo:'Prácticas de Pascua completadas',cuerpo:'La Temporada 3 arrancó con cuatro prácticas.',emoji:'🚴'},
-  {fecha:'Enero 2026',titulo:'Temporada 3 confirmada',cuerpo:'Se confirma el inicio de la Temporada 3.',emoji:'🏆'},
-  {fecha:'Octubre 2025',titulo:'Julian Matei bicampeón',cuerpo:'Con la victoria en Vista Calderona.',emoji:'🥇'}
+  {fecha:'13 Abril 2026',titulo:'La ruta de la muerte: LLOMA LLARGA',cuerpo:'Una de las peores experiencias para llegar a un circuito. El camino de Andrómeda a Lloma Llarga se ha convertido en un infierno, siendo una ruta de más de 20 km de ida y de vuelta. Los 4 participantes han tenido gran dificultad para llegar a la urbanización, la cual es la más alejada de de la Pobla de Vallbona sin contar la Manguilla. La ruta ha tenido cosas malas y otras buenas, pero en general llegar para hacer tiempos, ha podido con el cansancio de todos. El principal circuito que iba a ser añadido para esta tercera edición esta practicamente eliminado del calendario. "La ruta de llegada, por cualquier sitio es impensable a no ser que un vehículo nos lo facilite", dijo Hugo Castro.',emoji:'💀',img:''},
+  {fecha:'13 Abril 2026',titulo:'Andromeda vuelve de practicas.',cuerpo:'La casa del 69 ha sido protagonista de la penúltima práctica antes de la llegada de la temporada. Finalmente el tiempo del 23 en 2024 se ha batido de una vez por todas con un gran Hugo Castro que ha marcado un 1\'46,57", 4 segundos menos de lo que se logró en la temporada 1. Rubén Asensi se ha acercado con 1\'47,23", el mismo 23 aceptaba la falta de precisión en puntos claves del circuito, donde el cambio de marchas era una falta clave.',emoji:'',img:''},
+  {fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas, en el que los récords se han roto hasta 4 veces. El tiempo más rápido de el circuito de Casa Blanca era de Rubén la temporada 2025, con 1 minuto 30.56 segundos. Pues, tras la primera vuelta de Hugo Castro bajo el récord 1.7 segundos en su primera vuelta. Toni García bajaría su tiempo personal más de 10 segundos que con la b Pro, poniendo el récord a 1\'27.56". Rubén Asensi aún con la rueda delantera semipinchada a podido marcar un peligroso 1\'25.52", bajando el récord 2 segundos más y dejando casi definitivo el tiempo más rápido, si no fuera por el número 1, Julian Matei tras un día duro con indecisiones por el tráfico ha logrado en su tercer tiempo a Rubén, poniendo el récord mundial a 1\'22.96".',emoji:'🏆',img:''},
+  {fecha:'7 Abril 2026',titulo:'Prácticas en San José',cuerpo:'Después de la victoria de Toni García hace 198 días, Liga bici vuelve a San José para practicar. Los tiempos han sido en su mayoría impresionantes acercandose peligrosamente al record. Toni ha sido el primero en impresionar a los participantes con su nueva bici B-PRO M100, que ha logrado marcar el segundo mejor tiempo de la historia del circuito en su primera vuelta con 1\'57,34". Rubén Asensi no se queda atras y consolida un tiempo casi idéntico al del número 7. Solamente superandolo por 9 centésimas de segundo.',emoji:'🚲',img:''},
+  {fecha:'Abril 2026',titulo:'Prácticas de Pascua completadas',cuerpo:'La Temporada 3 arrancó con cuatro prácticas intensas.',emoji:'🚴'},
+  {fecha:'Enero 2026',titulo:'Temporada 3 confirmada',cuerpo:'Se confirma el inicio de la Temporada 3 para 2026.',emoji:'🏆'},
+  {fecha:'Octubre 2025',titulo:'Julian Matei bicampeón',cuerpo:'Con la victoria en Vista Calderona, Julian Matei se proclamó campeón de la Temporada 2.',emoji:'🥇'}
 ];
 
 // Temporadas
@@ -521,7 +529,8 @@ const SEASONS = {
       {name:'Práctica pascua 2',date:'7 abril',mes:'abr',dia:'7',circ:'Cementerio',tipo:'practica',status:'done',circId:'cementerio'},
       {name:'Práctica pascua 3',date:'13 abril',mes:'abr',dia:'13',circ:'Andrómeda',tipo:'practica',status:'done',circId:'andromeda'},
       {name:'Práctica pascua 4',date:'13 abril',mes:'abr',dia:'13',circ:'Lloma Llarga',tipo:'practica',status:'done',circId:'llomallarga'},
-      {name:'Etapa 1',date:'Por confirmar',mes:'???',dia:'?',circ:'Por confirmar',tipo:'carrera',status:'pend'}
+      {name:'Etapa 1',date:'Por confirmar',mes:'???',dia:'?',circ:'Por confirmar',tipo:'carrera',status:'pend'},
+      {name:'Presentación Temporada 3',date:'3 julio',mes:'jul',dia:'3',circ:'-',tipo:'evento',status:'pend'}
     ],
     circs:['sanjose','andromeda','maracana','benissano','poblanova','cementerio','benaguacil','lliria','barranquet','sierraespada']
   },
@@ -641,7 +650,7 @@ let compareSortBy='score', compareSortDir='desc';
 function zonaBadge(z){var m={tranquilo:'tag-tranquilo',coches:'tag-coches',peatones:'tag-peatones'};var l={tranquilo:'Tranquilo',coches:'Zona coches',peatones:'Zona peatones'};return '<span class="ci-tag '+m[z]+'">'+(l[z]||z)+'</span>';}
 function difBadge(d){var m={baja:'tag-dif-baja',media:'tag-dif-media',alta:'tag-dif-alta'};return '<span class="ci-tag '+m[d]+'">Dif. '+d+'</span>';}
 function riesgoBadge(r){var m={bajo:'tag-riesgo-bajo',medio:'tag-riesgo-medio',alto:'tag-riesgo-alto'};return '<span class="ci-tag '+m[r]+'">Riesgo '+r+'</span>';}
-function gamaBadge(g){var m={baja:'gama-baja',media:'gama-media',alta:'gama-alta',pro:'gama-pro'};var l={baja:'🟢 Baja',media:'🟡 Media',alta:'🟠 Alta',pro:'🔴 Pro'};return '<span class="gama-badge '+m[g]+'">'+(l[g]||g)+'</span>';}
+function gamaBadge(g){var m={baja:'gama-baja',media:'gama-media',alta:'gama-alta',pro:'gama-pro'};var l={baja:'🟢 Baja',media:'🟡 Media',alta:' Alta',pro:'🔴 Pro'};return '<span class="gama-badge '+m[g]+'">'+(l[g]||g)+'</span>';}
 
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
@@ -668,10 +677,10 @@ function openExternalLink(url){
     } else {
       var textArea = document.createElement("textarea"); textArea.value = url; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
       document.body.appendChild(textArea); textArea.select();
-      try { document.execCommand('copy'); showToast('🔗 URL copiada al portapapeles'); } catch (err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); }
+      try { document.execCommand('copy'); showToast(' URL copiada al portapapeles'); } catch (err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); }
       document.body.removeChild(textArea);
     }
-  } else { showToast('🔗 Abriendo enlace...'); }
+  } else { showToast(' Abriendo enlace...'); }
 }
 
 // ============================================
@@ -815,6 +824,7 @@ function renderView(){
       var btnType='';
       if(h.tipo==='practica') btnType='<button class="btn-practica">PRÁCTICA</button>';
       else if(h.tipo==='tiempos') btnType='<button class="btn-tiempos">TIEMPOS</button>';
+      else if(h.tipo==='evento') btnType='<button class="btn-carrera">EVENTO</button>';
       else btnType='<button class="btn-carrera">CARRERA</button>';
       html+='<div class="hor-item"><div class="hi-date"><div class="hi-day">'+(h.dia||'-')+'</div><div class="hi-month">'+(h.mes||'-')+'</div></div><div class="hi-body"><div class="hi-name">'+h.name+'</div><div class="hi-sub">'+h.circ+'</div><div class="hi-actions">'+btnType+'<button class="btn-ver-circ" onclick="event.stopPropagation();openCircuit(\''+(circ?circ.id:'')+'\')" role="button" tabindex="0">Ver circuito</button></div></div><span class="hi-status '+sc+'">'+sl+'</span></div>';
     });
@@ -824,24 +834,35 @@ function renderView(){
   else if(curView==='comparativa'){
     html+='<div class="view-header"><p class="eyebrow">Análisis técnico</p><h1>Comparativa Bicis</h1></div>';
     
-    // CORRECCIÓN: Sección de comparación de bicis con explicación de cuál es mejor
     html+='<div class="comp-section"><div class="comp-subtitle">🏆 Mejor Bici</div>';
     html+='<div class="bici-info-box"><h3>¿Cuál es la mejor bici?</h3>';
     html+='<p style="margin-top:8px;font-size:14px;"><strong>La Scott Spark 950</strong> es considerada la mejor bici de la liga por varias razones:</p>';
     html+='<ul style="margin-top:8px;padding-left:20px;font-size:13px;line-height:1.8;">';
     html+='<li>🔧 <strong>Suspensión superior:</strong> Cuenta con Fox 32 Float Perf. Air (120mm) + Fox Float Perf. Trunnion, ofreciendo un mejor control en terrenos difíciles.</li>';
-    html+='<li>🔄 <strong>Control TwinLoc:</strong> Sistema remoto que permite ajustar la suspensión en tiempo real durante la carrera.</li>';
+    html+='<li> <strong>Control TwinLoc:</strong> Sistema remoto que permite ajustar la suspensión en tiempo real durante la carrera.</li>';
     html+='<li>⚙️ <strong>Transmisión 2x10:</strong> Más relaciones de cambio (20 velocidades) para adaptarse a cualquier terreno.</li>';
     html+='<li>🏔️ <strong>Mejor para circuitos técnicos:</strong> Ideal para circuitos con cambios de altura como Cementerio, Sierra Espada y Barranquet.</li>';
     html+='</ul>';
     html+='<p style="margin-top:12px;font-size:13px;color:#555;"><strong>Nota:</strong> Aunque la Scott Spark es la mejor en rendimiento, cada piloto debe elegir la bici que mejor se adapte a su estilo y al tipo de circuito.</p>';
     html+='</div></div>';
     
-    html+='<div class="comp-section"><div class="comp-subtitle">📊 Transmisión</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Bicicleta</th><th>Piloto</th><th>Transmisión</th><th>Gama</th></tr></thead><tbody>';
-    ['matei','hugo','ruben','toni'].forEach(function(id){var r=RIDERS[id];var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;html+='<tr><td class="bike-label">'+b.model+'</td><td>'+r.first+' '+r.last+'</td><td>'+(b.specs[2]?b.specs[2].v:'-')+'</td><td>'+gamaBadge(b.gama)+'</td></tr>';});
+    html+='<div class="comp-section"><div class="comp-subtitle">📊 Transmisión y Componentes</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Bicicleta</th><th>Piloto</th><th>Transmisión</th><th>Suspensión</th><th>Frenos</th><th>Gama</th></tr></thead><tbody>';
+    var activeRiders = Object.keys(RIDERS).filter(function(id){ return RIDERS[id].seasons.includes(curSeason); });
+    activeRiders.forEach(function(id){
+       var r=RIDERS[id];
+       var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;
+       var susp = '';
+       var frenos = '';
+       b.specs.forEach(function(s){
+          if(s.l === 'Suspensión') susp = s.v;
+          if(s.l === 'Frenos') frenos = s.v;
+       });
+       html+='<tr><td class="bike-label">'+b.model+'</td><td>'+r.first+' '+r.last+'</td><td>'+(b.specs[2]?b.specs[2].v:'-')+'</td><td>'+susp+'</td><td>'+frenos+'</td><td>'+gamaBadge(b.gama)+'</td></tr>';
+    });
     html+='</tbody></table></div></div>';
-    var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
+    
     html+='<div class="comp-section"><div class="comp-subtitle">🚴 Recomendación por Circuito</div><div class="comp-table-wrap"><table class="comp-table"><thead><tr><th>Circuito</th><th>Mejor Bici</th><th>Motivo</th></tr></thead><tbody>';
+    var circuitList = curSeason==='t1'?CIRCUITS.filter(function(c){return c.season==='t1';}):curSeason==='t2'?CIRCUITS.filter(function(c){return c.season==='t2';}):CIRCUITS.filter(function(c){return c.season==='t3';});
     circuitList.forEach(function(c){var rec = c.bikeRec || 'Giant Talon 27.5 (versátil)';var bike = rec.split('(')[0].trim();var reason = rec.includes('(') ? rec.split('(')[1].replace(')','') : 'Buena para todo terreno';html+='<tr><td>'+c.name+'</td><td>'+bike+'</td><td>'+reason+'</td></tr>';});
     html+='</tbody></table></div></div>';
   }
@@ -849,15 +870,14 @@ function renderView(){
   else if(curView==='circuitos-comparativa'){
     html+='<div class="circ-compare-header"><p class="eyebrow">Análisis IA</p><h1>Comparativa Circuitos</h1></div>';
     html+='<div class="circ-compare-filters">';
-    html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button>';
+    html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()"> Dificultad</button>';
     html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
     html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
     html+='<button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button>';
     html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
     html+='</div>';
     var circuitList = getSortedCircuits();
-    // CORRECCIÓN: Headers actualizados a CURVAS TOTALES y CURVAS PELIGROSAS
-    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>CURVAS TOTALES</th><th>CURVAS PELIGROSAS</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
+    html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
     circuitList.forEach(function(c){
       var totalCurvas = c.curvasNorm + c.curvasPelig;
       var desnivel = (c.altMax - c.altMin).toFixed(1);
@@ -898,6 +918,27 @@ function renderView(){
     html+='<div class="video-note">ℹ️ Los archivos de vídeo locales no cargan en web. Sube los vídeos a YouTube o Google Drive y añade el enlace aquí.</div>';
     [{title:'Highlights '+s.label,meta:s.year,bg:'linear-gradient(135deg,#1e40ff,#0b0b0c)',icon:'🏆'},{title:'Mejor momento',meta:'Compilation',bg:'linear-gradient(135deg,#e02020,#7c0000)',icon:'🔥'},{title:'Resumen última prueba',meta:'Etapa final',bg:'linear-gradient(135deg,#16a34a,#052e16)',icon:'🚴'}].forEach(function(e){html+='<div class="vcard"><div class="vcard-thumb" style="background:'+e.bg+'"><span style="position:absolute;left:14px;top:12px;font-size:24px">'+e.icon+'</span><button class="vcard-play">▶</button></div><div class="vcard-info"><div class="vcard-title">'+e.title+'</div><div class="vcard-meta">'+e.meta+' · Sube el vídeo a YouTube para activarlo</div></div></div>';});
   }
+  
+  else if(curView==='comprar'){
+    html+='<div class="view-header"><p class="eyebrow">Tienda</p><h1>Comprar Bici</h1></div>';
+    
+    var activeRidersShop = Object.keys(RIDERS).filter(function(id){ return RIDERS[id].seasons.includes(curSeason); });
+    
+    activeRidersShop.forEach(function(id){
+       var r=RIDERS[id];
+       var b=r.bici[curSeason]||r.bici.t2||r.bici.t1;
+       html+='<div class="buy-bike-item">';
+       html+='<img src="'+BIKE_IMAGES[b.svgKey]+'" alt="'+b.model+'">';
+       html+='<div class="buy-bike-info"><h4>'+b.model+' ('+r.first+' '+r.last+')</h4>';
+       b.specs.forEach(function(s){
+          if(s.l !== 'Velocidades' && s.l !== 'Peso estimado') {
+             html+='<p><strong>'+s.l+':</strong> '+s.v+'</p>';
+          }
+       });
+       html+='<a href="'+b.shopUrl+'" target="_blank">Ver en tienda</a></div>';
+       html+='</div>';
+    });
+  }
 
   document.getElementById('app-content').innerHTML=html;
   window.scrollTo(0,0);
@@ -933,7 +974,8 @@ function openPlayer(id){
   var wins=r.wins.map(function(w){return '<button class="win-chip" onclick="closeDialog();openCircuit(\''+(CIRCUITS.find(function(c){return c.name===w.c;})?.id||'')+'\')" role="button" tabindex="0">🏆 '+w.c+'<span class="wc-season">'+w.s+'</span></button>';}).join('');
   var dev=calcDevRange(bici.desarrollo.plato,bici.desarrollo.pinonMin,bici.desarrollo.pinonMax);
   var photoHtml = r.foto ? '<img src="'+r.foto+'" alt="'+r.first+' '+r.last+'" class="pilot-photo" onerror="this.style.display=\'none\'"/>' : '';
-  openDialog('<div class="dlg-player-header" style="background:'+r.color+'"><div class="dph-eyebrow" style="color:'+r.textColor+';opacity:.7">DORSAL '+r.dorsal+'</div><div class="dph-name" style="color:'+r.textColor+'">'+r.first+' '+r.last+'</div></div><div style="height:14px"></div>'+photoHtml+'<div class="dlg-bici-row" onclick="openBici(\''+id+'\')" role="button" tabindex="0"><div class="dbr-img"><img src="'+BIKE_IMAGES[bici.svgKey]+'" alt="'+bici.model+'" loading="lazy" onerror="this.style.display=\'none\'"/></div><div><div class="dbr-model">'+bici.model+'</div><div class="dbr-link">Ver información web ↗</div></div></div><div class="dlg-stats-grid"><div class="dsg-box"><div class="dsg-val">'+st.pts+'</div><div class="dsg-lbl">Puntos temporada</div></div><div class="dsg-box"><div class="dsg-val">'+st.pos+'</div><div class="dsg-lbl">Posición</div></div><div class="dsg-box"><div class="dsg-val">'+r.peso+'</div><div class="dsg-lbl">Peso</div></div><div class="dsg-box"><div class="dsg-val">'+r.altura+'</div><div class="dsg-lbl">Altura</div></div><div class="dsg-box"><div class="dsg-val">'+seasonWins+'</div><div class="dsg-lbl">Victoria '+s.year.split(' ')[1]+'</div></div><div class="dsg-box"><div class="dsg-val">'+r.wins.length+'</div><div class="dsg-lbl">Victorias totales</div></div><div class="dsg-box"><div class="dsg-val">'+totalPts+'</div><div class="dsg-lbl">Puntos históricos</div></div><div class="dsg-box"><div class="dsg-val">3</div><div class="dsg-lbl">Temporadas participadas</div></div></div><div style="margin:0 16px 14px;display:flex;gap:8px"><span class="dev-badge dev-subida">🧗 Subida: '+dev.subida+' m/ped</span><span class="dev-badge dev-velocidad">🏎️ Vel: '+dev.velocidad+' m/ped</span></div><div class="dlg-wins-title">Circuitos ganados</div><div class="win-chips">'+(wins||'<span style="color:#aaa;padding:0 16px;font-size:13px">Sin victorias aún</span>')+'</div>');
+  // CORRECCIÓN: Temporadas participadas dinámicas
+  openDialog('<div class="dlg-player-header" style="background:'+r.color+'"><div class="dph-eyebrow" style="color:'+r.textColor+';opacity:.7">DORSAL '+r.dorsal+'</div><div class="dph-name" style="color:'+r.textColor+'">'+r.first+' '+r.last+'</div></div><div style="height:14px"></div>'+photoHtml+'<div class="dlg-bici-row" onclick="openBici(\''+id+'\')" role="button" tabindex="0"><div class="dbr-img"><img src="'+BIKE_IMAGES[bici.svgKey]+'" alt="'+bici.model+'" loading="lazy" onerror="this.style.display=\'none\'"/></div><div><div class="dbr-model">'+bici.model+'</div><div class="dbr-link">Ver información web ↗</div></div></div><div class="dlg-stats-grid"><div class="dsg-box"><div class="dsg-val">'+st.pts+'</div><div class="dsg-lbl">Puntos temporada</div></div><div class="dsg-box"><div class="dsg-val">'+st.pos+'</div><div class="dsg-lbl">Posición</div></div><div class="dsg-box"><div class="dsg-val">'+r.peso+'</div><div class="dsg-lbl">Peso</div></div><div class="dsg-box"><div class="dsg-val">'+r.altura+'</div><div class="dsg-lbl">Altura</div></div><div class="dsg-box"><div class="dsg-val">'+seasonWins+'</div><div class="dsg-lbl">Victoria '+s.year.split(' ')[1]+'</div></div><div class="dsg-box"><div class="dsg-val">'+r.wins.length+'</div><div class="dsg-lbl">Victorias totales</div></div><div class="dsg-box"><div class="dsg-val">'+totalPts+'</div><div class="dsg-lbl">Puntos históricos</div></div><div class="dsg-box"><div class="dsg-val">'+r.seasons.length+'</div><div class="dsg-lbl">Temporadas participadas</div></div></div><div style="margin:0 16px 14px;display:flex;gap:8px"><span class="dev-badge dev-subida">🧗 Subida: '+dev.subida+' m/ped</span><span class="dev-badge dev-velocidad">🏎️ Vel: '+dev.velocidad+' m/ped</span></div><div class="dlg-wins-title">Circuitos ganados</div><div class="win-chips">'+(wins||'<span style="color:#aaa;padding:0 16px;font-size:13px">Sin victorias aún</span>')+'</div>');
 }
 
 function openBici(riderId){
