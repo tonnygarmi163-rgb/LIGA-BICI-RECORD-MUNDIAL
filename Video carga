@@ -1,0 +1,31 @@
+<div class="loading-screen" id="loadingScreen">
+  <div class="youtube-loader">
+    <iframe 
+      src="https://www.youtube.com/watch?v=iuFrqvxerv8" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="loading-content">
+    <div class="loading-logo">LIGA BICI</div>
+    <button class="skip-btn" onclick="skipLoading()">Saltar</button>
+  </div>
+</div>
+
+<style>
+.youtube-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.youtube-loader iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
