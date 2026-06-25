@@ -13,6 +13,94 @@
   --nav-h:64px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--black);min-height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+/* Loading Screen Styles */
+.loading-screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.loading-video{
+  position:absolute;
+  top:50%;
+  left:50%;
+  min-width:100%;
+  min-height:100%;
+  transform:translate(-50%,-50%);
+  object-fit:cover;
+  z-index:1;
+}
+
+.loading-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  color:#fff;
+}
+
+.loading-logo{
+  font-size:48px;
+  font-weight:900;
+  margin-bottom:20px;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  animation:pulse 2s ease-in-out infinite;
+}
+
+.loading-text{
+  font-size:16px;
+  opacity:0.8;
+  margin-bottom:30px;
+}
+
+.skip-btn{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  border:2px solid rgba(255,255,255,0.5);
+  padding:12px 30px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  z-index:10;
+  transition:all 0.3s ease;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.skip-btn:hover{
+  background:rgba(255,255,255,0.3);
+  transform:scale(1.05);
+}
+
+.skip-btn:active{
+  transform:scale(0.95);
+}
+
+.loading-screen.fade-out{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.5s ease;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.05);opacity:0.8;}
+}
+
 .screen{display:none;min-height:100vh;padding-bottom:calc(var(--nav-h) + 24px)}.screen.active{display:block;animation:fadeSlideIn .2s ease}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .season-switcher{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:14px 14px 0;position:sticky;top:0;z-index:100;background:var(--bg)}
@@ -273,6 +361,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </style>
 </head>
 <body>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+  <video class="loading-video" autoplay muted loop playsinline>
+    <source src="tu-video-de-carga.mp4" type="video/mp4">
+    <!-- Fallback si el video no carga -->
+  </video>
+  <div class="loading-content">
+    <div class="loading-logo">LIGA BICI</div>
+    <div class="loading-text">Cargando experiencia...</div>
+  </div>
+  <button class="skip-btn" id="skipBtn" onclick="skipLoading()">Saltar</button>
+</div>
+
 <div id="screen-main" class="screen active">
   <div class="season-switcher" id="season-switcher"></div>
   <div class="app-content" id="app-content"></div>
@@ -302,6 +404,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 <div class="toast" id="toast"></div>
 <script>
+// ============================================
+// LOADING SCREEN FUNCTIONS
+// ============================================
+
+let loadingTimer;
+
+function skipLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.classList.add('fade-out');
+  setTimeout(() => {
+    loadingScreen.style.display = 'none';
+  }, 500);
+  clearTimeout(loadingTimer);
+}
+
+function autoSkipLoading() {
+  loadingTimer = setTimeout(() => {
+    skipLoading();
+  }, 5000); // Auto-skip after 5 seconds
+}
+
 // ============================================
 // DATOS DE LA APLICACIÓN
 // ============================================
@@ -360,7 +483,7 @@ function riesgoEmojiPorDificultad(dificultad){
   if(dificultad>=20)return'🔴';
   if(dificultad>=10)return'🟠';
   if(dificultad>=5)return'🟡';
-  return'';
+  return'🟢';
 }
 
 // Función para obtener emojis de riesgos específicos
@@ -373,7 +496,7 @@ function riesgoEmojis(riesgos){
   if(riesgos.includes('peatones'))emojis.push('🚶');
   if(riesgos.includes('visión reducida'))emojis.push('👁️');
   if(riesgos.includes('deslizante'))emojis.push('⚠️');
-  if(riesgos.includes('bicis'))emojis.push('');
+  if(riesgos.includes('bicis'))emojis.push('🚲');
   if(riesgos.includes('altura'))emojis.push('📈');
   return emojis.join(' ');
 }
@@ -650,7 +773,7 @@ let compareSortBy='score', compareSortDir='desc';
 function zonaBadge(z){var m={tranquilo:'tag-tranquilo',coches:'tag-coches',peatones:'tag-peatones'};var l={tranquilo:'Tranquilo',coches:'Zona coches',peatones:'Zona peatones'};return '<span class="ci-tag '+m[z]+'">'+(l[z]||z)+'</span>';}
 function difBadge(d){var m={baja:'tag-dif-baja',media:'tag-dif-media',alta:'tag-dif-alta'};return '<span class="ci-tag '+m[d]+'">Dif. '+d+'</span>';}
 function riesgoBadge(r){var m={bajo:'tag-riesgo-bajo',medio:'tag-riesgo-medio',alto:'tag-riesgo-alto'};return '<span class="ci-tag '+m[r]+'">Riesgo '+r+'</span>';}
-function gamaBadge(g){var m={baja:'gama-baja',media:'gama-media',alta:'gama-alta',pro:'gama-pro'};var l={baja:'🟢 Baja',media:'🟡 Media',alta:' Alta',pro:'🔴 Pro'};return '<span class="gama-badge '+m[g]+'">'+(l[g]||g)+'</span>';}
+function gamaBadge(g){var m={baja:'gama-baja',media:'gama-media',alta:'gama-alta',pro:'gama-pro'};var l={baja:'🟢 Baja',media:'🟡 Media',alta:'🟠 Alta',pro:'🔴 Pro'};return '<span class="gama-badge '+m[g]+'">'+(l[g]||g)+'</span>';}
 
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
@@ -677,10 +800,10 @@ function openExternalLink(url){
     } else {
       var textArea = document.createElement("textarea"); textArea.value = url; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
       document.body.appendChild(textArea); textArea.select();
-      try { document.execCommand('copy'); showToast(' URL copiada al portapapeles'); } catch (err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); }
+      try { document.execCommand('copy'); showToast('🔗 URL copiada al portapapeles'); } catch (err) { showToast('🔗 URL: ' + url.substring(0, 50) + '...'); }
       document.body.removeChild(textArea);
     }
-  } else { showToast(' Abriendo enlace...'); }
+  } else { showToast('🔗 Abriendo enlace...'); }
 }
 
 // ============================================
@@ -839,7 +962,7 @@ function renderView(){
     html+='<p style="margin-top:8px;font-size:14px;"><strong>La Scott Spark 950</strong> es considerada la mejor bici de la liga por varias razones:</p>';
     html+='<ul style="margin-top:8px;padding-left:20px;font-size:13px;line-height:1.8;">';
     html+='<li>🔧 <strong>Suspensión superior:</strong> Cuenta con Fox 32 Float Perf. Air (120mm) + Fox Float Perf. Trunnion, ofreciendo un mejor control en terrenos difíciles.</li>';
-    html+='<li> <strong>Control TwinLoc:</strong> Sistema remoto que permite ajustar la suspensión en tiempo real durante la carrera.</li>';
+    html+='<li>🔄 <strong>Control TwinLoc:</strong> Sistema remoto que permite ajustar la suspensión en tiempo real durante la carrera.</li>';
     html+='<li>⚙️ <strong>Transmisión 2x10:</strong> Más relaciones de cambio (20 velocidades) para adaptarse a cualquier terreno.</li>';
     html+='<li>🏔️ <strong>Mejor para circuitos técnicos:</strong> Ideal para circuitos con cambios de altura como Cementerio, Sierra Espada y Barranquet.</li>';
     html+='</ul>';
@@ -870,11 +993,11 @@ function renderView(){
   else if(curView==='circuitos-comparativa'){
     html+='<div class="circ-compare-header"><p class="eyebrow">Análisis IA</p><h1>Comparativa Circuitos</h1></div>';
     html+='<div class="circ-compare-filters">';
-    html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()"> Dificultad</button>';
+    html+='<button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button>';
     html+='<button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button>';
     html+='<button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button>';
     html+='<button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button>';
-    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button>';
+    html+='<button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'️')+'</button>';
     html+='</div>';
     var circuitList = getSortedCircuits();
     html+='<div class="circ-compare-table-wrap"><table class="circ-compare-table"><thead><tr><th>Circuito</th><th>Dist</th><th>Desnivel</th><th>Curvas</th><th>Peligros</th><th>Riesgos</th><th>Opinión</th><th>⭐</th></tr></thead><tbody>';
@@ -1014,8 +1137,10 @@ document.getElementById('detail-dialog').onclick=function(e){if(e.target===this)
 document.querySelectorAll('.nav-button').forEach(function(b){b.onclick=function(){curView=b.dataset.view;render();};});
 
 // Inicializar
-render();
+window.onload = function() {
+  autoSkipLoading();
+  render();
+};
 </script>
 </body>
 </html>
-
