@@ -1,19 +1,18 @@
 <div class="loading-screen" id="loadingScreen">
-  <div class="animation-container">
-    <div class="bike-animation">
-      <div class="wheel wheel-front"></div>
-      <div class="wheel wheel-back"></div>
-      <div class="frame"></div>
-      <div class="rider"></div>
-    </div>
-    <div class="road"></div>
+  <div class="video-loader">
+    <iframe 
+      src="https://drive.google.com/file/d/1kUk10XtEuDcbug50zVIlJOZqyy9P0Tk_/view?usp=sharing" 
+      width="100%" 
+      height="100%" 
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
   </div>
   <div class="loading-content">
     <div class="loading-logo">LIGA BICI</div>
-    <div class="loading-text">Preparando tu experiencia...</div>
-    <div class="progress-bar"></div>
+    <div class="loading-text">Cargando experiencia...</div>
+    <button class="skip-btn" id="skipBtn" onclick="skipLoading()">Saltar</button>
   </div>
-  <button class="skip-btn" id="skipBtn" onclick="skipLoading()">Saltar</button>
 </div>
 
 <style>
@@ -23,118 +22,30 @@
   left:0;
   width:100%;
   height:100%;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background:#000;
   z-index:9999;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
   overflow:hidden;
 }
 
-.animation-container {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  margin-bottom: 40px;
+.video-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.77vh;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-.bike-animation {
-  position: relative;
+.video-loader iframe {
   width: 100%;
   height: 100%;
-  animation: bikeMove 0.5s ease-in-out infinite;
-}
-
-.wheel {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border: 5px solid #fff;
-  border-radius: 50%;
-  bottom: 20px;
-  animation: wheelSpin 1s linear infinite;
-}
-
-.wheel::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.wheel::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 50px;
-  height: 2px;
-  background: rgba(255,255,255,0.5);
-  transform-origin: center;
-}
-
-.wheel-front {
-  right: 30px;
-}
-
-.wheel-back {
-  left: 30px;
-}
-
-.frame {
-  position: absolute;
-  width: 140px;
-  height: 4px;
-  background: #fff;
-  top: 60px;
-  left: 80px;
-  transform-origin: left center;
-  transform: rotate(-15deg);
-}
-
-.frame::before {
-  content: '';
-  position: absolute;
-  width: 80px;
-  height: 4px;
-  background: #fff;
-  left: -40px;
-  top: 0;
-  transform: rotate(30deg);
-  transform-origin: right center;
-}
-
-.rider {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background: #fff;
-  border-radius: 50%;
-  top: 20px;
-  left: 140px;
-  animation: headBob 0.5s ease-in-out infinite;
-}
-
-.road {
-  position: absolute;
-  bottom: 10px;
-  left: -100px;
-  width: 500px;
-  height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    #fff,
-    #fff 20px,
-    transparent 20px,
-    transparent 40px
-  );
-  animation: roadMove 1s linear infinite;
+  border: none;
 }
 
 .loading-content{
@@ -142,6 +53,7 @@
   z-index:2;
   text-align:center;
   color:#fff;
+  padding: 20px;
 }
 
 .loading-logo{
@@ -159,24 +71,6 @@
   opacity:0.9;
   margin-bottom:30px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-}
-
-.progress-bar {
-  width: 200px;
-  height: 4px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 2px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.progress-bar::after {
-  content: '';
-  display: block;
-  width: 0%;
-  height: 100%;
-  background: #fff;
-  animation: progress 5s ease-in-out forwards;
 }
 
 .skip-btn{
@@ -203,34 +97,9 @@
   transform:scale(1.05);
 }
 
-@keyframes bikeMove {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@keyframes wheelSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes headBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-@keyframes roadMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(40px); }
-}
-
 @keyframes pulse{
   0%,100%{transform:scale(1);opacity:1;}
   50%{transform:scale(1.05);opacity:0.8;}
-}
-
-@keyframes progress {
-  from { width: 0%; }
-  to { width: 100%; }
 }
 
 .loading-screen.fade-out{
@@ -249,7 +118,6 @@ function skipLoading() {
   }, 500);
 }
 
-// Auto-skip después de 5 segundos
 setTimeout(() => {
   skipLoading();
 }, 5000);
