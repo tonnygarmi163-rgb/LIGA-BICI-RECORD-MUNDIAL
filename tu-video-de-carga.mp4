@@ -1,10 +1,9 @@
 <div class="loading-screen" id="loadingScreen">
   <div class="video-loader">
     <iframe 
-      src="https://drive.google.com/file/d/1kUk10XtEuDcbug50zVIlJOZqyy9P0Tk_/view?usp=sharing" 
-      width="100%" 
-      height="100%" 
-      allow="autoplay"
+      src="https://www.youtube.com/embed/iuFrqvxerv8?autoplay=1&mute=1&loop=1&playlist=iuFrqvxerv8&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
       allowfullscreen>
     </iframe>
   </div>
