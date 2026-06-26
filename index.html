@@ -6,20 +6,24 @@
 <title>Liga Bici</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f0f0f0;--white:#fff;--black:#0b0b0c;
+  --red:#e02020;--blue:#1e40ff;--yellow:#f5c800;--green:#16a34a;--orange:#f97316;
+  --gray1:#f8f8f8;--gray2:#e8e8e8;--gray3:#d0d0d0;--gray4:#a0a0a0;--gray5:#555;
+  --nav-h:64px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--black);min-height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 
-/* ============================================ */
-/* PANTALLA DE CARGA - ANIMACIÓN CSS          */
-/* ============================================ */
+/* Loading Screen Styles */
 .loading-screen{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background:#000;
   z-index:99999;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
   overflow:hidden;
@@ -32,237 +36,90 @@
   pointer-events:none;
 }
 
-/* Bicicleta animada */
-.bike-container{
-  position:relative;
-  width:280px;
-  height:180px;
-  margin-bottom:40px;
-}
-
-.wheel{
+.loading-video-container{
   position:absolute;
-  width:80px;
-  height:80px;
-  border:6px solid #fff;
-  border-radius:50%;
-  bottom:20px;
-  animation: spin 1s linear infinite;
-}
-
-.wheel::before{
-  content:'';
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:60px;
-  height:60px;
-  border:4px solid rgba(255,255,255,0.3);
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-}
-
-.wheel::after{
-  content:'';
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:70px;
-  height:3px;
-  background:rgba(255,255,255,0.6);
-  transform-origin:center;
-  animation: spin 1s linear infinite;
-}
-
-.wheel-front{right:30px;}
-.wheel-back{left:30px;}
-
-/* Cuadro de la bici */
-.bike-frame{
-  position:absolute;
-  width:140px;
-  height:5px;
-  background:linear-gradient(90deg, #e02020, #ff6b6b);
-  top:60px;
-  left:70px;
-  transform:rotate(-15deg);
-  transform-origin:left center;
-}
-
-.bike-frame::before{
-  content:'';
-  position:absolute;
-  width:80px;
-  height:5px;
-  background:linear-gradient(90deg, #e02020, #ff6b6b);
-  left:-40px;
   top:0;
-  transform:rotate(30deg);
-  transform-origin:right center;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  overflow:hidden;
 }
 
-.bike-frame::after{
-  content:'';
+.loading-video-container iframe{
   position:absolute;
-  width:60px;
-  height:5px;
-  background:linear-gradient(90deg, #e02020, #ff6b6b);
-  right:-30px;
-  top:-20px;
-  transform:rotate(-30deg);
-  transform-origin:left center;
+  top:50%;
+  left:50%;
+  width:100vw;
+  height:56.25vw; /* 16:9 aspect ratio */
+  min-height:100vh;
+  min-width:177.77vh; /* 16:9 aspect ratio */
+  transform:translate(-50%,-50%);
+  border:none;
+  pointer-events:none;
 }
 
-/* Ciclista */
-.rider{
-  position:absolute;
-  width:35px;
-  height:35px;
-  background:#fff;
-  border-radius:50%;
-  top:15px;
-  left:150px;
-  animation: bob 0.5s ease-in-out infinite;
-}
-
-.rider::before{
-  content:'';
-  position:absolute;
-  width:40px;
-  height:8px;
-  background:#fff;
-  top:35px;
-  left:-5px;
-  transform:rotate(-20deg);
-}
-
-/* Carretera con líneas animadas */
-.road{
-  position:absolute;
-  bottom:15px;
-  left:-100%;
-  width:300%;
-  height:3px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255,255,255,0.8) 0px,
-    rgba(255,255,255,0.8) 30px,
-    transparent 30px,
-    transparent 60px
-  );
-  animation: roadMove 1.5s linear infinite;
-}
-
-/* Texto de carga */
-.loading-text{
-  color:#fff;
+.loading-content{
+  position:relative;
+  z-index:2;
   text-align:center;
-  margin-bottom:30px;
+  color:#fff;
+  pointer-events:none;
 }
 
 .loading-logo{
   font-size:48px;
   font-weight:900;
-  letter-spacing:4px;
-  margin-bottom:15px;
-  background: linear-gradient(90deg, #fff, #ff6b6b, #fff);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 2s ease-in-out infinite;
+  margin-bottom:20px;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  animation:pulse 2s ease-in-out infinite;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
-.loading-subtitle{
+.loading-text{
   font-size:16px;
-  opacity:0.8;
-  letter-spacing:2px;
+  opacity:0.9;
+  margin-bottom:30px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-/* Barra de progreso */
-.progress-container{
-  width:250px;
-  height:4px;
-  background:rgba(255,255,255,0.2);
-  border-radius:2px;
-  overflow:hidden;
-  margin-top:20px;
-}
-
-.progress-bar{
-  width:0%;
-  height:100%;
-  background: linear-gradient(90deg, #e02020, #ff6b6b);
-  animation: progress 5s ease-in-out forwards;
-}
-
-/* Botón saltar */
 .skip-btn{
   position:fixed;
   bottom:40px;
   right:40px;
-  background:rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.2);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   color:#fff;
-  border:2px solid rgba(255,255,255,0.4);
+  border:2px solid rgba(255,255,255,0.5);
   padding:12px 30px;
   border-radius:30px;
   font-size:14px;
-  font-weight:700;
+  font-weight:600;
   cursor:pointer;
   z-index:100000;
   transition:all 0.3s ease;
   text-transform:uppercase;
   letter-spacing:1px;
+  pointer-events:auto;
 }
 
 .skip-btn:hover{
-  background:rgba(255,255,255,0.25);
+  background:rgba(255,255,255,0.3);
   transform:scale(1.05);
-  border-color:rgba(255,255,255,0.6);
+  border-color:rgba(255,255,255,0.7);
 }
 
 .skip-btn:active{
   transform:scale(0.95);
 }
 
-/* Animaciones */
-@keyframes spin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.05);opacity:0.8;}
 }
 
-@keyframes bob{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-5px);}
-}
-
-@keyframes roadMove{
-  from{transform:translateX(0);}
-  to{transform:translateX(60px);}
-}
-
-@keyframes progress{
-  from{width:0%;}
-  to{width:100%;}
-}
-
-@keyframes shimmer{
-  0%{background-position:200% 0;}
-  100%{background-position:-200% 0;}
-}
-
-/* ============================================ */
-/* RESTO DEL CSS DE LA APP                    */
-/* ============================================ */
-:root{
-  --bg:#f0f0f0;--white:#fff;--black:#0b0b0c;
-  --red:#e02020;--blue:#1e40ff;--yellow:#f5c800;--green:#16a34a;--orange:#f97316;
-  --gray1:#f8f8f8;--gray2:#e8e8e8;--gray3:#d0d0d0;--gray4:#a0a0a0;--gray5:#555;
-  --nav-h:64px;
-}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--black);min-height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .screen{display:none;min-height:100vh;padding-bottom:calc(var(--nav-h) + 24px)}.screen.active{display:block;animation:fadeSlideIn .2s ease}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .season-switcher{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:14px 14px 0;position:sticky;top:0;z-index:100;background:var(--bg)}
@@ -524,53 +381,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- PANTALLA DE CARGA CON ANIMACIÓN CSS        -->
-<!-- ============================================ -->
+<!-- Loading Screen con Video de YouTube -->
 <div class="loading-screen" id="loadingScreen">
-  <div class="bike-container">
-    <div class="wheel wheel-back"></div>
-    <div class="wheel wheel-front"></div>
-    <div class="bike-frame"></div>
-    <div class="rider"></div>
-    <div class="road"></div>
+  <div class="loading-video-container">
+    <iframe 
+      src="https://www.youtube.com/embed/iuFrqvxerv8?autoplay=1&mute=1&loop=1&playlist=iuFrqvxerv8&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
   </div>
-  <div class="loading-text">
+  <div class="loading-content">
     <div class="loading-logo">LIGA BICI</div>
-    <div class="loading-subtitle">Cargando experiencia...</div>
-    <div class="progress-container">
-      <div class="progress-bar"></div>
-    </div>
+    <div class="loading-text">Cargando experiencia...</div>
   </div>
-  <button class="skip-btn" onclick="skipLoading()">Saltar</button>
+  <button class="skip-btn" id="skipBtn" onclick="skipLoading()">Saltar</button>
 </div>
 
 <div id="screen-main" class="screen active">
   <div class="season-switcher" id="season-switcher"></div>
   <div class="app-content" id="app-content"></div>
   <nav class="bottom-nav" id="bottom-nav">
-    <button class="nav-button active" data-view="inicio" title="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Inicio</button>
-    <button class="nav-button" data-view="pilotos" title="Pilotos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Pilotos</button>
-    <button class="nav-button" data-view="puntos" title="Puntos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Puntos</button>
-    <button class="nav-button" data-view="circuitos" title="Circuitos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="3"/></svg>Circuitos</button>
-    <button class="nav-button" data-view="horarios" title="Horarios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>Horarios</button>
-    <button class="nav-button" data-view="comparativa" title="Bicis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5.5 8.5l3-2.5 3 2.5M15.5 8.5l3-2.5 3 2.5"/><rect x="3" y="14" width="5" height="6" rx="1"/><rect x="10" y="12" width="5" height="8" rx="1"/><rect x="17" y="10" width="5" height="10" rx="1"/></svg>Bicis</button>
-    <button class="nav-button" data-view="circuitos-comparativa" title="Comparar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Comparar</button>
-    <button class="nav-button" data-view="info" title="Info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Info</button>
-    <button class="nav-button" data-view="edits" title="Edits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Edits</button>
+    <button class="nav-button active" data-view="inicio" title="Inicio" role="tab" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Inicio</button>
+    <button class="nav-button" data-view="pilotos" title="Pilotos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Pilotos</button>
+    <button class="nav-button" data-view="puntos" title="Puntos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Puntos</button>
+    <button class="nav-button" data-view="circuitos" title="Circuitos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="3"/><path d="M12 6v2M12 16v2M6 12h2M16 12h2"/></svg>Circuitos</button>
+    <button class="nav-button" data-view="horarios" title="Horarios" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>Horarios</button>
+    <button class="nav-button" data-view="comparativa" title="Comparativa Bicis" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5.5 8.5l3-2.5 3 2.5M15.5 8.5l3-2.5 3 2.5"/><rect x="3" y="14" width="5" height="6" rx="1"/><rect x="10" y="12" width="5" height="8" rx="1"/><rect x="17" y="10" width="5" height="10" rx="1"/></svg>Bicis</button>
+    <button class="nav-button" data-view="circuitos-comparativa" title="Comparar Circuitos" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Comparar</button>
+    <button class="nav-button" data-view="info" title="Info" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Info</button>
+    <button class="nav-button" data-view="edits" title="Edits" role="tab" aria-selected="false" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Edits</button>
   </nav>
 </div>
 
-<div class="detail-dialog" id="detail-dialog">
+<div class="detail-dialog" id="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
   <div class="dialog-content" id="dialog-content">
-    <button class="close-btn" id="dialog-close">&#x2715;</button>
+    <button class="close-btn" id="dialog-close" aria-label="Cerrar" tabindex="0">&#x2715;</button>
     <div id="dialog-body"></div>
   </div>
 </div>
 
-<div class="news-modal" id="news-modal">
+<div class="news-modal" id="news-modal" role="dialog" aria-modal="true">
   <div class="news-modal-content">
-    <button class="close-btn" onclick="closeNewsModal()">&#x2715;</button>
+    <button class="close-btn" onclick="closeNewsModal()" aria-label="Cerrar">&#x2715;</button>
     <div id="news-modal-body"></div>
   </div>
 </div>
@@ -590,10 +443,10 @@ function skipLoading() {
   }, 800);
 }
 
-// Auto-skip después de 5 segundos
+// Auto-skip después de 8 segundos (duración aproximada del video)
 setTimeout(() => {
   skipLoading();
-}, 5000);
+}, 8000);
 
 // ============================================
 // DATOS DE LA APLICACIÓN
@@ -742,7 +595,7 @@ const RIDERS = {
 const NOTICIAS = [
   {fecha:'13 Abril 2026',titulo:'La ruta de la muerte: LLOMA LLARGA',cuerpo:'Una de las peores experiencias para llegar a un circuito. El camino de Andrómeda a Lloma Llarga se ha convertido en un infierno, siendo una ruta de más de 20 km de ida y de vuelta. Los 4 participantes han tenido gran dificultad para llegar a la urbanización, la cual es la más alejada de de la Pobla de Vallbona sin contar la Manguilla. La ruta ha tenido cosas malas y otras buenas, pero en general llegar para hacer tiempos, ha podido con el cansancio de todos. El principal circuito que iba a ser añadido para esta tercera edición esta practicamente eliminado del calendario. "La ruta de llegada, por cualquier sitio es impensable a no ser que un vehículo nos lo facilite", dijo Hugo Castro.',emoji:'💀',img:''},
   {fecha:'13 Abril 2026',titulo:'Andromeda vuelve de practicas.',cuerpo:'La casa del 69 ha sido protagonista de la penúltima práctica antes de la llegada de la temporada. Finalmente el tiempo del 23 en 2024 se ha batido de una vez por todas con un gran Hugo Castro que ha marcado un 1\'46,57", 4 segundos menos de lo que se logró en la temporada 1. Rubén Asensi se ha acercado con 1\'47,23", el mismo 23 aceptaba la falta de precisión en puntos claves del circuito, donde el cambio de marchas era una falta clave.',emoji:'🚴',img:''},
-  {fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas, en el que los récords se han roto hasta 4 veces. El tiempo más rápido de el circuito de Casa Blanca era de Rubén la temporada 2025, con 1 minuto 30.56 segundos. Pues, tras la primera vuelta de Hugo Castro bajo el récord 1.7 segundos en su primera vuelta. Toni García bajaría su tiempo personal más de 10 segundos que con la b Pro, poniendo el récord a 1\'27.56". Rubén Asensi aún con la rueda delantera semipinchada a podido marcar un peligroso 1\'25.52", bajando el récord 2 segundos más y dejando casi definitivo el tiempo más rápido, si no fuera por el número 1, Julian Matei tras un día duro con indecisiones por el tráfico ha logrado en su tercer tiempo a Rubén, poniendo el récord mundial a 1\'22.96".',emoji:'🏆',img:''},
+  {fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas, en el que los récords se han roto hasta 4 veces. El tiempo más rápido de el circuito de Casa Blanca era de Rubén la temporada 2025, con 1 minuto 30.56 segundos. Pues, tras la primera vuelta de Hugo Castro bajo el récord 1.7 segundos en su primera vuelta. Toni García bajaría su tiempo personal más de 10 segundos que con la b Pro, poniendo el récord a 1\'27.56". Rubén Asensi aún con la rueda delantera semipinchada a podido marcar un peligroso 1\'25.52", bajando el récord 2 segundos más y dejando casi definitivo el tiempo más rápido, si no fuera por el número 1, Julian Matei tras un día duro con indisposiciones por el tráfico ha logrado en su tercer tiempo a Rubén, poniendo el récord mundial a 1\'22.96".',emoji:'🏆',img:''},
   {fecha:'7 Abril 2026',titulo:'Prácticas en San José',cuerpo:'Después de la victoria de Toni García hace 198 días, Liga bici vuelve a San José para practicar. Los tiempos han sido en su mayoría impresionantes acercandose peligrosamente al record. Toni ha sido el primero en impresionar a los participantes con su nueva bici B-PRO M100, que ha logrado marcar el segundo mejor tiempo de la historia del circuito en su primera vuelta con 1\'57,34". Rubén Asensi no se queda atras y consolida un tiempo casi idéntico al del número 7. Solamente superandolo por 9 centésimas de segundo.',emoji:'🚲',img:''},
   {fecha:'Abril 2026',titulo:'Prácticas de Pascua completadas',cuerpo:'La Temporada 3 arrancó con cuatro prácticas intensas.',emoji:'🚴'},
   {fecha:'Enero 2026',titulo:'Temporada 3 confirmada',cuerpo:'Se confirma el inicio de la Temporada 3 para 2026.',emoji:'🏆'},
