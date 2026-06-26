@@ -51,9 +51,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   top:50%;
   left:50%;
   width:100vw;
-  height:56.25vw; /* 16:9 aspect ratio */
+  height:56.25vw;
   min-height:100vh;
-  min-width:177.77vh; /* 16:9 aspect ratio */
+  min-width:177.77vh;
   transform:translate(-50%,-50%);
   border:none;
   pointer-events:none;
@@ -381,13 +381,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </head>
 <body>
 
-<!-- Loading Screen con Video de YouTube -->
+<!-- Loading Screen con Video de Google Drive -->
 <div class="loading-screen" id="loadingScreen">
   <div class="loading-video-container">
     <iframe 
-      src="https://www.youtube.com/embed/iuFrqvxerv8?autoplay=1&mute=1&loop=1&playlist=iuFrqvxerv8&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
+      src="https://drive.google.com/file/d/1kUk10XtEuDcbug50zVIlJOZqyy9P0Tk_/preview?autoplay=1&mute=1" 
       frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allow="autoplay; encrypted-media" 
       allowfullscreen>
     </iframe>
   </div>
@@ -443,10 +443,10 @@ function skipLoading() {
   }, 800);
 }
 
-// Auto-skip después de 8 segundos (duración aproximada del video)
+// Auto-skip después de 10 segundos
 setTimeout(() => {
   skipLoading();
-}, 8000);
+}, 10000);
 
 // ============================================
 // DATOS DE LA APLICACIÓN
@@ -756,8 +756,6 @@ function renderView(){
     html+='</div><div class="section-block"><div class="section-heading"><h2>Clasificación rápida</h2><button class="text-link" onclick="goView(\'puntos\')">Ver puntos</button></div>';
     s.standings.forEach(function(r,i){
       var rd=RIDERS[r.id];
-      // Adrián: fondo negro, texto blanco (para que se vea el número)
-      // Puntos: color del piloto, excepto Adrián que va en negro
       var rankingBg = (r.id === 'adrian') ? '#000000' : rd.color;
       var rankingText = '#ffffff';
       var ptsColor = (r.id === 'adrian') ? '#000000' : rd.color;
