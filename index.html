@@ -46,7 +46,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   overflow:hidden;
 }
 
-.loading-video-container video,
 .loading-video-container iframe{
   position:absolute;
   top:50%;
@@ -58,7 +57,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   transform:translate(-50%,-50%);
   border:none;
   pointer-events:none;
-  object-fit:cover;
 }
 
 .loading-content{
@@ -287,9 +285,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .bp-label{font-size:12px;opacity:.6}.bp-price{font-size:20px;font-weight:900}
 .btn-shop{display:block;margin:0 16px 16px;background:var(--blue);color:var(--white);border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;width:calc(100% - 32px);min-height:48px;display:flex;align-items:center;justify-content:center}
 .btn-shop.no-link{background:var(--gray3);color:var(--gray5);cursor:not-allowed}
-.dlg-circ-drawing{height:250px;background:var(--gray1);display:flex;align-items:center;justify-content:center;padding:10px;position:relative;overflow:hidden}
+.dlg-circ-drawing{height:300px;background:var(--gray1);display:flex;align-items:center;justify-content:center;padding:10px;position:relative;overflow:hidden}
 .dlg-circ-drawing img{width:100%;height:100%;object-fit:contain;border-radius:8px}
-.dlg-circ-drawing svg{max-width:100%;max-height:100%}
 .dlg-circ-label{font-size:10px;color:var(--gray4);letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:14px 16px 2px}
 .dlg-circ-name{font-size:24px;font-weight:900;padding:0 16px 6px}
 .dlg-circ-desc{font-size:13px;color:var(--gray5);padding:0 16px 14px;line-height:1.6}
@@ -387,9 +384,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Loading Screen con Video de Google Drive -->
 <div class="loading-screen" id="loadingScreen">
   <div class="loading-video-container">
-    <video autoplay muted loop playsinline>
-      <source src="tu-video-de-carga.mp4" type="video/mp4">
-    </video>
+    <iframe 
+      src="https://drive.google.com/file/d/1kUk10XtEuDcbug50zVIlJOZqyy9P0Tk_/preview?autoplay=1" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
   </div>
   <div class="loading-content">
     <div class="loading-logo">LIGA BICI</div>
@@ -978,9 +978,9 @@ function openCircuit(id){
   var winnersHtml = winners.map(function(w){return '<span class="dg-chip">'+(w.n||'')+' <small>'+(w.s||'')+'</small></span>';}).join('') || '<span style="color:#aaa">Sin historial</span>';
   var tiemposHtml = tiempos.length ? '<div class="dlg-tiempos"><div class="dg-title">Mejores tiempos</div>' + tiempos.map(function(t){return '<div class="dt-item"><span>'+t+'</span></div>';}).join('') + '</div>' : '';
   
-  // Mostrar imagen del circuito si existe
+  // Mostrar SOLO la imagen del circuito (sin SVG)
   var circuitImage = c.image || (id + '_' + curSeason + '.png');
-  var imageHtml = '<div class="dlg-circ-drawing"><img src="'+circuitImage+'" alt="'+c.name+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"></div>'+circSVG(c.id);
+  var imageHtml = '<div class="dlg-circ-drawing"><img src="'+circuitImage+'" alt="'+c.name+'"></div>';
   
   openDialog('<div class="dlg-circ-label">CIRCUITO</div>'+imageHtml+'<div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+(c.desc||'')+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+c.distancia+' m</div><div class="dig-lbl">Distancia</div></div><div class="dig-box"><div class="dig-val">'+(c.curvasNorm+c.curvasPelig)+'</div><div class="dig-lbl">Curvas totales</div></div><div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div><div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div></div><div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+winnersHtml+'</div>'+tiemposHtml+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earthBtn+'</div>');
 }
