@@ -1,0 +1,8 @@
+// Solo se salta cuando el usuario hace clic en "Saltar"
+function skipLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.classList.add('hidden');
+  setTimeout(() => {
+    loadingScreen.style.display = 'none';
+  }, 800);
+}
