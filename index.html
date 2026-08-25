@@ -949,3 +949,111 @@ function renderView(){
         html+='<div class="norma-section"><div class="ns-title">🚫 Sin puntos de casa</div><div class="ns-body"><div class="ns-nocasa">En la Temporada 3 <strong>NO se aplica</strong> el multiplicador ×1.5 del circuito de casa.</div></div></div>';
         html+='<div class="norma-section"><div class="ns-title">⏱ Prueba de tiempos (5 circuitos)</div><div class="ns-body">Solo puntúan los tiempos en 5 circuitos: <strong>Maracaná, Benissanó, Sierra Espada y los 2 circuitos nuevos</strong> (por confirmar). Puntos: 1º→3, 2º→2, 3º→1, 4º→0.</div></div>';
         html+='<div class="norma-section"><div class="ns-title">⚡ Pole Position
+          // ============================================
+// VARIABLES GLOBALES
+// ============================================
+let curSeason='t3', curView='inicio', circFilter='todos', infoTab='normas', searchQuery='', pilotaFilter='todos';
+let sortBy='nombre', sortDir='asc';
+let compareSortBy='score', compareSortDir='desc';
+
+// ============================================
+// FUNCIONES UTILITARIAS
+// ============================================
+
+function zonaBadge(z){var m={tranquilo:'tag-tranquilo',coches:'tag-coches',peatones:'tag-peatones'};var l={tranquilo:'Tranquilo',coches:'Zona coches',peatones:'Zona peatones'};return '<span class="ci-tag '+m[z]+'">'+(l[z]||z)+'</span>';}
+function difBadge(d){var m={baja:'tag-dif-baja',media:'tag-dif-media',alta:'tag-dif-alta'};return '<span class="ci-tag '+m[d]+'">Dif. '+d+'</span>';}
+function riesgoBadge(r){var m={bajo:'tag-riesgo-bajo',medio:'tag-riesgo-medio',alto:'tag-riesgo-alto'};return '<span class="ci-tag '+m[r]+'">Riesgo '+r+'</span>';}
+function gamaBadge(g){var m={baja:'gama-baja',media:'gama-media',alta:'gama-alta',pro:'gama-pro'};var l={baja:'🟢 Baja',media:'🟡 Media',alta:'🟠 Alta',pro:'🔴 Pro'};return '<span class="gama-badge '+m[g]+'">'+(l[g]||g)+'</span>';}
+
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+
+function getDorsal(r){return (r.dorsales && r.dorsales[curSeason]!=null)?r.dorsales[curSeason]:r.dorsal;}
+
+function getCircuitsForSeason(season){
+  var ids=SEASONS[season].circs||[];
+  return ids.map(function(id){
+    return CIRCUITS.find(function(c){return c.id===id&&c.season===season;})||CIRCUITS.find(function(c){return c.id===id;});
+  }).filter(function(c){return !!c;});
+}
+
+function earthUrlFor(id){
+  var m=curSeason==='t1'?CIRCUIT_GOOGLE_EARTH_T1:curSeason==='t2'?CIRCUIT_GOOGLE_EARTH_T2:CIRCUIT_GOOGLE_EARTH_T3;
+  return (m&&m[id])||'';
+}
+
+function circSVG(id) {
+  var c = CIRC_SVGS[id] || {color:'#888', path:'M 50 85 L 20 55 L 80 15 L 160 20 L 190 60 L 150 90 Z', dot:'M 50 85'};
+  var parts = c.dot.split(' ');
+  return '<svg viewBox="0 0 210 105" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:100%"><rect width="210" height="105" fill="#f8f8f8" rx="6"/><path d="'+c.path+'" fill="none" stroke="'+c.color+'" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/><path d="'+c.path+'" fill="'+c.color+'" fill-opacity="0.07"/><circle cx="'+parts[1]+'" cy="'+parts[2]+'" r="6" fill="'+c.color+'"/><circle cx="'+parts[1]+'" cy="'+parts[2]+'" r="3" fill="white"/></svg>';
+}
+
+function calcDevRange(plato, pinonMin, pinonMax) {
+  return {
+    subida: (2.167 * plato / pinonMax).toFixed(1),
+    velocidad: (2.167 * plato / pinonMin).toFixed(1),
+    rango: ((2.167 * plato / pinonMin) - (2.167 * plato / pinonMax)).toFixed(1)
+  };
+}
+
+function openExternalLink(url){
+  var newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+    alert('No se pudo abrir automáticamente. Copia esta URL y pégala en tu navegador:\n\n' + url);
+  }
+}
+
+function renderSwitcher(){
+  var order=['t1','t2','t3'];
+  var html=order.map(function(k){var s=SEASONS[k];return '<button class="season-card'+(curSeason===k?' active':'')+'" data-season="'+k+'"><span class="season-kicker">'+s.kicker+'</span><strong>'+s.label+'</strong><span>'+s.year+'</span></button>';}).join('');
+  document.getElementById('season-switcher').innerHTML=html;
+  document.querySelectorAll('.season-card').forEach(function(b){b.onclick=function(){curSeason=b.dataset.season;render();};});
+}
+
+function getTotalPts(id){return Object.values(SEASONS).reduce(function(a,s2){var x=s2.standings.find(function(x){return x.id===id;});return a+(typeof x?.pts==='number'?x.pts:0);},0);}
+
+function getSortedRiders(){
+  var riders=Object.values(RIDERS).filter(function(r){return r.seasons.includes(curSeason);});
+  var s=SEASONS[curSeason];
+  riders.sort(function(a,b){
+    var va,vb;
+    if(sortBy==='nombre'){va=a.first.toLowerCase();vb=b.first.toLowerCase();}
+    else if(sortBy==='apellido'){va=a.last.toLowerCase();vb=b.last.toLowerCase();}
+    else if(sortBy==='dorsal'){va=getDorsal(a);vb=getDorsal(b);}
+    else if(sortBy==='ptsTemporada'){var sta=s.standings.find(function(x){return x.id===a.id;})||{pts:0};var stb=s.standings.find(function(x){return x.id===b.id;})||{pts:0};va=typeof sta.pts==='number'?sta.pts:0;vb=typeof stb.pts==='number'?stb.pts:0;}
+    else if(sortBy==='ptsTotales'){va=getTotalPts(a.id);vb=getTotalPts(b.id);}
+    else return 0;
+    if(va<vb)return sortDir==='asc'?-1:1;
+    if(va>vb)return sortDir==='asc'?1:-1;
+    return 0;
+  });
+  return riders;
+}
+
+function getSortedCircuits(){
+  var circuits = getCircuitsForSeason(curSeason).slice();
+  circuits.sort(function(a,b){ return b.dificultad - a.dificultad; });
+  return circuits;
+}
+
+function renderView(){
+  var s=SEASONS[curSeason];
+  var html='';
+
+  if(curView==='inicio'){
+    html+='<div class="brand-panel"><div class="brand-logo"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="44" height="44" rx="8" fill="#000"/><text x="22" y="20" text-anchor="middle" fill="white" font-size="7" font-weight="600" font-family="sans-serif" opacity=".6">LIGA</text><text x="22" y="32" text-anchor="middle" fill="white" font-size="12" font-weight="900" font-family="sans-serif">BICI</text><line x1="8" y1="36" x2="36" y2="36" stroke="white" stroke-width="1.5" opacity=".3"/></svg></div><div class="brand-info"><p class="eyebrow">'+s.label+'</p><h1>Liga Bici '+s.year+'</h1><p class="season-summary">'+s.summary+'</p></div></div>';
+    html+='<div class="quick-stats"><div class="qs-box"><div class="qs-val">'+s.participantes+'</div><div class="qs-lbl">Pilotos</div></div><div class="qs-box"><div class="qs-val">'+s.carreras+'</div><div class="qs-lbl">Carreras</div></div><div class="qs-box"><div class="qs-val">'+s.practicas+'</div><div class="qs-lbl">Prácticas</div></div><div class="qs-box"><div class="qs-val">'+s.finalizadas+'</div><div class="qs-lbl">Finalizadas</div></div></div>';
+    html+='<div class="section-block"><div class="section-heading"><h2>Próximos eventos</h2><button class="text-link" onclick="goView(\'horarios\')">Ver horarios</button></div>';
+    s.horarios.slice(0,3).forEach(function(h){var sc=h.status==='done'?'status-done':h.status==='next'?'status-next':'status-pend';var sl=h.status==='done'?'FINALIZADA':h.status==='next'?'PRÓXIMA':'PENDIENTE';var onclick=h.circId?' onclick="openCircuit(\''+h.circId+'\')"':'';html+='<div class="event-item"'+onclick+' role="button" tabindex="0"><div><div class="ei-name">'+h.name+'</div><div class="ei-date">'+h.date+' · '+h.circ+'</div></div><span class="ei-status '+sc+'">'+sl+'</span></div>';});
+    html+='</div><div class="section-block"><div class="section-heading"><h2>Clasificación rápida</h2><button class="text-link" onclick="goView(\'puntos\')">Ver puntos</button></div>';
+    s.standings.forEach(function(r,i){
+      var rd=RIDERS[r.id];
+      var rankingBg = (r.id === 'adrian') ? '#000000' : rd.color;
+      var rankingText = '#ffffff';
+      var ptsColor = (r.id === 'adrian') ? '#000000' : rd.color;
+      html+='<div class="leader-item" onclick="openPlayer(\''+r.id+'\')" role="button" tabindex="0"><div class="li-pos" style="color:'+rankingText+';background:'+rankingBg+'">'+(i+1)+'</div><div class="li-bar" style="background:'+rd.color+'"></div><div class="li-name">'+rd.first+' '+rd.last+'</div><div class="li-pts" style="color:'+ptsColor+'">'+r.pts+'</div></div>';
+    });
+    html+='</div><div style="height:8px"></div>';
+  }
+
+  else if(curView==='pilotos'){
+    html+='<div class="view-header"><p class="eyebrow">Fichas</p><h1>Participantes</h1></
