@@ -73,6 +73,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .filter-row{display:flex;gap:8px;overflow-x:auto;padding:0 14px 10px;scrollbar-width:none}
 .filter-pill{background:var(--gray2);border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;color:var(--gray5);min-height:36px}
 .filter-pill.active{background:var(--black);color:var(--white)}
+.earth-banner{margin:0 14px 12px;background:linear-gradient(135deg,#1e40ff,#0b0b0c);border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.earth-banner .eb-txt{color:#fff;font-size:13px;font-weight:700}
+.earth-banner .eb-sub{color:#cfd8ff;font-size:11px;font-weight:400;display:block;margin-top:2px}
+.earth-banner button{background:#4285f4;color:#fff;border:none;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0}
 .circ-card{background:var(--white);border-radius:12px;margin:0 14px 12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);cursor:pointer}
 .circ-header-bar{padding:10px 14px 8px;display:flex;justify-content:space-between}
 .ch-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
@@ -109,17 +113,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ns-body ul{padding-left:18px;margin-top:6px}
 .ns-pole{background:#fefce8;border-left:3px solid #ca8a04;padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px}
 .ns-nocasa{background:#fee2e2;border-left:3px solid var(--red);padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px}
+.ns-time{background:#dbeafe;border-left:3px solid var(--blue);padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px}
 .comp-section{margin:0 14px 14px}
 .comp-table-wrap{overflow-x:auto}
 .comp-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:10px;overflow:hidden}
 .comp-table th{background:var(--black);color:#fff;padding:10px 8px;text-align:left;font-size:11px;text-transform:uppercase;white-space:nowrap}
 .comp-table td{padding:10px 8px;border-bottom:1px solid var(--gray2)}
 .comp-table .bike-label{font-weight:700;font-size:13px}
-.comp-subtitle{font-size:13px;font-weight:800;color:var(--gray4);letter-spacing:1px;text-transform:uppercase;margin:18px 0 10px}
 .noticia-card{background:var(--white);border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer}
-.noticia-img{background:linear-gradient(135deg,#1e40ff,#0b0b0c);height:100px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.noticia-img{background:linear-gradient(135deg,#1e40ff,#0b0b0c);height:100px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:40px;overflow:hidden}
+.noticia-img img{width:100%;height:100%;object-fit:cover}
 .noticia-fecha{font-size:10px;color:var(--gray4);text-transform:uppercase;font-weight:600}
 .noticia-title{font-size:16px;font-weight:800;margin-top:4px}
+.news-modal-imgs{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:15px}
+.news-modal-imgs img{width:100%;height:200px;object-fit:cover;border-radius:8px}
 .video-note{background:#dbeafe;border-radius:10px;padding:12px 14px;font-size:13px;color:#1e40af;margin:0 14px 14px;line-height:1.5}
 .vcard{background:var(--white);border-radius:12px;margin:0 0 10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
 .vcard-thumb{height:200px;display:flex;align-items:center;justify-content:center;background:var(--gray2);font-size:24px}
@@ -137,10 +144,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dbr-model{font-size:14px;font-weight:700}.dbr-link{font-size:11px;color:var(--blue);font-weight:600}
 .dlg-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray2);border-radius:10px;overflow:hidden;margin:0 16px 14px}
 .dsg-box{background:var(--white);padding:12px}.dsg-val{font-size:20px;font-weight:900}.dsg-lbl{font-size:10px;color:var(--gray4);text-transform:uppercase;margin-top:2px}
-.dlg-wins-title{font-size:13px;font-weight:800;color:var(--gray4);letter-spacing:1px;text-transform:uppercase;padding:0 16px;margin-bottom:8px}
+.dlg-wins-title{font-size:13px;font-weight:800;color:var(--gray4);letter-spacing:1px;text-transform:uppercase;padding:0 16px;margin:12px 0 8px}
 .win-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 16px}
 .win-chip{background:var(--gray2);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;border:none}
 .win-chip .wc-season{font-size:10px;color:var(--gray4);display:block}
+.pred-box{margin:0 16px 14px;background:#f5f3ff;border:2px solid #7c3aed;border-radius:12px;padding:14px}
+.pred-box h4{font-size:13px;font-weight:800;color:#7c3aed;margin-bottom:8px}
+.pred-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:13px}
+.pred-pos{width:22px;font-weight:900}
+.pred-name{flex:1;font-weight:700}
+.pred-razon{font-size:11px;color:var(--gray5);margin-top:6px}
+.consejo-box{margin:0 16px 14px;background:#f0fdf4;border:2px solid var(--green);border-radius:12px;padding:14px;font-size:12px;color:var(--gray5);line-height:1.6}
+.consejo-box h4{font-size:13px;font-weight:800;color:var(--green);margin-bottom:6px}
 .bici-hero{text-align:center;padding:20px 16px 10px;background:var(--gray1)}
 .bici-hero img{width:280px;height:180px;object-fit:contain}
 .bici-model-title{font-size:20px;font-weight:900;padding:14px 16px 2px}
@@ -174,30 +189,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gama-baja{background:#dcfce7;color:#15803d}.gama-media{background:#fef9c3;color:#854d0e}.gama-alta{background:#fee2e2;color:#b91c1c}
 .bici-info-box{background:var(--white);border-radius:12px;margin:0 14px 14px;padding:16px}
 .bici-info-box h3{font-size:15px;font-weight:800;margin-bottom:8px}
-.bici-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 14px}
-.legend-item{background:var(--white);border-radius:10px;padding:12px}
-.legend-item .leg-icon{font-size:24px;margin-bottom:6px}
-.legend-item h4{font-size:13px;font-weight:800;margin-bottom:4px}
-.legend-item p{font-size:11px;color:var(--gray5)}
-.sort-controls{display:flex;align-items:center;gap:8px;margin:0 14px 14px}
-.sort-label{font-size:12px;font-weight:700;color:var(--gray5)}
-.sort-select{background:var(--white);border:2px solid var(--gray2);border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer}
-.sort-dir{background:var(--black);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer}
-.news-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;display:none;align-items:center;justify-content:center;padding:20px}
-.news-modal.open{display:flex}
-.news-modal-content{background:var(--white);border-radius:12px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;position:relative}
-.news-modal-header{font-size:20px;font-weight:900;margin-bottom:10px}
-.news-modal-date{font-size:12px;color:var(--gray4);margin-bottom:15px;text-transform:uppercase}
-.news-modal-body{font-size:14px;line-height:1.6;color:var(--gray5)}
-.google-earth-btn{position:absolute;bottom:10px;right:10px;background:#4285f4;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;z-index:20;cursor:pointer;border:none}
-.circ-compare-header{padding:20px 14px 10px}
-.circ-compare-filters{display:flex;gap:8px;overflow-x:auto;padding:0 14px 14px;scrollbar-width:none}
-.circ-compare-table-wrap{overflow-x:auto;margin:0 14px 14px}
-.circ-compare-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:10px;overflow:hidden}
-.circ-compare-table th{background:var(--black);color:#fff;padding:10px 8px;text-align:left;font-size:11px;text-transform:uppercase}
-.circ-compare-table td{padding:10px 8px;border-bottom:1px solid var(--gray2)}
-.dificultad-cell{font-weight:700;font-size:14px;text-align:center}
-.pilot-photo{width:100%;height:200px;object-fit:contain;border-radius:8px;margin:0 16px 12px;background:var(--gray2);display:block}
 .bike-pros-cons{margin:0 16px 14px}
 .bpc-section{margin-bottom:12px}
 .bpc-section h4{font-size:13px;font-weight:800;margin-bottom:6px}
@@ -286,27 +277,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 function skipLoading(){var l=document.getElementById('loadingScreen');var v=document.getElementById('introVideo');if(v)v.pause();l.classList.add('hidden');setTimeout(function(){l.style.display='none';},800);}
 window.addEventListener('load',function(){
   var v=document.getElementById('introVideo'),ls=document.getElementById('loadingScreen'),started=false,done=false;
+  var isMobile=matchMedia('(pointer:coarse)').matches||/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   function finish(){if(done)return;done=true;skipLoading();}
   if(!v){finish();return;}
   v.addEventListener('playing',function(){started=true;});
   v.addEventListener('ended',finish);
   v.addEventListener('error',function(){if(!started)finish();},true);
   function soundBtn(){if(document.getElementById('soundBtn'))return;var b=document.createElement('button');b.id='soundBtn';b.className='sound-btn';b.innerHTML='🔊 Activar sonido';b.onclick=function(){v.muted=false;v.volume=1;b.remove();};ls.appendChild(b);}
-  var p=v.play();
-  if(p&&p.catch){p.catch(function(){v.muted=true;v.play().catch(function(){finish();});soundBtn();});}
+  if(isMobile){
+    v.muted=true;
+    var p=v.play();if(p&&p.catch)p.catch(function(){finish();});
+    soundBtn();
+  }else{
+    v.muted=false;v.volume=1;
+    var p2=v.play();
+    if(p2&&p2.catch)p2.catch(function(){
+      function unlock(){v.muted=false;v.volume=1;v.play().catch(function(){});document.removeEventListener('pointerdown',unlock);document.removeEventListener('keydown',unlock);}
+      document.addEventListener('pointerdown',unlock);document.addEventListener('keydown',unlock);
+    });
+  }
   setTimeout(function(){if(!started&&!done)finish();},8000);
 });
 
 var RAW_BASE='https://raw.githubusercontent.com/tonnygarmi163-rgb/LIGA-BICI-RECORD-MUNDIAL/main/';
 var MEDIA={
-  edits:[{titulo:'Intro Liga Bici 2026',meta:'2:07 · Oficial',url:RAW_BASE+'intro_liga_bici.mp4'}],
-  carreras:[{titulo:'Carrera 1 · San José 2026',meta:'17 agosto 2026',url:''},{titulo:'Carrera 2 · Andrómeda 2026',meta:'24 agosto 2026',url:''}],
-  entrevistas:[{titulo:'Entrevista Toni García · post Andrómeda',meta:'24 agosto 2026',url:''}],
-  fotos:[{titulo:'Toni · Andrómeda 2026',url:'toni_andromeda_2026.png'},{titulo:'Rubén · San José 2026',url:'ruben_sanjose_2026.png'},{titulo:'Podio San José 2026',url:'podio_sanjose_2026.png'},{titulo:'Grupo pretemporada',url:'grupo_pretemporada.png'}]
+  edits:[{titulo:'Intro Liga Bici 2026',meta:'2:07 · Oficial',season:'t3',url:RAW_BASE+'intro_liga_bici.mp4'}],
+  carreras:[
+    {titulo:'Carrera Maracaná · perspectiva Hugo',meta:'T3 · 31 agosto 2026',season:'t3',url:'https://drive.google.com/file/d/1aqfmx3hs1MDuPyXqkZtxmgOvuDOQsz6I/view?usp=sharing'},
+    {titulo:'Carrera Maracaná · perspectiva Rubén',meta:'T3 · 31 agosto 2026',season:'t3',url:'https://drive.google.com/file/d/19zYQcOugpDCVjB1NR9QJiFrNLc-IJ_Vq/view?usp=sharing'},
+    {titulo:'Carrera completa Andrómeda',meta:'T3 · 24 agosto 2026',season:'t3',url:'https://drive.google.com/file/d/1zym6s9KThVhhVxDEZOfuEE7CieOfU_Mi/view?usp=sharing'},
+    {titulo:'Carrera Andrómeda · perspectiva Hugo',meta:'T3 · 24 agosto 2026',season:'t3',url:'https://drive.google.com/file/d/1drxx9pwXkKOGhtruOVxOLA2yg-u3KQcK/view?usp=sharing'}
+  ],
+  entrevistas:[{titulo:'Entrevista Toni García · post Andrómeda',meta:'T3 · 24 agosto 2026',season:'t3',url:''}],
+  fotos:[{titulo:'Toni · Andrómeda 2026',url:'toni_andromeda_2026.png'},{titulo:'Rubén · San José 2026',url:'ruben_sanjose_2026.png'},{titulo:'Carrera San José 2026',url:'carrera_sanjose_2026.png'},{titulo:'Carrera Andrómeda 2026',url:'carrera_andromeda_2026.png'}]
 };
 function mediaEmbed(url){
   if(!url)return '<div class="vcard-thumb">🎬</div>';
-  if(url.indexOf('youtube.com')>-1||url.indexOf('youtu.be')>-1){var id=url.indexOf('v=')>-1?url.split('v=')[1]:url.split('/').pop();if(id.indexOf('&')>-1)id=id.split('&')[0];if(id.indexOf('?')>-1)id=id.split('?')[0];return '<iframe width="100%" height="200" style="display:block;border:0" src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';}
+  if(url.indexOf('drive.google.com')>-1){var m=url.match(/\/d\/([^\/?]+)/);var id=m?m[1]:'';if(id)return '<iframe width="100%" height="200" style="display:block;border:0" src="https://drive.google.com/file/d/'+id+'/preview" allowfullscreen></iframe>';return '<div class="vcard-thumb">🎬</div>';}
+  if(url.indexOf('youtube.com')>-1||url.indexOf('youtu.be')>-1){var id2=url.indexOf('v=')>-1?url.split('v=')[1]:url.split('/').pop();if(id2.indexOf('&')>-1)id2=id2.split('&')[0];if(id2.indexOf('?')>-1)id2=id2.split('?')[0];return '<iframe width="100%" height="200" style="display:block;border:0" src="https://www.youtube.com/embed/'+id2+'" allowfullscreen></iframe>';}
   return '<video controls preload="metadata" playsinline style="width:100%;height:200px;background:#000;display:block" src="'+url+'"></video>';
 }
 
@@ -325,6 +333,7 @@ rascanya:'https://earth.google.com/web/@39.60614115,-0.55324549,135.82511112a,63
 t2:{sanjose:'https://earth.google.com/web/@39.58672752,-0.55687671,91.90053382a,701.22167347d,30y,0h,0t,0r',andromeda:'https://earth.google.com/web/@39.58018851,-0.52510263,124.09678953a,752.9055877d,30y,0h,0t,0r',maracana:'https://earth.google.com/web/@39.58473501,-0.53863857,98.15293146a,903.12396654d,30y,0h,0t,0r',benissano:'https://earth.google.com/web/@39.61489088,-0.57384026,138.20541912a,1222.56626298d,30y,0h,0t,0r',poblanova:'https://earth.google.com/web/@39.57686237,-0.54218807,90.65437835a,1587.04235685d,30y,0h,0t,0r',cementerio:'https://earth.google.com/web/@39.59974002,-0.55399512,117.93524165a,2842.26975117d,30y,0h,0t,0r',benaguacil:'https://earth.google.com/web/@39.59440077,-0.58251938,103.10171917a,1372.69638153d,30y,0h,0t,0r',lliria:'https://earth.google.com/web/@39.61714052,-0.58428717,124.61490748a,953.86890987d,30y,0h,0t,0r',barranquet:'https://earth.google.com/web/@39.59447322,-0.53217721,106.68870906a,1120.22529488d,30y,91h,0t,0r',sierraespada:'https://earth.google.com/web/@39.58552013,-0.52679595,124.61501362a,1202.15096992d,30y,91h,0t,0r',vistacalderona:'https://earth.google.com/web/search/Carrer+del+Barri+del+Carme+46185+La+Pobla+de+Vallbona,+Valencia/@39.60515827,-0.52367078,120.19466211a,597.09881153d,35y,0.00000001h,1.16061445t,0r/data=CiwiJgokCQP45n8S0kNAEUIpB3SOzENAGQwHy5VRDt2_Ibq5xWrHcuK_QgIIATIpCicKJQohMTNtVmwzT0RFSlZVM2x5Uk1SYTNtZTF5Z3QwWWtYV1JLIAE6AwoBMEICCABKCAj2_vnKBRAB?authuser=0'},
 t3:{sanjose:'https://earth.google.com/web/@39.58675576,-0.55668303,104.70206898a,1005.53103716d,30y,0h,0t,0r',andromeda:'https://earth.google.com/web/@39.58005323,-0.5232704,120.57695947a,786.76008727d,30y,41.89h,19.16t,0r',maracana:'https://earth.google.com/web/@39.5845306,-0.53606349,103.95322103a,787.36678411d,30y,41.89h,19.16t,0r',poblanova:'https://earth.google.com/web/@39.57701527,-0.53877137,91.23520302a,808.95365847d,30y,41.89h,19.16t,0r',benissano:'https://earth.google.com/web/@39.61452388,-0.57529716,140.80506274a,533.97656659d,30y,-69.99h,14.75t,0r',cementerio:'https://earth.google.com/web/@39.59750742,-0.54828442,122.32120548a,473.1311963d,30y,-78.08h,19.82t,0r',benaguacil:'https://earth.google.com/web/@39.59241473,-0.58177357,99.27097211a,1210.06278252d,30y,-78.11h,19.83t,0r',lliria:'https://earth.google.com/web/@39.61656882,-0.58025817,128.92113476a,748.22848722d,30y,41.88h,19.16t,0r',barranquet:'https://earth.google.com/web/@39.593666,-0.53245584,116.30368778a,567.22302502d,30y,41.91h,19.16t,0r',sierraespada:'https://earth.google.com/web/@39.58576298,-0.52756643,117.80295645a,928.0180062d,30y,41.91h,19.16t,0r',vistacalderona:'https://earth.google.com/web/search/Carrer+del+Barri+del+Carme+46185+La+Pobla+de+Vallbona,+Valencia/@39.60532455,-0.52391195,127.96751353a,949.57104126d,30.00006604y,0h,0t,0r/data=CiwiJgokCQP45n8S0kNAEUIpB3SOzENAGQwHy5VRDt2_Ibq5xWrHcuK_QgIIATIpCicKJQohMVlnYWZ6a01uLVJyRWNuVGRKbExlLVFKQVJnTzlkdm5hIAE6AwoBMEICCABKCAjK3JT_BRAB?authuser=0',
 sima:'https://earth.google.com/web/@39.63044939,-0.56068637,169.41190812a,592.89295799d,30.00017762y,285.00171369h,0t,0r/data=CgRCAggBMikKJwolCiExWWdhZnprTW4tUnJFY25UZEpsTGUtUUpBUmdPOWR2bmEgAToDCgEwQgIIAEoHCPu83xsQAQ?authuser=0'}};
+var PROJECT_EARTH={t1:GE.t1.sanjose,t2:GE.t2.sanjose,t3:GE.t3.sanjose};
 
 function riesgoEmojiPorDificultad(d){if(d>=20)return'🔴';if(d>=10)return'🟠';if(d>=5)return'🟡';return'🟢';}
 function riesgoEmojis(r){if(!r||r==='-')return'';var e=[];if(r.includes('STOP'))e.push('🛑');if(r.includes('sentido contrario'))e.push('↔️');if(r.includes('obras'))e.push('🚧');if(r.includes('peatones'))e.push('🚶');if(r.includes('visión reducida'))e.push('👁️');if(r.includes('deslizante'))e.push('⚠️');if(r.includes('bicis'))e.push('🚲');return e.join(' ');}
@@ -352,8 +361,8 @@ const CIRCUITS=[
 {id:'vistacalderona',name:'Vista Calderona',season:'t2',img:'vistacalderona_t2.png',distancia:613,curvasNorm:3,curvasPelig:0,riesgos:'2 STOP',homePilot:'Fran Cobos',desc:'Circuito rápido y fluido con 3 curvas y zonas técnicas. ÚLTIMO circuito de la Temporada 2. Casa de Fran Cobos.',opinion:'Circuito rápido con 3 curvas y zonas técnicas. Cerró la Temporada 2.',zona:'coches',dif:'media',riesgo:'medio',altMin:118.18,altMax:121.55,dificultad:5.3,winners:[{s:'T2·2025',n:'Julian Matei'}],fecha:'2025-12-15'},
 {id:'sanjose',name:'San José',season:'t3',t3order:1,distancia:831,curvasNorm:8,curvasPelig:3,riesgos:'1 STOP, 3 sentido contrario, 3 obras',homePilot:'Toni García',desc:'Circuito técnico con muchas curvas y obras.',opinion:'Circuito con muchas curvas y obras.',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.7,altMax:93.4,dificultad:14.1,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Toni García'},{s:'T3·2026',n:'Rubén Asensi'}],fecha:'2026-08-17'},
 {id:'andromeda',name:'Andrómeda',season:'t3',t3order:2,distancia:766,curvasNorm:8,curvasPelig:1,riesgos:'-',homePilot:'Hugo Castro',desc:'Ritmo técnico, cuesta seguida de ceda el paso.',opinion:'Circuito de ritmo técnico.',zona:'coches',dif:'alta',riesgo:'medio',altMin:117.9,altMax:123.1,dificultad:8.7,winners:[{s:'T1·2024',n:'Hugo Castro'},{s:'T2·2025',n:'Julian Matei'},{s:'T3·2026',n:'Toni García'}],fecha:'2026-08-24'},
-{id:'maracana',name:'Maracaná',season:'t3',t3order:3,distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido.',opinion:'El circuito más sencillo.',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,dificultad:1.6,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'}],fecha:'2026-08-31'},
-{id:'poblanova',name:'Pobla Nova',season:'t3',t3order:4,distancia:677,curvasNorm:2,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico.',opinion:'Circuito técnico.',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,dificultad:10.8,winners:[{s:'T2·2025',n:'Julian Matei'}],fecha:'2026-09-04'},
+{id:'maracana',name:'Maracaná',season:'t3',t3order:3,distancia:483,curvasNorm:2,curvasPelig:0,riesgos:'-',homePilot:'Julian Matei',desc:'Circuito de ritmo rápido y llano.',opinion:'El circuito más sencillo. 3 vueltas.',zona:'tranquilo',dif:'baja',riesgo:'bajo',altMin:97.8,altMax:98.9,dificultad:1.6,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Hugo Castro'},{s:'T3·2026',n:'Julian Matei'}],fecha:'2026-08-31'},
+{id:'poblanova',name:'Pobla Nova',season:'t3',t3order:4,distancia:677,curvasNorm:2,curvasPelig:2,riesgos:'1 zona peatones',homePilot:'',desc:'Técnico.',opinion:'Circuito técnico.',zona:'peatones',dif:'media',riesgo:'medio',altMin:90.9,altMax:92.9,dificultad:10.8,winners:[{s:'T2·2025',n:'Julian Matei'}],fecha:'2026-09-06'},
 {id:'benissano',name:'Benissanó',season:'t3',t3order:5,distancia:587,curvasNorm:5,curvasPelig:2,riesgos:'Zona deslizante',homePilot:'',desc:'Circuito corto y muy técnico.',opinion:'Circuito corto pero técnico.',zona:'coches',dif:'alta',riesgo:'alto',altMin:132.3,altMax:139.6,dificultad:12.0,winners:[{s:'T1·2024',n:'Rubén Asensi'},{s:'T2·2025',n:'Rubén Asensi'}],fecha:'2026-09-12'},
 {id:'sima',name:'Sima',season:'t3',t3order:6,img:'sima_t3.png',distancia:865,curvasNorm:6,curvasPelig:2,riesgos:'2 curvas peligrosas',homePilot:'',desc:'Circuito rompepiernas con pendientes ascendentes y descendentes LARGAS y ELEVADAS que ocupan la mayoría del trazado. 8 curvas (2 peligrosas).',opinion:'Las cuestas largas y elevadas dominan casi todo el circuito.',zona:'coches',dif:'alta',riesgo:'alto',altMin:163.66,altMax:173.69,dificultad:20.0,winners:[],fecha:'2026-09-27'},
 {id:'cementerio',name:'Cementerio',season:'t3',t3order:7,distancia:585,curvasNorm:9,curvasPelig:1,riesgos:'Zona bicis',homePilot:'Rubén Asensi',desc:'Circuito técnico con cambios de altura.',opinion:'Circuito con muchos cambios de altura.',zona:'peatones',dif:'alta',riesgo:'alto',altMin:118.6,altMax:128.9,dificultad:20.3,winners:[{s:'T1·2024',n:'Julian Matei'},{s:'T2·2025',n:'Hugo Castro'}],fecha:'2026-04-07'},
@@ -371,7 +380,10 @@ sanjose:[
 andromeda:[
   {r:'matei',d:1,t:"1'36.74\"",y:2026},{r:'hugo',d:25,t:"1'38.00\"",y:2026},{r:'toni',d:7,t:"1'39.33\"",y:2026},{r:'ruben',d:23,t:"1'41.03\"",y:2026},{r:'sergio',d:21,t:"1'41.44\"",y:2026},{r:'toni',d:7,t:"1'46.08\"",y:2026,pre:1},{r:'hugo',d:25,t:"1'46.57\"",y:2026,pre:1},{r:'ruben',d:23,t:"1'47.23\"",y:2026,pre:1},{r:'hugo',d:25,t:"1'47.51\"",y:2026,pre:1},{r:'matei',d:1,t:"1'47.91\"",y:2026,pre:1},{r:'fran',d:95,t:"1'48.09\"",y:2026},{r:'adrian',d:14,t:"1'53.68\"",y:2026},{r:'ruben',d:23,t:"1'55.56\"",y:2024},{r:'ruben',d:23,t:"1'55.56\"",y:2025},{r:'toni',d:7,t:"2'02.54\"",y:2025},{r:'matei',d:9,t:"2'06.27\"",y:2024},{r:'hugo',d:69,t:"2'06.79\"",y:2025},{r:'hugo',d:6,t:"2'13.25\"",y:2024},{r:'matei',d:1,t:"2'17.32\"",y:2025},{r:'toni',d:7,t:"2'40.78\"",y:2024}
 ],
-maracana:[{r:'matei',d:9,t:"1'02.17\"",y:2024},{r:'ruben',d:23,t:"1'03.24\"",y:2024},{r:'matei',d:1,t:"1'04.43\"",y:2025},{r:'hugo',d:6,t:"1'07.36\"",y:2024},{r:'ruben',d:23,t:"1'07.75\"",y:2025},{r:'hugo',d:69,t:"1'08.19\"",y:2025},{r:'toni',d:7,t:"1'08.46\"",y:2025}],
+maracana:[
+  {r:'matei',d:1,t:"0'49.97\"",y:2026},{r:'hugo',d:25,t:"0'50.72\"",y:2026},{r:'toni',d:7,t:"0'52.61\"",y:2026},{r:'ruben',d:23,t:"0'52.74\"",y:2026},{r:'fran',d:95,t:"0'59.24\"",y:2026},{r:'sergio',d:21,t:"1'00.24\"",y:2026},{r:'adrian',d:14,t:"1'10.74\"",y:2026},
+  {r:'matei',d:9,t:"1'02.17\"",y:2024},{r:'ruben',d:23,t:"1'03.24\"",y:2024},{r:'matei',d:1,t:"1'04.43\"",y:2025},{r:'hugo',d:6,t:"1'07.36\"",y:2024},{r:'ruben',d:23,t:"1'07.75\"",y:2025},{r:'hugo',d:69,t:"1'08.19\"",y:2025},{r:'toni',d:7,t:"1'08.46\"",y:2025}
+],
 cementerio:[{r:'matei',d:1,t:"1'22.96\"",y:2026,pre:1},{r:'ruben',d:23,t:"1'25.52\"",y:2026,pre:1},{r:'toni',d:7,t:"1'27.56\"",y:2026,pre:1},{r:'hugo',d:69,t:"1'29.73\"",y:2026,pre:1},{r:'ruben',d:23,t:"1'30.56\"",y:2025},{r:'hugo',d:69,t:"1'30.96\"",y:2026,pre:1},{r:'matei',d:1,t:"1'31.68\"",y:2025},{r:'hugo',d:69,t:"1'33.71\"",y:2025},{r:'hugo',d:69,t:"1'35.20\"",y:2026,pre:1},{r:'ruben',d:23,t:"1'36.90\"",y:2024},{r:'matei',d:9,t:"1'39.93\"",y:2024},{r:'toni',d:7,t:"1'46.00\"",y:2024},{r:'toni',d:7,t:"1'47.78\"",y:2025}],
 benissano:[{r:'ruben',d:23,t:"1'35.30\"",y:2025},{r:'matei',d:1,t:"1'38.06\"",y:2025},{r:'toni',d:7,t:"1'39.37\"",y:2025},{r:'hugo',d:69,t:"1'46.12\"",y:2025}],
 poblanova:[{r:'hugo',d:69,t:"1'44.26\"",y:2025},{r:'toni',d:7,t:"1'51.88\"",y:2025},{r:'matei',d:1,t:"1'53.87\"",y:2025},{r:'ruben',d:23,t:"2'10.54\"",y:2025}],
@@ -385,7 +397,7 @@ vistacalderona:[{r:'ruben',d:23,t:"1'22.43\"",y:2025},{r:'matei',d:1,t:"1'23.15\
 const RACES={
 sanjose:{t2:[{p:1,r:'toni',t:"4'25.63\"",pts:18},{p:2,r:'ruben',t:"4'25.87\"",pts:9},{p:3,r:'matei',t:"4'47.66\"",pts:7},{p:4,r:'hugo',t:"5'12.40\"",pts:6}],t3:[{p:1,r:'ruben',t:"3'42.80\"",pts:15},{p:2,r:'hugo',t:'-0.17s',pts:12},{p:3,r:'toni',t:'-4.01s',pts:9},{p:4,r:'matei',t:'-5.20s',pts:7},{p:5,r:'adrian',t:'-66.13s',pts:6},{p:6,r:'sergio',t:'-70.21s',pts:5},{p:7,r:'fran',t:'NPT',pts:0}]},
 andromeda:{t2:[{p:1,r:'matei',t:"4'02.16\"",pts:12},{p:2,r:'hugo',t:"4'02.67\"",pts:13},{p:3,r:'ruben',t:"4'04.48\"",pts:7},{p:4,r:'toni',t:"5'12.21\"",pts:6}],t3:[{p:1,r:'toni',t:"3'15.23\"",pts:15},{p:2,r:'hugo',t:'-0.70s',pts:12},{p:3,r:'matei',t:'-5.69s',pts:9},{p:4,r:'ruben',t:'-9.03s',pts:7},{p:5,r:'sergio',t:'-50.13s',pts:6},{p:6,r:'adrian',t:'NPT',pts:0},{p:7,r:'fran',t:'NPT',pts:0}]},
-maracana:{t2:[{p:1,r:'hugo',t:"3'19.87\"",pts:12},{p:2,r:'ruben',t:"3'20.45\"",pts:9},{p:3,r:'matei',t:"3'27.26\"",pts:10}]},
+maracana:{t2:[{p:1,r:'hugo',t:"3'19.87\"",pts:12},{p:2,r:'ruben',t:"3'20.45\"",pts:9},{p:3,r:'matei',t:"3'27.26\"",pts:10}],t3:[{p:1,r:'matei',t:"0'49.97\"",pts:15},{p:2,r:'toni',t:"0'52.61\"",pts:12},{p:3,r:'hugo',t:"0'50.72\"",pts:10},{p:4,r:'fran',t:"0'59.24\"",pts:8},{p:5,r:'ruben',t:"0'52.74\"",pts:7},{p:6,r:'sergio',t:"1'00.24\"",pts:6},{p:7,r:'adrian',t:"1'10.74\"",pts:5}]},
 cementerio:{t2:[{p:1,r:'hugo',t:"3'05.46\"",pts:12},{p:2,r:'matei',t:"3'10.03\"",pts:9},{p:3,r:'ruben',t:"3'29.67\"",pts:7},{p:4,r:'toni',t:"4'21.34\"",pts:5}]},
 benissano:{t2:[{p:1,r:'ruben',t:"3'10.92\"",pts:12},{p:2,r:'matei',t:"3'17.17\"",pts:9},{p:3,r:'hugo',t:"3'36.50\"",pts:7},{p:4,r:'toni',t:"6'36.76\"",pts:5}]},
 benaguacil:{t2:[{p:1,r:'matei',t:"3'13.20\"",pts:12},{p:2,r:'ruben',t:"3'13.67\"",pts:9},{p:3,r:'hugo',t:"3'22.23\"",pts:7},{p:4,r:'toni',t:"4'10.56\"",pts:5}]},
@@ -393,6 +405,35 @@ lliria:{t2:[{p:1,r:'ruben',t:"2'59.56\"",pts:12},{p:2,r:'matei',t:"3'02.76\"",pt
 barranquet:{t2:[{p:1,r:'matei',t:"2'58.24\"",pts:12},{p:2,r:'hugo',t:"3'15.00\"",pts:9},{p:3,r:'ruben',t:"3'25.89\"",pts:7},{p:4,r:'toni',t:"4'31.79\"",pts:5}]},
 sierraespada:{t2:[{p:1,r:'hugo',t:"4'09.89\"",pts:12},{p:2,r:'ruben',t:"4'10.41\"",pts:9},{p:3,r:'matei',t:"4'11.07\"",pts:7},{p:4,r:'toni',t:"5'03.59\"",pts:5}]},
 vistacalderona:{t2:[{p:1,r:'matei',t:"2'44.89\"",pts:12},{p:2,r:'ruben',t:"2'46.93\"",pts:9},{p:3,r:'toni',t:"3'40.39\"",pts:7}]}
+};
+
+var PRED_T3={
+sanjose:{pred:['ruben','toni','hugo','matei','sergio','adrian','fran'],razon:'Rubén llega con pole y racha de récords; San José es técnico con obras y premia la gestión de ritmo.'},
+andromeda:{pred:['toni','hugo','matei','ruben','sergio','adrian','fran'],razon:'Toni ganó 2026 con remontada y la BH 30/46 va muy bien en la cuesta; Andrómeda es territorio de tensión.'},
+maracana:{pred:['matei','hugo','toni','ruben','fran','sergio','adrian'],razon:'Llano y rápido: Matei (0\'49.97") y Hugo (0\'50.72") tienen los mejores desarrollos de velocidad y el rebufo decide.'},
+poblanova:{pred:['hugo','matei','ruben','toni','sergio','adrian','fran'],razon:'Hugo tiene el mejor tiempo de T2 (1\'44.26"); trazada de velocidad premia el 36/11 del Rockrider.'},
+benissano:{pred:['ruben','matei','toni','hugo','sergio','adrian','fran'],razon:'Rubén domina Benissanó (victorias T1 y T2 y mejores tiempos). Circuito corto y técnico.'},
+sima:{pred:['toni','sergio','ruben','matei','hugo','adrian','fran'],razon:'Cuestas largas y empinadas: el mono-plato con piñón grande (BH 30/46, Scott 32/50) marca la diferencia.'},
+sierraespada:{pred:['hugo','ruben','toni','matei','sergio','adrian','fran'],razon:'Hugo ganó T2 y tiene los mejores tiempos; circuito técnico con 3 STOP que premia arrancadas.'},
+cementerio:{pred:['ruben','matei','hugo','toni','sergio','adrian','fran'],razon:'Cambios de altura y 9 curvas: Rubén y Matei han dominado históricamente.'},
+benaguacil:{pred:['ruben','matei','hugo','toni','sergio','adrian','fran'],razon:'Trazada de velocidad; Rubén y Matei con mejores tiempos de T2.'},
+lliria:{pred:['ruben','hugo','matei','toni','sergio','adrian','fran'],razon:'Rubén ganó T2; circuito rápido de ritmo.'},
+barranquet:{pred:['matei','ruben','hugo','toni','sergio','adrian','fran'],razon:'Muy técnico: Matei bicampeón aquí; exige frenos y trazada.'},
+vistacalderona:{pred:['matei','ruben','hugo','toni','fran','sergio','adrian'],razon:'Rápido con 3 curvas; Matei ganó T2. Casa de Fran.'}
+};
+var CONSEJOS_T3={
+sanjose:'Salida en marcha media (mono-plato BH/Scott: piñón 21-24; multi-plato Giant/Rockrider/Merida: plato grande con piñón 15-18). Baja 2 piñones antes de las curvas lentas y obras. Reserva el 11/13 para la recta final con rebufo.',
+andromeda:'Tras la cuesta y el ceda el paso no subas en el piñón más duro: mono-plato usa 18-21; multi-plato plato pequeño. Guarda el desarrollo tope para la última recta.',
+maracana:'Circuito llano de 3 vueltas: salida en 5ª y sube rápido a 9-10. Mono-plato (BH 30T) aprovecha el 11 con rebufo; multi-plato mantén plato grande y cadencia alta. Frena solo en las 2 curvas.',
+poblanova:'Trazada de velocidad: entra en curva con 6-7 y sal acelerando. Mono-plato: 15-18 en curva, 13-11 en recta. Multi-plato: plato grande en recta.',
+benissano:'Corto y técnico: no uses el piñón 11 hasta la última vuelta. Mono-plato mantén 18-21; multi-plato plato pequeño en las 2 curvas peligrosas.',
+sima:'Cuestas largas: mono-plato usa 32-46 (BH) o 32-50 (Scott) desde el inicio; multi-plato cambia a plato pequeño ANTES de la cuesta. No gastes el 11 hasta el llano final.',
+sierraespada:'3 STOP: arranca en marcha media y sube progresivo. Mono-plato: 21-24 para arrancar; multi-plato plato pequeño. Reserva energía entre paradas.',
+cementerio:'Cambios de altura: no frenes de más; mono-plato usa 24-28 en las subidas cortas; multi-plato plato pequeño. Aprovecha las bajadas para recuperar.',
+benaguacil:'Entrada rápida: sal en 6-7 y estira a 9-10. Mono-plato 13-11 en recta; multi-plato plato grande.',
+lliria:'Ritmo rápido: mantén cadencia alta; mono-plato 15-13; multi-plato plato grande con 15-13.',
+barranquet:'Muy técnico: frena antes de las 5 curvas peligrosas; mono-plato 18-21; multi-plato plato pequeño. Gasta energía solo en salidas.',
+vistacalderona:'Rápido con 3 curvas: sal en 7-8 y estira a 10. Mono-plato aprovecha rebufo; multi-plato plato grande.'
 };
 
 const PRACTICAS=[
@@ -412,7 +453,7 @@ var B_SERGIO={model:'Scott Scale serie 700 RC',tipo:'Mountain Bike 29"',svgKey:'
 var B_FRAN={model:'Rockrider ST 100',tipo:'Mountain Bike 27.5"',svgKey:'rockrider_st100',price:'~200€',gama:'baja',frenosQ:1,shopUrl:'',specs:[{l:'Cuadro',v:'Aluminio 27.5"'},{l:'Suspensión',v:'SR Suntour 80mm'},{l:'Transmisión',v:'Shimano 3x7'},{l:'Platos',v:'24/34/42T'},{l:'Cassette',v:'14-28T'},{l:'Velocidades',v:'21 marchas'},{l:'Frenos',v:'V-Brake'},{l:'Peso',v:'~15 kg'}],desarrollo:{plato:42,pinonMin:14,pinonMax:28},ventajas:['Económica','21 velocidades'],desventajas:['15kg','V-Brake'],terreno:{bajada:'Regular',plano:'Buena - 42/14 = 5.6',subida:'Muy Buena - 24/28 = 1.6'}};
 
 const RIDERS={
-matei:{id:'matei',first:'Julian',last:'MATEI',dorsal:1,dorsales:{t1:9,t2:1,t3:1},color:'#1e40ff',textColor:'#fff',peso:'70 kg',altura:'175 cm',stats:{ligas:2,podios:21,poles:6,records:6,totalPoints:222},seasons:['t1','t2','t3'],foto:'julian_1.png',bici:{t1:B_MATEI,t2:B_MATEI,t3:B_MATEI},wins:[{c:'San José',s:'T1 · 2024'},{c:'Rascaña',s:'T1 · 2024'},{c:'Cementerio',s:'T1 · 2024'},{c:'Barranquet',s:'T1 · 2024'},{c:'Andrómeda',s:'T2 · 2025'},{c:'Pobla Nova',s:'T2 · 2025'},{c:'Benaguacil',s:'T2 · 2025'},{c:'Barranquet',s:'T2 · 2025'},{c:'Vista Calderona',s:'T2 · 2025'}]},
+matei:{id:'matei',first:'Julian',last:'MATEI',dorsal:1,dorsales:{t1:9,t2:1,t3:1},color:'#1e40ff',textColor:'#fff',peso:'70 kg',altura:'175 cm',stats:{ligas:2,podios:21,poles:6,records:6,totalPoints:222},seasons:['t1','t2','t3'],foto:'julian_1.png',bici:{t1:B_MATEI,t2:B_MATEI,t3:B_MATEI},wins:[{c:'San José',s:'T1 · 2024'},{c:'Rascaña',s:'T1 · 2024'},{c:'Cementerio',s:'T1 · 2024'},{c:'Barranquet',s:'T1 · 2024'},{c:'Andrómeda',s:'T2 · 2025'},{c:'Pobla Nova',s:'T2 · 2025'},{c:'Benaguacil',s:'T2 · 2025'},{c:'Barranquet',s:'T2 · 2025'},{c:'Vista Calderona',s:'T2 · 2025'},{c:'Maracaná',s:'T3 · 2026'}]},
 hugo:{id:'hugo',first:'Hugo',last:'CASTRO',dorsal:69,dorsales:{t1:6,t2:69,t3:25},color:'#f5c800',textColor:'#000',peso:'61 kg',altura:'174 cm',stats:{ligas:0,podios:15,poles:3,records:2,totalPoints:149},seasons:['t1','t2','t3'],foto:'hugo_69.png',bici:{t1:B_HUGO,t2:B_HUGO,t3:B_HUGO},wins:[{c:'Andrómeda',s:'T1 · 2024'},{c:'Maracaná',s:'T2 · 2025'},{c:'Cementerio',s:'T2 · 2025'},{c:'Sierra Espada',s:'T2 · 2025'}]},
 ruben:{id:'ruben',first:'Rubén',last:'ASENSI',dorsal:23,color:'#e02020',textColor:'#fff',peso:'67 kg',altura:'186 cm',stats:{ligas:0,podios:18,poles:13,records:4,totalPoints:168},seasons:['t1','t2','t3'],foto:'ruben_23.png',bici:{t1:B_RUBEN,t2:B_RUBEN,t3:B_RUBEN},wins:[{c:'Benissanó',s:'T1 · 2024'},{c:'Maracaná',s:'T1 · 2024'},{c:'Benaguacil',s:'T1 · 2024'},{c:'Sierra Espada',s:'T1 · 2024'},{c:'Llíria',s:'T2 · 2025'},{c:'Benissanó',s:'T2 · 2025'},{c:'San José',s:'T3 · 2026'}]},
 toni:{id:'toni',first:'Toni',last:'GARCÍA',dorsal:7,color:'#16a34a',textColor:'#fff',peso:'70,5 kg',altura:'180 cm',stats:{ligas:0,podios:12,poles:1,records:0,totalPoints:153},seasons:['t1','t2','t3'],foto:'toni_7.png',bici:{t1:B_TONI_T1,t2:B_TONI_T1,t3:B_TONI_T3},wins:[{c:'San José',s:'T2 · 2025'},{c:'Andrómeda',s:'T3 · 2026'}]},
@@ -422,19 +463,17 @@ fran:{id:'fran',first:'Fran',last:'COBOS',dorsal:95,color:'#1e90ff',textColor:'#
 };
 
 const NOTICIAS=[
-{fecha:'24 Agosto 2026',titulo:'Toni García regresa a lo más alto del podio',cuerpo:'Después de casi un año desde San José 2025, Toni García gana con su nueva BH en Andrómeda. Las Scott han sufrido como nunca: Rubén queda fuera del podio por segunda vez en la historia. Bochons logra su primera gran mejora con 1\'41.44".',emoji:'🏆'},
-{fecha:'17 Agosto 2026',titulo:'Rubén Asensi consigue la victoria en San José',cuerpo:'Arranca la temporada con victoria de Rubén Asensi (3\'42.80") ante Hugo Castro (-0.17s) y Toni García (-4.01s). Matei rompe su racha de 20 podios seguidos. Vera 5º y Bochons 6º. Fran Cobos NPT.',emoji:'🏁'},
-{fecha:'2 Julio 2026',titulo:'Se presenta la nueva temporada: Liga Bici 2026',cuerpo:'La Temporada 3 arranca con 7 participantes, puntuación 15/12/9/7/6/5/4 y 3p de recuperación, sin puntos de casa.',emoji:'📢'},
-{fecha:'13 Abril 2026',titulo:'La ruta de la muerte: LLOMA LLARGA',cuerpo:'Una de las peores experiencias para llegar a un circuito.',emoji:'💀'},
-{fecha:'8 Abril 2026',titulo:'4 récords mundiales en Cementerio',cuerpo:'Cementerio ha sido el segundo circuito de pruebas, récords rotos hasta 4 veces.',emoji:'🏆'},
-{fecha:'Octubre 2025',titulo:'Julian Matei bicampeón',cuerpo:'Con la victoria en Vista Calderona, Julian Matei se proclamó campeón de la Temporada 2.',emoji:'🥇'}
+{season:'t3',fecha:'2 Julio 2026',titulo:'Se presenta la nueva temporada: Liga Bici 2026',video:RAW_BASE+'presentacion_t3.mp4',imgs:[],cuerpo:'La gala de presentación ha confirmado al 100% los 3 nuevos participantes de Liga Bici. Fran Cobos volverá a estar presente en 2026, después de su descalificación en 2024; el 95 se dispone a pelear el campeonato este año. Sergio Bochons, el presentador de la gala 2025, es otra sorpresa este año; el número 21 llega a la liga después de dos años de rumores sobre su participación. Adrián Vera es la mayor revelación: color blanco y su dorsal 14, llega este 2026 para luchar por el número 1. Esto duplica la cantidad de participantes respecto a 2025, y puede conllevar una mayor dificultad a Julian Matei a defender el título.'},
+{season:'t3',fecha:'17 Agosto 2026',titulo:'Rubén Asensi consigue la victoria en San José',imgs:['ruben_sanjose_2026.png','carrera_sanjose_2026.png'],cuerpo:'Arranca la temporada con una victoria de Rubén Asensi en el centro-sur de La Pobla de Vallbona. El 23 logra arrebatarle el trono a Toni García, con una pole, récord mundial y victoria. Tras una carrera intensa por parte de Toni en la primera vuelta y Hugo Castro en la segunda, Rubén ha sabido gestionarse para no dar oportunidades a sus rivales. Con esta suma su séptima victoria y su pole número 13. En segunda posición ha acabado Hugo Castro. El subcampeón del año pasado logra hacer una muy buena carrera y consigue llevarse un segundo puesto antes de ir a su territorio en Andrómeda. Toni García parecía un gran candidato a la victoria, pero su ritmo bajó considerablemente durante la última vuelta; pero aun así lograba un merecido tercer puesto y dejar fuera del podio a Julián Matei, que rompe su racha de 20 podios seguidos. El número 1 no solo pierde esa racha, también su racha de carreras liderando el campeonato. Tras una decisión de última hora, Matei corrió con la Merida con el propósito de aumentar todavía más su ritmo en carrera, pero el mal estado de las marchas y su mala adaptación han roto su ritmo totalmente. Mientras, Adrián Vera y Sergio Bochons han quedado en 5.ª y 6.ª posición respectivamente después de que en las primeras curvas los veteranos desaparecieran. Aunque están a pocos puntos detrás de Julián Matei, Bochons y Vera admiten que el ritmo es imposible de mantener en estas primeras carreras, y que van a necesitar mejorar en muchos aspectos para poder llegar a entrar en algún podio o acercarse a una victoria.'},
+{season:'t3',fecha:'24 Agosto 2026',titulo:'Toni García regresa a lo más alto del podio',imgs:['toni_andromeda_2026.png','carrera_andromeda_2026.png'],cuerpo:'Después de casi cumplirse casi un año desde San José 2025, Toni García logra ganar al fin otra carrera con su nueva bici BH, y esta vez en Andrómeda. Circuito sagrado por la tensión e historia que tiene este trazado. El número 7 ha logrado mantener el ritmo de principio a fin, logrando una remontada en la última vuelta a lo Hugo 2025. Hugo Castro vuelve a quedar en segunda posición por segundo año consecutivo; el 25 confiesa haberlo dado todo contra Matei y con la repentina aparición de García, a Castro se le ha hecho imposible pelear la primera posición. Julian Matei lidera prácticamente la carrera entera, pero su resistencia se desmorona casi al final. Hugo y Toni aún han tenido tiempo para sacarle a Matei más de 5 segundos al final. El campeón culpa sobre todo a las pasadas prácticas del sábado 21, por la sobrecarga excesiva en las piernas y exige un cambio en la elaboración de las carreras.'},
+{season:'t2',fecha:'Octubre 2025',titulo:'Julian Matei bicampeón',imgs:[],cuerpo:'Con la victoria en Vista Calderona, Julian Matei se proclamó campeón de la Temporada 2.'}
 ];
 
 const SEASONS={
-t3:{key:'t3',label:'Temporada 3',year:'2026',kicker:'Actual',summary:'2 carreras · Líder: Toni García (24 pts) · 7 participantes.',participantes:7,practicas:4,carreras:2,finalizadas:2,
-standings:[{id:'toni',pts:24,pos:'1º',diff:''},{id:'hugo',pts:24,pos:'2º',diff:'0'},{id:'ruben',pts:22,pos:'3º',diff:'-2'},{id:'matei',pts:16,pos:'4º',diff:'-8'},{id:'sergio',pts:11,pos:'5º',diff:'-13'},{id:'adrian',pts:9,pos:'6º',diff:'-15'},{id:'fran',pts:3,pos:'7º',diff:'-21'}],
-scores:{matei:[{c:'San José',tipo:'carrera',pts:7},{c:'Andrómeda',tipo:'carrera',pts:9}],hugo:[{c:'San José',tipo:'carrera',pts:12},{c:'Andrómeda',tipo:'carrera',pts:12}],ruben:[{c:'San José',tipo:'carrera',pts:15},{c:'Andrómeda',tipo:'carrera',pts:7}],toni:[{c:'San José',tipo:'carrera',pts:9},{c:'Andrómeda',tipo:'carrera',pts:15}],adrian:[{c:'San José',tipo:'carrera',pts:6},{c:'Andrómeda',tipo:'carrera',pts:0},{c:'Recuperación Andrómeda',tipo:'recuperacion',pts:3}],sergio:[{c:'San José',tipo:'carrera',pts:5},{c:'Andrómeda',tipo:'carrera',pts:6}],fran:[{c:'Recuperación Andrómeda',tipo:'recuperacion',pts:3}]},
-horarios:[{name:'Carrera 1 · San José',date:'17 agosto',mes:'ago',dia:'17',circ:'San José',tipo:'carrera',status:'done',circId:'sanjose'},{name:'Carrera 2 · Andrómeda',date:'24 agosto',mes:'ago',dia:'24',circ:'Andrómeda',tipo:'carrera',status:'done',circId:'andromeda'},{name:'Carrera 3 · Maracaná',date:'31 agosto',mes:'ago',dia:'31',circ:'Maracaná',tipo:'carrera',status:'next',circId:'maracana'},{name:'Carrera 4 · Pobla Nova',date:'4 septiembre',mes:'sep',dia:'4',circ:'Pobla Nova',tipo:'carrera',status:'pend',circId:'poblanova'},{name:'Carrera 5 · Benissanó',date:'12 septiembre',mes:'sep',dia:'12',circ:'Benissanó',tipo:'carrera',status:'pend',circId:'benissano'},{name:'Carrera 6 · La Sima',date:'27 septiembre',mes:'sep',dia:'27',circ:'Sima',tipo:'carrera',status:'pend',circId:'sima'},{name:'Carrera 7 · No confirmado',date:'Por confirmar',mes:'???',dia:'?',circ:'Por confirmar',tipo:'carrera',status:'pend'}]},
+t3:{key:'t3',label:'Temporada 3',year:'2026',kicker:'Actual',summary:'3 carreras · Líder: Toni García (36 pts) · 7 participantes.',participantes:7,practicas:4,carreras:3,finalizadas:3,
+standings:[{id:'toni',pts:36,pos:'1º',diff:''},{id:'hugo',pts:34,pos:'2º',diff:'-2'},{id:'matei',pts:31,pos:'3º',diff:'-5'},{id:'ruben',pts:29,pos:'4º',diff:'-7'},{id:'sergio',pts:17,pos:'5º',diff:'-19'},{id:'adrian',pts:14,pos:'6º',diff:'-22'},{id:'fran',pts:11,pos:'7º',diff:'-25'}],
+scores:{matei:[{c:'San José',tipo:'carrera',pts:7},{c:'Andrómeda',tipo:'carrera',pts:9},{c:'Maracaná',tipo:'carrera',pts:15}],hugo:[{c:'San José',tipo:'carrera',pts:12},{c:'Andrómeda',tipo:'carrera',pts:12},{c:'Maracaná',tipo:'carrera',pts:10}],ruben:[{c:'San José',tipo:'carrera',pts:15},{c:'Andrómeda',tipo:'carrera',pts:7},{c:'Maracaná',tipo:'carrera',pts:7}],toni:[{c:'San José',tipo:'carrera',pts:9},{c:'Andrómeda',tipo:'carrera',pts:15},{c:'Maracaná',tipo:'carrera',pts:12}],adrian:[{c:'San José',tipo:'carrera',pts:6},{c:'Andrómeda',tipo:'carrera',pts:0},{c:'Recuperación Andrómeda',tipo:'recuperacion',pts:3},{c:'Maracaná',tipo:'carrera',pts:5}],sergio:[{c:'San José',tipo:'carrera',pts:5},{c:'Andrómeda',tipo:'carrera',pts:6},{c:'Maracaná',tipo:'carrera',pts:6}],fran:[{c:'Recuperación Andrómeda',tipo:'recuperacion',pts:3},{c:'Maracaná',tipo:'carrera',pts:8}]},
+horarios:[{name:'Carrera 1 · San José',date:'17 agosto',mes:'ago',dia:'17',circ:'San José',tipo:'carrera',status:'done',circId:'sanjose'},{name:'Carrera 2 · Andrómeda',date:'24 agosto',mes:'ago',dia:'24',circ:'Andrómeda',tipo:'carrera',status:'done',circId:'andromeda'},{name:'Carrera 3 · Maracaná',date:'31 agosto',mes:'ago',dia:'31',circ:'Maracaná',tipo:'carrera',status:'done',circId:'maracana'},{name:'Carrera 4 · Pobla Nova',date:'6 septiembre',mes:'sep',dia:'6',circ:'Pobla Nova',tipo:'carrera',status:'next',circId:'poblanova'},{name:'Carrera 5 · Benissanó',date:'12 septiembre',mes:'sep',dia:'12',circ:'Benissanó',tipo:'carrera',status:'pend',circId:'benissano'},{name:'Carrera 6 · La Sima',date:'27 septiembre',mes:'sep',dia:'27',circ:'Sima',tipo:'carrera',status:'pend',circId:'sima'},{name:'Carrera 7 · No confirmado',date:'Por confirmar',mes:'???',dia:'?',circ:'Por confirmar',tipo:'carrera',status:'pend'}]},
 t2:{key:'t2',label:'Temporada 2',year:'2025',kicker:'Archivo',summary:'11 circuitos · Campeón: Julian Matei (119 pts).',participantes:4,practicas:0,carreras:11,finalizadas:11,
 standings:[{id:'matei',pts:119,pos:'Campeón',diff:''},{id:'hugo',pts:105,pos:'2º',diff:'-14'},{id:'ruben',pts:105,pos:'3º',diff:'-14'},{id:'toni',pts:75,pos:'4º',diff:'-44'}],
 scores:{matei:[{c:'San José',tipo:'carrera',pts:7},{c:'Andrómeda',tipo:'carrera',pts:12},{c:'Maracaná',tipo:'tiempos',pts:3},{c:'Maracaná',tipo:'carrera',pts:10},{c:'Benissanó',tipo:'carrera',pts:9},{c:'Pobla Nova',tipo:'tiempos',pts:2},{c:'Pobla Nova',tipo:'carrera',pts:12},{c:'Cementerio',tipo:'carrera',pts:9},{c:'Benaguacil',tipo:'tiempos',pts:2},{c:'Benaguacil',tipo:'carrera',pts:12},{c:'Llíria',tipo:'tiempos',pts:1},{c:'Llíria',tipo:'carrera',pts:9},{c:'Barranquet',tipo:'carrera',pts:12},{c:'Sierra Espada',tipo:'carrera',pts:7},{c:'Vista Calderona',tipo:'carrera',pts:12}],hugo:[{c:'San José',tipo:'carrera',pts:6},{c:'Andrómeda',tipo:'carrera',pts:13},{c:'Maracaná',tipo:'tiempos',pts:1},{c:'Maracaná',tipo:'carrera',pts:12},{c:'Benissanó',tipo:'carrera',pts:7},{c:'Pobla Nova',tipo:'tiempos',pts:1},{c:'Pobla Nova',tipo:'carrera',pts:9},{c:'Cementerio',tipo:'carrera',pts:12},{c:'Benaguacil',tipo:'tiempos',pts:1},{c:'Benaguacil',tipo:'carrera',pts:7},{c:'Llíria',tipo:'tiempos',pts:2},{c:'Llíria',tipo:'carrera',pts:7},{c:'Barranquet',tipo:'carrera',pts:9},{c:'Sierra Espada',tipo:'carrera',pts:12}],ruben:[{c:'San José',tipo:'carrera',pts:9},{c:'Andrómeda',tipo:'carrera',pts:7},{c:'Maracaná',tipo:'tiempos',pts:1},{c:'Maracaná',tipo:'carrera',pts:9},{c:'Benissanó',tipo:'carrera',pts:12},{c:'Pobla Nova',tipo:'tiempos',pts:0},{c:'Pobla Nova',tipo:'carrera',pts:5},{c:'Cementerio',tipo:'carrera',pts:10},{c:'Benaguacil',tipo:'tiempos',pts:3},{c:'Benaguacil',tipo:'carrera',pts:9},{c:'Llíria',tipo:'tiempos',pts:3},{c:'Llíria',tipo:'carrera',pts:12},{c:'Barranquet',tipo:'carrera',pts:7},{c:'Sierra Espada',tipo:'carrera',pts:9}],toni:[{c:'San José',tipo:'carrera',pts:18},{c:'Andrómeda',tipo:'carrera',pts:6},{c:'Maracaná',tipo:'tiempos',pts:0},{c:'Maracaná',tipo:'carrera',pts:3},{c:'Benissanó',tipo:'carrera',pts:5},{c:'Pobla Nova',tipo:'tiempos',pts:3},{c:'Pobla Nova',tipo:'carrera',pts:7},{c:'Cementerio',tipo:'carrera',pts:5},{c:'Benaguacil',tipo:'tiempos',pts:0},{c:'Benaguacil',tipo:'carrera',pts:5},{c:'Llíria',tipo:'tiempos',pts:0},{c:'Llíria',tipo:'carrera',pts:6},{c:'Barranquet',tipo:'carrera',pts:5},{c:'Sierra Espada',tipo:'carrera',pts:5}]},
@@ -445,7 +484,7 @@ scores:{matei:[{c:'San José',tipo:'carrera',pts:12},{c:'Rascaña',tipo:'carrera
 horarios:[{name:'San José',date:'Sin registro',mes:'',dia:'',circ:'San José',tipo:'carrera',status:'done',circId:'sanjose'},{name:'Cementerio',date:'Sin registro',mes:'',dia:'',circ:'Cementerio',tipo:'carrera',status:'done',circId:'cementerio'},{name:'Barranquet',date:'Sin registro',mes:'',dia:'',circ:'Barranquet',tipo:'carrera',status:'done',circId:'barranquet'},{name:'Andrómeda',date:'Sin registro',mes:'',dia:'',circ:'Andrómeda',tipo:'carrera',status:'done',circId:'andromeda'},{name:'Benissanó',date:'Sin registro',mes:'',dia:'',circ:'Benissanó',tipo:'carrera',status:'done',circId:'benissano'},{name:'Maracaná',date:'Sin registro',mes:'',dia:'',circ:'Maracaná',tipo:'carrera',status:'done',circId:'maracana'},{name:'Benaguacil',date:'Sin registro',mes:'',dia:'',circ:'Benaguacil',tipo:'carrera',status:'done',circId:'benaguacil'},{name:'Sierra Espada',date:'Sin registro',mes:'',dia:'',circ:'Sierra Espada',tipo:'carrera',status:'done',circId:'sierraespada'},{name:'Rascaña',date:'Sin registro',mes:'',dia:'',circ:'Rascaña',tipo:'carrera',status:'done',circId:'rascanya'}]}
 };
 
-let curSeason='t3',curView='inicio',circFilter='todos',infoTab='normas',searchQuery='',sortBy='nombre',sortDir='asc',compareSortBy='score',compareSortDir='desc',bikeSortBy='media',bikeSortDir='desc';
+let curSeason='t3',curView='inicio',circFilter='todos',infoTab='normas',newsFilter=null,searchQuery='',sortBy='nombre',sortDir='asc',compareSortBy='score',compareSortDir='desc',bikeSortBy='media',bikeSortDir='desc',mediaSeason=null;
 
 function zonaBadge(z){var m={tranquilo:'tag-tranquilo',coches:'tag-coches',peatones:'tag-peatones'};var l={tranquilo:'Tranquilo',coches:'Zona coches',peatones:'Zona peatones'};return '<span class="ci-tag '+m[z]+'">'+(l[z]||z)+'</span>';}
 function difBadge(d){return '<span class="ci-tag tag-dif-'+d+'">Dif. '+d+'</span>';}
@@ -505,7 +544,9 @@ if(curView==='inicio'){
     if(p.temporada.length){html+='<div class="comp-subtitle">Tiempos de temporada</div>';p.temporada.forEach(function(t,i){html+='<div class="tt-row"><div class="tt-pos">'+(i+1)+'</div><div class="tt-name'+(t.color==='#f5c800'||t.color==='#ffffff'?' dark':'')+'" style="background:'+t.color+'">'+t.piloto+' · '+t.dorsal+'</div><div class="tt-time">'+t.tiempo+'</div><div class="tt-year" style="border-color:'+t.color+'">'+t.anio+'</div></div>';});}
     html+='</div></div>';});
 }else if(curView==='circuitos'){
-  html+='<div class="view-header"><p class="eyebrow">Trazados</p><h1>Circuitos '+s.year+'</h1></div><div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="circFilter=\'todos\';renderView()">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="circFilter=\'baja\';renderView()">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="circFilter=\'media\';renderView()">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="circFilter=\'alta\';renderView()">Alta</button></div>';
+  html+='<div class="view-header"><p class="eyebrow">Trazados</p><h1>Circuitos '+s.year+'</h1></div>';
+  html+='<div class="earth-banner"><div><span class="eb-txt">🌍 Ver trazados en Google Earth</span><span class="eb-sub">Proyecto de mapas de la '+s.label+'. Si el trazado no carga, ábrelo aquí y elige el mapa de la temporada.</span></div><button onclick="openExternalLink(PROJECT_EARTH[curSeason])">Abrir proyecto</button></div>';
+  html+='<div class="filter-row"><button class="filter-pill'+(circFilter==='todos'?' active':'')+'" onclick="circFilter=\'todos\';renderView()">Todos</button><button class="filter-pill'+(circFilter==='baja'?' active':'')+'" onclick="circFilter=\'baja\';renderView()">Fácil</button><button class="filter-pill'+(circFilter==='media'?' active':'')+'" onclick="circFilter=\'media\';renderView()">Media</button><button class="filter-pill'+(circFilter==='alta'?' active':'')+'" onclick="circFilter=\'alta\';renderView()">Alta</button></div>';
   var list=getCircuitsForSeason().filter(function(c){return circFilter==='todos'||c.dif===circFilter;});
   list.forEach(function(c){var eu=GE[curSeason]&&GE[curSeason][c.id]?GE[curSeason][c.id]:(GE[c.season]&&GE[c.season][c.id]?GE[c.season][c.id]:'');
     var dh='<div class="circ-drawing"><img src="'+circImg(c)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;align-items:center;justify-content:center;height:100%;">'+circSVG(c.id)+'</div>';
@@ -526,10 +567,10 @@ if(curView==='inicio'){
   bikes.forEach(function(x){html+='<tr><td class="bike-label">'+x.b.model+'</td><td>'+x.r.first+' '+x.r.last+'</td><td>'+x.dev.velocidad+'</td><td>'+x.dev.subida+'</td><td><strong>'+x.media.toFixed(1)+'</strong></td><td>'+x.fq.emoji+' '+x.fq.label+'</td><td>'+gamaBadge(x.b.gama)+'</td></tr>';});
   html+='</tbody></table></div></div>';
   html+='<div class="norma-section"><div class="ns-title">📖 Cómo se calculan los valores</div><div class="ns-body"><ul>'
-  +'<li><strong>🏎️ Velocidad Máxima</strong> = 2,167 m (rueda) × (plato ÷ piñón más pequeño). Metros que avanza por pedalada en la marcha más larga. <strong>Cuanto MÁS GRANDE, mejor</strong> (más velocidad punta en llano/bajada).</li>'
-  +'<li><strong>🧗 Velocidad Mínima (Subida)</strong> = 2,167 m (rueda) × (plato ÷ piñón más grande). Metros por pedalada en la marcha más corta. <strong>Cuanto MÁS PEQUEÑO, mejor</strong> (menos esfuerzo, sube mejor).</li>'
-  +'<li><strong>🔄 Media (Versatilidad)</strong> = (Vel. Máx + Vel. Mín) ÷ 2. <strong>Cuanto MÁS GRANDE, más versátil</strong> (vale para llano y cuesta).</li>'
-  +'<li><strong>🛑 Frenos</strong>: 🟢 Hidráulico &gt; 🟡 Mecánico &gt; 🔴 V-Brake. Mejor freno = más seguridad y control.</li>'
+  +'<li><strong>🏎️ Velocidad Máxima</strong> = 2,167 m (rueda) × (plato ÷ piñón más pequeño). Más grande = más rápida.</li>'
+  +'<li><strong>🧗 Velocidad Mínima (Subida)</strong> = 2,167 m × (plato ÷ piñón más grande). Más pequeño = sube mejor.</li>'
+  +'<li><strong>🔄 Media (Versatilidad)</strong> = (Máx + Mín) ÷ 2. Más alto = más versátil.</li>'
+  +'<li><strong>🛑 Frenos</strong>: 🟢 Hidráulico &gt; 🟡 Mecánico &gt; 🔴 V-Brake.</li>'
   +'</ul></div></div>';
   bikes.forEach(function(x){var r=x.r,b=x.b,dev=x.dev;
   html+='<div class="bici-info-box"><h3>'+b.model+' - '+r.first+' '+r.last+'</h3><div class="bike-pros-cons"><div class="bpc-section pros"><h4>✅ Ventajas</h4><ul>'+b.ventajas.map(function(v){return '<li>'+v+'</li>';}).join('')+'</ul></div><div class="bpc-section cons"><h4>⚠️ Desventajas</h4><ul>'+b.desventajas.map(function(d){return '<li>'+d+'</li>';}).join('')+'</ul></div></div>';
@@ -550,32 +591,51 @@ if(curView==='inicio'){
 }else if(curView==='info'){
   html+='<div class="view-header"><p class="eyebrow">Información</p><h1>Liga Bici</h1></div><div class="info-tabs">'+['normas','noticias','entrevistas'].map(function(t){return '<button class="info-tab'+(infoTab===t?' active':'')+'" onclick="infoTab=\''+t+'\';renderView()">'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>';}).join('')+'</div><div class="info-panel">';
   if(infoTab==='normas'){
-    if(curSeason==='t3')html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera (T3)</div><div class="ns-body"><ul><li>1º→15</li><li>2º→12</li><li>3º→9</li><li>4º→7</li><li>5º→6</li><li>6º→5</li><li>7º→4</li></ul><div class="ns-nocasa">Recuperación: 3 pts (Vera y Fran en Andrómeda). Sin puntos de casa.</div></div></div>';
-    else html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera</div><div class="ns-body"><ul><li>1º→12</li><li>2º→9</li><li>3º→7</li><li>4º→5</li></ul><div class="ns-pole">Casa ×1.5</div></div></div>';
+    if(curSeason==='t3'){
+      html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera (nuevo baremo)</div><div class="ns-body"><ul><li>1º→15</li><li>2º→12</li><li>3º→10</li><li>4º→8</li><li>5º→7</li><li>6º→6</li><li>7º→5</li></ul><div class="ns-nocasa">Sin puntos de casa. Recuperación: 3 pts.</div></div></div>';
+      html+='<div class="norma-section"><div class="ns-title">⏱ Puntos de Tiempo</div><div class="ns-body"><div class="ns-time">En Andrómeda, Benissanó, La Sima, Nuevo circuito y Sierra Espada: 1º+5 · 2º+4 · 3º+3 · 4º+2 · 5º+1.</div><ul><li>Maracaná NO puntúa tiempos.</li></ul></div></div>';
+    }else if(curSeason==='t2'){
+      html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera</div><div class="ns-body"><ul><li>1º→12</li><li>2º→9</li><li>3º→7</li><li>4º→5</li></ul><div class="ns-pole">Casa ×1.5.</div></div></div>';
+    }else{
+      html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera (T1)</div><div class="ns-body"><ul><li>1º→12</li><li>2º→9</li><li>3º→7</li><li>4º→5</li></ul><div class="ns-nocasa">En la Temporada 1 NO había puntos ×1.5 en casa.</div></div></div>';
+    }
     html+='<div class="norma-section"><div class="ns-title">⚡ Pole</div><div class="ns-body">Mejor tiempo = pole. Desempate.</div></div>';
   }else if(infoTab==='noticias'){
-    NOTICIAS.forEach(function(n){html+='<div class="noticia-card" onclick="openNews(\''+n.titulo.replace(/'/g,"\\'")+'\',\''+n.fecha+'\',\''+n.cuerpo.replace(/'/g,"\\'")+'\')"><div class="noticia-img"><div style="font-size:40px">'+n.emoji+'</div></div><div class="noticia-fecha">'+n.fecha+'</div><div class="noticia-title">'+n.titulo+'</div></div>';});
+    var nf=(newsFilter==null)?curSeason:newsFilter;
+    html+='<div class="filter-row">'+['t1','t2','t3','all'].map(function(k){var lbl=k==='all'?'Todas':(k==='t1'?'T1':k==='t2'?'T2':'T3');return '<button class="filter-pill'+(nf===k?' active':'')+'" onclick="newsFilter=\''+k+'\';renderView()">'+lbl+'</button>';}).join('')+'</div>';
+    var news=NOTICIAS.filter(function(n){return nf==='all'||n.season===nf;});
+    if(!news.length)html+='<div class="empty-state"><p> Sin noticias de esta temporada</p></div>';
+    news.forEach(function(n,idx){html+='<div class="noticia-card" onclick="openNews('+idx+',\''+nf+'\')"><div class="noticia-img">'+(n.imgs&&n.imgs.length?'<img src="'+n.imgs[0]+'" onerror="this.style.display=\'none\'">':'📰')+'</div><div class="noticia-fecha">'+n.fecha+' · '+(n.season==='t1'?'T1':n.season==='t2'?'T2':'T3')+'</div><div class="noticia-title">'+n.titulo+'</div></div>';});
   }else{
-    html+='<div class="video-note">🎙️ Sube las entrevistas a YouTube (ocultas) y pega el enlace en MEDIA.entrevistas, o súbelas a GitHub y pega la URL raw.</div>';
-    MEDIA.entrevistas.forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+(m.meta||'')+'</div></div></div>';});
+    var ef=(newsFilter==null)?curSeason:newsFilter;
+    html+='<div class="filter-row">'+['t1','t2','t3','all'].map(function(k){var lbl=k==='all'?'Todas':(k==='t1'?'T1':k==='t2'?'T2':'T3');return '<button class="filter-pill'+(ef===k?' active':'')+'" onclick="newsFilter=\''+k+'\';renderView()">'+lbl+'</button>';}).join('')+'</div>';
+    var ents=MEDIA.entrevistas.filter(function(m){return ef==='all'||m.season===ef;});
+    if(!ents.length)html+='<div class="empty-state"><p>🎙️ Sin entrevistas de esta temporada</p></div>';
+    ents.forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+m.meta+'</div></div></div>';});
   }
   html+='</div>';
 }else if(curView==='edits'){
+  var mf=(mediaSeason==null)?curSeason:mediaSeason;
   html+='<div class="view-header"><p class="eyebrow">Multimedia</p><h1>Edits & Media</h1></div>';
-  html+='<div class="video-note">📤 <strong>Cómo añadir contenido:</strong><br>1) GitHub: repo → Add files → sube foto/vídeo (&lt;100MB) → pega RAW_BASE+\'nombre\' en MEDIA.<br>2) YouTube: sube el vídeo (oculto) y pega el enlace en MEDIA → se incrusta solo.</div>';
+  html+='<div class="filter-row">'+['t1','t2','t3','all'].map(function(k){var lbl=k==='all'?'Todas':(k==='t1'?'T1':k==='t2'?'T2':'T3');return '<button class="filter-pill'+(mf===k?' active':'')+'" onclick="mediaSeason=\''+k+'\';renderView()">'+lbl+'</button>';}).join('')+'</div>';
+  html+='<div class="video-note">📤 Añade contenido en GitHub (&lt;100MB) con RAW_BASE+\'nombre\', o YouTube/Drive pegando el enlace en MEDIA.</div>';
   html+='<div class="section-block"><div class="section-heading"><h2>🎬 Edits</h2></div>';
-  MEDIA.edits.forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+(m.meta||'')+'</div></div></div>';});
+  MEDIA.edits.filter(function(m){return mf==='all'||m.season===mf;}).forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+m.meta+'</div></div></div>';});
   html+='</div><div class="section-block"><div class="section-heading"><h2>🏁 Vídeos de carreras</h2></div>';
-  MEDIA.carreras.forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+(m.meta||'')+'</div></div></div>';});
-  html+='</div><div class="section-block"><div class="section-heading"><h2>🎙️ Entrevistas</h2></div>';
-  if(MEDIA.entrevistas.length){MEDIA.entrevistas.forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+(m.meta||'')+'</div></div></div>';});}else{html+='<div class="empty-state"><p>🎙️ Sin entrevistas todavía</p></div>';}
+  var carr=MEDIA.carreras.filter(function(m){return mf==='all'||m.season===mf;});
+  if(!carr.length)html+='<div class="empty-state"><p>🏁 Sin vídeos de esta temporada</p></div>';
+  carr.forEach(function(m){html+='<div class="vcard">'+mediaEmbed(m.url)+'<div class="vcard-info"><div class="vcard-title">'+m.titulo+'</div><div class="vcard-meta">'+m.meta+'</div></div></div>';});
   html+='</div><div class="section-block"><div class="section-heading"><h2>📸 Fotos</h2></div><div class="foto-grid">';
   MEDIA.fotos.forEach(function(f){html+='<div class="foto-item"><img src="'+f.url+'" onerror="this.style.background=\'var(--gray2)\';this.style.height=\'80px\'"><div class="foto-title">'+f.titulo+'</div></div>';});
   html+='</div></div>';
 }
 document.getElementById('app-content').innerHTML=html;window.scrollTo(0,0);}
 
-function openNews(t,d,b){document.getElementById('news-modal-body').innerHTML='<div class="news-modal-header">'+t+'</div><div class="news-modal-date">'+d+'</div><div class="news-modal-body">'+b+'</div>';document.getElementById('news-modal').classList.add('open');}
+function openNews(idx,nf){var list=NOTICIAS.filter(function(n){return nf==='all'||n.season===nf;});var n=list[idx];if(!n)return;
+var imgs=(n.imgs&&n.imgs.length)?'<div class="news-modal-imgs">'+n.imgs.map(function(u){return '<img src="'+u+'" onerror="this.style.display=\'none\'">';}).join('')+'</div>':'';
+var vid=n.video?'<div style="margin-bottom:15px">'+mediaEmbed(n.video)+'</div>':'';
+document.getElementById('news-modal-body').innerHTML='<div class="news-modal-header">'+n.titulo+'</div><div class="news-modal-date">'+n.fecha+'</div>'+vid+imgs+'<div class="news-modal-body">'+n.cuerpo+'</div>';
+document.getElementById('news-modal').classList.add('open');}
 function closeNewsModal(){document.getElementById('news-modal').classList.remove('open');}
 function render(){renderSwitcher();renderView();document.querySelectorAll('.nav-button').forEach(function(b){b.classList.toggle('active',b.dataset.view===curView);});}
 function goView(v){curView=v;render();}
@@ -602,13 +662,19 @@ if(race){raceHtml='<div class="rc-wrap"><div class="rc-title">Resultado de carre
 race.forEach(function(row){var col=riderColor(row.r);
 raceHtml+='<div class="rc-row"><div class="rc-pos" style="border-left-color:'+col+'">'+row.p+'</div><div class="rc-name">'+riderName(row.r).toUpperCase()+'</div><div class="rc-dorsal" style="background:'+col+';color:'+riderText(row.r)+'">'+getDorsal(RIDERS[row.r])+'</div><div class="rc-time'+(row.p===1?' red':'')+'">'+row.t+'</div><div class="rc-pts" style="border-color:'+col+'">+'+row.pts+'</div></div>';});
 raceHtml+='</div>';}
+var predHtml='';
+if(curSeason==='t3'&&PRED_T3[id]){var P=PRED_T3[id];
+predHtml='<div class="pred-box"><h4>🤖 Predicción IA</h4>';
+P.pred.forEach(function(rid,i){predHtml+='<div class="pred-row"><span class="pred-pos">'+(i+1)+'º</span><span class="pred-name" style="color:'+riderColor(rid)+'">'+riderName(rid)+'</span></div>';});
+predHtml+='<div class="pred-razon">📊 '+P.razon+'</div></div>';
+if(CONSEJOS_T3[id])predHtml+='<div class="consejo-box"><h4>⚙️ Consejos de marcha</h4>'+CONSEJOS_T3[id]+'</div>';}
 var times=(TIMES[id]||[]).filter(function(t){return yearAllowed(t.y,t.pre);});
 var timesHtml='';
 if(times.length){timesHtml='<div style="padding:0 16px 14px"><div class="dg-title">Tiempos ('+(curSeason==='t1'?'2024':curSeason==='t2'?'2024-2025':'2024-2026 + pretemporada')+')</div>';
 times.forEach(function(t,i){var col=riderColor(t.r);
 timesHtml+='<div class="tt-row"><div class="tt-dorsal" style="background:'+col+';color:'+riderText(t.r)+'">'+t.d+'</div><div class="tt-time'+(i===0?' red':'')+'">'+t.t+'</div><div class="tt-year" style="border-color:'+col+'">'+t.y+(t.pre?' · PRE':'')+'</div></div>';});
 timesHtml+='</div>';}
-openDialog('<div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-drawing"><img src="'+circImg(c)+'" onerror="this.parentElement.innerHTML=\''+circSVG(c.id).replace(/'/g,"\\'")+'\'"></div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+c.desc+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+c.distancia+' m</div><div class="dig-lbl">Distancia</div></div><div class="dig-box"><div class="dig-val">'+(c.curvasNorm+c.curvasPelig)+'</div><div class="dig-lbl">Curvas</div></div><div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div><div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div></div><div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+win+'</div>'+raceHtml+timesHtml+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earth+'</div>');}
+openDialog('<div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-drawing"><img src="'+circImg(c)+'" onerror="this.parentElement.innerHTML=\''+circSVG(c.id).replace(/'/g,"\\'")+'\'"></div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+c.desc+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+c.distancia+' m</div><div class="dig-lbl">Distancia</div></div><div class="dig-box"><div class="dig-val">'+(c.curvasNorm+c.curvasPelig)+'</div><div class="dig-lbl">Curvas</div></div><div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div><div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div></div>'+predHtml+'<div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+win+'</div>'+raceHtml+timesHtml+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earth+'</div>');}
 
 document.getElementById('dialog-close').onclick=closeDialog;
 document.getElementById('detail-dialog').onclick=function(e){if(e.target===this)closeDialog();};
