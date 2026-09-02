@@ -87,6 +87,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .circ-info{padding:10px 14px}
 .ci-name{font-size:18px;font-weight:900}.ci-record{font-size:13px;color:var(--gray4);float:right}
 .ci-desc{font-size:12px;color:var(--gray5);margin-top:4px}
+.ci-elev{font-size:11px;color:var(--gray4);margin-top:4px}
 .ci-summary{font-size:11px;color:var(--blue);margin-top:6px;font-style:italic}
 .ci-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .ci-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;text-transform:uppercase}
@@ -126,8 +127,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .noticia-cap{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.87);padding:9px 12px}
 .noticia-cap .nc-title{color:#fff;font-size:13px;font-weight:700;line-height:1.3}
 .noticia-cap .nc-date{color:#cfcfcf;font-size:10px;margin-top:3px}
-.news-modal-imgs-single{width:100%;height:230px;object-fit:cover;border-radius:8px;margin-bottom:14px;display:block}
-.news-modal-datebar{background:var(--black);color:#fff;text-align:center;padding:10px;border-radius:8px;margin-top:14px;font-size:13px;font-weight:600}
+.news-img{width:calc(100% - 32px);margin:0 16px 14px;height:230px;object-fit:cover;border-radius:8px;display:block}
+.news-txt{padding:0 16px 12px;font-size:13px;color:var(--gray5);line-height:1.6}
+.news-datebar{margin:0 16px 20px;background:var(--black);color:#fff;text-align:center;padding:10px;border-radius:8px;font-size:13px;font-weight:600}
 .video-note{background:#dbeafe;border-radius:10px;padding:12px 14px;font-size:13px;color:#1e40af;margin:0 14px 14px;line-height:1.5}
 .vcard{background:var(--white);border-radius:12px;margin:0 0 10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
 .vcard-thumb{height:200px;display:flex;align-items:center;justify-content:center;background:var(--gray2);font-size:24px}
@@ -138,7 +140,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .close-btn{position:sticky;top:12px;float:right;background:var(--gray2);border:none;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;z-index:10;margin:12px 12px 0 0}
 .dlg-player-header{padding:20px 16px 16px}
 .dph-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;opacity:.7}
-.dph-name{font-size:28px;font-weight:900;margin-top:4px}
+.dph-name{font-size:26px;font-weight:900;margin-top:4px}
 .dlg-bici-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--gray1);border-radius:10px;margin:0 16px 14px;cursor:pointer;border:1.5px solid var(--gray2)}
 .dbr-img{width:80px;height:48px;background:var(--gray2);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .dbr-img img{width:100%;height:100%;object-fit:contain}
@@ -158,6 +160,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pred-detalle{font-size:11px;color:#4c1d95;margin-top:6px;line-height:1.5;background:#ede9fe;border-radius:8px;padding:8px}
 .consejo-box{margin:0 16px 14px;background:#f0fdf4;border:2px solid var(--green);border-radius:12px;padding:14px;font-size:12px;color:var(--gray5);line-height:1.6}
 .consejo-box h4{font-size:13px;font-weight:800;color:var(--green);margin-bottom:6px}
+.elev-strip{margin:0 16px 14px;background:var(--gray1);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--gray5)}
 .bici-hero{text-align:center;padding:20px 16px 10px;background:var(--gray1)}
 .bici-hero img{width:280px;height:180px;object-fit:contain}
 .bici-model-title{font-size:20px;font-weight:900;padding:14px 16px 2px}
@@ -272,7 +275,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <div class="detail-dialog" id="detail-dialog"><div class="dialog-content" id="dialog-content"><button class="close-btn" id="dialog-close">&#x2715;</button><div id="dialog-body"></div></div></div>
-<div class="news-modal" id="news-modal"><div class="news-modal-content"><button class="close-btn" onclick="closeNewsModal()">&#x2715;</button><div id="news-modal-body"></div></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -335,6 +337,7 @@ var PROJECT_EARTH={t1:GE.t1.sanjose,t2:GE.t2.sanjose,t3:GE.t3.sanjose};
 
 function riesgoEmojiPorDificultad(d){if(d>=20)return'🔴';if(d>=10)return'🟠';if(d>=5)return'🟡';return'🟢';}
 function riesgoEmojis(r){if(!r||r==='-')return'';var e=[];if(r.includes('STOP'))e.push('🛑');if(r.includes('sentido contrario'))e.push('↔️');if(r.includes('obras'))e.push('🚧');if(r.includes('peatones'))e.push('🚶');if(r.includes('visión reducida'))e.push('👁️');if(r.includes('deslizante'))e.push('⚠️');if(r.includes('bicis'))e.push('🚲');return e.join(' ');}
+function elevMedia(c){return ((c.altMin+c.altMax)/2).toFixed(1);}
 
 const CIRCUITS=[
 {id:'sanjose',name:'San José',season:'t1',distancia:914,curvasNorm:6,curvasPelig:3,riesgos:'1 STOP, 2 visión reducida',homePilot:'Toni García',desc:'Circuito técnico y más largo que Benissanó.',opinion:'Circuito técnico con muchas curvas.',zona:'peatones',dif:'media',riesgo:'bajo',altMin:91.2,altMax:94.2,dificultad:18.5,winners:[{s:'T1·2024',n:'Julian Matei'}],fecha:'2024-08-17'},
@@ -408,25 +411,25 @@ vistacalderona:{t2:[{p:1,r:'matei',t:"2'44.89\"",pts:12},{p:2,r:'ruben',t:"2'46.
 var PRED_T3={
 sanjose:{pred:['ruben','toni','hugo','matei','sergio','adrian','fran'],
 razon:'Rubén llegaba con la mejor vuelta de pretemporada (1\'57.23") y el récord de 2025 (1\'54.25"); Toni a una décima (1\'57.34"); Hugo y Matei por detrás en práctica.',
-detalle:'Por qué: Rubén fue el único en bajar de 1\'55" en 2025 y repitió mejor vuelta en práctica → 1º. Toni calca su tiempo de práctica pero su ritmo cayó en la última vuelta → cede al 3º. Hugo, con peor práctica (2\'00.21"), sorprende en carrera (2º): su gestión de esfuerzo es su punto fuerte. Matei con la Merida y malas marchas queda 4º, como anticipaba su mala práctica (2\'09.12"). La IA acertó el podio salvo el puesto de Hugo.'},
+detalle:'Por qué: Rubén fue el único en bajar de 1\'55" en 2025 y repitió mejor vuelta en práctica → 1º. Toni calca su tiempo de práctica pero su ritmo cayó en la última vuelta → cede al 3º. Hugo, con peor práctica (2\'00.21"), sorprende en carrera (2º): su gestión de esfuerzo es su punto fuerte. Matei con la Merida y malas marchas queda 4º, como anticipaba su mala práctica (2\'09.12").'},
 andromeda:{pred:['toni','hugo','matei','ruben','sergio','adrian','fran'],
 razon:'En práctica Toni marcó 1\'46.08" y Hugo 1\'46.57"; la BH 30/46 de Toni y el conocimiento del trazado le daban el favoritismo en la cuesta + ceda el paso.',
-detalle:'Por qué: la cuesta larga premia el piñón 46 de la BH de Toni → 1º. Hugo con Rockrider 22/34 sube bien y aguanta → 2º. La práctica ponía a Rubén (1\'47.23") por delante de Matei (1\'47.91"), pero en carrera Matei aguantó más y fue 3º: su resistencia en carrera supera su vuelta de práctica. Sergio con Scott 32/50 se acerca (1\'41.44" en carrera).'},
+detalle:'Por qué: la cuesta larga premia el piñón grande de la BH de Toni → 1º. Hugo con Rockrider 22/34 sube bien y aguanta → 2º. La práctica ponía a Rubén por delante de Matei, pero en carrera Matei aguantó más y fue 3º. Sergio con Scott 32/50 se acerca (1\'41.44").'},
 maracana:{pred:['matei','hugo','toni','ruben','fran','sergio','adrian'],
 razon:'Circuito llano y rápido de 3 vueltas: los desarrollos tope mandan. Matei (0\'49.97") y Hugo (0\'50.72") eran favoritos por velocidad punta.',
-detalle:'Por qué: en llano gana el que más metros por pedalada tiene: Matei (36-42/11) y Hugo (36/11). La sorpresa fue Toni (0\'52.61"), que con BH 30/11 (menos desarrollo) se coló 2º por rebufo y cadencia. Rubén (0\'52.74") a una centésima de Toni: su Scott 36/11 no bastó sin rebufo. Fran y Sergio por detrás, como marcaban sus tiempos. Aquí puntúan tiempos (5/4/3/2/1).'},
+detalle:'Por qué: en llano gana el que más metros por pedalada tiene: Matei y Hugo. La sorpresa fue Toni (0\'52.61"), que con BH 30/11 se coló 2º por rebufo y cadencia. Rubén (0\'52.74") a una centésima de Toni. Aquí puntúan tiempos (5/4/3/2/1).'},
 poblanova:{pred:['hugo','matei','ruben','toni','sergio','adrian','fran'],
 razon:'Hugo tiene el mejor tiempo de T2 (1\'44.26"); la trazada de velocidad premia el 36/11 del Rockrider y sus frenos hidráulicos.',
-detalle:'Por qué: Pobla Nova es técnica con zona de peatones; la seguridad de frenos de Hugo y su trazada de velocidad le dan el 1º. Matei ganó en 2025 y su Giant va bien en llano → 2º. Rubén y Toni por detrás según tiempos de 2025.'},
+detalle:'Por qué: Pobla Nova es técnica con zona de peatones; la seguridad de frenos de Hugo y su trazada de velocidad le dan el 1º. Matei ganó en 2025 y su Giant va bien en llano → 2º.'},
 benissano:{pred:['ruben','matei','toni','hugo','sergio','adrian','fran'],
 razon:'Rubén domina: victorias T1 y T2 y mejores tiempos (1\'35.30"). Circuito corto y técnico que premia frenada y salida.',
-detalle:'Por qué: Benissanó exige frenar fuerte y relanzar: la Scott Spark de Rubén con TwinLoc y 29" acelera mejor a la salida de curva → 1º. Matei 2º por tiempos, Toni 3º. Aquí puntúan tiempos (5/4/3/2/1), así que Rubén puede ampliar ventaja.'},
+detalle:'Por qué: Benissanó exige frenar fuerte y relanzar: la Scott Spark de Rubén con TwinLoc y 29" acelera mejor a la salida de curva → 1º. Aquí puntúan tiempos, Rubén puede ampliar ventaja.'},
 sima:{pred:['toni','sergio','ruben','matei','hugo','adrian','fran'],
 razon:'Cuestas LARGAS y empinadas: el mono-plato con piñón grande (BH 30/46, Scott 32/50) marca la diferencia.',
-detalle:'Por qué: en subida larga el desarrollo más bajo gana: Toni 30/46=1.2 y Sergio 32/50=1.2 son los mejores → 1º y 2º. Rubén con 36/36=1.9 sufre más pero su potencia lo mantiene 3º. Matei (24/32=1.6) y Hugo (22/34=1.2) quedan 4º-5º por peso/potencia en subida larga.'},
+detalle:'Por qué: en subida larga el desarrollo más bajo gana: Toni 30/46 y Sergio 32/50 son los mejores → 1º y 2º. Rubén con 36/36 sufre más pero su potencia lo mantiene 3º.'},
 sierraespada:{pred:['hugo','ruben','toni','matei','sergio','adrian','fran'],
 razon:'Hugo ganó T2 (2\'05.04") y tiene los mejores tiempos; los 3 STOP premian arrancadas potentes.',
-detalle:'Por qué: cada STOP es una salida parada: el bi-plato de Hugo (22/36 con 11-34) arranca rápido → 1º. Rubén 2º por potencia. Aquí puntúan tiempos, Hugo favorito.'},
+detalle:'Por qué: cada STOP es una salida parada: el bi-plato de Hugo arranca rápido → 1º. Rubén 2º por potencia. Aquí puntúan tiempos, Hugo favorito.'},
 cementerio:{pred:['ruben','matei','hugo','toni','sergio','adrian','fran'],razon:'Cambios de altura y 9 curvas: Rubén y Matei han dominado históricamente.',detalle:'Por qué: Rubén es local y tiene los mejores tiempos; Matei el récord de práctica (1\'22.96"). Hugo por potencia en subidas cortas.'},
 benaguacil:{pred:['ruben','matei','hugo','toni','sergio','adrian','fran'],razon:'Trazada de velocidad; Rubén y Matei con mejores tiempos de T2.',detalle:'Por qué: entrada rápida premia el desarrollo tope; Rubén 1\'33.00" y Matei 1\'33.27" en 2025.'},
 lliria:{pred:['ruben','hugo','matei','toni','sergio','adrian','fran'],razon:'Rubén ganó T2; circuito rápido de ritmo.',detalle:'Por qué: Rubén 1\'27.63" en 2025; Hugo y Matei cerca.'},
@@ -434,18 +437,18 @@ barranquet:{pred:['matei','ruben','hugo','toni','sergio','adrian','fran'],razon:
 vistacalderona:{pred:['matei','ruben','hugo','toni','fran','sergio','adrian'],razon:'Rápido con 3 curvas; Matei ganó T2. Casa de Fran.',detalle:'Por qué: Matei 1\'23.15" y ganó en 2025; Fran conoce el trazado de casa.'}
 };
 var CONSEJOS_T3={
-sanjose:'Tramos: salida+recta (plano), curvas lentas con obras, subida CORTA. MONO (BH 30T / Scott 32T): plano 30x13-15, salida de curva 30x18-21, subida corta 30x24-28, bajada corta mantén 30x11-13 sin cambiar. BI (Giant 24-36 / Rockrider 22-36 / Spark 36): plano 36x15-17, salida 36x18-21 o 24x13-15, subida corta 24x28-32, bajada 36x11-13. TRI (ST100 24-34-42 / Merida 3x7): plano 42x15-17, salida 34x18-21, subida corta 24x24-28, bajada 42x11-13 pedaleando.',
-andromeda:'Tramos: cuesta MEDIA + ceda el paso, recta, bajada corta. MONO: cuesta 30x24-28, tras ceda el paso 30x11, bajada corta mantén. BI: cuesta 24x28-32, recta 36x11-13. TRI: cuesta 34x21-24, recta 42x11-13. No esperes a perder velocidad para bajar de plato/piñón en la cuesta.',
-maracana:'Llano 3 vueltas, solo 2 curvas, bajadas CORTAS. MONO: 30x13-15 y 30x11 con rebufo; salida 30x18-21; frena y baja a 30x18 y relanza. BI: 36x15-17, 36x11; salida 36x18-21. TRI: 42x15-17, 42x11-13. Gasta energía solo en las 2 salidas de curva; el resto es rebufo.',
-poblanova:'Trazada de velocidad con zona de peatones, subida corta. MONO: 15-18 en curva, 13-11 en recta. BI: plato grande en recta, 24x28 en subida corta. TRI: 34x18-21 curva, 42x13-15 recta.',
-benissano:'Corto y técnico, 2 curvas peligrosas, subida corta. MONO mantén 18-21, no uses el 11 hasta la última vuelta. BI plato pequeño en curvas. TRI 34x21-24. Frena antes y relanza fuerte.',
-sima:'Subidas LARGAS y empinadas + bajadas LARGAS. MONO: usa 30x46 (BH) o 32x50 (Scott) desde el inicio de la cuesta; bajada larga estira 30x11/32x11 pedaleando; plano 30x13-15. BI: cambia a plato pequeño (24) con 28-34 ANTES de la rampa; bajada 36x11. TRI: 24x28 en subida larga; 42x11-13 bajada. No gastes el desarrollo tope hasta el llano final.',
-sierraespada:'3 STOP (salidas paradas) + tramos técnicos, subidas cortas. MONO: 21-24 para arrancar, 30x11 en recta. BI: 24x13-15 arrancada, 36x11-13 recta. TRI: 34x15-18 arrancada, 42x11-13 recta. Reserva energía entre paradas.',
-cementerio:'Cambios de altura, subidas CORTAS repetidas, bajadas cortas. MONO: 24-28 en subidas cortas, 30x11-13 bajadas. BI: 24x24-28 subida, 36x11 bajada. TRI: 34x21-24 subida, 42x11-13 bajada. No frenes de más.',
-benaguacil:'Entrada rápida, plano, bajada corta. MONO: 30x13-15, salida 30x18-21. BI: 36x15-17. TRI: 42x15-17. Estira y mantén cadencia.',
-lliria:'Ritmo rápido, plano, bajadas cortas. MONO: 15-13 y 11 con rebufo. BI: 36x13-15. TRI: 42x13-15. Mantén cadencia alta.',
-barranquet:'Muy técnico, 5 curvas peligrosas, subida corta. MONO: 18-21 en curvas, 30x24 subida corta. BI: 24x28-32 subida, 36x15-17 recta. TRI: 24x24-28 subida, 42x15-17 recta. Gasta solo en salidas.',
-vistacalderona:'Rápido con 3 curvas, plano, bajadas cortas. MONO: 30x13-15, salida 30x18-21, 30x11 con rebufo. BI: 36x15-17, 36x11. TRI: 42x15-17, 42x11-13.'
+sanjose:'Tramos: salida+recta (plano), curvas lentas con obras, subida CORTA. MONO: plano 1×7-9, salida 1×4-5, subida corta 1×3-4, bajada 1×10. BI: plano 2×5-7, salida 2×3-4, subida corta 1×6-7, bajada 2×8-9. TRI: plano 3×4-6, salida 2×3-4, subida corta 2×2-3, bajada 3×7. 💪 Fuerza máxima: en la salida de las curvas de las obras y en la recta final; no la gastes en la subida corta, pásala con inercia.',
+andromeda:'Tramos: cuesta MEDIA + ceda el paso, recta, bajada corta. MONO: cuesta 1×3-4, tras el ceda el paso 1×8-10, bajada 1×10. BI: cuesta 1×5-7, recta 2×6-8, bajada 2×9. TRI: cuesta 1×4-6, recta 3×5-6, bajada 3×7. 💪 Fuerza máxima: en la cuesta tras el ceda el paso (ahí se gana la posición) y en la última recta; administra en la bajada.',
+maracana:'Llano 3 vueltas, solo 2 curvas, bajadas CORTAS. MONO: 1×7-9 y 1×10 con rebufo; salida 1×4-5. BI: 2×5-7, 2×8-9; salida 2×3-4. TRI: 3×4-6, 3×7. 💪 Fuerza máxima: solo en las 2 salidas de curva y en el sprint final con rebufo; el resto es administrar y rodar a rueda.',
+poblanova:'Trazada de velocidad con zona de peatones, subida corta. MONO: curva 1×4-5, recta 1×8-10. BI: curva 2×3-4, recta 2×6-8. TRI: curva 2×3-4, recta 3×5-6. 💪 Fuerza máxima: en la entrada de la zona de peatones y en la recta larga.',
+benissano:'Corto y técnico, 2 curvas peligrosas, subida corta. MONO: 1×4-6, no uses 1×10 hasta la última vuelta. BI: 1×6-7 en curvas, 2×5-6 recta. TRI: 2×3-4 curvas, 3×4-5 recta. 💪 Fuerza máxima: en las 2 salidas de curva peligrosas; frena antes y relanza fuerte.',
+sima:'Subidas LARGAS y empinadas + bajadas LARGAS. MONO: subida larga 1×1-2 desde el inicio, bajada larga 1×10 pedaleando, plano 1×7-8. BI: subida larga 1×4-6 ANTES de la rampa, bajada 2×9. TRI: subida larga 1×3-5, bajada 3×7. 💪 Fuerza máxima: NO al principio de la cuesta larga (administra), sí en el último tercio de la cuesta y en el llano final; en la bajada larga recupera.',
+sierraespada:'3 STOP (salidas paradas) + tramos técnicos, subidas cortas. MONO: arrancada 1×4-5, recta 1×8-10. BI: arrancada 2×3-4, recta 2×6-8. TRI: arrancada 2×3-4, recta 3×5-6. 💪 Fuerza máxima: en cada arrancada tras los STOP; reserva energía entre paradas.',
+cementerio:'Cambios de altura, subidas CORTAS repetidas, bajadas cortas. MONO: subida corta 1×3-4, bajada 1×9-10. BI: subida 1×6-7, bajada 2×8-9. TRI: subida 2×2-4, bajada 3×6-7. 💪 Fuerza máxima: en las subidas cortas repetidas (ahí se selecciona); no frenes de más.',
+benaguacil:'Entrada rápida, plano, bajada corta. MONO: 1×7-9, salida 1×4-5. BI: 2×5-7. TRI: 3×4-6. 💪 Fuerza máxima: en la entrada rápida y en la recta; estira y mantén cadencia.',
+lliria:'Ritmo rápido, plano, bajadas cortas. MONO: 1×8-10 con rebufo. BI: 2×6-8. TRI: 3×5-6. 💪 Fuerza máxima: en las salidas de curva; mantén cadencia alta.',
+barranquet:'Muy técnico, 5 curvas peligrosas, subida corta. MONO: curvas 1×4-5, subida corta 1×3-4, recta 1×7-8. BI: curvas 2×3-4, subida 1×6-7, recta 2×5-7. TRI: curvas 2×3-4, subida 2×2-3, recta 3×4-5. 💪 Fuerza máxima: solo en las salidas de las 5 curvas; el resto administra.',
+vistacalderona:'Rápido con 3 curvas, plano, bajadas cortas. MONO: 1×7-9, salida 1×4-5, 1×10 con rebufo. BI: 2×5-7, 2×8-9. TRI: 3×4-6, 3×7. 💪 Fuerza máxima: en las 3 salidas de curva y en la recta de meta.'
 };
 
 const PRACTICAS=[
@@ -564,7 +567,7 @@ if(curView==='inicio'){
     var dh='<div class="circ-drawing"><img src="'+circImg(c)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;align-items:center;justify-content:center;height:100%;">'+circSVG(c.id)+'</div>';
     if(eu)dh+='<button class="google-earth-btn" onclick="event.stopPropagation();window.open(\''+eu+'\',\'_blank\')">🌍 Google Earth</button>';
     dh+='</div>';
-    html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')"><div class="circ-header-bar"><span class="ch-label">Circuito</span><span class="ch-badge badge-circuit">CIRCUITO</span></div>'+dh+'<div class="circ-info"><span class="ci-record">'+c.distancia+' m</span><div class="ci-name">'+c.name+'</div><div class="ci-desc">'+c.desc+'</div><div class="ci-summary">💡 '+c.opinion+'</div><div class="ci-tags">'+zonaBadge(c.zona)+difBadge(c.dif)+riesgoBadge(c.riesgo)+'</div></div></div>';});
+    html+='<div class="circ-card" onclick="openCircuit(\''+c.id+'\')"><div class="circ-header-bar"><span class="ch-label">Circuito</span><span class="ch-badge badge-circuit">CIRCUITO</span></div>'+dh+'<div class="circ-info"><span class="ci-record">'+c.distancia+' m</span><div class="ci-name">'+c.name+'</div><div class="ci-desc">'+c.desc+'</div><div class="ci-elev">⛰️ Elevación: mín '+c.altMin+' m · media '+elevMedia(c)+' m · máx '+c.altMax+' m</div><div class="ci-summary">💡 '+c.opinion+'</div><div class="ci-tags">'+zonaBadge(c.zona)+difBadge(c.dif)+riesgoBadge(c.riesgo)+'</div></div></div>';});
   if(!list.length)html+='<div class="empty-state"><p>🔍 No hay circuitos</p></div>';
 }else if(curView==='horarios'){
   html+='<div class="view-header"><p class="eyebrow">Calendario</p><h1>Horarios</h1></div>';
@@ -583,7 +586,7 @@ if(curView==='inicio'){
   +'<li><strong>🧗 Velocidad Mínima (Subida)</strong> = 2,167 m × (plato ÷ piñón más grande). Más pequeño = sube mejor.</li>'
   +'<li><strong>🔄 Media (Versatilidad)</strong> = (Máx + Mín) ÷ 2. Más alto = más versátil.</li>'
   +'<li><strong>🛑 Frenos</strong>: 🟢 Hidráulico &gt; 🟡 Mecánico &gt; 🔴 V-Brake.</li>'
-  +'<li><strong>Platos</strong>: MONO (1 plato), BI (2), TRI (3). Los mono dependen del cassette; los bi/tri ganan rango en subidas.</li>'
+  +'<li><strong>Platos</strong>: MONO (1), BI (2), TRI (3). Los mono dependen del cassette; los bi/tri ganan rango en subidas.</li>'
   +'</ul></div></div>';
   bikes.forEach(function(x){var r=x.r,b=x.b,dev=x.dev;
   html+='<div class="bici-info-box"><h3>'+b.model+' - '+r.first+' '+r.last+'</h3><div class="bike-pros-cons"><div class="bpc-section pros"><h4>✅ Ventajas</h4><ul>'+b.ventajas.map(function(v){return '<li>'+v+'</li>';}).join('')+'</ul></div><div class="bpc-section cons"><h4>⚠️ Desventajas</h4><ul>'+b.desventajas.map(function(d){return '<li>'+d+'</li>';}).join('')+'</ul></div></div>';
@@ -606,7 +609,7 @@ if(curView==='inicio'){
   if(infoTab==='normas'){
     if(curSeason==='t3'){
       html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera (nuevo baremo)</div><div class="ns-body"><ul><li>1º→15</li><li>2º→12</li><li>3º→10</li><li>4º→8</li><li>5º→7</li><li>6º→6</li><li>7º→5</li></ul><div class="ns-nocasa">Sin puntos de casa. Recuperación: 3 pts.</div></div></div>';
-      html+='<div class="norma-section"><div class="ns-title">⏱ Puntos de Tiempo</div><div class="ns-body"><div class="ns-time">En Maracaná, Benissanó, La Sima, Nuevo circuito y Sierra Espada: 1º+5 · 2º+4 · 3º+3 · 4º+2 · 5º+1.</div><ul><li>Andrómeda NO puntúa tiempos.</li></ul></div></div>';
+      html+='<div class="norma-section"><div class="ns-title">⏱ Puntos de Tiempo</div><div class="ns-body"><div class="ns-time">En Maracaná, Benissanó, La Sima, Nuevo circuito y Sierra Espada: 1º+5 · 2º+4 · 3º+3 · 4º+2 · 5º+1.</div></div></div>';
     }else if(curSeason==='t2'){
       html+='<div class="norma-section"><div class="ns-title">🏁 Puntos Carrera</div><div class="ns-body"><ul><li>1º→12</li><li>2º→9</li><li>3º→7</li><li>4º→5</li></ul><div class="ns-pole">Casa ×1.5.</div></div></div>';
     }else{
@@ -648,13 +651,13 @@ if(curView==='inicio'){
 document.getElementById('app-content').innerHTML=html;window.scrollTo(0,0);}
 
 function openNews(idx,nf){var list=NOTICIAS.filter(function(n){return nf==='all'||n.season===nf;});var n=list[idx];if(!n)return;
-var body='';
-if(n.blocks){body=n.blocks.map(function(b){if(b.t==='img')return '<img src="'+b.src+'" class="news-modal-imgs-single" onerror="this.style.display=\'none\'">';if(b.t==='p')return '<p style="margin-bottom:12px">'+b.text+'</p>';return '';}).join('');}
-else{body='<div class="news-modal-body">'+(n.cuerpo||'')+'</div>';}
-var vid=n.video?'<div style="margin-bottom:15px">'+mediaEmbed(n.video)+'</div>':'';
-document.getElementById('news-modal-body').innerHTML='<div class="news-modal-header">'+n.titulo+'</div>'+vid+body+'<div class="news-modal-datebar">'+n.fecha+'</div>';
-document.getElementById('news-modal').classList.add('open');}
-function closeNewsModal(){document.getElementById('news-modal').classList.remove('open');}
+var body='<div class="dlg-player-header" style="background:var(--black)"><div class="dph-name" style="color:#fff">'+n.titulo+'</div></div>';
+if(n.video)body+='<div style="padding:0 16px 14px">'+mediaEmbed(n.video)+'</div>';
+if(n.blocks){n.blocks.forEach(function(b){if(b.t==='img')body+='<img src="'+b.src+'" class="news-img" onerror="this.style.display=\'none\'">';if(b.t==='p')body+='<div class="news-txt">'+b.text+'</div>';});}
+else if(n.cuerpo){body+='<div class="news-txt">'+n.cuerpo+'</div>';}
+body+='<div class="news-datebar">'+n.fecha+'</div>';
+openDialog(body);}
+function closeNewsModal(){}
 function render(){renderSwitcher();renderView();document.querySelectorAll('.nav-button').forEach(function(b){b.classList.toggle('active',b.dataset.view===curView);});}
 function goView(v){curView=v;render();}
 function openDialog(h){document.getElementById('dialog-body').innerHTML=h;document.getElementById('detail-dialog').classList.add('open');document.getElementById('dialog-content').scrollTop=0;document.body.style.overflow='hidden';}
@@ -692,7 +695,8 @@ if(times.length){timesHtml='<div style="padding:0 16px 14px"><div class="dg-titl
 times.forEach(function(t,i){var col=riderColor(t.r);
 timesHtml+='<div class="tt-row"><div class="tt-dorsal" style="background:'+col+';color:'+riderText(t.r)+'">'+t.d+'</div><div class="tt-time'+(i===0?' red':'')+'">'+t.t+'</div><div class="tt-year" style="border-color:'+col+'">'+t.y+(t.pre?' · PRE':'')+'</div></div>';});
 timesHtml+='</div>';}
-openDialog('<div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-drawing"><img src="'+circImg(c)+'" onerror="this.parentElement.innerHTML=\''+circSVG(c.id).replace(/'/g,"\\'")+'\'"></div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+c.desc+'</div><div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+c.distancia+' m</div><div class="dig-lbl">Distancia</div></div><div class="dig-box"><div class="dig-val">'+(c.curvasNorm+c.curvasPelig)+'</div><div class="dig-lbl">Curvas</div></div><div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div><div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div></div>'+predHtml+'<div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+win+'</div>'+raceHtml+timesHtml+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earth+'</div>');}
+var elevHtml='<div class="elev-strip"><span>⬇️ Mín '+c.altMin+' m</span><span>➖ Media '+elevMedia(c)+' m</span><span>⬆️ Máx '+c.altMax+' m</span></div>';
+openDialog('<div class="dlg-circ-label">CIRCUITO</div><div class="dlg-circ-drawing"><img src="'+circImg(c)+'" onerror="this.parentElement.innerHTML=\''+circSVG(c.id).replace(/'/g,"\\'")+'\'"></div><div class="dlg-circ-name">'+c.name+'</div><div class="dlg-circ-desc">'+c.desc+'</div>'+elevHtml+'<div class="dlg-info-grid"><div class="dig-box"><div class="dig-val">'+c.distancia+' m</div><div class="dig-lbl">Distancia</div></div><div class="dig-box"><div class="dig-val">'+(c.curvasNorm+c.curvasPelig)+'</div><div class="dig-lbl">Curvas</div></div><div class="dig-box"><div class="dig-val">'+(c.riesgos||'-')+'</div><div class="dig-lbl">Riesgos</div></div><div class="dig-box"><div class="dig-val">'+(c.homePilot||'-')+'</div><div class="dig-lbl">Casa de</div></div></div>'+predHtml+'<div class="dlg-ganadores"><div class="dg-title">Ganadores</div>'+win+'</div>'+raceHtml+timesHtml+'<div class="dlg-actions"><button class="btn-back" onclick="closeDialog()">Volver</button>'+earth+'</div>');}
 
 document.getElementById('dialog-close').onclick=closeDialog;
 document.getElementById('detail-dialog').onclick=function(e){if(e.target===this)closeDialog();};
