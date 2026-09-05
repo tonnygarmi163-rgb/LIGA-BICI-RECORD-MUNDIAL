@@ -11,7 +11,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .loading-screen{position:fixed;inset:0;background:#000;z-index:99999;overflow:hidden;transition:opacity .8s,visibility .8s}
 .loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .loading-video-container{position:absolute;inset:0;overflow:hidden}
-.loading-video-container video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover}
+.loading-video-container video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain}
 .skip-btn{position:fixed;bottom:40px;right:40px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:#fff;border:2px solid rgba(255,255,255,.5);padding:12px 30px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;z-index:100000;text-transform:uppercase;letter-spacing:1px}
 .sound-btn{position:fixed;bottom:40px;left:40px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:#fff;border:2px solid rgba(255,255,255,.5);padding:12px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;z-index:100000}
 .screen{display:none;min-height:100vh;padding-bottom:calc(var(--nav-h) + 24px)}.screen.active{display:block}
@@ -413,15 +413,16 @@ sierraespada:[{r:'matei',d:9,t:"1'49.00\"",y:2024},{r:'hugo',d:69,t:"2'05.04\"",
 vistacalderona:[{r:'ruben',d:23,t:"1'22.43\"",y:2025},{r:'matei',d:1,t:"1'23.15\"",y:2025},{r:'toni',d:7,t:"1'47.14\"",y:2025}]
 };
 const RACES={
-sanjose:{t2:[{p:1,r:'toni',t:"4'25.63\"",pts:18},{p:2,r:'ruben',t:"4'25.87\"",pts:9},{p:3,r:'matei',t:"4'47.66\"",pts:7},{p:4,r:'hugo',t:"5'12.40\"",pts:6}],t3:[{p:1,r:'ruben',t:"3'42.80\"",pts:15},{p:2,r:'hugo',t:'-0.17s',pts:12},{p:3,r:'toni',t:'-4.01s',pts:9},{p:4,r:'matei',t:'-5.20s',pts:7},{p:5,r:'adrian',t:'-66.13s',pts:6},{p:6,r:'sergio',t:'-70.21s',pts:5},{p:7,r:'fran',t:'NPT',pts:0}]},
-andromeda:{t2:[{p:1,r:'matei',t:"4'02.16\"",pts:12},{p:2,r:'hugo',t:"4'02.67\"",pts:13},{p:3,r:'ruben',t:"4'04.48\"",pts:7},{p:4,r:'toni',t:"5'12.21\"",pts:6}],t3:[{p:1,r:'toni',t:"3'15.23\"",pts:15},{p:2,r:'hugo',t:'-0.70s',pts:12},{p:3,r:'matei',t:'-5.69s',pts:9},{p:4,r:'ruben',t:'-9.03s',pts:7},{p:5,r:'sergio',t:'-50.13s',pts:6},{p:6,r:'adrian',t:'NPT',pts:0},{p:7,r:'fran',t:'NPT',pts:0}]},
-maracana:{t2:[{p:1,r:'hugo',t:"3'19.87\"",pts:12},{p:2,r:'ruben',t:"3'20.45\"",pts:9},{p:3,r:'matei',t:"3'27.26\"",pts:10}],t3:[{p:1,r:'matei',t:"0'49.97\"",pts:15},{p:2,r:'toni',t:"0'52.61\"",pts:12},{p:3,r:'hugo',t:"0'50.72\"",pts:10},{p:4,r:'fran',t:"0'59.24\"",pts:8},{p:5,r:'ruben',t:"0'52.74\"",pts:7},{p:6,r:'sergio',t:"1'00.24\"",pts:6},{p:7,r:'adrian',t:"1'10.74\"",pts:5}]},
-cementerio:{t2:[{p:1,r:'hugo',t:"3'05.46\"",pts:12},{p:2,r:'matei',t:"3'10.03\"",pts:9},{p:3,r:'ruben',t:"3'29.67\"",pts:7},{p:4,r:'toni',t:"4'21.34\"",pts:5}]},
-benissano:{t2:[{p:1,r:'ruben',t:"3'10.92\"",pts:12},{p:2,r:'matei',t:"3'17.17\"",pts:9},{p:3,r:'hugo',t:"3'36.50\"",pts:7},{p:4,r:'toni',t:"6'36.76\"",pts:5}]},
-benaguacil:{t2:[{p:1,r:'matei',t:"3'13.20\"",pts:12},{p:2,r:'ruben',t:"3'13.67\"",pts:9},{p:3,r:'hugo',t:"3'22.23\"",pts:7},{p:4,r:'toni',t:"4'10.56\"",pts:5}]},
+sanjose:{t1:[{p:1,r:'matei',t:'-',pts:12},{p:2,r:'ruben',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}],t2:[{p:1,r:'toni',t:"4'25.63\"",pts:18},{p:2,r:'ruben',t:"4'25.87\"",pts:9},{p:3,r:'matei',t:"4'47.66\"",pts:7},{p:4,r:'hugo',t:"5'12.40\"",pts:6}],t3:[{p:1,r:'ruben',t:"3'42.80\"",pts:15},{p:2,r:'hugo',t:'-0.17s',pts:12},{p:3,r:'toni',t:'-4.01s',pts:9},{p:4,r:'matei',t:'-5.20s',pts:7},{p:5,r:'adrian',t:'-66.13s',pts:6},{p:6,r:'sergio',t:'-70.21s',pts:5},{p:7,r:'fran',t:'NPT',pts:0}]},
+andromeda:{t1:[{p:1,r:'hugo',t:'-',pts:12},{p:2,r:'ruben',t:'-',pts:9},{p:3,r:'matei',t:'-',pts:7},{p:4,r:'toni',t:'-',pts:5}],t2:[{p:1,r:'matei',t:"4'02.16\"",pts:12},{p:2,r:'hugo',t:"4'02.67\"",pts:13},{p:3,r:'ruben',t:"4'04.48\"",pts:7},{p:4,r:'toni',t:"5'12.21\"",pts:6}],t3:[{p:1,r:'toni',t:"3'15.23\"",pts:15},{p:2,r:'hugo',t:'-0.70s',pts:12},{p:3,r:'matei',t:'-5.69s',pts:9},{p:4,r:'ruben',t:'-9.03s',pts:7},{p:5,r:'sergio',t:'-50.13s',pts:6},{p:6,r:'adrian',t:'NPT',pts:0},{p:7,r:'fran',t:'NPT',pts:0}]},
+maracana:{t1:[{p:1,r:'ruben',t:'-',pts:12},{p:2,r:'matei',t:'-',pts:9},{p:3,r:'hugo',t:'-',pts:7},{p:4,r:'toni',t:'-',pts:5}],t2:[{p:1,r:'hugo',t:"3'19.87\"",pts:12},{p:2,r:'ruben',t:"3'20.45\"",pts:9},{p:3,r:'matei',t:"3'27.26\"",pts:10}],t3:[{p:1,r:'matei',t:"0'49.97\"",pts:15},{p:2,r:'toni',t:"0'52.61\"",pts:12},{p:3,r:'hugo',t:"0'50.72\"",pts:10},{p:4,r:'fran',t:"0'59.24\"",pts:8},{p:5,r:'ruben',t:"0'52.74\"",pts:7},{p:6,r:'sergio',t:"1'00.24\"",pts:6},{p:7,r:'adrian',t:"1'10.74\"",pts:5}]},
+cementerio:{t1:[{p:1,r:'matei',t:'-',pts:12},{p:2,r:'ruben',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}],t2:[{p:1,r:'hugo',t:"3'05.46\"",pts:12},{p:2,r:'matei',t:"3'10.03\"",pts:9},{p:3,r:'ruben',t:"3'29.67\"",pts:7},{p:4,r:'toni',t:"4'21.34\"",pts:5}]},
+benissano:{t1:[{p:1,r:'ruben',t:'-',pts:12},{p:2,r:'matei',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}],t2:[{p:1,r:'ruben',t:"3'10.92\"",pts:12},{p:2,r:'matei',t:"3'17.17\"",pts:9},{p:3,r:'hugo',t:"3'36.50\"",pts:7},{p:4,r:'toni',t:"6'36.76\"",pts:5}]},
+benaguacil:{t1:[{p:1,r:'ruben',t:'-',pts:12},{p:2,r:'matei',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}],t2:[{p:1,r:'matei',t:"3'13.20\"",pts:12},{p:2,r:'ruben',t:"3'13.67\"",pts:9},{p:3,r:'hugo',t:"3'22.23\"",pts:7},{p:4,r:'toni',t:"4'10.56\"",pts:5}]},
 lliria:{t2:[{p:1,r:'ruben',t:"2'59.56\"",pts:12},{p:2,r:'matei',t:"3'02.76\"",pts:9},{p:3,r:'hugo',t:"3'08.23\"",pts:7},{p:4,r:'toni',t:"3'46.86\"",pts:5}]},
-barranquet:{t2:[{p:1,r:'matei',t:"2'58.24\"",pts:12},{p:2,r:'hugo',t:"3'15.00\"",pts:9},{p:3,r:'ruben',t:"3'25.89\"",pts:7},{p:4,r:'toni',t:"4'31.79\"",pts:5}]},
-sierraespada:{t2:[{p:1,r:'hugo',t:"4'09.89\"",pts:12},{p:2,r:'ruben',t:"4'10.41\"",pts:9},{p:3,r:'matei',t:"4'11.07\"",pts:7},{p:4,r:'toni',t:"5'03.59\"",pts:5}]},
+barranquet:{t1:[{p:1,r:'matei',t:'-',pts:12},{p:2,r:'ruben',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}],t2:[{p:1,r:'matei',t:"2'58.24\"",pts:12},{p:2,r:'hugo',t:"3'15.00\"",pts:9},{p:3,r:'ruben',t:"3'25.89\"",pts:7},{p:4,r:'toni',t:"4'31.79\"",pts:5}]},
+sierraespada:{t1:[{p:1,r:'ruben',t:'-',pts:12},{p:2,r:'matei',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}],t2:[{p:1,r:'hugo',t:"4'09.89\"",pts:12},{p:2,r:'ruben',t:"4'10.41\"",pts:9},{p:3,r:'matei',t:"4'11.07\"",pts:7},{p:4,r:'toni',t:"5'03.59\"",pts:5}]},
+rascanya:{t1:[{p:1,r:'matei',t:'-',pts:12},{p:2,r:'ruben',t:'-',pts:9},{p:3,r:'toni',t:'-',pts:7},{p:4,r:'hugo',t:'-',pts:5}]},
 vistacalderona:{t2:[{p:1,r:'matei',t:"2'44.89\"",pts:12},{p:2,r:'ruben',t:"2'46.93\"",pts:9},{p:3,r:'toni',t:"3'40.39\"",pts:7}]}
 };
 var PRED_T3={
@@ -547,28 +548,29 @@ function startCountdown(){if(cdTimer){clearInterval(cdTimer);cdTimer=null;}var e
 function stopCountdown(){if(cdTimer){clearInterval(cdTimer);cdTimer=null;}}
 function chartHTML(){
 var cfg=null;
-if(curSeason==='t3'){cfg={order:['San José','Andrómeda','Maracaná'],labs:['SALIDA','SJ','AND','MAR'],max:40,W:340,H:160};}
-else if(curSeason==='t2'){cfg={order:['San José','Andrómeda','Maracaná','Benissanó','Pobla Nova','Cementerio','Benaguacil','Llíria','Barranquet','Sierra Espada','Vista Calderona'],labs:['SALIDA','SJ','AND','MAR','BEN','PN','CEM','BAG','LLI','BAR','SE','VC'],max:120,W:660,H:170};}
+if(curSeason==='t3'){cfg={order:['San José','Andrómeda','Maracaná'],labs:['SALIDA','SJ','AND','MAR'],max:40,W:340,H:170};}
+else if(curSeason==='t2'){cfg={order:['San José','Andrómeda','Maracaná','Benissanó','Pobla Nova','Cementerio','Benaguacil','Llíria','Barranquet','Sierra Espada','Vista Calderona'],labs:['SALIDA','SJ','AND','MAR','BEN','PN','CEM','BAG','LLI','BAR','SE','VC'],max:120,W:660,H:180};}
 if(!cfg)return '<div class="norma-section"><div class="ns-title">📈 Evolución de puntos</div><div class="ns-body">Disponible con el recuento completo de la temporada.</div></div>';
 var s=SEASONS[curSeason];var W=cfg.W,H=cfg.H,P=26,n=cfg.order.length;
 function xs(i){return P+i*(W-2*P)/n;}
 function ys(v){return H-P-(v/cfg.max)*(H-2*P);}
+var offArr=[-6,10,-14,16];
 var out='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;background:#0b0b0c;border-radius:10px">';
 out+='<line x1="'+P+'" y1="'+ys(0)+'" x2="'+(W-P)+'" y2="'+ys(0)+'" stroke="#333333" stroke-width="1"/>';
 var fs=n>6?7:9;
 for(var i=0;i<=n;i++){out+='<text x="'+xs(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="'+fs+'" fill="#9a9a9a">'+cfg.labs[i]+'</text>';}
 s.standings.forEach(function(st,idx){var rd=RIDERS[st.id];var acc=0;var pts=[0];
-cfg.order.forEach(function(cn){var sum=0;(s.scores[st.id]||[]).forEach(function(sc){if(sc.c===cn||(sc.tipo==='recuperacion'&&sc.c.indexOf(cn)>-1))sum+=sc.pts;});acc+=sum;pts.push(acc);});
+cfg.order.forEach(function(cn,ci){var sum=0;(s.scores[st.id]||[]).forEach(function(sc){if(sc.c===cn||(sc.tipo==='recuperacion'&&sc.c.indexOf(cn)>-1))sum+=sc.pts;});acc+=sum;pts.push(ci===n-1?st.pts:acc);});
 var str='';pts.forEach(function(v,i){str+=xs(i)+','+ys(v)+' ';});
 out+='<polyline points="'+str+'" fill="none" stroke="'+rd.color+'" stroke-width="2"/>';
-var off=(idx%2===0)?5:12;
-pts.forEach(function(v,i){if(i===0)return;out+='<circle cx="'+xs(i)+'" cy="'+ys(v)+'" r="2.5" fill="'+rd.color+'"/>';out+='<text x="'+xs(i)+'" y="'+(ys(v)-off)+'" text-anchor="middle" font-size="7" font-weight="800" fill="'+rd.color+'">'+v+'</text>';});
+var off=offArr[idx%4];
+pts.forEach(function(v,i){if(i===0)return;out+='<circle cx="'+xs(i)+'" cy="'+ys(v)+'" r="2.5" fill="'+rd.color+'"/>';out+='<text x="'+xs(i)+'" y="'+(ys(v)+off)+'" text-anchor="middle" font-size="7" font-weight="800" fill="'+rd.color+'">'+v+'</text>';});
 });
 out+='</svg>';
 var leg='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">'+s.standings.map(function(st){var rd=RIDERS[st.id];return '<span class="ci-tag" style="background:'+rd.color+';color:'+rd.textColor+'">'+rd.first+' '+rd.last+'</span>';}).join('')+'</div>';
 return '<div class="norma-section"><div class="ns-title">📈 Evolución de puntos por carrera</div>'+out+leg+'</div>';
 }
-function duels(a,b){var wa=0,wb=0;Object.keys(RACES).forEach(function(cid){Object.keys(RACES[cid]).forEach(function(se){var rows=RACES[cid][se];var ra=null,rb=null;rows.forEach(function(r){if(r.r===a)ra=r;if(r.r===b)rb=r;});if(ra&&rb){if(ra.p<rb.p)wa++;else if(rb.p<ra.p)wb++;}});});return[wa,wb];}
+function duels(a,b){var wa=0,wb=0;Object.keys(RACES).forEach(function(cid){Object.keys(RACES[cid]).forEach(function(se){var rows=RACES[cid][se];var ra=null,rb=null;rows.forEach(function(r){if(r.r===a)ra=r;if(r.r===b)rb=r;});if(ra&&rb){if(ra.p===1)wa++;if(rb.p===1)wb++;}});});return[wa,wb];}
 function renderSwitcher(){var html=['t1','t2','t3'].map(function(k){var s=SEASONS[k];return '<button class="season-card'+(curSeason===k?' active':'')+'" data-season="'+k+'"><span class="season-kicker">'+s.kicker+'</span><strong>'+s.label+'</strong><span>'+s.year+'</span></button>';}).join('');document.getElementById('season-switcher').innerHTML=html;document.querySelectorAll('.season-card').forEach(function(b){b.onclick=function(){curSeason=b.dataset.season;render();};});}
 function getTotalPts(id){return Object.values(SEASONS).reduce(function(a,s){var x=s.standings.find(function(x){return x.id===id;});return a+(x&&typeof x.pts==='number'?x.pts:0);},0);}
 function getSortedRiders(){var s=SEASONS[curSeason];var riders=Object.values(RIDERS).filter(function(r){return r.seasons.includes(curSeason);});riders.sort(function(a,b){var va,vb;if(sortBy==='nombre'){va=a.first.toLowerCase();vb=b.first.toLowerCase();}else if(sortBy==='apellido'){va=a.last.toLowerCase();vb=b.last.toLowerCase();}else if(sortBy==='dorsal'){va=getDorsal(a);vb=getDorsal(b);}else if(sortBy==='ptsTemporada'){var sa=s.standings.find(function(x){return x.id===a.id;})||{pts:0};var sb=s.standings.find(function(x){return x.id===b.id;})||{pts:0};va=sa.pts;vb=sb.pts;}else{va=getTotalPts(a.id);vb=getTotalPts(b.id);}if(va<vb)return sortDir==='asc'?-1:1;if(va>vb)return sortDir==='asc'?1:-1;return 0;});return riders;}
@@ -616,7 +618,7 @@ var opts=Object.values(RIDERS).map(function(r){return '<option value="'+r.id+'">
 html+='<div class="h2h-controls"><select class="h2h-select" onchange="h2hA=this.value;renderView()">'+opts.replace('value="'+h2hA+'"','value="'+h2hA+'" selected')+'</select><span class="h2h-vs">VS</span><select class="h2h-select" onchange="h2hB=this.value;renderView()">'+opts.replace('value="'+h2hB+'"','value="'+h2hB+'" selected')+'</select></div>';
 var A=RIDERS[h2hA],B=RIDERS[h2hB];var du=duels(h2hA,h2hB);
 html+='<div class="h2h-card"><div class="h2h-head"><div class="h2h-side" style="background:'+A.color+'"><div class="hs-name" style="color:'+A.textColor+'">'+A.first+'</div><div class="hs-num" style="color:'+A.textColor+'">'+du[0]+'</div></div><div class="h2h-side" style="background:'+B.color+'"><div class="hs-name" style="color:'+B.textColor+'">'+B.first+'</div><div class="hs-num" style="color:'+B.textColor+'">'+du[1]+'</div></div></div><div class="h2h-rows">';
-html+='<div class="h2h-row"><span class="hr-l">'+du[0]+'</span><span class="hr-m">Duelos directos en carrera</span><span class="hr-r">'+du[1]+'</span></div>';
+html+='<div class="h2h-row"><span class="hr-l">'+du[0]+'</span><span class="hr-m">Victorias en enfrentamientos directos (T1+T2+T3)</span><span class="hr-r">'+du[1]+'</span></div>';
 html+='<div class="h2h-row"><span class="hr-l">'+A.wins.length+'</span><span class="hr-m">Victorias</span><span class="hr-r">'+B.wins.length+'</span></div>';
 html+='<div class="h2h-row"><span class="hr-l">'+A.stats.podios+'</span><span class="hr-m">Podios</span><span class="hr-r">'+B.stats.podios+'</span></div>';
 html+='<div class="h2h-row"><span class="hr-l">'+A.stats.poles+'</span><span class="hr-m">Poles</span><span class="hr-r">'+B.stats.poles+'</span></div>';
@@ -667,7 +669,7 @@ html+='<div class="bici-info-box"><h3>'+b.model+' - '+r.first+' '+r.last+'</h3><
 if(b.terreno)html+='<div class="bike-terrain-section"><h4>🏔️ Rendimiento por Terreno</h4><div class="terrain-item"><div class="terrain-title">⬇️ Bajadas</div><div class="terrain-desc">'+b.terreno.bajada+'</div></div><div class="terrain-item"><div class="terrain-title">➡️ Plano</div><div class="terrain-desc">'+b.terreno.plano+'</div></div><div class="terrain-item"><div class="terrain-title">⬆️ Subidas</div><div class="terrain-desc">'+b.terreno.subida+'</div></div></div>';
 html+='<div class="gear-analysis"><h4>⚙️ Marchas</h4><div class="gear-grid"><div class="gear-box"><div class="gear-title">Máxima</div><div class="gear-value">'+dev.velocidad+'</div><div class="gear-desc">Más grande = más rápida</div></div><div class="gear-box"><div class="gear-title">Mínima (Subida)</div><div class="gear-value">'+dev.subida+'</div><div class="gear-desc">Más pequeño = sube mejor</div></div><div class="gear-box media"><div class="gear-title">Media (Versatilidad)</div><div class="gear-value">'+bikeMedia(dev)+'</div><div class="gear-desc">Más alto = más versátil</div></div></div></div></div>';});
 }else if(curView==='circuitos-comparativa'){
-html+='<div class="circ-compare-header"><h1>Comparativa Circuitos</h1></div><div class="circ-compare-filters"><button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button><button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button><button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button><button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button><button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'⬇️')+'</button></div>';
+html+='<div class="circ-compare-header"><h1>Comparativa Circuitos</h1></div><div class="circ-compare-filters"><button class="filter-pill'+(compareSortBy==='score'?' active':'')+'" onclick="compareSortBy=\'score\';renderView()">🏆 Dificultad</button><button class="filter-pill'+(compareSortBy==='distancia'?' active':'')+'" onclick="compareSortBy=\'distancia\';renderView()">📏 Distancia</button><button class="filter-pill'+(compareSortBy==='desnivel'?' active':'')+'" onclick="compareSortBy=\'desnivel\';renderView()">⛰️ Desnivel</button><button class="filter-pill'+(compareSortBy==='curvas'?' active':'')+'" onclick="compareSortBy=\'curvas\';renderView()">🔄 Curvas</button><button class="sort-dir" onclick="compareSortDir=compareSortDir===\'asc\'?\'desc\':\'asc\';renderView();">'+(compareSortDir==='asc'?'⬆️':'️')+'</button></div>';
 var cl=getCircuitsForSeason().slice();
 cl.sort(function(a,b){var va,vb;
 if(compareSortBy==='distancia'){va=a.distancia;vb=b.distancia;}
